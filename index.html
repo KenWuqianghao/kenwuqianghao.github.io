@@ -19,7 +19,7 @@ Have fun creating your portfolio on this template!!! -->
     <title>Ken Wu | Developer</title>
 
     <!-- Add some coding keywords below, Ex: (javascript, yourusername, etc) -->
-    <meta name="keywords" content="kenwu, kenwuqianghao, kenw wu, python, data science, machine learning, tensorflow" />
+    <meta name="keywords" content="kenwu, kenwuqianghao, kenw wu, qianghao, qianghao wu, python, data science, machine learning, tensorflow" />
 
     <!-- Improve your SEO by adding a small descrption of you -->
     <meta name="Love Python and ML. I also know some front end development including Angular, Typescript, etc" content="Ken Wu | Developer" />
@@ -37,12 +37,12 @@ Have fun creating your portfolio on this template!!! -->
     <!-- Fill content with the title of your portfolio(Recommended to use what you put in <title> tag) -->
     <meta property="og:title" content="Ken Wu | Developer" />
     <!-- Give a short description that'll show up when you/someone shares your portfolio on different platform -->
-    <meta property="og:description" content="Portfolio website for Ken Wu, passionate programmer and problem solver." />
+    <meta property="og:description" content="Portfolio Website for Ken Wu, Passionate Programmer and Problem Solver." />
     <!-- Add a thumbnail image in assets folder and fill the content attr with URL to that thumbnail 
       so that a thumbnail image of your portfolio is shown while shared on other platform -->
     <meta
       property="og:image"
-      content="https://devfolio.js.org/assets/devfolio.png"
+      content="./assets/profile.png"
     />
 
     <!-- Twitter -->
@@ -53,7 +53,7 @@ Have fun creating your portfolio on this template!!! -->
     <meta property="twitter:title" content="Ken Wu | Developer" />
     <!-- short description that shows up while your portfolio is shared -->
     <meta
-      property="twitter:description"
+      property="Portfolio Website for Ken Wu, Passionate Programmer and Problem Solver."
       content="Made using DevFolio Template"
     />
     <!-- Fill content with the URL to the thumbnail image that you'll put in the assets folder -->
@@ -83,10 +83,10 @@ Have fun creating your portfolio on this template!!! -->
         <h1 class="hero-title">
           Hi, my name is <span class="text-color-main name">Ken Wu</span>
           <br />
-          I'm a Student, Developer, and Problem Solver. Currently a Intern at delphai.
+          I'm a Student, Developer, and Problem Solver. Currently an Intern at delphai.
         </h1>
         <p class="hero-cta">
-          <a class="cta-btn cta-btn--hero" href="#about">Get in touch</a>
+          <a class="cta-btn cta-btn--hero" href="#contact">Get in touch</a>
         </p>
       </section>
       <a href="#about" class="scroll-down-link" aria-label="scroll-down">
@@ -109,10 +109,10 @@ Have fun creating your portfolio on this template!!! -->
           </div>
           <div class="about-wrapper__info">
             <p class="about-wrapper__info-text">
-              I am currently an intern at <a href ="https://www.delphai.com/">delphai</a>, student at  <a href ="https://www.asmilan.org/">American School of Milan</a>.
-              I love Python and machine learning. I also know some front end development including Angular, Typescript, etc
-              I love Unix systems and I enjoy trying out different linux distros, but currently using Mac.
-              Thinking about going into Web3 Development, DeFi, Data Science and Quantitative Finance.
+              I am currently an intern at <a href ="https://www.delphai.com/">delphai</a>, incoming student at  <a href ="https://wlu.ca">Wilfrid Laurier University</a> and <a href ="https://uwaterloo.ca/">University of Waterloo</a> studying Business Administration and Computer Science. 
+              I love Python and machine learning. I also know some front end development including Angular, Typescript, etc. 
+              I love Unix systems and I enjoy trying out different linux distros, but currently using Mac. 
+              Thinking about going into Web3 Development, DeFi, Data Science and/or Quantitative Finance. 
               I'm always curious to learn more, don't hesitate to reach out to me if you have any fun projects.
             </p>
             <span class="about-wrapper__cta">
@@ -133,21 +133,42 @@ Have fun creating your portfolio on this template!!! -->
           <!-- Each .row is a project -->
           <article class="row">
             <div class="project-wrapper__text">
-              <h3 class="project-wrapper__text-title">Project Title</h3>
+              <h3 class="project-wrapper__text-title">Animal Crossing and Doom Classifier</h3>
               <p class="project-wrapper__text-info">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Deleniti voluptas, sit nam perspiciatis tempore aspernatur ullam
-                necessitatibus impedit repellendus vero sed ipsa eos beatae ab
-                sint saepe nostrum! Enim, perferendis.
+                In this project, I created a deep learning model to classify images to be animal crossing or doom related. 
+                This model probably doesn't have any real world usage, but it's fun, so yeah. The dataset can be found <a href ='https://www.kaggle.com/andrewmvd/doom-crossing?rvi=1'>here</a>.
               </p>
               <div class="project-wrapper__text-btns">
-                <a
-                  href="#"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="cta-btn cta-btn--hero cta-btn--projects"
-                  >See Live</a
+                <a href="https://github.com/KenWuqianghao/ML-Zoomcamp-Capstone-Project" target="_blank" class="cta-btn text-color-main"
+                  >Source Code</a
                 >
+              </div>
+            </div>
+
+            <div class="project-wrapper__image">
+              <a href="#" target="_blank" rel="noopener noreferrer">
+                <div class="thumbnail rounded">
+                  <img
+                    src="./assets/project.png"
+                    class="img-fluid"
+                    alt="Project Image"
+                  />
+                </div>
+              </a>
+            </div>
+          </article>
+          <!-- /END Project -->
+
+          <!-- Each .row is a project -->
+          <article class="row">
+            <div class="project-wrapper__text">
+              <h3 class="project-wrapper__text-title">London Bike Usage Regressor</h3>
+              <p class="project-wrapper__text-info">
+                In this project, I created a regression model predicitng the number of bike rented duirng a specific hour in London 
+                through information including temperature, wind speed, time, humidity, holiday, weather code and season. 
+                This model will produce a numerical output predicint how many bikes will be rented so the bike providers can 
+                distribute these bikes more wisely for maximum profit and usage. The dataset can be found <a href ='https://www.kaggle.com/hmavrodiev/london-bike-sharing-dataset'>here</a>.
+              <div class="project-wrapper__text-btns">
                 <a href="#" target="_blank" class="cta-btn text-color-main"
                   >Source Code</a
                 >
@@ -171,50 +192,14 @@ Have fun creating your portfolio on this template!!! -->
           <!-- Each .row is a project -->
           <article class="row">
             <div class="project-wrapper__text">
-              <h3 class="project-wrapper__text-title">Project Title</h3>
+              <h3 class="project-wrapper__text-title">Facial Recognition Attendance Taker</h3>
               <p class="project-wrapper__text-info">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Deleniti voluptas, sit nam perspiciatis tempore aspernatur ullam
-                necessitatibus impedit repellendus vero sed ipsa eos beatae ab
-                sint saepe nostrum! Enim, perferendis.
-              </p>
-              <div class="project-wrapper__text-btns">
-                <a
-                  href="#"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="cta-btn cta-btn--hero cta-btn--projects"
-                  >See Live</a
-                >
-                <a href="#" target="_blank" class="cta-btn text-color-main"
-                  >Source Code</a
-                >
-              </div>
-            </div>
-
-            <div class="project-wrapper__image">
-              <a href="#" target="_blank" rel="noopener noreferrer">
-                <div class="thumbnail rounded">
-                  <img
-                    src="./assets/project.png"
-                    class="img-fluid"
-                    alt="Project Image"
-                  />
-                </div>
-              </a>
-            </div>
-          </article>
-          <!-- /END Project -->
-
-          <!-- Each .row is a project -->
-          <article class="row">
-            <div class="project-wrapper__text">
-              <h3 class="project-wrapper__text-title">Project Title</h3>
-              <p class="project-wrapper__text-info">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Deleniti voluptas, sit nam perspiciatis tempore aspernatur ullam
-                necessitatibus impedit repellendus vero sed ipsa eos beatae ab
-                sint saepe nostrum! Enim, perferendis.
+                This is the code I wrote/edited for my computer science IA. 
+                The goal of this project is to use a raspberry pi to automatically scan students' faces 
+                and keep a running record of the names of the students entering the classroom on time, 
+                tardy and absent. Ultimately, sending the list of students to the teacher for attendance. 
+                The faces used in this project are not real students due to the violation of GDPR, therefore, 
+                <a href ='https://www.kaggle.com/hereisburak/pins-face-recognition'>this</a>. kaggle celebrity face dataset is used.
               </p>
               <div class="project-wrapper__text-btns">
                 <a
