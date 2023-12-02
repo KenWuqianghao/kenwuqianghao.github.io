@@ -109,7 +109,7 @@ Have fun creating your portfolio on this template!!! -->
           </div>
           <div class="about-wrapper__info">
             <p class="about-wrapper__info-text">
-              I am a dedicated Computer Science and Business Administration student at the University of Waterloo and Wilfrid Laurier University, passionate about leveraging technology to solve complex problems. My technical skills include Python, Tensorflow, Keras, spaCy, Computer Vision, NLP, and more. I have gained valuable experience through internships at Keywords AI, delphai, and CodeDay Lab, working on projects such as NER models, web scraping, and building web applications using Angular.
+              I'm Qianghao Ken Wu, a dedicated Computer Science and Business Administration student at the University of Waterloo and Wilfrid Laurier University, respectively. My academic journey is marked by a passion for Data Science, Machine Learning, Software Development, and Supply Chain Management, with hands-on experience garnered through roles at Laurier Fintech, Keywords AI, and Delphai. Skilled in Python, Tensorflow, Keras, spaCy, SQL, and C, and fluent in English and Chinese, I navigate seamlessly through technical and multicultural environments, bringing innovation and analytical skills to the forefront of technology and business. Let’s connect if you're as enthusiastic as I am about leveraging data and technology to drive actionable insights and solutions!
             </p>
             <span class="about-wrapper__cta">
               <a href="./assets/CV.pdf" class="cta-btn cta-btn--resume">View Resume</a>
@@ -125,14 +125,105 @@ Have fun creating your portfolio on this template!!! -->
       <div class="container">
         <div class="project-wrapper">
           <h2 class="section-title dark-blue-text">Projects</h2>
+          
+          <!-- Each .row is a project -->
+          <article class="row">
+            <div class="project-wrapper__text">
+              <h3 class="project-wrapper__text-title">MedChat - Winner of 2023 Cohere RAG Challenge</h3>
+              <p class="project-wrapper__text-info">
+              - Integrated Cohere's Classify API to determine user intent, triggering specific models like the brain tumor CNN for accurate diagnosis. <br>
+              - Utilized Cohere Embedding and RAG, MedChat efficiently generates accurate citations from over 1000 WebMD pages. <br>
+              - Streamlit is used in MedChat for instantaneous data streaming from Cohere API and the pre-trained CNN model, enhancing user interaction. <br>
+              </p>
+              <div class="project-wrapper__text-btns">
+                <a href="https://devpost.com/software/medchat-ro1b72" target="_blank" class="cta-btn text-color-main"
+                  >Source Code</a
+                >
+              </div>
+            </div>
+
+            <div class="project-wrapper__image">
+              <a href="https://devpost.com/software/medchat-ro1b72" target="_blank" rel="noopener noreferrer">
+                <div class="thumbnail rounded">
+                  <img
+                    src="./assets/medchat.png"
+                    class="img-fluid"
+                    alt="Project Image"
+                  />
+                </div>
+              </a>
+            </div>
+          </article>
+          <!-- /END Project -->
+
+          <!-- Each .row is a project -->
+          <article class="row">
+            <div class="project-wrapper__text">
+              <h3 class="project-wrapper__text-title"> DirectU - Winner of Hack the North 2023 Best Use of Cohere Prize</h3>
+              <p class="project-wrapper__text-info">
+                -Developed the backend of DirectU W, a course recommendation system, utilizing the Cohere API for text embedding to calculate Similarity Score and Text Summarizer as well as a chat feature for analysis <br>
+                - Developed backend using Flask and Cohere Embedding API, achieving a 99% reduction in loading time <br>
+                - Collaborated in a team of 4 on a full-stack web app with React, MongoDB, and Selenium
+              </p>
+              <div class="project-wrapper__text-btns">
+                <a href="https://directu.onrender.com/" target="_blank" class="cta-btn text-color-main"
+                  >Source Code</a
+                >
+              </div>
+            </div>
+
+            <div class="project-wrapper__image">
+              <a href="https://directu.onrender.com/" target="_blank" rel="noopener noreferrer">
+                <div class="thumbnail rounded">
+                  <img
+                    src="./assets/directu.png"
+                    class="img-fluid"
+                    alt="Project Image"
+                  />
+                </div>
+              </a>
+            </div>
+          </article>
+          <!-- /END Project -->
 
           <!-- Each .row is a project -->
           <article class="row">
             <div class="project-wrapper__text">
               <h3 class="project-wrapper__text-title">Animal Crossing and Doom Classifier</h3>
               <p class="project-wrapper__text-info">
-                In this project, I created a deep learning model to classify images to be animal crossing or doom related. 
-                This model probably doesn't have any real world usage, but it's fun, so yeah. The dataset can be found <a href ='https://www.kaggle.com/andrewmvd/doom-crossing?rvi=1'>here</a>.
+                - Developed an automated attendance tracking system for classrooms <br>
+                - Utilized a tech stack consisting of Python, Linux, OpenCV, and the face-recognition library <br>
+                - Programmed a raspberry pi to scan students' faces automatically
+              </p>
+              <div class="project-wrapper__text-btns">
+                <a href="https://github.com/KenWuqianghao" target="_blank" class="cta-btn text-color-main"
+                  >Source Code</a
+                >
+              </div>
+            </div>
+
+            <div class="project-wrapper__image">
+              <a href="https://github.com/KenWuqianghao" target="_blank" rel="noopener noreferrer">
+                <div class="thumbnail rounded">
+                  <img
+                    src="./assets/chess.png"
+                    class="img-fluid"
+                    alt="Project Image"
+                  />
+                </div>
+              </a>
+            </div>
+          </article>
+          <!-- /END Project -->
+
+          <!-- Each .row is a project -->
+          <article class="row">
+            <div class="project-wrapper__text">
+              <h3 class="project-wrapper__text-title">Animal Crossing and Doom Classifier</h3>
+              <p class="project-wrapper__text-info">
+                - Created a deep-learning model to classify images as animal crossing or doom related <br>
+                - Successfully deployed the model in a local docker container <br>
+                - Demonstrated proficiency in deep learning, computer vision, and deployment
               </p>
               <div class="project-wrapper__text-btns">
                 <a href="https://github.com/KenWuqianghao/ML-Zoomcamp-Capstone-Project" target="_blank" class="cta-btn text-color-main"
@@ -160,10 +251,10 @@ Have fun creating your portfolio on this template!!! -->
             <div class="project-wrapper__text">
               <h3 class="project-wrapper__text-title">London Bike Usage Regressor</h3>
               <p class="project-wrapper__text-info">
-                In this project, I created a regression model predicitng the number of bike rented duirng a specific hour in London 
-                through information including temperature, wind speed, time, humidity, holiday, weather code and season. 
-                This model will produce a numerical output predicint how many bikes will be rented so the bike providers can 
-                distribute these bikes more wisely for maximum profit and usage. The dataset can be found <a href ='https://www.kaggle.com/hmavrodiev/london-bike-sharing-dataset'>here</a>.
+                - Utilized Python programming language to build a regression model predicting the number of bikes rented in London <br>
+                - Implemented different machine learning algorithms such as XGBoost, RandomForest, and Linear Regression for model development <br>
+                - Incorporated various factors such as temperature, wind speed, time, humidity, holiday, weather code, and season for feature selection and model training <br>
+                - Enabled bike providers to optimize the distribution of bikes for maximum profit and usage
               <div class="project-wrapper__text-btns">
                 <a href="https://github.com/KenWuqianghao/ML-Zoomcamp-Midterm-Project" target="_blank" class="cta-btn text-color-main"
                   >Source Code</a
@@ -190,12 +281,9 @@ Have fun creating your portfolio on this template!!! -->
             <div class="project-wrapper__text">
               <h3 class="project-wrapper__text-title">Facial Recognition Attendance Taker</h3>
               <p class="project-wrapper__text-info">
-                This is the code I wrote/edited for my computer science IA. 
-                The goal of this project is to use a raspberry pi to automatically scan students' faces 
-                and keep a running record of the names of the students entering the classroom on time, 
-                tardy and absent. Ultimately, sending the list of students to the teacher for attendance. 
-                The faces used in this project are not real students due to the violation of GDPR, therefore, 
-                <a href ='https://www.kaggle.com/hereisburak/pins-face-recognition'>this</a>. kaggle celebrity face dataset is used.
+                - Developed an automated attendance tracking system for classrooms <br>
+                - Utilized a tech stack consisting of Python, Linux, OpenCV, and the face-recognition library <br>
+                - Programmed a raspberry pi to scan students' faces automatically
               </p>
               <div class="project-wrapper__text-btns">
                 <a href="https://github.com/KenWuqianghao/Facial-Recognition-Attendance" target="_blank" class="cta-btn text-color-main"
