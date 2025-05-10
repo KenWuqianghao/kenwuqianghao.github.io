@@ -54,8 +54,8 @@ export default function InteractiveBackground() {
       directionY: number
 
       constructor() {
-        this.x = Math.random() * canvas.width
-        this.y = Math.random() * canvas.height
+        this.x = Math.random() * (canvas?.width || window.innerWidth)
+        this.y = Math.random() * (canvas?.height || window.innerHeight)
         this.size = Math.random() * 2.5 + 0.5 // Smaller particles
         this.baseX = this.x
         this.baseY = this.y
@@ -83,10 +83,10 @@ export default function InteractiveBackground() {
         this.y += this.vy + this.directionY
 
         // Bounce off edges
-        if (this.x > canvas.width || this.x < 0) {
+        if (this.x > (canvas?.width || window.innerWidth) || this.x < 0) {
           this.vx *= -1
         }
-        if (this.y > canvas.height || this.y < 0) {
+        if (this.y > (canvas?.height || window.innerHeight) || this.y < 0) {
           this.vy *= -1
         }
 

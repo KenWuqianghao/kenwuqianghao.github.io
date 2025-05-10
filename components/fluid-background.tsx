@@ -37,8 +37,8 @@ export default function FluidBackground() {
       direction: number
 
       constructor() {
-        this.x = Math.random() * canvas.width
-        this.y = Math.random() * canvas.height
+        this.x = Math.random() * (canvas?.width || window.innerWidth)
+        this.y = Math.random() * (canvas?.height || window.innerHeight)
         this.size = Math.random() * 50 + 20
         this.speedX = Math.random() * 2 - 1
         this.speedY = Math.random() * 2 - 1
@@ -52,10 +52,10 @@ export default function FluidBackground() {
         this.y += this.speedY
 
         // Bounce off edges
-        if (this.x > canvas.width || this.x < 0) {
+        if (this.x > (canvas?.width || window.innerWidth) || this.x < 0) {
           this.speedX *= -1
         }
-        if (this.y > canvas.height || this.y < 0) {
+        if (this.y > (canvas?.height || window.innerHeight) || this.y < 0) {
           this.speedY *= -1
         }
       }

@@ -50,13 +50,13 @@ export default function GridBackground() {
     const mouseMoveThrottle = performanceMode ? 50 : 30 // ms
 
     // Animation frame control
-    let animationFrameId = null
+    let animationFrameId: number | null = null
     let lastFrameTime = 0
     const targetFPS = performanceMode ? 30 : 60
     const frameInterval = 1000 / targetFPS
 
     // Particles array
-    let particles = []
+    let particles: Particle[] = []
 
     // Create gradient for background based on theme
     const createGradient = () => {
@@ -133,7 +133,7 @@ export default function GridBackground() {
     }
 
     // Optimized animation loop with frame limiting
-    const animate = (timestamp) => {
+    const animate = (timestamp: number) => {
       if (timestamp - lastFrameTime < frameInterval) {
         animationFrameId = requestAnimationFrame(animate)
         return
@@ -208,7 +208,7 @@ export default function GridBackground() {
     }
 
     // Throttled mouse move handler
-    const handleMouseMove = (e) => {
+    const handleMouseMove = (e: MouseEvent) => {
       const now = Date.now()
       if (now - lastMouseMoveTime < mouseMoveThrottle) return
 
@@ -218,7 +218,7 @@ export default function GridBackground() {
     }
 
     // Touch move handler
-    const handleTouchMove = (e) => {
+    const handleTouchMove = (e: TouchEvent) => {
       const now = Date.now()
       if (now - lastMouseMoveTime < mouseMoveThrottle) return
 

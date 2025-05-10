@@ -628,7 +628,16 @@ export default function Home() {
   )
 }
 
-function ProjectCard({ title, subtitle, technologies, description, image, link }) {
+interface ProjectCardProps {
+  title: string;
+  subtitle: string;
+  technologies: string[];
+  description: string;
+  image: string;
+  link: string;
+}
+
+function ProjectCard({ title, subtitle, technologies, description, image, link }: ProjectCardProps) {
   return (
     <a href={link} target="_blank" rel="noopener noreferrer" className="block h-full">
       <Card className="bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm border-gray-100 dark:border-gray-800 shadow-xl overflow-hidden h-full group hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 cursor-pointer">
@@ -678,7 +687,12 @@ function ProjectCard({ title, subtitle, technologies, description, image, link }
   )
 }
 
-function SkillCategory({ title, skills }) {
+interface SkillCategoryProps {
+  title: string;
+  skills: string[];
+}
+
+function SkillCategory({ title, skills }: SkillCategoryProps) {
   return (
     <div>
       <h4 className="font-semibold mb-3 text-gray-800 dark:text-gray-200 text-lg">{title}</h4>
@@ -696,7 +710,14 @@ function SkillCategory({ title, skills }) {
   )
 }
 
-function SocialLink({ icon, label, href, subtitle }) {
+interface SocialLinkProps {
+  icon: React.ReactNode;
+  label: string;
+  href: string;
+  subtitle?: string;
+}
+
+function SocialLink({ icon, label, href, subtitle }: SocialLinkProps) {
   return (
     <a
       href={href}

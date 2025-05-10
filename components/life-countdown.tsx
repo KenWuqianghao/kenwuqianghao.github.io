@@ -218,7 +218,12 @@ export default function LifeCountdown() {
   )
 }
 
-function TimeUnit({ value, label }) {
+interface TimeUnitProps {
+  value: number;
+  label: string;
+}
+
+function TimeUnit({ value, label }: TimeUnitProps) {
   return (
     <div className="text-center group hover:-translate-y-1 transition-transform duration-300">
       <div className="text-2xl font-bold text-red-500 dark:text-red-400 group-hover:scale-110 transition-transform duration-300">

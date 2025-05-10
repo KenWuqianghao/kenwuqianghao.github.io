@@ -51,8 +51,8 @@ export default function UniversityHoverCard({
   }, [isOpen])
 
   // Define event handlers with timeouts for better user experience
-  const openTimeout = useRef<NodeJS.Timeout>()
-  const closeTimeout = useRef<NodeJS.Timeout>()
+  const openTimeout = useRef<NodeJS.Timeout | null>(null)
+  const closeTimeout = useRef<NodeJS.Timeout | null>(null)
   
   const handleMouseEnter = () => {
     if (closeTimeout.current) {
