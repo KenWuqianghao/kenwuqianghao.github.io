@@ -51,15 +51,20 @@ const NoSSR = dynamic(() => Promise.resolve(ProfileImage), {
   ssr: false,
 })
 
+// Define the interface for SectionTitle props
+interface SectionTitleProps {
+  icon: React.ReactNode;
+  title: string;
+  id?: string;
+}
+
 // Create a reusable SectionTitle component that includes the hover effect
-const SectionTitle = ({ icon, title, id = "" }) => (
+const SectionTitle = ({ icon, title, id = "" }: SectionTitleProps) => (
   <div className="flex items-center mb-6 group" id={id}>
     <div className="bg-red-500 text-white w-10 h-10 rounded-full flex items-center justify-center mr-3 shadow-lg transition-transform duration-300 transform group-hover:scale-110">
       {icon}
     </div>
-    <h2 className="text-3xl font-bold font-display text-gray-900 dark:text-gray-100 transition-transform duration-300 transform group-hover:translate-x-1">
-      {title}
-    </h2>
+    <h2 className="text-2xl font-bold transition-transform duration-300 transform group-hover:translate-x-1">{title}</h2>
   </div>
 );
 
