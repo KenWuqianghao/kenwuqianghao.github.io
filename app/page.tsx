@@ -83,10 +83,10 @@ export default function Home() {
         {/* Grid background */}
         <GridBackground />
 
-        {/* Theme toggle and visitor stats - fixed position */}
+        {/* Theme toggle and VisitorCounter (pill) - fixed position */}
         <div className="fixed bottom-4 right-4 z-[50000] flex flex-col gap-2 items-end">
           <ThemeToggle />
-          <VisitorStats />
+          <VisitorCounter />
         </div>
 
         {/* Content wrapper */}
@@ -94,7 +94,7 @@ export default function Home() {
           {/* Header */}
           <header 
             id="about"
-            className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-md sticky top-0 z-40 shadow-sm transition-all duration-300 ease-in-out header-expanded">
+            className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-md sticky top-0 z-40 shadow-sm transition-all duration-500 ease-out header-expanded">
             <div className="container max-w-7xl mx-auto px-4 py-4 md:py-6 flex flex-col md:flex-row items-center justify-between gap-4 md:gap-8 header-container">
               <div className="flex flex-col md:flex-row items-center md:items-start gap-4 md:gap-6">
                 <div id="profile-image" className="h-20 w-20 md:h-24 md:w-24 rounded-full overflow-hidden border-2 border-gray-200 dark:border-gray-700 transition-all group relative">
@@ -128,9 +128,14 @@ export default function Home() {
                     >
                       <Phone size={14} /> 437-971-3179
                     </a>
-                    <span className="flex items-center gap-1 text-sm bg-gray-100 dark:bg-gray-800 px-3 py-1 rounded-full text-gray-700 dark:text-gray-300 contact-info">
+                    <a
+                      href="https://maps.google.com/?q=Waterloo,+Ontario,+Canada"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-1 text-sm bg-gray-100 dark:bg-gray-800 px-3 py-1 rounded-full hover:bg-red-500 hover:text-white dark:hover:bg-red-500 dark:hover:text-white transition-colors duration-300 text-gray-700 dark:text-gray-300 contact-info"
+                    >
                       <MapPin size={14} /> Waterloo, ON
-                    </span>
+                    </a>
                   </div>
                 </div>
               </div>
@@ -139,45 +144,45 @@ export default function Home() {
                   href="https://github.com/KenWuqianghao"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="transition-all"
+                  className="transition-all group"
                 >
                   <Button
                     variant="outline"
                     size="icon"
                     aria-label="GitHub"
-                    className="rounded-full h-9 w-9"
+                    className="rounded-full h-9 w-9 border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:bg-red-500/10 hover:border-red-500/30 dark:hover:bg-red-500/10 dark:hover:border-red-500/30 transition-colors duration-300"
                   >
-                    <Github className="h-4 w-4" />
+                    <Github className="h-4 w-4 group-hover:text-red-500 dark:group-hover:text-red-400 transition-colors duration-300" />
                   </Button>
                 </a>
                 <a
                   href="https://www.linkedin.com/in/kenwuqianghao/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="transition-all"
+                  className="transition-all group"
                 >
                   <Button
                     variant="outline"
                     size="icon"
                     aria-label="LinkedIn"
-                    className="rounded-full h-9 w-9"
+                    className="rounded-full h-9 w-9 border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:bg-red-500/10 hover:border-red-500/30 dark:hover:bg-red-500/10 dark:hover:border-red-500/30 transition-colors duration-300"
                   >
-                    <Linkedin className="h-4 w-4" />
+                    <Linkedin className="h-4 w-4 group-hover:text-red-500 dark:group-hover:text-red-400 transition-colors duration-300" />
                   </Button>
                 </a>
                 <a
-                  href="/resume.pdf"
+                  href="/Ken_Wu_Resume.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="transition-all"
+                  className="transition-all group"
                 >
                   <Button
                     variant="outline"
                     size="icon"
                     aria-label="Resume"
-                    className="rounded-full h-9 w-9"
+                    className="rounded-full h-9 w-9 border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:bg-red-500/10 hover:border-red-500/30 dark:hover:bg-red-500/10 dark:hover:border-red-500/30 transition-colors duration-300"
                   >
-                    <FileText className="h-4 w-4" />
+                    <FileText className="h-4 w-4 group-hover:text-red-500 dark:group-hover:text-red-400 transition-colors duration-300" />
                   </Button>
                 </a>
               </div>
@@ -467,7 +472,7 @@ export default function Home() {
                     id="hobbies"
                   />
 
-                  <Tabs defaultValue="basketball" className="w-full">
+                  <Tabs defaultValue="basketball" className="w-full relative overflow-hidden">
                     <TabsList className="grid grid-cols-4 mb-6 bg-gray-100/80 dark:bg-gray-800/80">
                       <TabsTrigger
                         value="basketball"
@@ -497,7 +502,8 @@ export default function Home() {
 
                     <TabsContent
                       value="basketball"
-                      className="bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-gray-100 dark:border-gray-800 hover:shadow-2xl transition-shadow duration-300"
+                      forceMount
+                      className="bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-gray-100 dark:border-gray-800 w-full transition-all ease-out duration-500 data-[state=active]:opacity-100 data-[state=active]:translate-x-0 data-[state=active]:relative data-[state=active]:z-10 data-[state=inactive]:opacity-0 data-[state=inactive]:-translate-x-full data-[state=inactive]:absolute data-[state=inactive]:inset-0 data-[state=inactive]:pointer-events-none"
                     >
                       <div className="flex flex-col md:flex-row gap-6 items-center">
                         <div className="w-full md:w-1/3 aspect-square relative rounded-xl overflow-hidden">
@@ -554,7 +560,8 @@ export default function Home() {
 
                     <TabsContent
                       value="chess"
-                      className="bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-gray-100 dark:border-gray-800 hover:shadow-2xl transition-shadow duration-300"
+                      forceMount
+                      className="bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-gray-100 dark:border-gray-800 w-full transition-all ease-out duration-500 data-[state=active]:opacity-100 data-[state=active]:translate-x-0 data-[state=active]:relative data-[state=active]:z-10 data-[state=inactive]:opacity-0 data-[state=inactive]:-translate-x-full data-[state=inactive]:absolute data-[state=inactive]:inset-0 data-[state=inactive]:pointer-events-none"
                     >
                       <div className="flex flex-col md:flex-row gap-6 items-center">
                         <div className="w-full md:w-1/3 aspect-square relative rounded-xl overflow-hidden">
@@ -645,7 +652,8 @@ export default function Home() {
 
                     <TabsContent
                       value="anime"
-                      className="bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-gray-100 dark:border-gray-800 hover:shadow-2xl transition-shadow duration-300"
+                      forceMount
+                      className="bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-gray-100 dark:border-gray-800 w-full transition-all ease-out duration-500 data-[state=active]:opacity-100 data-[state=active]:translate-x-0 data-[state=active]:relative data-[state=active]:z-10 data-[state=inactive]:opacity-0 data-[state=inactive]:-translate-x-full data-[state=inactive]:absolute data-[state=inactive]:inset-0 data-[state=inactive]:pointer-events-none"
                     >
                       <div className="flex flex-col md:flex-row gap-6 items-center">
                         <div className="w-full md:w-1/3 aspect-square relative rounded-xl overflow-hidden">
@@ -689,7 +697,8 @@ export default function Home() {
 
                     <TabsContent
                       value="startup"
-                      className="bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-gray-100 dark:border-gray-800 hover:shadow-2xl transition-shadow duration-300"
+                      forceMount
+                      className="bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-gray-100 dark:border-gray-800 w-full transition-all ease-out duration-500 data-[state=active]:opacity-100 data-[state=active]:translate-x-0 data-[state=active]:relative data-[state=active]:z-10 data-[state=inactive]:opacity-0 data-[state=inactive]:-translate-x-full data-[state=inactive]:absolute data-[state=inactive]:inset-0 data-[state=inactive]:pointer-events-none"
                     >
                       <div className="flex flex-col md:flex-row gap-6 items-center">
                         <div className="w-full md:w-1/3 aspect-square relative rounded-xl overflow-hidden">
@@ -828,28 +837,32 @@ export default function Home() {
               <div className="flex flex-col md:flex-row justify-between items-center">
                 <div className="mb-4 md:mb-0">
                   <p className="text-sm text-gray-500 dark:text-gray-400">
-                    © {new Date().getFullYear()} Ken Wu. All rights reserved.
+                    &copy; {new Date().getFullYear()} Ken Wu. All rights reserved.
                   </p>
-                  <div className="mt-2">
-                    <VisitorStats />
+                  {/* VisitorStats for Footer (Total and Today) */}
+                  <div className="mt-2 flex justify-center md:justify-start">
+                    <VisitorStats /> {/* This displays total and today */}
                   </div>
                 </div>
                 <div className="flex gap-4">
                   <a
                     href="mailto:ken.wu@uwaterloo.ca"
                     className="text-gray-500 dark:text-gray-400 hover:text-red-500 dark:hover:text-red-400 transition-colors duration-300"
+                    aria-label="Email"
                   >
                     <Mail size={20} />
                   </a>
                   <a
                     href="https://github.com/KenWuqianghao"
                     className="text-gray-500 dark:text-gray-400 hover:text-red-500 dark:hover:text-red-400 transition-colors duration-300"
+                    aria-label="GitHub"
                   >
                     <Github size={20} />
                   </a>
                   <a
                     href="https://linkedin.com/in/kenwuu"
                     className="text-gray-500 dark:text-gray-400 hover:text-red-500 dark:hover:text-red-400 transition-colors duration-300"
+                    aria-label="LinkedIn"
                   >
                     <Linkedin size={20} />
                   </a>

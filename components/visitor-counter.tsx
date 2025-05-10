@@ -1,75 +1,102 @@
 "use client"
 
-import React, { useEffect, useState } from 'react'
-import { Badge } from './ui/badge'
-import { Eye } from 'lucide-react'
+import React, { useEffect, useState, useRef } from 'react'
+import { Users } from 'lucide-react'
+import { Skeleton } from './ui/skeleton'
+import { 
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip"
 
 export default function VisitorCounter() {
-  const [count, setCount] = useState<number>(0)
-  const [showAnimation, setShowAnimation] = useState(false)
-  const [loading, setLoading] = useState(true)
+  const [totalVisits, setTotalVisits] = useState<number | null>(null)
+  const [showPlusOne, setShowPlusOne] = useState(false)
+  const initialLoadRef = useRef(true) // To prevent +1 on first ever component mount after storage clear
 
   useEffect(() => {
-    // Simple counter implementation that ensures it works properly
     if (typeof window !== 'undefined') {
-      // Generate a unique ID for today
-      const today = new Date().toISOString().split('T')[0];
-      const counterKey = 'visitor_count';
-      const todayKey = `visitor_today_${today}`;
-      const sessionKey = 'visitor_session';
+      const counterKey = 'visitor_counter_total_pill_v1'; // Unique key for this component
+      const sessionKey = 'visitor_counter_session_pill_v1'; // Unique session key
       
-      // Check if we've counted this session already
+      let currentTotalCount = parseInt(localStorage.getItem(counterKey) || '0', 10);
       const isNewSession = !sessionStorage.getItem(sessionKey);
       
-      // Get or initialize counter values
-      let totalCount = parseInt(localStorage.getItem(counterKey) || '0', 10);
-      let todayCount = parseInt(localStorage.getItem(todayKey) || '0', 10);
-      
-      // If it's a brand new session, count the visit
       if (isNewSession) {
-        // Increment counters
-        totalCount += 1;
-        todayCount += 1;
+        currentTotalCount += 1;
+        localStorage.setItem(counterKey, currentTotalCount.toString());
+        sessionStorage.setItem(sessionKey, 'counted_pill_v1');
         
-        // Save the updated counts
-        localStorage.setItem(counterKey, totalCount.toString());
-        localStorage.setItem(todayKey, todayCount.toString());
-        
-        // Mark this session as counted
-        sessionStorage.setItem(sessionKey, 'true');
-        
-        // Show the +1 animation
-        setShowAnimation(true);
-        setTimeout(() => setShowAnimation(false), 2000);
+        if (!initialLoadRef.current) {
+          setShowPlusOne(true);
+          setTimeout(() => setShowPlusOne(false), 1500); 
+        }
       }
       
-      // Update the display count
-      setCount(totalCount);
-      setLoading(false);
+      setTotalVisits(currentTotalCount);
+      initialLoadRef.current = false;
     }
   }, []);
 
+  if (totalVisits === null) {
+    return (
+      <div className="flex items-center gap-1 text-xs text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-800/80 backdrop-blur-sm px-2 py-1 rounded-full shadow-sm border border-gray-200 dark:border-gray-700/60">
+        <Users size={12} className="text-gray-400 dark:text-gray-500" />
+        <Skeleton className="h-3 w-8 bg-gray-300 dark:bg-gray-600 rounded-sm"/>
+      </div>
+    )
+  }
+
   return (
-    <div className="flex items-center gap-1.5 relative">
-      <Badge 
-        variant="outline" 
-        className="bg-gray-100/80 dark:bg-gray-800/80 text-gray-700 dark:text-gray-300 py-1 px-2 rounded-full border-gray-200 dark:border-gray-700 flex items-center gap-1 transition-all duration-300 hover:bg-white dark:hover:bg-gray-700 hover:shadow-md transform hover:scale-105 min-w-[80px] justify-center"
-      >
-        <Eye size={12} className="text-red-500 dark:text-red-400" />
-        {loading ? (
-          <span className="text-xs animate-pulse">?</span>
-        ) : (
-          <span className="text-xs">{count.toLocaleString()} visitors</span>
-        )}
-      </Badge>
-      
-      {showAnimation && (
-        <div 
-          className="absolute -right-2 -top-6 text-xs font-semibold text-green-500 animate-fadeUp"
+    <div className="relative flex items-center gap-1 text-xs text-gray-600 dark:text-gray-300 bg-white/70 dark:bg-gray-800/70 backdrop-blur-md px-2.5 py-1.5 rounded-full shadow-md border border-gray-200 dark:border-gray-700">
+      <TooltipProvider>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <div className="flex items-center gap-1.5 cursor-default">
+              <Users size={13} className="text-red-500 dark:text-red-400" />
+              <span className="font-medium">{totalVisits.toLocaleString()}</span>
+            </div>
+          </TooltipTrigger>
+          <TooltipContent side="left" align="center" sideOffset={15}>
+            <p className="text-xs">Total views</p>
+          </TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
+      {showPlusOne && (
+        <span 
+          className="absolute -top-5 left-1/2 -translate-x-1/2 px-1.5 py-0.5 text-xxs bg-red-500 text-white rounded-full shadow-lg animate-plus-one-counter"
         >
           +1
-        </div>
+        </span>
       )}
+      <style jsx global>{`
+        .text-xxs {
+          font-size: 0.65rem;
+          line-height: 0.85rem;
+        }
+        @keyframes plus-one-animation-counter {
+          0% {
+            opacity: 0;
+            transform: translate(-50%, 5px);
+          }
+          20% {
+            opacity: 1;
+            transform: translate(-50%, -3px);
+          }
+          80% {
+            opacity: 1;
+            transform: translate(-50%, -3px);
+          }
+          100% {
+            opacity: 0;
+            transform: translate(-50%, -10px);
+          }
+        }
+        .animate-plus-one-counter {
+          animation: plus-one-animation-counter 1.5s ease-out forwards;
+        }
+      `}</style>
     </div>
   )
 } 

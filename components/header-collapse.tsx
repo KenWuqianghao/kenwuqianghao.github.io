@@ -1,39 +1,49 @@
 "use client"
 
-import React, { useEffect, useState, useRef } from 'react'
-import { ChevronUp, ChevronDown } from 'lucide-react'
+import React, { useEffect, useState, useRef, useCallback } from 'react'
 
 export default function HeaderCollapse() {
   const [isCollapsed, setIsCollapsed] = useState(false)
-  const manualToggleRef = useRef(false)
-  const lastToggleTimeRef = useRef(0)
-  
+  const tickingRef = useRef(false) // For requestAnimationFrame throttling
+
+  const handleScroll = useCallback(() => {
+    const currentScrollY = window.scrollY;
+
+    if (currentScrollY === 0) {
+      if (isCollapsed) {
+        setIsCollapsed(false); // Expand if at top
+      }
+    } else { // Scrolled down from top
+      if (!isCollapsed) {
+        setIsCollapsed(true); // Collapse if not at top
+      }
+    }
+  }, [isCollapsed]);
+
   useEffect(() => {
-    // Track scroll position to auto-collapse header
-    const handleScroll = () => {
-      // If the button was manually clicked in the last 1 second, don't override
-      if (Date.now() - lastToggleTimeRef.current < 1000) {
-        return
-      }
-      
-      // Auto-collapse after scrolling past threshold
-      if (window.scrollY > 100 && !isCollapsed) {
-        setIsCollapsed(true)
-        manualToggleRef.current = false
-      } else if (window.scrollY <= 20 && isCollapsed && !manualToggleRef.current) {
-        setIsCollapsed(false)
-        manualToggleRef.current = false
-      }
+    // Initial check based on scroll position when the component mounts
+    if (window.scrollY > 0) {
+      setIsCollapsed(true);
+    } else {
+      setIsCollapsed(false);
     }
-    
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    
+
+    const onScroll = () => {
+      if (!tickingRef.current) {
+        window.requestAnimationFrame(() => {
+          handleScroll();
+          tickingRef.current = false;
+        });
+        tickingRef.current = true;
+      }
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
     return () => {
-      window.removeEventListener('scroll', handleScroll)
-    }
-  }, [isCollapsed])
-  
-  // Apply collapse/expand classes to header whenever state changes
+      window.removeEventListener('scroll', onScroll);
+    };
+  }, [handleScroll]);
+
   useEffect(() => {
     const header = document.getElementById('about');
     const profileImage = document.getElementById('profile-image');
@@ -63,27 +73,8 @@ export default function HeaderCollapse() {
     }
   }, [isCollapsed]);
   
-  const toggleCollapse = () => {
-    manualToggleRef.current = true;
-    lastToggleTimeRef.current = Date.now();
-    setIsCollapsed(!isCollapsed);
-  }
-  
   return (
-    <>
-      <button 
-        onClick={toggleCollapse}
-        className="absolute bottom-1 right-4 z-50 bg-gray-100 dark:bg-gray-800 p-1 rounded-full shadow-sm hover:shadow transition-all border border-gray-200 dark:border-gray-700 focus:outline-none focus:ring-1 focus:ring-primary"
-        aria-label={isCollapsed ? "Expand header" : "Collapse header"}
-      >
-        {isCollapsed ? (
-          <ChevronDown size={16} className="text-gray-600 dark:text-gray-300" />
-        ) : (
-          <ChevronUp size={16} className="text-gray-600 dark:text-gray-300" />
-        )}
-      </button>
-      
-      <style jsx global>{`
+    <style jsx global>{`
         .header-collapsed {
           padding-top: 0.5rem;
           padding-bottom: 0.5rem;
@@ -205,6 +196,5 @@ export default function HeaderCollapse() {
           }
         }
       `}</style>
-    </>
   )
 } 
