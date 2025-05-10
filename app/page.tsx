@@ -444,7 +444,7 @@ export default function Home() {
                       link="https://github.com/jamesliangg/LeaseEase"
                     />
                     <ProjectCard
-                      title="MedChatW"
+                      title="MedChat"
                       subtitle="Winner of 2023 Cohere RAG Challenge"
                       technologies={["Python", "Cohere API", "Streamlit", "Tensorflow", "OpenCV"]}
                       description="A medical diagnostic assistant that uses RAG to provide accurate information and analysis of medical images, helping users understand their health concerns."
@@ -452,7 +452,7 @@ export default function Home() {
                       link="https://github.com/AreelKhan/MedChat"
                     />
                     <ProjectCard
-                      title="DirectUW"
+                      title="DirectU"
                       subtitle="Winner of Hack the North 2023 Best Use of Cohere Prize"
                       technologies={["Python", "Flask", "Cohere API", "MongoDB", "React", "Selenium"]}
                       description="An academic planning tool that provides personalized course recommendations for University of Waterloo students, enhancing their educational journey."
