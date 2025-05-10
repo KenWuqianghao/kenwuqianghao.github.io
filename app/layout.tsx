@@ -8,14 +8,14 @@ import Script from "next/script"
 const poppins = Poppins({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
-  variable: "--font-poppins",
+  variable: "--font-display",
   display: "swap",
 })
 
 // Font for body text
 const outfit = Outfit({
   subsets: ["latin"],
-  variable: "--font-outfit",
+  variable: "--font-sans",
   display: "swap",
 })
 
@@ -66,9 +66,17 @@ export default function RootLayout({
             })();
           `}
         </Script>
+        
+        {/* Umami Analytics - Privacy-friendly analytics */}
+        <Script
+          async
+          src="https://analytics.umami.is/script.js"
+          data-website-id="your-website-id-here" // Replace with your actual Umami website ID
+          strategy="afterInteractive"
+        />
       </head>
       <body 
-        className={`${outfit.variable} ${poppins.variable} font-body`}
+        className={`${outfit.variable} ${poppins.variable} font-sans bg-background text-foreground`}
         style={{ isolation: "isolate" }}
         suppressHydrationWarning
       >

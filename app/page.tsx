@@ -22,6 +22,8 @@ import {
   Code,
   Heart,
   Globe,
+  ArrowUpRight,
+  FileText
 } from "lucide-react"
 import GridBackground from "@/components/grid-background"
 import ExperienceTimeline from "@/components/experience-timeline"
@@ -32,6 +34,9 @@ import UniversityHoverCard from "@/components/university-hover-card"
 import ProfessorHoverCard from "@/components/professor-hover-card"
 import CompanyHoverCard from "@/components/company-hover-card"
 import EntityHoverCard from "@/components/entity-hover-card"
+import VisitorCounter from "@/components/visitor-counter"
+import VisitorStats from "@/components/visitor-stats"
+import HeaderCollapse from "@/components/header-collapse"
 
 // Create a client-side only component for the image
 const ProfileImage = () => {
@@ -78,19 +83,32 @@ export default function Home() {
         {/* Grid background */}
         <GridBackground />
 
-        {/* Theme toggle - fixed position */}
-        <div className="fixed top-4 right-4 z-[50000]">
+        {/* Theme toggle and visitor stats - fixed position */}
+        <div className="fixed bottom-4 right-4 z-[50000] flex flex-col gap-2 items-end">
           <ThemeToggle />
+          <VisitorStats />
         </div>
 
         {/* Content wrapper */}
         <div className="relative z-10">
           {/* Header */}
-          <header id="about" className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-md sticky top-0 z-40 shadow-sm">
-            <div className="container max-w-7xl mx-auto px-4 py-4 md:py-6 flex flex-col md:flex-row items-center justify-between gap-4 md:gap-8">
+          <header 
+            id="about"
+            className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-md sticky top-0 z-40 shadow-sm transition-all duration-300 ease-in-out header-expanded">
+            <div className="container max-w-7xl mx-auto px-4 py-4 md:py-6 flex flex-col md:flex-row items-center justify-between gap-4 md:gap-8 header-container">
               <div className="flex flex-col md:flex-row items-center md:items-start gap-4 md:gap-6">
-                <NoSSR />
-                <div className="text-center md:text-left">
+                <div id="profile-image" className="h-20 w-20 md:h-24 md:w-24 rounded-full overflow-hidden border-2 border-gray-200 dark:border-gray-700 transition-all group relative">
+                  <div className="absolute inset-0 bg-red-500/0 group-hover:bg-red-500/10 transition-colors duration-500 z-10"></div>
+                  <Image 
+                    src="/KenWuCropped.jpg" 
+                    alt="Ken Wu" 
+                    width={96} 
+                    height={96} 
+                    className="w-full h-full object-cover transition-all duration-500 group-hover:scale-110"
+                    priority
+                  />
+                </div>
+                <div id="header-content" className="text-center md:text-left transition-all">
                   <h1 className="text-3xl md:text-4xl font-bold mb-1 font-display text-gray-900 dark:text-gray-100 hover:text-red-500 dark:hover:text-red-400 transition-colors duration-300">
                     Ken Wu
                   </h1>
@@ -100,65 +118,71 @@ export default function Home() {
                   <div className="flex flex-wrap justify-center md:justify-start gap-2 mb-3">
                     <a
                       href="mailto:ken.wu@uwaterloo.ca"
-                      className="flex items-center gap-1 text-sm bg-gray-100 dark:bg-gray-800 px-3 py-1 rounded-full hover:bg-red-500 hover:text-white dark:hover:bg-red-500 dark:hover:text-white transition-colors duration-300 text-gray-700 dark:text-gray-300"
+                      className="flex items-center gap-1 text-sm bg-gray-100 dark:bg-gray-800 px-3 py-1 rounded-full hover:bg-red-500 hover:text-white dark:hover:bg-red-500 dark:hover:text-white transition-colors duration-300 text-gray-700 dark:text-gray-300 contact-info"
                     >
                       <Mail size={14} /> ken.wu@uwaterloo.ca
                     </a>
                     <a
                       href="tel:4379713179"
-                      className="flex items-center gap-1 text-sm bg-gray-100 dark:bg-gray-800 px-3 py-1 rounded-full hover:bg-red-500 hover:text-white dark:hover:bg-red-500 dark:hover:text-white transition-colors duration-300 text-gray-700 dark:text-gray-300"
+                      className="flex items-center gap-1 text-sm bg-gray-100 dark:bg-gray-800 px-3 py-1 rounded-full hover:bg-red-500 hover:text-white dark:hover:bg-red-500 dark:hover:text-white transition-colors duration-300 text-gray-700 dark:text-gray-300 contact-info"
                     >
                       <Phone size={14} /> 437-971-3179
                     </a>
-                    <span className="flex items-center gap-1 text-sm bg-gray-100 dark:bg-gray-800 px-3 py-1 rounded-full text-gray-700 dark:text-gray-300">
+                    <span className="flex items-center gap-1 text-sm bg-gray-100 dark:bg-gray-800 px-3 py-1 rounded-full text-gray-700 dark:text-gray-300 contact-info">
                       <MapPin size={14} /> Waterloo, ON
                     </span>
                   </div>
-                  <div className="flex justify-center md:justify-start gap-2">
-                    <a
-                      href="https://github.com/KenWuqianghao"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        className="border-gray-300 dark:border-gray-700 hover:bg-red-500 hover:text-white hover:border-red-500 dark:hover:bg-red-500 dark:hover:text-white dark:hover:border-red-500 transition-colors duration-300 text-gray-700 dark:text-gray-300 group"
-                      >
-                        <Github className="mr-2 h-4 w-4 group-hover:scale-110 transition-transform duration-300" /> GitHub
-                      </Button>
-                    </a>
-                    <a
-                      href="https://linkedin.com/in/kenwuu"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        className="border-gray-300 dark:border-gray-700 hover:bg-red-500 hover:text-white hover:border-red-500 dark:hover:bg-red-500 dark:hover:text-white dark:hover:border-red-500 transition-colors duration-300 text-gray-700 dark:text-gray-300 group"
-                      >
-                        <Linkedin className="mr-2 h-4 w-4 group-hover:scale-110 transition-transform duration-300" />{" "}
-                        LinkedIn
-                      </Button>
-                    </a>
-                    <a
-                      href="/resume.pdf"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <Button
-                        size="sm"
-                        className="bg-red-500 hover:bg-red-600 text-white shadow-[0_4px_14px_0_rgba(244,63,94,0.4)] hover:shadow-[0_6px_20px_0_rgba(244,63,94,0.5)] transition-all duration-300 group"
-                      >
-                        Resume{" "}
-                        <ChevronRight className="ml-1 h-4 w-4 group-hover:translate-x-1 transition-transform duration-300" />
-                      </Button>
-                    </a>
-                  </div>
                 </div>
               </div>
+              <div id="contact-buttons" className="flex justify-center md:justify-start gap-2 transition-all">
+                <a
+                  href="https://github.com/KenWuqianghao"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="transition-all"
+                >
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    aria-label="GitHub"
+                    className="rounded-full h-9 w-9"
+                  >
+                    <Github className="h-4 w-4" />
+                  </Button>
+                </a>
+                <a
+                  href="https://www.linkedin.com/in/kenwuqianghao/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="transition-all"
+                >
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    aria-label="LinkedIn"
+                    className="rounded-full h-9 w-9"
+                  >
+                    <Linkedin className="h-4 w-4" />
+                  </Button>
+                </a>
+                <a
+                  href="/resume.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="transition-all"
+                >
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    aria-label="Resume"
+                    className="rounded-full h-9 w-9"
+                  >
+                    <FileText className="h-4 w-4" />
+                  </Button>
+                </a>
+              </div>
             </div>
+            <HeaderCollapse />
           </header>
 
           {/* Main content */}
@@ -806,6 +830,9 @@ export default function Home() {
                   <p className="text-sm text-gray-500 dark:text-gray-400">
                     © {new Date().getFullYear()} Ken Wu. All rights reserved.
                   </p>
+                  <div className="mt-2">
+                    <VisitorStats />
+                  </div>
                 </div>
                 <div className="flex gap-4">
                   <a
