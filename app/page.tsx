@@ -29,6 +29,7 @@ import LifeCountdown from "@/components/life-countdown"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { ThemeToggle } from "@/components/theme-toggle"
 import UniversityHoverCard from "@/components/university-hover-card"
+import ProfessorHoverCard from "@/components/professor-hover-card"
 
 // Create a client-side only component for the image
 const ProfileImage = () => {
@@ -178,7 +179,18 @@ export default function Home() {
                           My Journey
                         </h3>
                         <p className="text-lg leading-relaxed text-gray-700 dark:text-gray-300 mb-4">
-                          <span className="font-semibold">🪿 3rd Year CS Student at @UWaterloo</span>, Learning ML, LLM
+                          <span className="font-semibold">🪿 3rd Year CS Student at{" "}
+                            <UniversityHoverCard
+                              name="University of Waterloo"
+                              logo="/uwaterloo.png"
+                              description="A leading Canadian university known for its co-operative education programs and excellence in computer science, engineering, and mathematics."
+                              location="Waterloo, Ontario, Canada"
+                              website="https://uwaterloo.ca"
+                              founded="1957"
+                              ranking="#1 in Canada for Computer Science"
+                              programs={["Computer Science", "Software Engineering", "Mathematics", "Engineering"]}
+                            />
+                          </span>, Learning ML, LLM
                           and Data Science
                         </p>
                         <p className="text-lg leading-relaxed text-gray-700 dark:text-gray-300">
@@ -232,7 +244,24 @@ export default function Home() {
                           Research Assistant
                         </h3>
                         <p className="text-gray-700 dark:text-gray-300 mb-2">
-                          <span className="font-medium">Lancaster University</span> with Professor Plamen Angelov
+                          <span className="font-medium flex items-center">
+                            <Image 
+                              src="/lancaster.png" 
+                              alt="Lancaster University" 
+                              width={20} 
+                              height={20} 
+                              className="mr-2 rounded-sm" 
+                            /> 
+                            Lancaster University
+                          </span> with Professor{" "}
+                          <ProfessorHoverCard
+                            name="Plamen Angelov"
+                            university="Lancaster University"
+                            universityLogo="/lancaster.png"
+                            profile="https://www.lancaster.ac.uk/lira/people/"
+                            research="Renowned for his work in explainable AI, fuzzy systems, and autonomous learning systems. Director of LIRA (Lancaster Intelligent, Robotic and Autonomous systems) Research Centre."
+                            department="School of Computing and Communications"
+                          />
                         </p>
                         <p className="text-gray-700 dark:text-gray-300">
                           Working on optimization of clustering algorithms and analysis.
@@ -244,8 +273,33 @@ export default function Home() {
                           Research Assistant
                         </h3>
                         <p className="text-gray-700 dark:text-gray-300 mb-2">
-                          <span className="font-medium">University of Waterloo</span> with Professor Ali Ghodsi and Amin
-                          Ravanbakhsh
+                          <span className="font-medium flex items-center">
+                            <Image 
+                              src="/uwaterloo.png" 
+                              alt="University of Waterloo" 
+                              width={20} 
+                              height={20} 
+                              className="mr-2 rounded-sm" 
+                            /> 
+                            University of Waterloo
+                          </span> with Professor{" "}
+                          <ProfessorHoverCard
+                            name="Ali Ghodsi"
+                            university="University of Waterloo"
+                            universityLogo="/uwaterloo.png"
+                            profile="https://uwaterloo.ca/data-analytics/people-profiles/ali-ghodsi"
+                            research="Specializes in machine learning, statistical pattern recognition, and data mining. Co-founder and CEO of Databricks, known for his work on dimensionality reduction and distributed systems."
+                            department="Department of Statistics and Actuarial Science"
+                          />
+                          {" "}and{" "}
+                          <ProfessorHoverCard
+                            name="Amin Ravanbakhsh"
+                            university="University of Waterloo"
+                            universityLogo="/uwaterloo.png"
+                            profile="https://aminravanbakhsh.com/"
+                            research="Master's student in Computer Science focused on symbolic regression using large language models and developing reasoning-based tools that leverage human guidance."
+                            department="Data Analytics Lab, Computer Science"
+                          />
                         </p>
                         <p className="text-gray-700 dark:text-gray-300">
                           Working on symbolic regression using GPT models.
@@ -428,8 +482,11 @@ export default function Home() {
                             Chess Player
                           </h3>
                           <p className="text-gray-700 dark:text-gray-300 mb-4">
-                            I started playing chess during Covid and haven't stopped since then. Find me on Lichess and
-                            Chess.com, or at UWaterloo or Lancaster University Chess Club.
+                            I started playing chess during Covid and haven't stopped since then. Find me on 
+                            <a href="https://lichess.org/@/KenWuu" target="_blank" rel="noopener noreferrer" className="mx-1 text-red-500 hover:underline">Lichess</a> 
+                            and
+                            <a href="https://www.chess.com/member/kenwuu" target="_blank" rel="noopener noreferrer" className="mx-1 text-red-500 hover:underline">Chess.com</a>, 
+                            or at UWaterloo or Lancaster University Chess Club.
                           </p>
                           <p className="text-gray-700 dark:text-gray-300">
                             Chess has sharpened my strategic thinking and ability to plan several moves ahead - crucial
