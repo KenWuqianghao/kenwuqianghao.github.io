@@ -30,6 +30,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { ThemeToggle } from "@/components/theme-toggle"
 import UniversityHoverCard from "@/components/university-hover-card"
 import ProfessorHoverCard from "@/components/professor-hover-card"
+import CompanyHoverCard from "@/components/company-hover-card"
+import EntityHoverCard from "@/components/entity-hover-card"
 
 // Create a client-side only component for the image
 const ProfileImage = () => {
@@ -238,72 +240,108 @@ export default function Home() {
                   />
 
                   <div className="bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm rounded-2xl p-8 shadow-xl border border-gray-100 dark:border-gray-800 hover:shadow-2xl transition-shadow duration-300 space-y-4">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <div className="bg-gray-50/80 dark:bg-gray-800/80 rounded-xl p-6 hover:shadow-md transition-shadow duration-300">
-                        <h3 className="text-xl font-semibold mb-3 text-gray-900 dark:text-gray-100">
-                          Research Assistant
-                        </h3>
-                        <p className="text-gray-700 dark:text-gray-300 mb-2">
-                          <span className="font-medium flex items-center">
-                            <Image 
-                              src="/lancaster.png" 
-                              alt="Lancaster University" 
-                              width={20} 
-                              height={20} 
-                              className="mr-2 rounded-sm" 
-                            /> 
-                            Lancaster University
-                          </span> with Professor{" "}
-                          <ProfessorHoverCard
-                            name="Plamen Angelov"
-                            university="Lancaster University"
-                            universityLogo="/lancaster.png"
-                            profile="https://www.lancaster.ac.uk/lira/people/"
-                            research="Renowned for his work in explainable AI, fuzzy systems, and autonomous learning systems. Director of LIRA (Lancaster Intelligent, Robotic and Autonomous systems) Research Centre."
-                            department="School of Computing and Communications"
-                          />
-                        </p>
-                        <p className="text-gray-700 dark:text-gray-300">
-                          Working on optimization of clustering algorithms and analysis.
-                        </p>
-                      </div>
+                    {/* Current Roles - Horizontal Scrollable */}
+                    <div className="relative">
+                      <div className="overflow-x-auto pb-4 hide-scrollbar">
+                        <div className="flex gap-6 min-w-max">
+                          <div className="bg-gray-50/80 dark:bg-gray-800/80 rounded-xl p-6 hover:shadow-md transition-shadow duration-300 w-[350px]">
+                            <h3 className="text-xl font-semibold mb-3 text-gray-900 dark:text-gray-100">
+                              Data Scientist Intern
+                            </h3>
+                            <p className="text-gray-700 dark:text-gray-300 mb-2">
+                              <span className="font-medium flex items-center">
+                                <Image 
+                                  src="/td.png" 
+                                  alt="TD Bank" 
+                                  width={20} 
+                                  height={20} 
+                                  className="mr-2 rounded-sm" 
+                                /> 
+                                <CompanyHoverCard
+                                  name="TD Bank"
+                                  logo="/td.png"
+                                  website="https://www.td.com/"
+                                  location="Toronto, Canada"
+                                  industry="Banking & Financial Services"
+                                  founded="1855"
+                                  description="TD Bank Group is one of the largest banks in North America, offering a full range of financial products and services to more than 26 million customers worldwide."
+                                  technologies={["Data Science", "AI/ML", "Big Data", "Financial Analytics"]}
+                                />
+                              </span>
+                            </p>
+                            <p className="text-gray-700 dark:text-gray-300">
+                              Working on machine learning models for financial data analysis and prediction.
+                            </p>
+                          </div>
 
-                      <div className="bg-gray-50/80 dark:bg-gray-800/80 rounded-xl p-6 hover:shadow-md transition-shadow duration-300">
-                        <h3 className="text-xl font-semibold mb-3 text-gray-900 dark:text-gray-100">
-                          Research Assistant
-                        </h3>
-                        <p className="text-gray-700 dark:text-gray-300 mb-2">
-                          <span className="font-medium flex items-center">
-                            <Image 
-                              src="/uwaterloo.png" 
-                              alt="University of Waterloo" 
-                              width={20} 
-                              height={20} 
-                              className="mr-2 rounded-sm" 
-                            /> 
-                            University of Waterloo
-                          </span> with Professor{" "}
-                          <ProfessorHoverCard
-                            name="Ali Ghodsi"
-                            university="University of Waterloo"
-                            universityLogo="/uwaterloo.png"
-                            profile="https://uwaterloo.ca/data-analytics/people-profiles/ali-ghodsi"
-                            research="Specializes in machine learning, statistical pattern recognition, and data mining. Co-founder and CEO of Databricks, known for his work on dimensionality reduction and distributed systems."
-                            department="Department of Statistics and Actuarial Science"
-                          />
-                          {" "}and{" "}
-                          <ProfessorHoverCard
-                            name="Amin Ravanbakhsh"
-                            university="University of Waterloo"
-                            universityLogo="/uwaterloo.png"
-                            profile="https://aminravanbakhsh.com/"
-                            research="Master's student in Computer Science focused on symbolic regression using large language models and developing reasoning-based tools that leverage human guidance."
-                            department="Data Analytics Lab, Computer Science"
-                          />
-                        </p>
-                        <p className="text-gray-700 dark:text-gray-300">
-                          Working on symbolic regression using GPT models.
-                        </p>
+                          <div className="bg-gray-50/80 dark:bg-gray-800/80 rounded-xl p-6 hover:shadow-md transition-shadow duration-300 w-[350px]">
+                            <h3 className="text-xl font-semibold mb-3 text-gray-900 dark:text-gray-100">
+                              Research Assistant
+                            </h3>
+                            <p className="text-gray-700 dark:text-gray-300 mb-2">
+                              <span className="font-medium flex items-center">
+                                <Image 
+                                  src="/lancaster.png" 
+                                  alt="Lancaster University" 
+                                  width={20} 
+                                  height={20} 
+                                  className="mr-2 rounded-sm" 
+                                /> 
+                                Lancaster University
+                              </span> with Professor{" "}
+                              <ProfessorHoverCard
+                                name="Plamen Angelov"
+                                university="Lancaster University"
+                                universityLogo="/lancaster.png"
+                                profile="https://www.lancaster.ac.uk/lira/people/"
+                                research="Renowned for his work in explainable AI, fuzzy systems, and autonomous learning systems. Director of LIRA (Lancaster Intelligent, Robotic and Autonomous systems) Research Centre."
+                                department="School of Computing and Communications"
+                              />
+                            </p>
+                            <p className="text-gray-700 dark:text-gray-300">
+                              Working on optimization of clustering algorithms and analysis.
+                            </p>
+                          </div>
+
+                          <div className="bg-gray-50/80 dark:bg-gray-800/80 rounded-xl p-6 hover:shadow-md transition-shadow duration-300 w-[350px]">
+                            <h3 className="text-xl font-semibold mb-3 text-gray-900 dark:text-gray-100">
+                              Research Assistant
+                            </h3>
+                            <p className="text-gray-700 dark:text-gray-300 mb-2">
+                              <span className="font-medium flex items-center">
+                                <Image 
+                                  src="/uwaterloo.png" 
+                                  alt="University of Waterloo" 
+                                  width={20} 
+                                  height={20} 
+                                  className="mr-2 rounded-sm" 
+                                /> 
+                                University of Waterloo
+                              </span> with Professor{" "}
+                              <ProfessorHoverCard
+                                name="Ali Ghodsi"
+                                university="University of Waterloo"
+                                universityLogo="/uwaterloo.png"
+                                profile="https://uwaterloo.ca/data-analytics/people-profiles/ali-ghodsi"
+                                research="Specializes in machine learning, statistical pattern recognition, and data mining. Co-founder and CEO of Databricks, known for his work on dimensionality reduction and distributed systems."
+                                department="Department of Statistics and Actuarial Science"
+                              />
+                              {" "} and {" "}
+                              <ProfessorHoverCard
+                                name="Amin Ravanbakhsh"
+                                university="University of Waterloo"
+                                universityLogo="/uwaterloo.png"
+                                profile="https://aminravanbakhsh.com/"
+                                research="Master's student in Computer Science focused on symbolic regression using large language models and developing reasoning-based tools that leverage human guidance. Also interested in Cybersecurity, Generative AI, and Reinforcement Learning."
+                                department="Data Analytics Lab, Computer Science"
+                                role="Master's student at"
+                              />
+                            </p>
+                            <p className="text-gray-700 dark:text-gray-300">
+                              Working on symbolic regression using GPT models.
+                            </p>
+                          </div>
+                        </div>
                       </div>
                     </div>
 
@@ -452,8 +490,35 @@ export default function Home() {
                             Basketball Enthusiast
                           </h3>
                           <p className="text-gray-700 dark:text-gray-300 mb-4">
-                            I've been playing basketball since high school and I'm a Dallas Mavericks fan. My favorite
-                            player is KD (I know KD never played for Mavericks, relax).
+                            I've been playing basketball since high school and I'm a <span className="border-b border-dotted border-gray-400 dark:border-gray-600"><EntityHoverCard
+                              name="Dallas Mavericks"
+                              logo="/mavericks.png"
+                              website="https://www.mavs.com/"
+                              type="team"
+                              founded="1980"
+                              description="The Dallas Mavericks are an American professional basketball team based in Dallas, Texas. They compete in the National Basketball Association (NBA) as a member of the Western Conference Southwest Division."
+                              stats={[
+                                { label: "Championships", value: "1 (2011)" },
+                                { label: "Conference Titles", value: "2" },
+                                { label: "Arena", value: "American Airlines Center" },
+                                { label: "Owner", value: "Mark Cuban" }
+                              ]}
+                              achievements={["NBA Champions (2011)", "Western Conference Champions (2006, 2011)"]}
+                            /></span> fan. My favorite
+                            player is <span className="border-b border-dotted border-gray-400 dark:border-gray-600"><EntityHoverCard
+                              name="KD"
+                              logo="/durant.png"
+                              website="https://www.instagram.com/easymoneysniper/"
+                              type="player"
+                              description={"Kevin Durant, nicknamed \"KD\", is an American professional basketball player for the Phoenix Suns of the NBA. Standing at 6'11\" with elite scoring abilities, Durant is widely regarded as one of the greatest players of all time."}
+                              stats={[
+                                { label: "Position", value: "Forward" },
+                                { label: "Teams", value: "OKC, GSW, BKN, PHX" },
+                                { label: "Championships", value: "2 (2017, 2018)" },
+                                { label: "MVP", value: "1 (2014)" }
+                              ]}
+                              achievements={["2× NBA Champion", "NBA MVP", "13× NBA All-Star", "4× Olympic Gold Medalist", "4× NBA Scoring Champion"]}
+                            /></span> (I know KD never played for Mavericks, relax).
                           </p>
                           <p className="text-gray-700 dark:text-gray-300">
                             Basketball has taught me teamwork, strategy, and perseverance - skills that translate well
@@ -483,10 +548,68 @@ export default function Home() {
                           </h3>
                           <p className="text-gray-700 dark:text-gray-300 mb-4">
                             I started playing chess during Covid and haven't stopped since then. Find me on 
-                            <a href="https://lichess.org/@/KenWuu" target="_blank" rel="noopener noreferrer" className="mx-1 text-red-500 hover:underline">Lichess</a> 
+                            <a href="https://lichess.org/@/KenWuu" target="_blank" rel="noopener noreferrer" className="mx-1 text-red-500 hover:underline">
+                              <span className="border-b border-dotted border-gray-400 dark:border-gray-600"><EntityHoverCard
+                                name="Lichess"
+                                logo="/lichess.png"
+                                website="https://lichess.org/@/KenWuu"
+                                type="platform"
+                                founded="2010"
+                                description="Lichess is a free and open-source Internet chess server run by a non-profit organization of the same name. Anyone can play chess on the platform without registration, and advanced features such as tournaments, coaching, and game analysis are available."
+                                stats={[
+                                  { label: "Daily Players", value: "1M+" },
+                                  { label: "Games Played", value: "8B+" },
+                                  { label: "Variants", value: "8+" },
+                                  { label: "Cost", value: "Free" }
+                                ]}
+                                achievements={["Open Source", "Ad-free", "Free Analysis", "Studies", "Training", "Puzzle Database"]}
+                              /></span>
+                            </a> 
                             and
-                            <a href="https://www.chess.com/member/kenwuu" target="_blank" rel="noopener noreferrer" className="mx-1 text-red-500 hover:underline">Chess.com</a>, 
-                            or at UWaterloo or Lancaster University Chess Club.
+                            <a href="https://www.chess.com/member/kenwuu" target="_blank" rel="noopener noreferrer" className="mx-1 text-red-500 hover:underline">
+                              <span className="border-b border-dotted border-gray-400 dark:border-gray-600"><EntityHoverCard
+                                name="Chess.com"
+                                logo="/chesscom.png"
+                                website="https://www.chess.com/member/kenwuu"
+                                type="platform"
+                                founded="2007"
+                                description="Chess.com is the world's largest online chess platform. It offers various features such as online chess games, tournaments, lessons, puzzles, news, articles, social features, and more to a global community of chess players."
+                                stats={[
+                                  { label: "Daily Players", value: "10M+" },
+                                  { label: "Registered Users", value: "100M+" },
+                                  { label: "Daily Games", value: "10M+" },
+                                  { label: "Mobile Rating", value: "4.8/5" }
+                                ]}
+                                achievements={["Puzzle Rush", "Chess Bots", "Video Lessons", "Tactics Trainer", "Computer Analysis"]}
+                              /></span>
+                            </a>, 
+                            or at UWaterloo or Lancaster University Chess Club. My favorite players are <span className="border-b border-dotted border-gray-400 dark:border-gray-600"><EntityHoverCard
+                              name="Ding Liren"
+                              logo="/ding-liren.png"
+                              website="https://www.chess.com/players/ding-liren"
+                              type="player"
+                              description="Ding Liren is a Chinese chess grandmaster who became the 17th World Chess Champion in 2023, defeating Ian Nepomniachtchi. He was the world champion until December 2024, when he lost to GM Gukesh Dommaraju. Ding was the first Chinese player to win the World Chess Championship and the first from Asia to hold the title."
+                              stats={[
+                                { label: "World Ranking", value: "#21 (2734)" },
+                                { label: "Country", value: "China" },
+                                { label: "Born", value: "October 24, 1992" },
+                                { label: "Peak Rating", value: "2816 (2019)" }
+                              ]}
+                              achievements={["World Chess Champion (2023-2024)", "Chinese Chess Champion (5 times)", "Sinquefield Cup Winner (2019)", "100-game unbeaten streak (2017-2018)", "Chess Olympiad Gold Medalist (2018)"] }
+                            /></span> and <span className="border-b border-dotted border-gray-400 dark:border-gray-600"><EntityHoverCard
+                              name="Fabiano Caruana"
+                              logo="/caruana.jpg"
+                              website="https://www.chess.com/players/fabiano-caruana"
+                              type="player"
+                              description="Fabiano Caruana is an Italian-American chess grandmaster. He challenged Magnus Carlsen for the World Chess Championship in 2018, where all classical games ended in draws before Carlsen won the rapid tiebreaks. Caruana has been among the world's top players for over a decade and has represented both Italy and the United States."
+                              stats={[
+                                { label: "Title", value: "Grandmaster" },
+                                { label: "Country", value: "USA (formerly Italy)" },
+                                { label: "Born", value: "July 30, 1992" },
+                                { label: "Peak Rating", value: "2844 (2014)" }
+                              ]}
+                              achievements={["World Championship Challenger (2018)", "US Chess Champion (2016, 2022)", "Sinquefield Cup Winner (2014 with 8.5/10)", "Chess Olympiad Gold Medalist (2016)", "Seven wins against Magnus Carlsen"] }
+                            /></span>.
                           </p>
                           <p className="text-gray-700 dark:text-gray-300">
                             Chess has sharpened my strategic thinking and ability to plan several moves ahead - crucial
@@ -516,7 +639,21 @@ export default function Home() {
                           </h3>
                           <p className="text-gray-700 dark:text-gray-300 mb-4">
                             I've been watching anime and reading manga since elementary school. Fellow weebs feel free to
-                            hit me up to talk about newest animes and manga.
+                            hit me up to talk about newest animes and manga. I'm a huge fan of <span className="border-b border-dotted border-gray-400 dark:border-gray-600"><EntityHoverCard
+                              name="JoJo's Bizarre Adventure"
+                              logo="/jojo.png"
+                              website="https://jojo-portal.com/en/"
+                              type="organization"
+                              founded="1987"
+                              description="JoJo's Bizarre Adventure is a Japanese manga series written and illustrated by Hirohiko Araki. It follows the supernatural adventures of the Joestar family across generations, with each part featuring a new JoJo protagonist with unique abilities called Stands."
+                              stats={[
+                                { label: "Creator", value: "Hirohiko Araki" },
+                                { label: "Parts", value: "8 (ongoing)" },
+                                { label: "Volumes", value: "130+" },
+                                { label: "Anime Seasons", value: "6" }
+                              ]}
+                              achievements={["100+ million copies sold", "One of the longest-running manga series", "Iconic art style", "Cultural phenomenon in Japan", "Unique Stand power system"]}
+                            /></span> and I think Part 7 is the greatest manga of all time. 
                           </p>
                           <p className="text-gray-700 dark:text-gray-300">
                             Anime and manga have inspired my creativity and exposed me to unique storytelling approaches
@@ -548,7 +685,21 @@ export default function Home() {
                             you have a cool project in mind!
                           </p>
                           <p className="text-gray-700 dark:text-gray-300">
-                            I've interviewed with YC before (didn't get in), but I do know a thing or two about the
+                            I've interviewed with <span className="border-b border-dotted border-gray-400 dark:border-gray-600"><EntityHoverCard
+                              name="YC"
+                              logo="/yc.png"
+                              website="https://www.ycombinator.com/"
+                              type="organization"
+                              founded="2005"
+                              description="Y Combinator is a startup accelerator that invests in a wide range of startups twice a year. The program provides seed funding, advice, and connections in exchange for equity. Companies such as Airbnb, Dropbox, Stripe, and Reddit got their start through YC."
+                              stats={[
+                                { label: "Founded by", value: "Paul Graham" },
+                                { label: "Batch Size", value: "~200 companies" },
+                                { label: "Total Companies", value: "4000+" },
+                                { label: "Combined Valuation", value: "$600B+" }
+                              ]}
+                              achievements={["Airbnb", "Dropbox", "Stripe", "Reddit", "DoorDash", "Instacart", "Coinbase"]}
+                            /></span> before (didn't get in), but I do know a thing or two about the
                             startup world. I'm passionate about innovation and building products that solve real problems.
                           </p>
                         </div>

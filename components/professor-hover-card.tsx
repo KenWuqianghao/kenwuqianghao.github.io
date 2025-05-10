@@ -15,6 +15,7 @@ interface ProfessorHoverCardProps {
   profile?: string
   research: string
   department?: string
+  role?: string
 }
 
 export default function ProfessorHoverCard({
@@ -24,6 +25,7 @@ export default function ProfessorHoverCard({
   profile,
   research,
   department,
+  role,
 }: ProfessorHoverCardProps) {
   const [isOpen, setIsOpen] = useState(false)
   const triggerRef = useRef<HTMLSpanElement>(null)
@@ -99,7 +101,7 @@ export default function ProfessorHoverCard({
                 <div>
                   <h3 className="font-bold text-base text-gray-900 dark:text-gray-100">{name}</h3>
                   <span className="text-xs text-gray-500 dark:text-gray-400 flex items-center">
-                    <GraduationCap size={10} className="mr-1" /> Professor at {university}
+                    <GraduationCap size={10} className="mr-1" /> {role || "Professor at"} {university}
                   </span>
                   {department && (
                     <span className="text-xs text-gray-500 dark:text-gray-400 block mt-0.5">

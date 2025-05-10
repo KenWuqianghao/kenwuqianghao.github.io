@@ -25,7 +25,7 @@ const experiences = [
     ],
     companyInfo: {
       industry: "AI & Legal Tech",
-      founded: "2021",
+      founded: "2023",
       description: "Vecflow is an AI company building automated legal document analysis and processing solutions that streamline contract workflows using large language models.",
       technologies: ["LangChain", "RAG", "Vector Databases", "AWS", "FastAPI"]
     }
