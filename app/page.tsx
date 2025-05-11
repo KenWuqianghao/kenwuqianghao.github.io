@@ -34,7 +34,6 @@ import UniversityHoverCard from "@/components/university-hover-card"
 import ProfessorHoverCard from "@/components/professor-hover-card"
 import CompanyHoverCard from "@/components/company-hover-card"
 import EntityHoverCard from "@/components/entity-hover-card"
-import VisitorCounter from "@/components/visitor-counter"
 import VisitorStats from "@/components/visitor-stats"
 import HeaderCollapse from "@/components/header-collapse"
 
@@ -83,10 +82,12 @@ export default function Home() {
         {/* Grid background */}
         <GridBackground />
 
-        {/* Theme toggle and VisitorCounter (pill) - fixed position */}
+        {/* Theme toggle and VisitorStats (pill) - fixed position */}
         <div className="fixed bottom-4 right-4 z-[50000] flex flex-col gap-2 items-end">
           <ThemeToggle />
-          <VisitorCounter />
+          <div className="bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 px-4 py-2 rounded-full shadow-lg flex items-center">
+            <VisitorStats />
+          </div>
         </div>
 
         {/* Content wrapper */}
@@ -835,14 +836,10 @@ export default function Home() {
           <footer className="bg-gray-50/80 dark:bg-gray-900/80 backdrop-blur-sm border-t border-gray-100 dark:border-gray-800">
             <div className="container max-w-7xl mx-auto px-4 py-8">
               <div className="flex flex-col md:flex-row justify-between items-center">
-                <div className="mb-4 md:mb-0">
+                <div className="mb-4 md:mb-0 text-center md:text-left">
                   <p className="text-sm text-gray-500 dark:text-gray-400">
                     &copy; {new Date().getFullYear()} Ken Wu. All rights reserved.
                   </p>
-                  {/* VisitorStats for Footer (Total and Today) */}
-                  <div className="mt-2 flex justify-center md:justify-start">
-                    <VisitorStats /> {/* This displays total and today */}
-                  </div>
                 </div>
                 <div className="flex gap-4">
                   <a

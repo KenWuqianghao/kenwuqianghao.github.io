@@ -1,8 +1,10 @@
-import type { Metadata } from "next"
+import type { Metadata, Viewport } from "next"
 import "./globals.css"
 import { Outfit, Poppins } from "next/font/google"
 import { ThemeProvider } from "@/components/theme-provider"
 import Script from "next/script"
+import { GeistSans } from "geist/font/sans"
+import { GeistMono } from "geist/font/mono"
 
 // Font for headings
 const poppins = Poppins({
@@ -20,12 +22,15 @@ const outfit = Outfit({
 })
 
 export const metadata: Metadata = {
-  title: "Ken Wu - Personal Portfolio",
-  description: "Ken Wu is a software engineer and ML enthusiast currently studying at the University of Waterloo.",
-  icons: {
-    icon: '/KenWuCircular.png',
-    apple: '/KenWuCircular.png',
-  }
+  metadataBase: new URL("https://kenwu.dev"),
+  title: "Ken Wu - Software Engineer & Chess Enthusiast"
+}
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "white" },
+    { media: "(prefers-color-scheme: dark)", color: "black" },
+  ]
 }
 
 export default function RootLayout({
@@ -34,7 +39,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" className={`${GeistSans.variable} ${GeistMono.variable}`} suppressHydrationWarning>
       <head>
         <meta name="color-scheme" content="light dark" />
         <Script id="suppress-hydration" strategy="beforeInteractive">
@@ -66,14 +71,6 @@ export default function RootLayout({
             })();
           `}
         </Script>
-        
-        {/* Umami Analytics - Privacy-friendly analytics */}
-        <Script
-          async
-          src="https://analytics.umami.is/script.js"
-          data-website-id="your-website-id-here" // Replace with your actual Umami website ID
-          strategy="afterInteractive"
-        />
       </head>
       <body 
         className={`${outfit.variable} ${poppins.variable} font-sans bg-background text-foreground`}
