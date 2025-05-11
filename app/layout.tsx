@@ -23,7 +23,45 @@ const outfit = Outfit({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://kenwu.dev"),
-  title: "Ken Wu - Software Engineer & Chess Enthusiast"
+  title: "Ken Wu - Software Engineer & Chess Enthusiast",
+  description: "Ken Wu's personal portfolio showcasing projects in AI/ML, web development, and his passion for basketball, chess, and anime.",
+  openGraph: {
+    title: "Ken Wu - Portfolio",
+    description: "Explore Ken Wu's work, skills, and interests.",
+    url: "https://kenwu.dev",
+    siteName: "Ken Wu",
+    images: [
+      {
+        url: "/og-image.png", 
+        width: 1200,
+        height: 630,
+        alt: "Ken Wu Portfolio OG Image",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Ken Wu - Software Engineer & Chess Enthusiast",
+    description: "Ken Wu's personal portfolio.",
+    images: ["/og-image.png"], 
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  icons: {
+    icon: '/KenWuCircular.png',
+    apple: '/KenWuCircular.png',
+  },
 }
 
 export const viewport: Viewport = {
