@@ -7,6 +7,7 @@ import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import {
   ChevronRight,
+  ChevronLeft,
   Mail,
   Phone,
   MapPin,
@@ -172,7 +173,7 @@ export default function Home() {
                   </Button>
                 </a>
                 <a
-                  href="/Ken_Wu_Resume.pdf"
+                  href="https://drive.google.com/file/d/11TiGQ-JxqmLQ-TJ24Jui8V9kXsI6QZld/view"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="transition-all group"
@@ -208,7 +209,9 @@ export default function Home() {
                       <div className="md:w-1/2">
                         <h3 className="text-xl font-bold mb-4 font-display text-gray-900 dark:text-gray-100 flex items-center">
                           <Globe className="mr-2 text-red-500 dark:text-red-400" size={20} />
-                          My Journey
+                          <span className="hover:text-red-500 dark:hover:text-red-400 transition-colors duration-300">
+                            My Journey
+                          </span>
                         </h3>
                         <p className="text-lg leading-relaxed text-gray-700 dark:text-gray-300 mb-4">
                           <span className="font-semibold">🪿 3rd Year CS Student at{" "}
@@ -234,7 +237,9 @@ export default function Home() {
                       <div className="md:w-1/2">
                         <h3 className="text-xl font-bold mb-4 font-display text-gray-900 dark:text-gray-100 flex items-center">
                           <User className="mr-2 text-red-500 dark:text-red-400" size={20} />
-                          Who I Am
+                          <span className="hover:text-red-500 dark:hover:text-red-400 transition-colors duration-300">
+                            Who I Am
+                          </span>
                         </h3>
                         <p className="text-lg leading-relaxed text-gray-700 dark:text-gray-300 mb-4">
                           <span className="font-semibold">
@@ -252,7 +257,9 @@ export default function Home() {
                     <div id="life-countdown" className="pt-6 border-t border-gray-100 dark:border-gray-800">
                       <h3 className="text-xl font-bold mb-4 font-display text-gray-900 dark:text-gray-100 flex items-center">
                         <span className="text-red-500 dark:text-red-400 mr-2">⏳</span>
-                        Time I have Left to Make Some Cool Stuff for this World
+                        <span className="hover:text-red-500 dark:hover:text-red-400 transition-colors duration-300">
+                          Time I have Left to Make Some Cool Stuff for this World
+                        </span>
                       </h3>
                       <LifeCountdown />
                     </div>
@@ -260,13 +267,193 @@ export default function Home() {
                 </div>
               </section>
 
-              {/* Current Roles section */}
-              <section id="current-roles-education" className="mb-16">
+              {/* Education section */}
+              <section id="education" className="mb-16">
                 <div className="max-w-full mx-auto">
                   <SectionTitle 
-                    icon={<Briefcase size={18} className="text-white" />} 
-                    title="Current Roles & Education"
-                    id="current-roles-education"
+                    icon={<GraduationCap size={18} className="text-white" />} 
+                    title="Education"
+                    id="education"
+                  />
+
+                  <div className="bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm rounded-2xl p-8 shadow-xl border border-gray-100 dark:border-gray-800 hover:shadow-2xl transition-shadow duration-300">
+                    <div className="relative">
+                      {/* Vertical line */}
+                      <div className="absolute left-6 top-0 bottom-0 w-0.5 bg-gray-200 dark:bg-gray-700"></div>
+
+                      {/* Education entries */}
+                      <div className="space-y-8">
+                        {/* University of Waterloo */}
+                        <div className="relative pl-16">
+                          <div className="absolute left-0 w-12 h-12 flex items-center justify-center bg-white dark:bg-gray-800 rounded-full border-2 border-gray-200 dark:border-gray-700">
+                            <Image
+                              src="/uwaterloo.png"
+                              alt="University of Waterloo"
+                              width={32}
+                              height={32}
+                              className="rounded-full"
+                            />
+                          </div>
+                          <div className="bg-gray-50/80 dark:bg-gray-800/80 rounded-xl p-6 hover:shadow-md transition-shadow duration-300">
+                            <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2 group">
+                              <span className="hover:text-red-500 dark:hover:text-red-400 transition-colors duration-300">
+                                BCS, Honour's Computer Science, Business Specialization, Minor in Philosophy
+                              </span>
+                            </h3>
+                            <p className="text-gray-700 dark:text-gray-300 mb-2">
+                              <span className="font-medium">
+                                <UniversityHoverCard
+                                  name="University of Waterloo"
+                                  logo="/uwaterloo.png"
+                                  description="A leading Canadian university known for its co-operative education programs and excellence in computer science, engineering, and mathematics."
+                                  location="Waterloo, Ontario, Canada"
+                                  website="https://uwaterloo.ca"
+                                  founded="1957"
+                                  ranking="#1 in Canada for Computer Science"
+                                  programs={["Computer Science", "Software Engineering", "Mathematics", "Engineering"]}
+                                />
+                              </span>
+                              <span className="text-gray-500 dark:text-gray-400"> • Sep 2022 - Jun 2026</span>
+                            </p>
+                            <p className="text-gray-700 dark:text-gray-300 mb-2">
+                              Activities and societies: Technical Project Manager, Undergraduate Research Assistant
+                            </p>
+                            <div className="flex flex-wrap gap-2">
+                              {["C", "C++", "Git", "Bash", "R", "Linux", "LaTeX", "Racket"].map((skill) => (
+                                <Badge
+                                  key={skill}
+                                  className="bg-gray-100 dark:bg-gray-800 hover:bg-red-500 hover:text-white dark:hover:bg-red-500 dark:hover:text-white transition-colors duration-300 text-gray-700 dark:text-gray-300"
+                                >
+                                  {skill}
+                                </Badge>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Lancaster University */}
+                        <div className="relative pl-16">
+                          <div className="absolute left-0 w-12 h-12 flex items-center justify-center bg-white dark:bg-gray-800 rounded-full border-2 border-gray-200 dark:border-gray-700">
+                            <Image
+                              src="/lancaster.png"
+                              alt="Lancaster University"
+                              width={32}
+                              height={32}
+                              className="rounded-full"
+                            />
+                          </div>
+                          <div className="bg-gray-50/80 dark:bg-gray-800/80 rounded-xl p-6 hover:shadow-md transition-shadow duration-300">
+                            <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2 group">
+                              <span className="hover:text-red-500 dark:hover:text-red-400 transition-colors duration-300">
+                                Exchange Student, Computer Science
+                              </span>
+                            </h3>
+                            <p className="text-gray-700 dark:text-gray-300 mb-2">
+                              <span className="font-medium">
+                                <UniversityHoverCard
+                                  name="Lancaster University"
+                                  logo="/lancaster.png"
+                                  description="A top UK university known for its research excellence and high student satisfaction."
+                                  location="Lancaster, United Kingdom"
+                                  website="https://www.lancaster.ac.uk"
+                                  founded="1964"
+                                  ranking="Top 15 in UK University Rankings"
+                                  programs={["Computer Science", "Engineering", "Business", "Arts"]}
+                                />
+                              </span>
+                              <span className="text-gray-500 dark:text-gray-400"> • Jan 2025 - Jun 2025</span>
+                            </p>
+                            <p className="text-gray-700 dark:text-gray-300 mb-2">
+                              Activities and societies: Research Assistant, Chess Club Member
+                            </p>
+                            <div className="flex flex-wrap gap-2">
+                              {["C", "C++", "Java", "GDScript"].map((skill) => (
+                                <Badge
+                                  key={skill}
+                                  className="bg-gray-100 dark:bg-gray-800 hover:bg-red-500 hover:text-white dark:hover:bg-red-500 dark:hover:text-white transition-colors duration-300 text-gray-700 dark:text-gray-300"
+                                >
+                                  {skill}
+                                </Badge>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* American School of Milan */}
+                        <div className="relative pl-16">
+                          <div className="absolute left-0 w-12 h-12 flex items-center justify-center bg-white dark:bg-gray-800 rounded-full border-2 border-gray-200 dark:border-gray-700">
+                            <Image
+                              src="/asm.png"
+                              alt="American School of Milan"
+                              width={32}
+                              height={32}
+                              className="rounded-full"
+                            />
+                          </div>
+                          <div className="bg-gray-50/80 dark:bg-gray-800/80 rounded-xl p-6 hover:shadow-md transition-shadow duration-300">
+                            <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2 group">
+                              <span className="hover:text-red-500 dark:hover:text-red-400 transition-colors duration-300">
+                                High School Diploma
+                              </span>
+                            </h3>
+                            <p className="text-gray-700 dark:text-gray-300 mb-2">
+                              <span className="font-medium">
+                                <span className="border-b border-dotted border-gray-400 dark:border-gray-600">
+                                  <EntityHoverCard
+                                    name="American School of Milan"
+                                    logo="/asm.png"
+                                    website="https://www.asmilan.org/"
+                                    type="organization"
+                                    founded="1962"
+                                    description="The American School of Milan is an IB World School accredited by the Middle States Association, offering a global learning experience for students from over 70 countries. The school is known for its commitment to developing curious learners, critical thinkers, and global citizens."
+                                    stats={[
+                                      { label: "Founded", value: "1962" },
+                                      { label: "Accreditation", value: "IB World School, Middle States Association" },
+                                      { label: "Student Body", value: "70+ nationalities" },
+                                      { label: "Campus", value: "Modern facilities with 27,000 volume library" }
+                                    ]}
+                                    achievements={[
+                                      "IB Diploma Programme since 1983",
+                                      "Pioneering digital learning (2000)",
+                                      "Modern Media Center (1994)",
+                                      "Multicultural learning environment"
+                                    ]}
+                                  />
+                                </span>
+                              </span>
+                              <span className="text-gray-500 dark:text-gray-400"> • Sep 2015 - May 2022</span>
+                            </p>
+                            <p className="text-gray-700 dark:text-gray-300 mb-2">
+                              Activities and societies: Tech Team Leader, Varsity Basketball, Chess Club Member, National Honor Society Member
+                            </p>
+                            <p className="text-gray-700 dark:text-gray-300 mb-2">
+                              Graduated with the ASM Diploma and was awarded the Computer Science award.
+                            </p>
+                            <div className="flex flex-wrap gap-2">
+                              {["Python", "LaTeX", "Data Analysis", "HTML", "CSS", "Microsoft Excel", "Italian", "Git", "Computer Vision", "English"].map((skill) => (
+                                <Badge
+                                  key={skill}
+                                  className="bg-gray-100 dark:bg-gray-800 hover:bg-red-500 hover:text-white dark:hover:bg-red-500 dark:hover:text-white transition-colors duration-300 text-gray-700 dark:text-gray-300"
+                                >
+                                  {skill}
+                                </Badge>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              {/* Current Roles section */}
+              <section id="current-roles" className="mb-16">
+                <div className="max-w-full mx-auto">
+                  <SectionTitle 
+                    icon={<User size={18} className="text-white" />} 
+                    title="Current Roles"
+                    id="current-roles"
                   />
 
                   <div className="bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm rounded-2xl p-8 shadow-xl border border-gray-100 dark:border-gray-800 hover:shadow-2xl transition-shadow duration-300 space-y-4">
@@ -274,9 +461,11 @@ export default function Home() {
                     <div className="relative">
                       <div className="overflow-x-auto pb-4 hide-scrollbar">
                         <div className="flex gap-6 min-w-max">
-                          <div className="bg-gray-50/80 dark:bg-gray-800/80 rounded-xl p-6 hover:shadow-md transition-shadow duration-300 w-[350px]">
-                            <h3 className="text-xl font-semibold mb-3 text-gray-900 dark:text-gray-100">
-                              Data Scientist Intern
+                          <div className="bg-gray-50/80 dark:bg-gray-800/80 rounded-xl p-6 hover:shadow-xl transition-all duration-700 ease-out w-[350px] group hover:bg-white dark:hover:bg-gray-800">
+                            <h3 className="text-xl font-semibold mb-3 text-gray-900 dark:text-gray-100 group">
+                              <span className="hover:text-red-500 dark:hover:text-red-400 transition-colors duration-300">
+                                Data Scientist Intern
+                              </span>
                             </h3>
                             <p className="text-gray-700 dark:text-gray-300 mb-2">
                               <span className="font-medium flex items-center">
@@ -298,15 +487,51 @@ export default function Home() {
                                   technologies={["Data Science", "AI/ML", "Big Data", "Financial Analytics"]}
                                 />
                               </span>
+                              <span className="text-gray-500 dark:text-gray-400"> • Toronto, Canada • Jan 2024 - Present</span>
                             </p>
                             <p className="text-gray-700 dark:text-gray-300">
                               Working on machine learning models for financial data analysis and prediction.
                             </p>
                           </div>
 
-                          <div className="bg-gray-50/80 dark:bg-gray-800/80 rounded-xl p-6 hover:shadow-md transition-shadow duration-300 w-[350px]">
-                            <h3 className="text-xl font-semibold mb-3 text-gray-900 dark:text-gray-100">
-                              Research Assistant
+                          <div className="bg-gray-50/80 dark:bg-gray-800/80 rounded-xl p-6 hover:shadow-xl transition-all duration-700 ease-out w-[350px] group hover:bg-white dark:hover:bg-gray-800">
+                            <h3 className="text-xl font-semibold mb-3 text-gray-900 dark:text-gray-100 group">
+                              <span className="hover:text-red-500 dark:hover:text-red-400 transition-colors duration-300">
+                                Student Instructor
+                              </span>
+                            </h3>
+                            <p className="text-gray-700 dark:text-gray-300 mb-2">
+                              <span className="font-medium flex items-center">
+                                <Image 
+                                  src="/stanford.png" 
+                                  alt="Stanford University" 
+                                  width={20} 
+                                  height={20} 
+                                  className="mr-2 rounded-sm" 
+                                /> 
+                                <CompanyHoverCard
+                                  name="Stanford University"
+                                  logo="/stanford.png"
+                                  website="https://stanford.edu/"
+                                  location="Stanford, United States"
+                                  industry="Education"
+                                  founded="1891"
+                                  description="Stanford University is one of the world's leading research and teaching institutions, known for its excellence in computer science education and innovation."
+                                  technologies={["Computer Science Education", "Python", "Karel", "Tkinter"]}
+                                />
+                              </span>
+                              <span className="text-gray-500 dark:text-gray-400"> • Stanford, United States • Jan 2024 - Present</span>
+                            </p>
+                            <p className="text-gray-700 dark:text-gray-300">
+                              Teaching Stanford's Code in Place CS106A course to students globally.
+                            </p>
+                          </div>
+
+                          <div className="bg-gray-50/80 dark:bg-gray-800/80 rounded-xl p-6 hover:shadow-xl transition-all duration-700 ease-out w-[350px] group hover:bg-white dark:hover:bg-gray-800">
+                            <h3 className="text-xl font-semibold mb-3 text-gray-900 dark:text-gray-100 group">
+                              <span className="hover:text-red-500 dark:hover:text-red-400 transition-colors duration-300">
+                                Research Assistant
+                              </span>
                             </h3>
                             <p className="text-gray-700 dark:text-gray-300 mb-2">
                               <span className="font-medium flex items-center">
@@ -327,15 +552,18 @@ export default function Home() {
                                 research="Renowned for his work in explainable AI, fuzzy systems, and autonomous learning systems. Director of LIRA (Lancaster Intelligent, Robotic and Autonomous systems) Research Centre."
                                 department="School of Computing and Communications"
                               />
+                              <span className="text-gray-500 dark:text-gray-400"> • Lancaster, United Kingdom • Jan 2025 - Present</span>
                             </p>
                             <p className="text-gray-700 dark:text-gray-300">
                               Working on optimization of clustering algorithms and analysis.
                             </p>
                           </div>
 
-                          <div className="bg-gray-50/80 dark:bg-gray-800/80 rounded-xl p-6 hover:shadow-md transition-shadow duration-300 w-[350px]">
-                            <h3 className="text-xl font-semibold mb-3 text-gray-900 dark:text-gray-100">
-                              Research Assistant
+                          <div className="bg-gray-50/80 dark:bg-gray-800/80 rounded-xl p-6 hover:shadow-xl transition-all duration-700 ease-out w-[350px] group hover:bg-white dark:hover:bg-gray-800">
+                            <h3 className="text-xl font-semibold mb-3 text-gray-900 dark:text-gray-100 group">
+                              <span className="hover:text-red-500 dark:hover:text-red-400 transition-colors duration-300">
+                                Research Assistant
+                              </span>
                             </h3>
                             <p className="text-gray-700 dark:text-gray-300 mb-2">
                               <span className="font-medium flex items-center">
@@ -366,6 +594,7 @@ export default function Home() {
                                 department="Data Analytics Lab, Computer Science"
                                 role="Master's student at"
                               />
+                              <span className="text-gray-500 dark:text-gray-400"> • Waterloo, Canada • Sep 2023 - Present</span>
                             </p>
                             <p className="text-gray-700 dark:text-gray-300">
                               Working on symbolic regression using GPT models.
@@ -373,54 +602,44 @@ export default function Home() {
                           </div>
                         </div>
                       </div>
-                    </div>
 
-                    <div className="mt-6">
-                      <h3 className="text-xl font-semibold mb-3 text-gray-900 dark:text-gray-100">Education</h3>
-                      <div className="text-gray-700 dark:text-gray-300">
-                        🎓{" "}
-                        <span className="font-medium">
-                          <UniversityHoverCard
-                            name="University of Waterloo"
-                            logo="/uwaterloo.png"
-                            description="A leading Canadian university known for its co-operative education programs and excellence in computer science, engineering, and mathematics."
-                            location="Waterloo, Ontario, Canada"
-                            website="https://uwaterloo.ca"
-                            founded="1957"
-                            ranking="#1 in Canada for Computer Science"
-                            programs={["Computer Science", "Software Engineering", "Mathematics", "Engineering"]}
-                          />
-                        </span>{" "}
-                        - Pursuing a Bachelor's in Computer Science with a Business Specialization and a minor in
-                        Philosophy (Sept. 2022 - Apr. 2026).
-                      </div>
-                      <div className="text-gray-700 dark:text-gray-300 mt-2">
-                        Currently doing an exchange term at{" "}
-                        <span className="font-medium">
-                          <UniversityHoverCard
-                            name="Lancaster University"
-                            logo="/lancaster.png"
-                            description="A top UK university known for its research excellence and high student satisfaction."
-                            location="Lancaster, United Kingdom"
-                            website="https://www.lancaster.ac.uk"
-                            founded="1964"
-                            ranking="Top 15 in UK University Rankings"
-                            programs={["Computer Science", "Engineering", "Business", "Arts"]}
-                          />
-                        </span>
-                        .
-                      </div>
+                      {/* Navigation buttons */}
+                      <button
+                        onClick={() => {
+                          const container = document.querySelector('.overflow-x-auto');
+                          if (container) {
+                            container.scrollBy({ left: -350, behavior: 'smooth' });
+                          }
+                        }}
+                        className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 bg-white dark:bg-gray-800 rounded-full p-2 shadow-lg border border-gray-100 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:bg-red-500 hover:text-white dark:hover:bg-red-500 dark:hover:text-white hover:border-red-500 dark:hover:border-red-500 transition-colors duration-300"
+                        aria-label="Scroll left"
+                      >
+                        <ChevronLeft size={20} />
+                      </button>
+
+                      <button
+                        onClick={() => {
+                          const container = document.querySelector('.overflow-x-auto');
+                          if (container) {
+                            container.scrollBy({ left: 350, behavior: 'smooth' });
+                          }
+                        }}
+                        className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 bg-white dark:bg-gray-800 rounded-full p-2 shadow-lg border border-gray-100 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:bg-red-500 hover:text-white dark:hover:bg-red-500 dark:hover:text-white hover:border-red-500 dark:hover:border-red-500 transition-colors duration-300"
+                        aria-label="Scroll right"
+                      >
+                        <ChevronRight size={20} />
+                      </button>
                     </div>
                   </div>
                 </div>
               </section>
 
-              {/* Experience section */}
+              {/* Past Experience section */}
               <section id="experience" className="mb-16">
                 <div className="max-w-full mx-auto">
                   <SectionTitle 
                     icon={<Briefcase size={18} className="text-white" />} 
-                    title="Experience"
+                    title="Past Experience"
                     id="experience"
                   />
                   <ExperienceTimeline />

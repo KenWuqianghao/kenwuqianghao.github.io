@@ -32,6 +32,27 @@ const experiences = [
   },
   {
     title: "Machine Learning Engineer",
+    company: "hum.ai",
+    website: "https://hum.ai/",
+    logo: "/humai.jpeg",
+    period: "Jul 2024 – Sep 2024",
+    location: "Kitchener, Canada",
+    technologies: ["Python", "PyTorch", "AWS", "SageMaker", "Jupyter", "Matplotlib", "Seaborn", "S3", "EC2"],
+    description: [
+      "Benchmarked **SOTA super resolution models** including **ESRGAN**, **StableSR**, etc through pipelines in **PyTorch**",
+      "Created **automated benchmarking pipelines** in **Python** to evaluate multiple models efficiently",
+      "Visualized model performance using **Matplotlib** and **Seaborn** in **Jupyter Notebook** on **SageMaker** for comprehensive analysis",
+      "Managed experiment infrastructure using **AWS S3** buckets and **EC2** instances for scalable model finetuning and evaluation",
+    ],
+    companyInfo: {
+      industry: "AI & Climate Tech",
+      founded: "2023",
+      description: "hum.ai (formerly Coastal Carbon) is an AI company focused on climate tech solutions, using machine learning to address environmental challenges.",
+      technologies: ["Computer Vision", "Super Resolution", "PyTorch", "AWS"]
+    }
+  },
+  {
+    title: "Machine Learning Engineer",
     company: "Health Canada",
     website: "https://www.canada.ca/en/health-canada.html",
     logo: "/health_canada.jpg",
