@@ -542,7 +542,16 @@ export default function Home() {
                                   height={20} 
                                   className="mr-2 rounded-sm" 
                                 /> 
-                                Lancaster University
+                                <UniversityHoverCard
+                                  name="Lancaster University"
+                                  logo="/lancaster.png"
+                                  description="A top UK university known for its research excellence and high student satisfaction."
+                                  location="Lancaster, United Kingdom"
+                                  website="https://www.lancaster.ac.uk"
+                                  founded="1964"
+                                  ranking="Top 15 in UK University Rankings"
+                                  programs={["Computer Science", "Engineering", "Business", "Arts"]}
+                                />
                               </span> with Professor{" "}
                               <ProfessorHoverCard
                                 name="Plamen Angelov"
@@ -574,7 +583,16 @@ export default function Home() {
                                   height={20} 
                                   className="mr-2 rounded-sm" 
                                 /> 
-                                University of Waterloo
+                                <UniversityHoverCard
+                                  name="University of Waterloo"
+                                  logo="/uwaterloo.png"
+                                  description="A leading Canadian university known for its co-operative education programs and excellence in computer science, engineering, and mathematics."
+                                  location="Waterloo, Ontario, Canada"
+                                  website="https://uwaterloo.ca"
+                                  founded="1957"
+                                  ranking="#1 in Canada for Computer Science"
+                                  programs={["Computer Science", "Software Engineering", "Mathematics", "Engineering"]}
+                                />
                               </span> with Professor{" "}
                               <ProfessorHoverCard
                                 name="Ali Ghodsi"
