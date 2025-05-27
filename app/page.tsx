@@ -487,7 +487,7 @@ export default function Home() {
                                   technologies={["Data Science", "AI/ML", "Big Data", "Financial Analytics"]}
                                 />
                               </span>
-                              <span className="text-gray-500 dark:text-gray-400"> • Toronto, Canada • Jan 2024 - Present</span>
+                              <span className="text-gray-500 dark:text-gray-400"> • Toronto, Canada • Jun 2025 - Aug 2025</span>
                             </p>
                             <p className="text-gray-700 dark:text-gray-300">
                               Working on machine learning models for financial data analysis and prediction.
@@ -497,33 +497,33 @@ export default function Home() {
                           <div className="bg-gray-50/80 dark:bg-gray-800/80 rounded-xl p-6 hover:shadow-xl transition-all duration-700 ease-out w-[350px] group hover:bg-white dark:hover:bg-gray-800">
                             <h3 className="text-xl font-semibold mb-3 text-gray-900 dark:text-gray-100 group">
                               <span className="hover:text-red-500 dark:hover:text-red-400 transition-colors duration-300">
-                                Student Instructor
+                                Full Stack Developer
                               </span>
                             </h3>
                             <p className="text-gray-700 dark:text-gray-300 mb-2">
                               <span className="font-medium flex items-center">
                                 <Image 
-                                  src="/stanford.png" 
-                                  alt="Stanford University" 
+                                  src="/nokia.png" 
+                                  alt="Nokia" 
                                   width={20} 
                                   height={20} 
                                   className="mr-2 rounded-sm" 
                                 /> 
                                 <CompanyHoverCard
-                                  name="Stanford University"
-                                  logo="/stanford.png"
-                                  website="https://stanford.edu/"
-                                  location="Stanford, United States"
-                                  industry="Education"
-                                  founded="1891"
-                                  description="Stanford University is one of the world's leading research and teaching institutions, known for its excellence in computer science education and innovation."
-                                  technologies={["Computer Science Education", "Python", "Karel", "Tkinter"]}
+                                  name="Nokia"
+                                  logo="/nokia.png"
+                                  website="https://www.nokia.com/"
+                                  location="Espoo, Finland"
+                                  industry="Telecommunications & Technology"
+                                  founded="1865"
+                                  description="Nokia is a Finnish multinational telecommunications, information technology, and consumer electronics company, known for its mobile phones and network infrastructure equipment."
+                                  technologies={["5G", "Network Infrastructure", "IoT", "Cloud", "AI/ML"]}
                                 />
                               </span>
-                              <span className="text-gray-500 dark:text-gray-400"> • Stanford, United States • Jan 2024 - Present</span>
+                              <span className="text-gray-500 dark:text-gray-400"> • Remote • Jul 2025 - Dec 2025</span>
                             </p>
                             <p className="text-gray-700 dark:text-gray-300">
-                              Teaching Stanford's Code in Place CS106A course to students globally.
+                              Developing full-stack RAG, LLM and agentic system applications.
                             </p>
                           </div>
 
