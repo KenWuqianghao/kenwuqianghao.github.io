@@ -2,31 +2,71 @@
 
 import React, { useEffect, useState, useRef, useCallback } from 'react'
 
+const MAX_SCROLL_Y = 150; // Pixels over which the animation occurs
+
+// Helper to interpolate values
+const interpolate = (start: number, end: number, progress: number) => start + (end - start) * progress;
+
 export default function HeaderCollapse() {
-  const [isCollapsed, setIsCollapsed] = useState(false)
-  const tickingRef = useRef(false) // For requestAnimationFrame throttling
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const tickingRef = useRef(false);
+  const isMobileRef = useRef(false);
+  const lastScrollYRef = useRef(0);
+  const stableCountRef = useRef(0);
+  const freezeUntilRef = useRef(0);
+
+  const updateIsMobile = () => {
+    isMobileRef.current = window.innerWidth < 768;
+  };
 
   const handleScroll = useCallback(() => {
     const currentScrollY = window.scrollY;
-
-    if (currentScrollY === 0) {
-      if (isCollapsed) {
-        setIsCollapsed(false); // Expand if at top
-      }
-    } else { // Scrolled down from top
-      if (!isCollapsed) {
-        setIsCollapsed(true); // Collapse if not at top
-      }
+    const now = Date.now();
+    
+    // If we're in a freeze period, ignore all scroll events
+    if (now < freezeUntilRef.current) {
+      return;
     }
-  }, [isCollapsed]);
+    
+    // Check if scroll position is stable (hasn't changed much)
+    const scrollDiff = Math.abs(currentScrollY - lastScrollYRef.current);
+    
+    if (scrollDiff < 0.3) { 
+      // Scroll position is very stable, increment counter
+      stableCountRef.current += 1;
+      
+      // If we've been stable for longer, freeze for a period
+      if (stableCountRef.current > 6) { 
+        // Freeze scroll updates for 200ms
+        freezeUntilRef.current = now + 200;
+        return;
+      }
+    } else {
+      // Reset stable counter if there's significant movement
+      stableCountRef.current = 0;
+      // Clear any freeze period if there's real movement
+      freezeUntilRef.current = 0;
+    }
+    
+    lastScrollYRef.current = currentScrollY;
+    
+    let newProgress = Math.min(currentScrollY / MAX_SCROLL_Y, 1);
+    // Round to 2 decimal places to reduce sensitivity even more
+    newProgress = parseFloat(newProgress.toFixed(2));
+
+    setScrollProgress(prevProgress => {
+      // Even higher threshold to prevent micro-updates
+      // This is now 1.5% of total progress range
+      if (Math.abs(prevProgress - newProgress) > 0.015) {
+        return newProgress;
+      }
+      return prevProgress;
+    });
+  }, []);
 
   useEffect(() => {
-    // Initial check based on scroll position when the component mounts
-    if (window.scrollY > 0) {
-      setIsCollapsed(true);
-    } else {
-      setIsCollapsed(false);
-    }
+    updateIsMobile(); // Initial check
+    handleScroll(); // Initial calculation
 
     const onScroll = () => {
       if (!tickingRef.current) {
@@ -39,162 +79,112 @@ export default function HeaderCollapse() {
     };
 
     window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', updateIsMobile, { passive: true });
+
     return () => {
       window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', updateIsMobile);
     };
   }, [handleScroll]);
 
   useEffect(() => {
-    const header = document.getElementById('about');
-    const profileImage = document.getElementById('profile-image');
-    const headerContent = document.getElementById('header-content');
-    const contactButtons = document.getElementById('contact-buttons');
-    const contactInfo = document.querySelectorAll('.contact-info');
-    const headerContainer = document.querySelector('.header-container');
+    const root = document.documentElement; // Or specific header element if preferred for scoping
+    const headerElement = document.getElementById('about') as HTMLElement;
+    const profileImageElement = document.getElementById('profile-image') as HTMLElement;
+    const headerContentElement = document.getElementById('header-content') as HTMLElement;
+    const headerH1Element = headerContentElement?.querySelector('h1') as HTMLElement;
+    const headerPElement = headerContentElement?.querySelector('p') as HTMLElement;
+    const contactButtonsElement = document.getElementById('contact-buttons') as HTMLElement;
+
+    if (!headerElement) return; // Only need headerElement to set properties on it
+
+    const isMobile = isMobileRef.current;
+
+    // Header padding (rem)
+    const headerPaddingExpanded = isMobile ? 1 : 1.5;
+    const headerPaddingCollapsed = 0.5;
+    headerElement.style.setProperty('--header-padding-dynamic', `${interpolate(headerPaddingExpanded, headerPaddingCollapsed, scrollProgress)}rem`);
+
+    // Profile image size (rem)
+    const profileSizeExpanded = isMobile ? 5 : 6;
+    const profileSizeCollapsed = isMobile ? 2.5 : 2.75;
+    headerElement.style.setProperty('--profile-image-size-dynamic', `${interpolate(profileSizeExpanded, profileSizeCollapsed, scrollProgress)}rem`);
     
-    if (header && profileImage && headerContent && contactButtons && headerContainer) {
-      if (isCollapsed) {
-        header.classList.add('header-collapsed');
-        header.classList.remove('header-expanded');
-        profileImage.classList.add('profile-collapsed');
-        headerContent.classList.add('content-collapsed');
-        contactButtons.classList.add('buttons-collapsed');
-        headerContainer.classList.add('container-collapsed');
-        contactInfo.forEach(item => item.classList.add('info-collapsed'));
-      } else {
-        header.classList.remove('header-collapsed');
-        header.classList.add('header-expanded');
-        profileImage.classList.remove('profile-collapsed');
-        headerContent.classList.remove('content-collapsed');
-        contactButtons.classList.remove('buttons-collapsed');
-        headerContainer.classList.remove('container-collapsed');
-        contactInfo.forEach(item => item.classList.remove('info-collapsed'));
-      }
+    // Profile image margin (for desktop collapsed state)
+    const profileMarginRightExpanded = 0;
+    const profileMarginRightCollapsed = isMobile ? 0 : 0.75;
+    if (!isMobile) {
+      headerElement.style.setProperty('--profile-image-margin-right-dynamic', `${interpolate(profileMarginRightExpanded, profileMarginRightCollapsed, scrollProgress)}rem`);
+    } else {
+      headerElement.style.setProperty('--profile-image-margin-right-dynamic', `0rem`);
     }
-  }, [isCollapsed]);
-  
+
+    // H1 font size (rem)
+    const h1SizeExpanded = isMobile ? 1.875 : 2.25;
+    const h1SizeCollapsed = isMobile ? 1.25 : 1.5;
+    headerElement.style.setProperty('--h1-font-size-dynamic', `${interpolate(h1SizeExpanded, h1SizeCollapsed, scrollProgress)}rem`);
+    headerElement.style.setProperty('--h1-margin-bottom-dynamic', `${interpolate(0.25, 0, scrollProgress)}rem`);
+
+    // Opacity for fading elements
+    const opacityValue = interpolate(1, 0, scrollProgress);
+    headerElement.style.setProperty('--fade-opacity-dynamic', `${opacityValue}`);
+
+    // Control display of fading elements (to remove from layout when fully faded)
+    const displayValue = scrollProgress > 0.95 ? 'none' : ''; // A bit more aggressive hiding
+    if (headerPElement) headerPElement.style.display = displayValue;
+    if (contactButtonsElement) contactButtonsElement.style.display = displayValue;
+
+  }, [scrollProgress]);
+
+  // The <style jsx global> can be significantly reduced or removed if all styles are handled by JS.
+  // For now, let's keep some minimal structural CSS if needed, or remove it if page.tsx handles base styles.
   return (
     <style jsx global>{`
-        .header-collapsed {
-          padding-top: 0.5rem;
-          padding-bottom: 0.5rem;
-        }
-        
-        .header-expanded {
-          padding-top: 1rem;
-          padding-bottom: 1rem;
-        }
-        
-        .container-collapsed {
-          padding-top: 0 !important;
-          padding-bottom: 0 !important; 
-          min-height: 3.5rem;
-          display: flex;
-          align-items: center;
-        }
-        
-        @media (min-width: 768px) {
-          .header-expanded {
-            padding-top: 1.5rem;
-            padding-bottom: 1.5rem;
-          }
-        }
-        
-        .profile-collapsed {
-          width: 2.5rem !important;
-          height: 2.5rem !important;
-          margin: 0 !important;
-          transition: all 0.3s ease-in-out;
-          position: relative;
-          flex-shrink: 0;
-        }
-        
-        .profile-collapsed img {
-          transform: scale(1) !important;
-        }
-        
-        .content-collapsed {
-          transform: scale(0.95);
-          transform-origin: left;
-          transition: all 0.3s ease-in-out;
-        }
-        
-        .content-collapsed h1 {
-          font-size: 1.25rem !important;
-          margin-bottom: 0 !important;
-          line-height: 1.2 !important;
-          white-space: nowrap;
-        }
-        
-        .content-collapsed p {
-          display: none;
-        }
-        
-        .info-collapsed {
-          transform: scale(0.9);
-          white-space: nowrap;
-          margin-bottom: 0 !important;
-          transition: all 0.3s ease-in-out;
-        }
-        
-        .buttons-collapsed {
-          display: none !important;
-        }
-        
-        @media (min-width: 768px) {
-          .profile-collapsed {
-            width: 2.75rem !important;
-            height: 2.75rem !important;
-            margin-right: 0.75rem !important;
-          }
-          
-          .content-collapsed {
-            transform: scale(1);
-            display: flex !important;
-            align-items: center !important;
-            flex-direction: row !important;
-            gap: 0.75rem !important;
-            margin-left: 0;
-            width: 100%;
-            padding: 0;
-          }
-          
-          .content-collapsed h1 {
-            font-size: 1.5rem !important;
-            margin-right: 1.5rem !important;
-            margin-bottom: 0 !important;
-            white-space: nowrap;
-            min-width: max-content;
-          }
-          
-          .container-collapsed {
-            display: flex !important;
-            flex-direction: row !important;
-            align-items: center !important;
-            justify-content: flex-start !important;
-            gap: 1rem;
-            padding: 0.5rem 1rem !important;
-          }
-          
-          .info-collapsed {
-            transform: scale(1);
-            padding: 0.25rem 0.75rem !important;
-            margin-right: 0.5rem !important;
-            font-size: 0.875rem !important;
-            min-width: max-content;
-          }
-          
-          .content-collapsed .flex {
-            display: flex !important;
-            flex-direction: row !important;
-            align-items: center !important;
-            justify-content: flex-start !important;
-            gap: 0.75rem !important;
-            margin-bottom: 0 !important;
-            width: auto;
-            flex-wrap: nowrap !important;
-          }
-        }
-      `}</style>
-  )
+      /* Apply the dynamic CSS variables */
+      #about {
+        padding-top: var(--header-padding-dynamic, 1.5rem);
+        padding-bottom: var(--header-padding-dynamic, 1.5rem);
+        /* transition-all (from page.tsx) should cover padding, but let's be explicit if issues persist */
+        transition-property: padding-top, padding-bottom;
+        /* Inherit duration and timing function from #about's Tailwind classes or define here */
+      }
+
+      #profile-image {
+        width: var(--profile-image-size-dynamic, 6rem);
+        height: var(--profile-image-size-dynamic, 6rem);
+        margin-right: var(--profile-image-margin-right-dynamic, 0rem);
+        /* transition-all (from page.tsx) should cover width, height, margin */
+        transition-property: width, height, margin-right;
+      }
+
+      #header-content h1 {
+        font-size: var(--h1-font-size-dynamic, 2.25rem);
+        margin-bottom: var(--h1-margin-bottom-dynamic, 0.25rem);
+        /* transition-all (from page.tsx) should cover font-size, margin-bottom */
+        transition-property: font-size, margin-bottom;
+      }
+
+      #header-content p {
+        opacity: var(--fade-opacity-dynamic, 1);
+        /* transition-all (from page.tsx) should cover opacity */
+        transition-property: opacity;
+      }
+
+      /* For #contact-buttons, opacity is handled by JS setting display:none when fully scrolled. */
+      /* If a smoother fade is needed before display:none, this can be used: */
+      #contact-buttons.fade-transition {
+         opacity: var(--fade-opacity-dynamic, 1);
+         transition-property: opacity;
+      }
+      
+      /* 
+        The 'transition-all duration-500 ease-in-out' on #about in page.tsx is the primary transition driver.
+        The 'transition-property' lines above are to ensure these specific CSS variable-driven properties
+        are definitely included in the transition. If the main 'transition-all' is effective, 
+        these more specific 'transition-property' rules might not be strictly necessary but can help in debugging
+        or ensuring certain properties animate if 'transition-all' is behaving unexpectedly with CSS variables.
+        The duration and timing function will be inherited from the #about element's Tailwind classes.
+      */
+    `}</style>
+  );
 } 

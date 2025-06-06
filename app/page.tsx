@@ -1,6 +1,8 @@
 "use client"
 
-import dynamic from 'next/dynamic'
+import React, { useState, useEffect } from 'react'
+import dynamic from 'next/dynamic';
+import { Cookie } from 'next/font/google';
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
@@ -36,7 +38,7 @@ import ProfessorHoverCard from "@/components/professor-hover-card"
 import CompanyHoverCard from "@/components/company-hover-card"
 import EntityHoverCard from "@/components/entity-hover-card"
 import VisitorStats from "@/components/visitor-stats"
-import HeaderCollapse from "@/components/header-collapse"
+import EnhancedHeader from "@/components/enhanced-header" // Import the new header
 
 // Create a client-side only component for the image
 const ProfileImage = () => {
@@ -76,124 +78,113 @@ const SectionTitle = ({ icon, title, id = "" }: SectionTitleProps) => (
   </div>
 );
 
+const cookie = Cookie({
+  weight: '400',
+  subsets: ['latin'],
+  display: 'swap',
+});
+
+const StartupAnimation = () => {
+  return (
+    <div 
+      className="fixed inset-0 z-[10000] flex items-center justify-center bg-gray-900 dark:bg-black"
+      style={{
+        animation: 'fade-out-container 3s forwards',
+      }}
+    >
+      <div 
+        className="absolute rounded-full"
+        style={{
+          width: '10px',
+          height: '10px',
+          // A vibrant gradient for the "color burst"
+          background: 'radial-gradient(circle, rgba(255,126,95,1) 0%, rgba(254,180,123,0.8) 30%, rgba(134,168,231,0.6) 70%, rgba(145,234,228,0.4) 100%)',
+          // Animation: expand, then fade the burst element itself
+          animation: 'expand-and-fade-burst 2.5s cubic-bezier(0.25, 1, 0.5, 1) forwards',
+        }}
+      ></div>
+      <div 
+        className={`absolute text-white text-7xl md:text-8xl opacity-0 ${cookie.className}`}
+        style={{ animation: 'fade-text-in-out 2.8s ease-in-out forwards' }} // Slightly longer to ensure visibility
+      >
+        Ken Wu
+      </div>
+      <style jsx global>{`
+        @keyframes expand-and-fade-burst {
+          0% {
+            transform: scale(1);
+            opacity: 0.7;
+          }
+          70% {
+            transform: scale(300); /* Expands to ~3000px */
+            opacity: 1;
+          }
+          100% {
+            transform: scale(350); /* Slightly more expansion during fade */
+            opacity: 0;
+          }
+        }
+        
+        @keyframes fade-out-container {
+          0% { 
+            opacity: 1; 
+          }
+          80% { /* Hold container visible while burst animation plays */
+            opacity: 1; 
+          }
+          100% { 
+            opacity: 0; 
+            pointer-events: none; /* Make sure it's not interactive after fading */
+          }
+        }
+
+        @keyframes fade-text-in-out {
+          0% { opacity: 0; transform: scale(0.9); }
+          25% { opacity: 1; transform: scale(1); }
+          75% { opacity: 1; transform: scale(1); }
+          100% { opacity: 0; transform: scale(0.9); }
+        }
+      `}</style>
+    </div>
+  );
+};
+
 export default function Home() {
+  const [showAnimation, setShowAnimation] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowAnimation(false);
+    }, 3000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (showAnimation) {
+    return <StartupAnimation />;
+  }
+
   return (
     <>
       <div className="min-h-screen text-gray-800 dark:text-gray-200 relative">
         {/* Grid background */}
         <GridBackground />
 
-        {/* Theme toggle and VisitorStats (pill) - fixed position */}
-        <div className="fixed bottom-4 right-4 z-[50000] flex flex-col gap-2 items-end">
+
+        {/* FAB for ThemeToggle and VisitorStats */}
+        <div className="fixed bottom-6 right-6 z-[50000] flex flex-col items-end gap-3">
           <ThemeToggle />
-          <div className="bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 px-4 py-2 rounded-full shadow-lg flex items-center">
+          <div className="bg-background/80 dark:bg-background/80 backdrop-blur-sm text-foreground px-3 py-1.5 rounded-full shadow-lg flex items-center text-xs border border-border">
             <VisitorStats />
           </div>
         </div>
 
         {/* Content wrapper */}
         <div className="relative z-10">
-          {/* Header */}
-          <header 
-            id="about"
-            className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-md sticky top-0 z-40 shadow-sm transition-all duration-500 ease-out header-expanded">
-            <div className="container max-w-7xl mx-auto px-4 py-4 md:py-6 flex flex-col md:flex-row items-center justify-between gap-4 md:gap-8 header-container">
-              <div className="flex flex-col md:flex-row items-center md:items-start gap-4 md:gap-6">
-                <div id="profile-image" className="h-20 w-20 md:h-24 md:w-24 rounded-full overflow-hidden border-2 border-gray-200 dark:border-gray-700 transition-all group relative">
-                  <div className="absolute inset-0 bg-red-500/0 group-hover:bg-red-500/10 transition-colors duration-500 z-10"></div>
-                  <Image 
-                    src="/KenWuCropped.jpg" 
-                    alt="Ken Wu" 
-                    width={96} 
-                    height={96} 
-                    className="w-full h-full object-cover transition-all duration-500 group-hover:scale-110"
-                    priority
-                  />
-                </div>
-                <div id="header-content" className="text-center md:text-left transition-all">
-                  <h1 className="text-3xl md:text-4xl font-bold mb-1 font-display text-gray-900 dark:text-gray-100 hover:text-red-500 dark:hover:text-red-400 transition-colors duration-300">
-                    Ken Wu
-                  </h1>
-                  <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 mb-3 font-display">
-                    Software Engineer & ML Enthusiast
-                  </p>
-                  <div className="flex flex-wrap justify-center md:justify-start gap-2 mb-3">
-                    <a
-                      href="mailto:ken.wu@uwaterloo.ca"
-                      className="flex items-center gap-1 text-sm bg-gray-100 dark:bg-gray-800 px-3 py-1 rounded-full hover:bg-red-500 hover:text-white dark:hover:bg-red-500 dark:hover:text-white transition-colors duration-300 text-gray-700 dark:text-gray-300 contact-info"
-                    >
-                      <Mail size={14} /> ken.wu@uwaterloo.ca
-                    </a>
-                    <a
-                      href="tel:4379713179"
-                      className="flex items-center gap-1 text-sm bg-gray-100 dark:bg-gray-800 px-3 py-1 rounded-full hover:bg-red-500 hover:text-white dark:hover:bg-red-500 dark:hover:text-white transition-colors duration-300 text-gray-700 dark:text-gray-300 contact-info"
-                    >
-                      <Phone size={14} /> 437-971-3179
-                    </a>
-                    <a
-                      href="https://maps.google.com/?q=Waterloo,+Ontario,+Canada"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-1 text-sm bg-gray-100 dark:bg-gray-800 px-3 py-1 rounded-full hover:bg-red-500 hover:text-white dark:hover:bg-red-500 dark:hover:text-white transition-colors duration-300 text-gray-700 dark:text-gray-300 contact-info"
-                    >
-                      <MapPin size={14} /> Waterloo, ON
-                    </a>
-                  </div>
-                </div>
-              </div>
-              <div id="contact-buttons" className="flex justify-center md:justify-start gap-2 transition-all">
-                <a
-                  href="https://github.com/KenWuqianghao"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="transition-all group"
-                >
-                  <Button
-                    variant="outline"
-                    size="icon"
-                    aria-label="GitHub"
-                    className="rounded-full h-9 w-9 border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:bg-red-500/10 hover:border-red-500/30 dark:hover:bg-red-500/10 dark:hover:border-red-500/30 transition-colors duration-300"
-                  >
-                    <Github className="h-4 w-4 group-hover:text-red-500 dark:group-hover:text-red-400 transition-colors duration-300" />
-                  </Button>
-                </a>
-                <a
-                  href="https://www.linkedin.com/in/kenwuqianghao/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="transition-all group"
-                >
-                  <Button
-                    variant="outline"
-                    size="icon"
-                    aria-label="LinkedIn"
-                    className="rounded-full h-9 w-9 border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:bg-red-500/10 hover:border-red-500/30 dark:hover:bg-red-500/10 dark:hover:border-red-500/30 transition-colors duration-300"
-                  >
-                    <Linkedin className="h-4 w-4 group-hover:text-red-500 dark:group-hover:text-red-400 transition-colors duration-300" />
-                  </Button>
-                </a>
-                <a
-                  href="https://drive.google.com/file/d/11TiGQ-JxqmLQ-TJ24Jui8V9kXsI6QZld/view"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="transition-all group"
-                >
-                  <Button
-                    variant="outline"
-                    size="icon"
-                    aria-label="Resume"
-                    className="rounded-full h-9 w-9 border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:bg-red-500/10 hover:border-red-500/30 dark:hover:bg-red-500/10 dark:hover:border-red-500/30 transition-colors duration-300"
-                  >
-                    <FileText className="h-4 w-4 group-hover:text-red-500 dark:group-hover:text-red-400 transition-colors duration-300" />
-                  </Button>
-                </a>
-              </div>
-            </div>
-            <HeaderCollapse />
-          </header>
+          <EnhancedHeader />
 
-          {/* Main content */}
-          <main className="pb-20">
+          {/* Main content - Add margin-top to account for fixed header height */}
+          <main className="pb-20 mt-36">
             <div className="container max-w-7xl mx-auto px-4">
               {/* Introduction section - Combined Journey and About */}
               <section id="journey-details" className="mb-16 pt-16">
@@ -229,8 +220,8 @@ export default function Home() {
                           and Data Science
                         </p>
                         <p className="text-lg leading-relaxed text-gray-700 dark:text-gray-300">
-                          🇮🇹 Italian born 🇨🇳 Chinese attending a 🇨🇦 Canadian University, interned in US 🇺🇸 and currently
-                          exchanging in UK 🇬🇧. I'm all over the place :)
+                          🇮🇹 Italian born 🇨🇳 Chinese attending a 🇨🇦 Canadian University, interned in US 🇺🇸 and previously
+                          exchanged in UK 🇬🇧. I'm all over the place :)
                         </p>
                       </div>
 
@@ -1078,28 +1069,8 @@ export default function Home() {
                     &copy; {new Date().getFullYear()} Ken Wu. All rights reserved.
                   </p>
                 </div>
-                <div className="flex gap-4">
-                  <a
-                    href="mailto:ken.wu@uwaterloo.ca"
-                    className="text-gray-500 dark:text-gray-400 hover:text-red-500 dark:hover:text-red-400 transition-colors duration-300"
-                    aria-label="Email"
-                  >
-                    <Mail size={20} />
-                  </a>
-                  <a
-                    href="https://github.com/KenWuqianghao"
-                    className="text-gray-500 dark:text-gray-400 hover:text-red-500 dark:hover:text-red-400 transition-colors duration-300"
-                    aria-label="GitHub"
-                  >
-                    <Github size={20} />
-                  </a>
-                  <a
-                    href="https://linkedin.com/in/kenwuu"
-                    className="text-gray-500 dark:text-gray-400 hover:text-red-500 dark:hover:text-red-400 transition-colors duration-300"
-                    aria-label="LinkedIn"
-                  >
-                    <Linkedin size={20} />
-                  </a>
+                 <div className="flex gap-4">
+                  {/* Icons removed as requested */}
                 </div>
               </div>
             </div>
