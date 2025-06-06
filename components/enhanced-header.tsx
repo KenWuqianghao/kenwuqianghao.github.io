@@ -50,7 +50,7 @@ export default function EnhancedHeader() {
       <header
         className={cn(
           "fixed top-0 left-0 right-0 z-50 transition-all duration-700 ease-out",
-          scrolled ? "h-20 bg-white/95 dark:bg-gray-900/95 backdrop-blur-xl shadow-xl border-b border-gray-200 dark:border-gray-800" : "h-36 bg-white dark:bg-gray-900 shadow-md",
+          scrolled ? "h-20 bg-white/70 dark:bg-gray-900/70 backdrop-blur-xl shadow-xl border-b border-gray-200 dark:border-gray-800" : "h-36 bg-white dark:bg-gray-900 shadow-md",
         )}
       >
         <div className="container mx-auto h-full px-6 flex items-center justify-between">
