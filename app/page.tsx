@@ -589,8 +589,8 @@ export default function Home() {
                                 name="Ali Ghodsi"
                                 university="University of Waterloo"
                                 universityLogo="/uwaterloo.png"
-                                profile="https://uwaterloo.ca/data-analytics/people-profiles/ali-ghodsi"
-                                research="Specializes in machine learning, statistical pattern recognition, and data mining. Co-founder and CEO of Databricks, known for his work on dimensionality reduction and distributed systems."
+                                profile="https://uwaterloo.ca/statistics-and-actuarial-science/profiles/ali-ghodsi"
+                                research="Professor in Statistics and Actuarial Science specializing in machine learning, deep learning, computational statistics, dimensionality reduction, natural language processing, and bioinformatics. Co-author of 'Elements of Dimensionality Reduction and Manifold Learning' (Springer) with several US patents. His research encompasses theoretical frameworks and new machine-learning algorithms for analyzing large-scale data sets, with applications in natural language processing, bioinformatics, and computer vision."
                                 department="Department of Statistics and Actuarial Science"
                               />
                               {" "} and {" "}
