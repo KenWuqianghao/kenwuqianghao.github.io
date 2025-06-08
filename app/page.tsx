@@ -33,11 +33,13 @@ import ExperienceTimeline from "@/components/experience-timeline"
 import LifeCountdown from "@/components/life-countdown"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { ThemeToggle } from "@/components/theme-toggle"
+import { useTheme } from "next-themes";
 import UniversityHoverCard from "@/components/university-hover-card"
 import ProfessorHoverCard from "@/components/professor-hover-card"
 import CompanyHoverCard from "@/components/company-hover-card"
 import EntityHoverCard from "@/components/entity-hover-card"
 import VisitorStats from "@/components/visitor-stats"
+import { motion } from "framer-motion";
 import EnhancedHeader from "@/components/enhanced-header" // Import the new header
 
 // Create a client-side only component for the image
@@ -85,9 +87,19 @@ const cookie = Cookie({
 });
 
 const StartupAnimation = () => {
+  const { resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+
+  // Render a non-theme-dependent version or a placeholder until mounted
+  // This ensures server and initial client render match.
+  const initialBgClass = "bg-gray-900"; // Default to one color before mount
+
+  const currentBgClass = mounted && resolvedTheme === "dark" ? "bg-black" : "bg-gray-900";
+
   return (
     <div 
-      className="fixed inset-0 z-[10000] flex items-center justify-center bg-gray-900 dark:bg-black"
+      className={`fixed inset-0 z-[10000] flex items-center justify-center ${mounted ? currentBgClass : initialBgClass}`}
       style={{
         animation: 'fade-out-container 3s forwards',
       }}
@@ -97,15 +109,13 @@ const StartupAnimation = () => {
         style={{
           width: '10px',
           height: '10px',
-          // A vibrant gradient for the "color burst"
           background: 'radial-gradient(circle, rgba(255,126,95,1) 0%, rgba(254,180,123,0.8) 30%, rgba(134,168,231,0.6) 70%, rgba(145,234,228,0.4) 100%)',
-          // Animation: expand, then fade the burst element itself
           animation: 'expand-and-fade-burst 2.5s cubic-bezier(0.25, 1, 0.5, 1) forwards',
         }}
       ></div>
       <div 
         className={`absolute text-white text-7xl md:text-8xl opacity-0 ${cookie.className}`}
-        style={{ animation: 'fade-text-in-out 2.8s ease-in-out forwards' }} // Slightly longer to ensure visibility
+        style={{ animation: 'fade-text-in-out 2.8s ease-in-out forwards' }}
       >
         Ken Wu
       </div>
@@ -116,11 +126,11 @@ const StartupAnimation = () => {
             opacity: 0.7;
           }
           70% {
-            transform: scale(300); /* Expands to ~3000px */
+            transform: scale(300);
             opacity: 1;
           }
           100% {
-            transform: scale(350); /* Slightly more expansion during fade */
+            transform: scale(350);
             opacity: 0;
           }
         }
@@ -129,12 +139,12 @@ const StartupAnimation = () => {
           0% { 
             opacity: 1; 
           }
-          80% { /* Hold container visible while burst animation plays */
+          80% {
             opacity: 1; 
           }
           100% { 
             opacity: 0; 
-            pointer-events: none; /* Make sure it's not interactive after fading */
+            pointer-events: none;
           }
         }
 
@@ -447,12 +457,12 @@ export default function Home() {
                     id="current-roles"
                   />
 
-                  <div className="bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm rounded-2xl p-8 shadow-xl border border-gray-100 dark:border-gray-800 hover:shadow-2xl transition-shadow duration-300 space-y-4">
+                  <div className="bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm rounded-2xl p-8 shadow-xl border border-gray-100 dark:border-gray-800 hover:shadow-2xl transition-shadow duration-300 space-y-4 overflow-visible">
                     {/* Current Roles - Horizontal Scrollable */}
                     <div className="relative">
-                      <div className="overflow-x-auto pb-4 hide-scrollbar">
+                      <div className="overflow-x-auto overflow-y-visible pb-4 hide-scrollbar">
                         <div className="flex gap-6 min-w-max">
-                          <div className="bg-gray-50/80 dark:bg-gray-800/80 rounded-xl p-6 hover:shadow-xl transition-all duration-700 ease-out w-[350px] group hover:bg-white dark:hover:bg-gray-800">
+                          <div className="bg-gray-50/80 dark:bg-gray-800/80 rounded-xl p-6 hover:shadow-xl hover:border-red-200 dark:hover:border-red-800 border border-transparent transition-all duration-700 ease-out w-[350px] group hover:bg-white dark:hover:bg-gray-800">
                             <h3 className="text-xl font-semibold mb-3 text-gray-900 dark:text-gray-100 group">
                               <span className="hover:text-red-500 dark:hover:text-red-400 transition-colors duration-300">
                                 Data Scientist Intern
@@ -485,7 +495,7 @@ export default function Home() {
                             </p>
                           </div>
 
-                          <div className="bg-gray-50/80 dark:bg-gray-800/80 rounded-xl p-6 hover:shadow-xl transition-all duration-700 ease-out w-[350px] group hover:bg-white dark:hover:bg-gray-800">
+                          <div className="bg-gray-50/80 dark:bg-gray-800/80 rounded-xl p-6 hover:shadow-xl hover:border-red-200 dark:hover:border-red-800 border border-transparent transition-all duration-700 ease-out w-[350px] group hover:bg-white dark:hover:bg-gray-800">
                             <h3 className="text-xl font-semibold mb-3 text-gray-900 dark:text-gray-100 group">
                               <span className="hover:text-red-500 dark:hover:text-red-400 transition-colors duration-300">
                                 Full Stack Developer
@@ -518,7 +528,7 @@ export default function Home() {
                             </p>
                           </div>
 
-                          <div className="bg-gray-50/80 dark:bg-gray-800/80 rounded-xl p-6 hover:shadow-xl transition-all duration-700 ease-out w-[350px] group hover:bg-white dark:hover:bg-gray-800">
+                          <div className="bg-gray-50/80 dark:bg-gray-800/80 rounded-xl p-6 hover:shadow-xl hover:border-red-200 dark:hover:border-red-800 border border-transparent transition-all duration-700 ease-out w-[350px] group hover:bg-white dark:hover:bg-gray-800">
                             <h3 className="text-xl font-semibold mb-3 text-gray-900 dark:text-gray-100 group">
                               <span className="hover:text-red-500 dark:hover:text-red-400 transition-colors duration-300">
                                 Research Assistant
@@ -559,7 +569,7 @@ export default function Home() {
                             </p>
                           </div>
 
-                          <div className="bg-gray-50/80 dark:bg-gray-800/80 rounded-xl p-6 hover:shadow-xl transition-all duration-700 ease-out w-[350px] group hover:bg-white dark:hover:bg-gray-800">
+                          <div className="bg-gray-50/80 dark:bg-gray-800/80 rounded-xl p-6 hover:shadow-xl hover:border-red-200 dark:hover:border-red-800 border border-transparent transition-all duration-700 ease-out w-[350px] group hover:bg-white dark:hover:bg-gray-800">
                             <h3 className="text-xl font-semibold mb-3 text-gray-900 dark:text-gray-100 group">
                               <span className="hover:text-red-500 dark:hover:text-red-400 transition-colors duration-300">
                                 Research Assistant
@@ -645,7 +655,7 @@ export default function Home() {
 
               {/* Past Experience section */}
               <section id="experience" className="mb-16">
-                <div className="max-w-full mx-auto">
+                <div className="max-w-full mx-auto overflow-visible">
                   <SectionTitle 
                     icon={<Briefcase size={18} className="text-white" />} 
                     title="Past Experience"
@@ -705,25 +715,25 @@ export default function Home() {
                     <TabsList className="grid grid-cols-4 mb-6 bg-gray-100/80 dark:bg-gray-800/80">
                       <TabsTrigger
                         value="basketball"
-                        className="data-[state=active]:bg-red-500 data-[state=active]:text-white dark:text-gray-300 dark:data-[state=active]:text-white"
+                        className="data-[state=active]:bg-red-500 data-[state=active]:text-white dark:text-gray-300 dark:data-[state=active]:text-white hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200"
                       >
                         🏀 Basketball
                       </TabsTrigger>
                       <TabsTrigger
                         value="chess"
-                        className="data-[state=active]:bg-red-500 data-[state=active]:text-white dark:text-gray-300 dark:data-[state=active]:text-white"
+                        className="data-[state=active]:bg-red-500 data-[state=active]:text-white dark:text-gray-300 dark:data-[state=active]:text-white hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200"
                       >
                         ♟️ Chess
                       </TabsTrigger>
                       <TabsTrigger
                         value="anime"
-                        className="data-[state=active]:bg-red-500 data-[state=active]:text-white dark:text-gray-300 dark:data-[state=active]:text-white"
+                        className="data-[state=active]:bg-red-500 data-[state=active]:text-white dark:text-gray-300 dark:data-[state=active]:text-white hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200"
                       >
                         👺 Anime
                       </TabsTrigger>
                       <TabsTrigger
                         value="startup"
-                        className="data-[state=active]:bg-red-500 data-[state=active]:text-white dark:text-gray-300 dark:data-[state=active]:text-white"
+                        className="data-[state=active]:bg-red-500 data-[state=active]:text-white dark:text-gray-300 dark:data-[state=active]:text-white hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200"
                       >
                         🚀 Startups
                       </TabsTrigger>
@@ -732,23 +742,24 @@ export default function Home() {
                     <TabsContent
                       value="basketball"
                       forceMount
-                      className="bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-gray-100 dark:border-gray-800 w-full transition-all ease-out duration-500 data-[state=active]:opacity-100 data-[state=active]:translate-x-0 data-[state=active]:relative data-[state=active]:z-10 data-[state=inactive]:opacity-0 data-[state=inactive]:-translate-x-full data-[state=inactive]:absolute data-[state=inactive]:inset-0 data-[state=inactive]:pointer-events-none"
+                      className="bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-gray-100 dark:border-gray-800 w-full transition-all ease-in-out duration-500 data-[state=active]:opacity-100 data-[state=active]:translate-y-0 data-[state=active]:relative data-[state=active]:z-10 data-[state=inactive]:opacity-0 data-[state=inactive]:translate-y-4 data-[state=inactive]:absolute data-[state=inactive]:inset-0 data-[state=inactive]:pointer-events-none"
                     >
-                      <div className="flex flex-col md:flex-row gap-6 items-center">
-                        <div className="w-full md:w-1/3 aspect-square relative rounded-xl overflow-hidden">
+                      <div className="flex flex-col md:flex-row gap-6 items-start">
+                        <div className="group w-full md:w-1/4 aspect-square relative rounded-xl overflow-hidden">
                           <Image
                             src="/basketball.jpeg"
                             alt="Basketball"
                             fill
-                            className="object-cover hover:scale-110 transition-transform duration-500"
+                            className="object-cover group-hover:scale-105 group-hover:brightness-110 transition-all duration-300"
                             unoptimized={true}
                           />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/25 to-transparent opacity-0 group-hover:opacity-80 transition-opacity duration-300"></div>
                         </div>
                         <div className="w-full md:w-2/3">
-                          <h3 className="text-xl font-bold mb-3 font-display text-gray-900 dark:text-gray-100">
+                          <motion.h3 initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0, transition: { duration: 0.3, delay: 0.2 } }} viewport={{ once: false }} className="text-xl font-bold mb-3 font-display text-gray-900 dark:text-gray-100 hover:text-red-500 dark:hover:text-red-400 transition-colors duration-300">
                             Basketball Enthusiast
-                          </h3>
-                          <p className="text-gray-700 dark:text-gray-300 mb-4">
+                          </motion.h3>
+                          <motion.p initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0, transition: { duration: 0.3, delay: 0.3 } }} viewport={{ once: false }} className="text-gray-700 dark:text-gray-300 mb-4">
                             I've been playing basketball since high school and I'm a <span className="border-b border-dotted border-gray-400 dark:border-gray-600"><EntityHoverCard
                               name="Dallas Mavericks"
                               logo="/mavericks.png"
@@ -762,7 +773,10 @@ export default function Home() {
                                 { label: "Arena", value: "American Airlines Center" },
                                 { label: "Owner", value: "Mark Cuban" }
                               ]}
-                              achievements={["NBA Champions (2011)", "Western Conference Champions (2006, 2011)"]}
+                              achievements={[
+                                "NBA Champions (2011)",
+                                "Western Conference Champions (2006, 2011)"
+                              ]}
                             /></span> fan. My favorite
                             player is <span className="border-b border-dotted border-gray-400 dark:border-gray-600"><EntityHoverCard
                               name="KD"
@@ -778,11 +792,11 @@ export default function Home() {
                               ]}
                               achievements={["2× NBA Champion", "NBA MVP", "13× NBA All-Star", "4× Olympic Gold Medalist", "4× NBA Scoring Champion"]}
                             /></span> (I know KD never played for Mavericks, relax).
-                          </p>
-                          <p className="text-gray-700 dark:text-gray-300">
+                          </motion.p>
+                          <motion.p initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0, transition: { duration: 0.3, delay: 0.4 } }} viewport={{ once: false }} className="text-gray-700 dark:text-gray-300">
                             Basketball has taught me teamwork, strategy, and perseverance - skills that translate well
                             into my professional life.
-                          </p>
+                          </motion.p>
                         </div>
                       </div>
                     </TabsContent>
@@ -790,23 +804,24 @@ export default function Home() {
                     <TabsContent
                       value="chess"
                       forceMount
-                      className="bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-gray-100 dark:border-gray-800 w-full transition-all ease-out duration-500 data-[state=active]:opacity-100 data-[state=active]:translate-x-0 data-[state=active]:relative data-[state=active]:z-10 data-[state=inactive]:opacity-0 data-[state=inactive]:-translate-x-full data-[state=inactive]:absolute data-[state=inactive]:inset-0 data-[state=inactive]:pointer-events-none"
+                      className="bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-gray-100 dark:border-gray-800 w-full transition-all ease-in-out duration-500 data-[state=active]:opacity-100 data-[state=active]:translate-y-0 data-[state=active]:relative data-[state=active]:z-10 data-[state=inactive]:opacity-0 data-[state=inactive]:translate-y-4 data-[state=inactive]:absolute data-[state=inactive]:inset-0 data-[state=inactive]:pointer-events-none"
                     >
-                      <div className="flex flex-col md:flex-row gap-6 items-center">
-                        <div className="w-full md:w-1/3 aspect-square relative rounded-xl overflow-hidden">
+                      <div className="flex flex-col md:flex-row gap-6 items-start">
+                        <div className="group w-full md:w-1/4 aspect-square relative rounded-xl overflow-hidden">
                           <Image
                             src="/chess.png"
                             alt="Chess"
                             fill
-                            className="object-cover hover:scale-110 transition-transform duration-500"
+                            className="object-cover group-hover:scale-105 group-hover:brightness-110 transition-all duration-300"
                             unoptimized={true}
                           />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/25 to-transparent opacity-0 group-hover:opacity-80 transition-opacity duration-300"></div>
                         </div>
                         <div className="w-full md:w-2/3">
-                          <h3 className="text-xl font-bold mb-3 font-display text-gray-900 dark:text-gray-100">
+                          <motion.h3 initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0, transition: { duration: 0.3, delay: 0.2 } }} viewport={{ once: false }} className="text-xl font-bold mb-3 font-display text-gray-900 dark:text-gray-100 hover:text-red-500 dark:hover:text-red-400 transition-colors duration-300">
                             Chess Player
-                          </h3>
-                          <p className="text-gray-700 dark:text-gray-300 mb-4">
+                          </motion.h3>
+                          <motion.p initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0, transition: { duration: 0.3, delay: 0.3 } }} viewport={{ once: false }} className="text-gray-700 dark:text-gray-300 mb-4">
                             I started playing chess during Covid and haven't stopped since then. Find me on 
                             <a href="https://lichess.org/@/KenWuu" target="_blank" rel="noopener noreferrer" className="mx-1 text-red-500 hover:underline">
                               <span className="border-b border-dotted border-gray-400 dark:border-gray-600"><EntityHoverCard
@@ -870,11 +885,11 @@ export default function Home() {
                               ]}
                               achievements={["World Championship Challenger (2018)", "US Chess Champion (2016, 2022)", "Sinquefield Cup Winner (2014 with 8.5/10)", "Chess Olympiad Gold Medalist (2016)", "Seven wins against Magnus Carlsen"] }
                             /></span>.
-                          </p>
-                          <p className="text-gray-700 dark:text-gray-300">
+                          </motion.p>
+                          <motion.p initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0, transition: { duration: 0.3, delay: 0.4 } }} viewport={{ once: false }} className="text-gray-700 dark:text-gray-300">
                             Chess has sharpened my strategic thinking and ability to plan several moves ahead - crucial
                             skills for software development and problem-solving.
-                          </p>
+                          </motion.p>
                         </div>
                       </div>
                     </TabsContent>
@@ -882,23 +897,24 @@ export default function Home() {
                     <TabsContent
                       value="anime"
                       forceMount
-                      className="bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-gray-100 dark:border-gray-800 w-full transition-all ease-out duration-500 data-[state=active]:opacity-100 data-[state=active]:translate-x-0 data-[state=active]:relative data-[state=active]:z-10 data-[state=inactive]:opacity-0 data-[state=inactive]:-translate-x-full data-[state=inactive]:absolute data-[state=inactive]:inset-0 data-[state=inactive]:pointer-events-none"
+                      className="bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-gray-100 dark:border-gray-800 w-full transition-all ease-in-out duration-500 data-[state=active]:opacity-100 data-[state=active]:translate-y-0 data-[state=active]:relative data-[state=active]:z-10 data-[state=inactive]:opacity-0 data-[state=inactive]:translate-y-4 data-[state=inactive]:absolute data-[state=inactive]:inset-0 data-[state=inactive]:pointer-events-none"
                     >
-                      <div className="flex flex-col md:flex-row gap-6 items-center">
-                        <div className="w-full md:w-1/3 aspect-square relative rounded-xl overflow-hidden">
+                      <div className="flex flex-col md:flex-row gap-6 items-start">
+                        <div className="group w-full md:w-1/4 aspect-square relative rounded-xl overflow-hidden">
                           <Image
                             src="/anime.png"
                             alt="Anime & Manga"
                             fill
-                            className="object-cover hover:scale-110 transition-transform duration-500"
+                            className="object-cover group-hover:scale-105 group-hover:brightness-110 transition-all duration-300"
                             unoptimized={true}
                           />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/25 to-transparent opacity-0 group-hover:opacity-80 transition-opacity duration-300"></div>
                         </div>
                         <div className="w-full md:w-2/3">
-                          <h3 className="text-xl font-bold mb-3 font-display text-gray-900 dark:text-gray-100">
+                          <motion.h3 initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0, transition: { duration: 0.3, delay: 0.2 } }} viewport={{ once: false }} className="text-xl font-bold mb-3 font-display text-gray-900 dark:text-gray-100 hover:text-red-500 dark:hover:text-red-400 transition-colors duration-300">
                             Anime & Manga Fan
-                          </h3>
-                          <p className="text-gray-700 dark:text-gray-300 mb-4">
+                          </motion.h3>
+                          <motion.p initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0, transition: { duration: 0.3, delay: 0.3 } }} viewport={{ once: false }} className="text-gray-700 dark:text-gray-300 mb-4">
                             I've been watching anime and reading manga since elementary school. Fellow weebs feel free to
                             hit me up to talk about newest animes and manga. I'm a huge fan of <span className="border-b border-dotted border-gray-400 dark:border-gray-600"><EntityHoverCard
                               name="JoJo's Bizarre Adventure"
@@ -915,11 +931,11 @@ export default function Home() {
                               ]}
                               achievements={["100+ million copies sold", "One of the longest-running manga series", "Iconic art style", "Cultural phenomenon in Japan", "Unique Stand power system"]}
                             /></span> and I think Part 7 is the greatest manga of all time. 
-                          </p>
-                          <p className="text-gray-700 dark:text-gray-300">
+                          </motion.p>
+                          <motion.p initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0, transition: { duration: 0.3, delay: 0.4 } }} viewport={{ once: false }} className="text-gray-700 dark:text-gray-300">
                             Anime and manga have inspired my creativity and exposed me to unique storytelling approaches
                             and artistic styles.
-                          </p>
+                          </motion.p>
                         </div>
                       </div>
                     </TabsContent>
@@ -927,26 +943,27 @@ export default function Home() {
                     <TabsContent
                       value="startup"
                       forceMount
-                      className="bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-gray-100 dark:border-gray-800 w-full transition-all ease-out duration-500 data-[state=active]:opacity-100 data-[state=active]:translate-x-0 data-[state=active]:relative data-[state=active]:z-10 data-[state=inactive]:opacity-0 data-[state=inactive]:-translate-x-full data-[state=inactive]:absolute data-[state=inactive]:inset-0 data-[state=inactive]:pointer-events-none"
+                      className="bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-gray-100 dark:border-gray-800 w-full transition-all ease-in-out duration-500 data-[state=active]:opacity-100 data-[state=active]:translate-y-0 data-[state=active]:relative data-[state=active]:z-10 data-[state=inactive]:opacity-0 data-[state=inactive]:translate-y-4 data-[state=inactive]:absolute data-[state=inactive]:inset-0 data-[state=inactive]:pointer-events-none"
                     >
-                      <div className="flex flex-col md:flex-row gap-6 items-center">
-                        <div className="w-full md:w-1/3 aspect-square relative rounded-xl overflow-hidden">
+                      <div className="flex flex-col md:flex-row gap-6 items-start">
+                        <div className="group w-full md:w-1/4 aspect-square relative rounded-xl overflow-hidden">
                           <Image
                             src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?q=80&w=1470&auto=format&fit=crop"
                             alt="Startup"
                             fill
-                            className="object-cover hover:scale-110 transition-transform duration-500"
+                            className="object-cover group-hover:scale-105 group-hover:brightness-110 transition-all duration-300"
                           />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/25 to-transparent opacity-0 group-hover:opacity-80 transition-opacity duration-300"></div>
                         </div>
                         <div className="w-full md:w-2/3">
-                          <h3 className="text-xl font-bold mb-3 font-display text-gray-900 dark:text-gray-100">
+                          <motion.h3 initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0, transition: { duration: 0.3, delay: 0.2 } }} viewport={{ once: false }} className="text-xl font-bold mb-3 font-display text-gray-900 dark:text-gray-100 hover:text-red-500 dark:hover:text-red-400 transition-colors duration-300">
                             Startup Enthusiast
-                          </h3>
-                          <p className="text-gray-700 dark:text-gray-300 mb-4">
+                          </motion.h3>
+                          <motion.p initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0, transition: { duration: 0.3, delay: 0.3 } }} viewport={{ once: false }} className="text-gray-700 dark:text-gray-300 mb-4">
                             I'm exploring the startup space and trying to find cracked people to work with. Hit me up if
                             you have a cool project in mind!
-                          </p>
-                          <p className="text-gray-700 dark:text-gray-300">
+                          </motion.p>
+                          <motion.p initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0, transition: { duration: 0.3, delay: 0.4 } }} viewport={{ once: false }} className="text-gray-700 dark:text-gray-300">
                             I've interviewed with <span className="border-b border-dotted border-gray-400 dark:border-gray-600"><EntityHoverCard
                               name="YC"
                               logo="/yc.png"
@@ -963,7 +980,7 @@ export default function Home() {
                               achievements={["Airbnb", "Dropbox", "Stripe", "Reddit", "DoorDash", "Instacart", "Coinbase"]}
                             /></span> before (didn't get in), but I do know a thing or two about the
                             startup world. I'm passionate about innovation and building products that solve real problems.
-                          </p>
+                          </motion.p>
                         </div>
                       </div>
                     </TabsContent>

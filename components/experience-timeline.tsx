@@ -217,13 +217,13 @@ export default function ExperienceTimeline() {
       {/* Timeline */}
       <div
         ref={scrollContainerRef}
-        className="flex overflow-x-auto pb-4 hide-scrollbar snap-x snap-mandatory"
+        className="flex overflow-x-auto overflow-y-visible pb-4 hide-scrollbar snap-x snap-mandatory"
         onScroll={handleScroll}
       >
         <div className="flex gap-6">
           {experiences.map((exp, index) => (
             <div key={index} className="min-w-[350px] md:min-w-[400px] snap-start">
-              <Card className="bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm border-gray-100 dark:border-gray-800 shadow-xl overflow-hidden h-full hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 group">
+              <Card className="bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm border-gray-100 dark:border-gray-800 shadow-xl h-full hover:shadow-2xl hover:border-red-200 dark:hover:border-red-800 transition-all duration-300 group">
                 <div className="p-6">
                   <div className="flex items-center mb-3">
                     <a

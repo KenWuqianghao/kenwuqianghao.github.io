@@ -115,7 +115,7 @@ export default function RootLayout({
         style={{ isolation: "isolate" }}
         suppressHydrationWarning
       >
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <div suppressHydrationWarning>
             {children}
           </div>
