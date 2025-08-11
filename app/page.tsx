@@ -215,7 +215,7 @@ export default function Home() {
                           </span>
                         </h3>
                         <p className="text-lg leading-relaxed text-gray-700 dark:text-gray-300 mb-4">
-                          <span className="font-semibold">🪿 3rd Year CS Student at{" "}
+                          <span className="font-semibold">🪿 4th Year CS Student at{" "}
                             <UniversityHoverCard
                               name="University of Waterloo"
                               logo="/uwaterloo.png"
@@ -244,7 +244,7 @@ export default function Home() {
                         </h3>
                         <p className="text-lg leading-relaxed text-gray-700 dark:text-gray-300 mb-4">
                           <span className="font-semibold">
-                            Software Engineer & Machine Learning Enthusiast & 5x Hackathon Winner
+                            Software Engineer & Machine Learning Enthusiast & 5x Hackathon Winner & Neo Scholar Finalist
                           </span>
                         </p>
                         <p className="text-lg leading-relaxed text-gray-700 dark:text-gray-300">
