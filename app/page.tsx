@@ -1063,7 +1063,7 @@ export default function Home() {
                   <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
                     <SocialLink icon={<Mail size={24} />} label="Email" href="mailto:ken.wu@uwaterloo.ca" />
                     <SocialLink icon={<Github size={24} />} label="Github" href="https://github.com/KenWuqianghao" />
-                    <SocialLink icon={<Linkedin size={24} />} label="LinkedIn" href="https://linkedin.com/in/kenwuu" />
+                    <SocialLink icon={<Linkedin size={24} />} label="LinkedIn" href="https://www.linkedin.com/in/kenwuu/" />
                     <SocialLink icon={<Twitter size={24} />} label="Twitter" href="https://twitter.com/KenWuqianghao" />
                     <SocialLink
                       icon={<Instagram size={24} />}

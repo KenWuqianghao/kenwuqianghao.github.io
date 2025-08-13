@@ -37,8 +37,8 @@ export default function EnhancedHeader() {
     location: "Waterloo, ON",
     phone: "+1 437-599-3179", // Updated phone number
     email: "ken.wu@uwaterloo.ca",
-    github: "https://github.com/KenWuqianghao",
-    linkedin: "https://www.linkedin.com/in/kenwuqianghao/",
+  github: "https://github.com/KenWuqianghao",
+  linkedin: "https://www.linkedin.com/in/kenwuu/",
     resumeLink: "https://drive.google.com/file/d/11TiGQ-JxqmLQ-TJ24Jui8V9kXsI6QZld/view",
     profileImage: "/KenWuCropped.jpg"
   }
