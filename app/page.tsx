@@ -1064,7 +1064,7 @@ export default function Home() {
                     <SocialLink icon={<Mail size={24} />} label="Email" href="mailto:ken.wu@uwaterloo.ca" />
                     <SocialLink icon={<Github size={24} />} label="Github" href="https://github.com/KenWuqianghao" />
                     <SocialLink icon={<Linkedin size={24} />} label="LinkedIn" href="https://www.linkedin.com/in/kenwuu/" />
-                    <SocialLink icon={<Twitter size={24} />} label="Twitter" href="https://twitter.com/KenWuqianghao" />
+                    <SocialLink icon={<Twitter size={24} />} label="Twitter" href="https://x.com/kenwuuuu" />
                     <SocialLink
                       icon={<Instagram size={24} />}
                       label="Instagram"
