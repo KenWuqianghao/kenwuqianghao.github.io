@@ -462,43 +462,11 @@ export default function Home() {
                     <div className="relative">
                       <div className="overflow-x-auto overflow-y-visible pb-4 hide-scrollbar">
                         <div className="flex gap-6 min-w-max">
-                          <div className="bg-gray-50/80 dark:bg-gray-800/80 rounded-xl p-6 hover:shadow-xl hover:border-red-200 dark:hover:border-red-800 border border-transparent transition-all duration-700 ease-out w-[350px] group hover:bg-white dark:hover:bg-gray-800">
-                            <h3 className="text-xl font-semibold mb-3 text-gray-900 dark:text-gray-100 group">
-                              <span className="hover:text-red-500 dark:hover:text-red-400 transition-colors duration-300">
-                                Data Scientist Intern
-                              </span>
-                            </h3>
-                            <p className="text-gray-700 dark:text-gray-300 mb-2">
-                              <span className="font-medium flex items-center">
-                                <Image 
-                                  src="/td.png" 
-                                  alt="TD Bank" 
-                                  width={20} 
-                                  height={20} 
-                                  className="mr-2 rounded-sm" 
-                                /> 
-                                <CompanyHoverCard
-                                  name="TD Bank"
-                                  logo="/td.png"
-                                  website="https://www.td.com/"
-                                  location="Toronto, Canada"
-                                  industry="Banking & Financial Services"
-                                  founded="1855"
-                                  description="TD Bank Group is one of the largest banks in North America, offering a full range of financial products and services to more than 26 million customers worldwide."
-                                  technologies={["Data Science", "AI/ML", "Big Data", "Financial Analytics"]}
-                                />
-                              </span>
-                              <span className="text-gray-500 dark:text-gray-400"> • Toronto, Canada • Jun 2025 - Aug 2025</span>
-                            </p>
-                            <p className="text-gray-700 dark:text-gray-300">
-                              Working on machine learning models for financial data analysis and prediction.
-                            </p>
-                          </div>
 
                           <div className="bg-gray-50/80 dark:bg-gray-800/80 rounded-xl p-6 hover:shadow-xl hover:border-red-200 dark:hover:border-red-800 border border-transparent transition-all duration-700 ease-out w-[350px] group hover:bg-white dark:hover:bg-gray-800">
                             <h3 className="text-xl font-semibold mb-3 text-gray-900 dark:text-gray-100 group">
                               <span className="hover:text-red-500 dark:hover:text-red-400 transition-colors duration-300">
-                                Full Stack Developer
+                                Software Engineer Intern
                               </span>
                             </h3>
                             <p className="text-gray-700 dark:text-gray-300 mb-2">
@@ -514,17 +482,17 @@ export default function Home() {
                                   name="Nokia"
                                   logo="/nokia.png"
                                   website="https://www.nokia.com/"
-                                  location="Espoo, Finland"
+                                  location="Ottawa, Canada"
                                   industry="Telecommunications & Technology"
                                   founded="1865"
                                   description="Nokia is a Finnish multinational telecommunications, information technology, and consumer electronics company, known for its mobile phones and network infrastructure equipment."
                                   technologies={["5G", "Network Infrastructure", "IoT", "Cloud", "AI/ML"]}
                                 />
                               </span>
-                              <span className="text-gray-500 dark:text-gray-400"> • Remote • Jul 2025 - Dec 2025</span>
+                              <span className="text-gray-500 dark:text-gray-400"> • Ottawa, Canada • Jul 2025 - Dec 2025</span>
                             </p>
                             <p className="text-gray-700 dark:text-gray-300">
-                              Developing full-stack RAG, LLM and agentic system applications.
+                              Building RAG and LLM agent application for automating 5G network configuration generation and enhancement.
                             </p>
                           </div>
 

@@ -9,6 +9,26 @@ import CompanyHoverCard from "@/components/company-hover-card"
 
 const experiences = [
   {
+    title: "Data Scientist Intern",
+    company: "TD Bank",
+    website: "https://www.td.com/",
+    logo: "/td.png",
+    period: "June 2025 – Aug 2025",
+    location: "Toronto, Canada",
+    technologies: ["Python", "SQL", "PySpark", "Pandas", "Databricks"],
+    description: [
+      "Replatformed pipelines for **1.5M+ rows** of data and reproduced a **154,340 row** deliverable with **100% parity**",
+      "Automated **30+ minutes** of manual ingestion per cycle, cutting QA time by **80%** via a parity harness",
+      "Migrated on-prem pipeline to **Azure** fully automating runs and saving **2–4 hours/week** of manual execution",
+    ],
+    companyInfo: {
+      industry: "Banking & Financial Services",
+      founded: "1855",
+      description: "TD Bank Group is one of the largest banks in North America, offering a full range of financial products and services to more than 26 million customers worldwide.",
+      technologies: ["Data Science", "AI/ML", "Big Data", "Financial Analytics", "Azure", "Databricks"]
+    }
+  },
+  {
     title: "Software Engineer Intern",
     company: "Vecflow",
     website: "https://vecflow.ai/",
