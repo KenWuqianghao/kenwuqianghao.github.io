@@ -37,8 +37,8 @@ export default function EnhancedHeader() {
     location: "Waterloo, ON",
     phone: "+1 437-599-3179", // Updated phone number
     email: "ken.wu@uwaterloo.ca",
-    github: "https://github.com/KenWuqianghao",
-    linkedin: "https://www.linkedin.com/in/kenwuu/",
+  github: "https://github.com/KenWuqianghao",
+  linkedin: "https://www.linkedin.com/in/kenwuu/",
     twitter: "https://x.com/kenwuuuu",
     resumeLink: "https://drive.google.com/file/d/11TiGQ-JxqmLQ-TJ24Jui8V9kXsI6QZld/view",
     profileImage: "/KenWuCropped.jpg"
@@ -132,7 +132,7 @@ export default function EnhancedHeader() {
             <div className="flex items-center space-x-2">
               <SocialLink href={personalInfo.github} icon={Github} label="GitHub" className="bg-gray-100 dark:bg-gray-800 p-2 rounded-full shadow-sm hover:shadow-md hover:text-purple-600 dark:hover:text-purple-400 transition-all duration-200 hover:scale-110" /> 
               <SocialLink href={personalInfo.linkedin} icon={Linkedin} label="LinkedIn" className="bg-gray-100 dark:bg-gray-800 p-2 rounded-full shadow-sm hover:shadow-md hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-200 hover:scale-110" />
-              <SocialLink href={personalInfo.twitter} icon={Twitter} label="Twitter" className="bg-gray-100 dark:bg-gray-800 p-2 rounded-full shadow-sm hover:shadow-md hover:text-blue-500 dark:hover:text-blue-400 transition-all duration-200 hover:scale-110" />
+              <SocialLink href={personalInfo.twitter} icon={Twitter} label="Twitter" className="bg-gray-100 dark:bg-gray-800 p-2 rounded-full shadow-sm hover:shadow-md hover:text-sky-600 dark:hover:text-sky-400 transition-all duration-200 hover:scale-110" />
               <SocialLink href={personalInfo.resumeLink} icon={FileText} label="Resume" className="bg-gray-100 dark:bg-gray-800 p-2 rounded-full shadow-sm hover:shadow-md hover:text-red-600 dark:hover:text-red-400 transition-all duration-200 hover:scale-110" isButton={false} />
             </div>
 
@@ -220,7 +220,7 @@ export default function EnhancedHeader() {
               href={personalInfo.twitter}
               icon={Twitter}
               label="Twitter"
-              className="hover:text-blue-500 dark:hover:text-blue-400 p-3 hover:bg-blue-50 dark:hover:bg-blue-900/30 rounded-full"
+              className="hover:text-sky-600 dark:hover:text-sky-400 p-3 hover:bg-sky-50 dark:hover:bg-sky-900/30 rounded-full"
               size="large"
             />
             <SocialLink

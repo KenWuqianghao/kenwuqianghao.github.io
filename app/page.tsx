@@ -462,40 +462,6 @@ export default function Home() {
                     <div className="relative">
                       <div className="overflow-x-auto overflow-y-visible pb-4 hide-scrollbar">
                         <div className="flex gap-6 min-w-max">
-
-                          <div className="bg-gray-50/80 dark:bg-gray-800/80 rounded-xl p-6 hover:shadow-xl hover:border-red-200 dark:hover:border-red-800 border border-transparent transition-all duration-700 ease-out w-[350px] group hover:bg-white dark:hover:bg-gray-800">
-                            <h3 className="text-xl font-semibold mb-3 text-gray-900 dark:text-gray-100 group">
-                              <span className="hover:text-red-500 dark:hover:text-red-400 transition-colors duration-300">
-                                Software Engineer Intern
-                              </span>
-                            </h3>
-                            <p className="text-gray-700 dark:text-gray-300 mb-2">
-                              <span className="font-medium flex items-center">
-                                <Image 
-                                  src="/nokia.png" 
-                                  alt="Nokia" 
-                                  width={20} 
-                                  height={20} 
-                                  className="mr-2 rounded-sm" 
-                                /> 
-                                <CompanyHoverCard
-                                  name="Nokia"
-                                  logo="/nokia.png"
-                                  website="https://www.nokia.com/"
-                                  location="Ottawa, Canada"
-                                  industry="Telecommunications & Technology"
-                                  founded="1865"
-                                  description="Nokia is a Finnish multinational telecommunications, information technology, and consumer electronics company, known for its mobile phones and network infrastructure equipment."
-                                  technologies={["5G", "Network Infrastructure", "IoT", "Cloud", "AI/ML"]}
-                                />
-                              </span>
-                              <span className="text-gray-500 dark:text-gray-400"> • Ottawa, Canada • Jul 2025 - Dec 2025</span>
-                            </p>
-                            <p className="text-gray-700 dark:text-gray-300">
-                              Building RAG and LLM agent application for automating 5G network configuration generation and enhancement.
-                            </p>
-                          </div>
-
                           <div className="bg-gray-50/80 dark:bg-gray-800/80 rounded-xl p-6 hover:shadow-xl hover:border-red-200 dark:hover:border-red-800 border border-transparent transition-all duration-700 ease-out w-[350px] group hover:bg-white dark:hover:bg-gray-800">
                             <h3 className="text-xl font-semibold mb-3 text-gray-900 dark:text-gray-100 group">
                               <span className="hover:text-red-500 dark:hover:text-red-400 transition-colors duration-300">

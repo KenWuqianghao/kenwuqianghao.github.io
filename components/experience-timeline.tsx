@@ -9,6 +9,26 @@ import CompanyHoverCard from "@/components/company-hover-card"
 
 const experiences = [
   {
+    title: "Software Engineer Intern",
+    company: "Nokia",
+    website: "https://www.nokia.com/",
+    logo: "/nokia.png",
+    period: "Jul 2025 – Dec 2025",
+    location: "Ottawa, Canada",
+    technologies: ["Python", "PyTorch", "LoRA", "Qwen", "GGUF", "Triton"],
+    description: [
+      "Built **LoRA fine-tuning pipeline** for **Qwen** generating **Camunda BPMN XML** with **GGUF quantization**",
+      "Designed **evaluation framework** revealing overfitting from **NCSC-only data** vs. base models",
+      "Resolved **GPU memory** and **Triton** issues and shipped reusable training tooling for future experiments",
+    ],
+    companyInfo: {
+      industry: "Telecommunications & Technology",
+      founded: "1865",
+      description: "Nokia is a Finnish multinational telecommunications, information technology, and consumer electronics company, known for its mobile phones and network infrastructure equipment.",
+      technologies: ["5G", "Network Infrastructure", "IoT", "Cloud", "AI/ML"]
+    }
+  },
+  {
     title: "Data Scientist Intern",
     company: "TD Bank",
     website: "https://www.td.com/",
