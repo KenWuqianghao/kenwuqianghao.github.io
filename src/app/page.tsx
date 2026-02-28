@@ -14,6 +14,7 @@ import { CursorTrail } from "@/components/CursorTrail";
 import { ScrollParallax } from "@/components/ScrollParallax";
 import { FilmGrain } from "@/components/FilmGrain";
 import { KonamiEgg } from "@/components/KonamiEgg";
+import { About } from "@/components/About";
 
 export default function Home() {
   return (
@@ -30,6 +31,8 @@ export default function Home() {
         <Hero />
         <Accolades />
         <Stats />
+        <SectionCut />
+        <About />
         <SectionCut />
         <Experience />
         <SectionCut />
