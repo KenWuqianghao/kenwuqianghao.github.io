@@ -6,6 +6,7 @@ export const personalInfo = {
   github: "KenWuqianghao",
   linkedin: "kenwuu",
   website: "kenwu.is-a.dev",
+  resume: "https://drive.google.com/file/d/11TiGQ-JxqmLQ-TJ24Jui8V9kXsI6QZld/view",
 };
 
 export interface ExperienceEntry {

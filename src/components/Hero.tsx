@@ -109,6 +109,14 @@ export function Hero() {
               >
                 Email
               </a>
+              <a
+                href={personalInfo.resume}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-mono text-xs text-zinc-400 hover:text-red-600 transition-colors duration-300 underline underline-offset-4 decoration-zinc-300 hover:decoration-red-600"
+              >
+                Resume
+              </a>
             </div>
           </motion.div>
         </div>
