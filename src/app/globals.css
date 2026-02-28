@@ -1,0 +1,229 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-sans: var(--font-outfit), system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, monospace;
+  --font-display: var(--font-cormorant), Georgia, serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: transparent;
+  color: #171717;
+}
+
+/* Semi-transparent section backgrounds so Three.js shows through */
+section {
+  background: rgba(250, 249, 248, 0.92);
+}
+
+/* Hero fully transparent to show grid/particles */
+section:first-of-type {
+  background: transparent;
+}
+
+/* Glitch-on-hover effect */
+.glitch-hover {
+  position: relative;
+  display: inline-block;
+}
+
+.glitch-hover::before,
+.glitch-hover::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.glitch-hover::before {
+  color: #dc2626;
+  clip-path: inset(0 0 60% 0);
+}
+
+.glitch-hover::after {
+  color: #2563eb;
+  clip-path: inset(40% 0 0 0);
+}
+
+.glitch-hover:hover::before {
+  opacity: 0.8;
+  animation: glitch-top 0.3s steps(2) infinite;
+}
+
+.glitch-hover:hover::after {
+  opacity: 0.8;
+  animation: glitch-bottom 0.3s steps(2) infinite;
+}
+
+@keyframes glitch-top {
+  0% { transform: translate(0); }
+  25% { transform: translate(2px, -1px); }
+  50% { transform: translate(-1px, 1px); }
+  75% { transform: translate(1px, 2px); }
+  100% { transform: translate(-2px, -1px); }
+}
+
+@keyframes glitch-bottom {
+  0% { transform: translate(0); }
+  25% { transform: translate(-2px, 1px); }
+  50% { transform: translate(1px, -1px); }
+  75% { transform: translate(-1px, -2px); }
+  100% { transform: translate(2px, 1px); }
+}
+
+/* SHAFT head-tilt on hover */
+.head-tilt {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.head-tilt:hover {
+  transform: rotate(-2deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .head-tilt,
+  .head-tilt:hover {
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+/* Film jitter — subtle cel-animation trembling */
+.film-jitter {
+  animation: film-jitter 0.15s steps(2) infinite;
+}
+
+@keyframes film-jitter {
+  0%  { transform: translate(0, 0); }
+  20% { transform: translate(-0.5px, 0.5px); }
+  40% { transform: translate(0.5px, -0.3px); }
+  60% { transform: translate(-0.3px, -0.5px); }
+  80% { transform: translate(0.4px, 0.3px); }
+  100% { transform: translate(0, 0); }
+}
+
+/* Slower, larger gate-weave for watermarks */
+.gate-weave {
+  animation: gate-weave 4s ease-in-out infinite;
+}
+
+/* Parallax watermark — translates at fraction of scroll speed */
+.parallax-watermark {
+  translate: 0 calc(var(--scroll-y, 0px) * -0.04);
+}
+
+@keyframes gate-weave {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  25%      { transform: translate(1px, -0.5px) rotate(0.1deg); }
+  50%      { transform: translate(-0.5px, 1px) rotate(-0.15deg); }
+  75%      { transform: translate(0.8px, 0.3px) rotate(0.08deg); }
+}
+
+/* CRT text weight flicker — plays once on load */
+.weight-flicker {
+  animation: weight-flicker 0.3s steps(1) 0.6s 1 both;
+}
+
+@keyframes weight-flicker {
+  0%   { font-weight: 300; }
+  16%  { font-weight: 700; }
+  33%  { font-weight: 300; }
+  50%  { font-weight: 600; }
+  66%  { font-weight: 300; }
+  83%  { font-weight: 700; }
+  100% { font-weight: 300; }
+}
+
+/* Section cut — hard white flash */
+.section-cut {
+  animation: section-cut 0.6s ease-out forwards;
+}
+
+@keyframes section-cut {
+  0%   { opacity: 1; transform: scaleX(0); }
+  30%  { opacity: 1; transform: scaleX(1); }
+  100% { opacity: 0; transform: scaleX(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .film-jitter,
+  .gate-weave,
+  .weight-flicker,
+  .section-cut {
+    animation: none !important;
+  }
+}
+
+::selection {
+  background: #dc2626;
+  color: #fafaf9;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: #fafaf9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #d4d4d8;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a1a1aa;
+}
+
+/* Entrance sequence — Bakemonogatari-style rapid kanji cards */
+.entrance-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+.entrance-card {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display), Georgia, serif;
+  font-size: clamp(6rem, 20vw, 16rem);
+  font-weight: 300;
+  opacity: 0;
+  animation: entrance-flash 150ms steps(1) forwards;
+}
+
+@keyframes entrance-flash {
+  0% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+.entrance-fade {
+  position: absolute;
+  inset: 0;
+  background: #fafaf9;
+  animation: entrance-fade-out 400ms ease-out forwards;
+}
+
+@keyframes entrance-fade-out {
+  0% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .entrance-overlay {
+    display: none !important;
+  }
+}

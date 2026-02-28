@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" fill="#fafaf9"/>
+  <!-- K letterform — bold geometric, SHAFT-sharp -->
+  <path d="M160 96 L160 416 M160 256 L352 96 M160 256 L352 416" fill="none" stroke="#171717" stroke-width="56" stroke-linecap="square" stroke-linejoin="miter"/>
+  <!-- Red diagonal slash cutting through -->
+  <line x1="380" y1="72" x2="132" y2="440" stroke="#dc2626" stroke-width="20" stroke-linecap="round"/>
+</svg>
