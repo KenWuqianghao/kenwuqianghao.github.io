@@ -139,12 +139,18 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    name: "LeLM",
+    name: "Ding-Bot",
     description:
-      "Fine-tuned large language model for generating NBA hot takes, built on Qwen3-8B with QLoRA training via Unsloth",
-    stack: ["Python", "Unsloth", "QLoRA", "Hugging Face"],
-    github: "https://github.com/KenWuqianghao/LeLM",
-    demo: "https://legm-lab.vercel.app/",
+      "Chess engine combining GATEAU-style Graph Attention Networks with contrastive latent-space search",
+    stack: ["Python", "TypeScript", "Graph Neural Networks"],
+    github: "https://github.com/KenWuqianghao/Ding-Bot",
+  },
+  {
+    name: "PokerMon",
+    description:
+      "Deep Counterfactual Regret Minimization (Deep CFR) for 6-player No-Limit Texas Hold'em",
+    stack: ["Python", "Deep CFR", "Game Theory"],
+    github: "https://github.com/KenWuqianghao/PokerMon",
   },
   {
     name: "LeGM-Lab",
@@ -155,6 +161,13 @@ export const projects: Project[] = [
     demo: "https://legm-lab.vercel.app",
   },
   {
+    name: "LeLM",
+    description:
+      "Fine-tuned LLM for NBA hot takes, built on Qwen3-8B with LoRA and trained on Reddit r/nba posts",
+    stack: ["Python", "Unsloth", "LoRA", "Hugging Face"],
+    github: "https://github.com/KenWuqianghao/LeLM",
+  },
+  {
     name: "Algoherence",
     description:
       "Stock trading chatbot democratizing financial literacy with RAG-powered advice and live Alpaca paper trading",
@@ -163,25 +176,10 @@ export const projects: Project[] = [
     highlight: "18 stars",
   },
   {
-    name: "MedChat",
+    name: "OpenFintech",
     description:
-      "AI medical assistant for querying research literature and AI-powered disease diagnosis with pre-trained models",
-    stack: ["Python", "Cohere", "TensorFlow", "Streamlit"],
-    github: "https://github.com/KenWuqianghao/MedChat",
-  },
-  {
-    name: "Ding-Bot",
-    description:
-      "Neural network chess engine with a trained model hosted on Hugging Face, built for the ChessHacks hackathon",
-    stack: ["JavaScript", "Python", "Neural Networks"],
-    github: "https://github.com/KenWuqianghao/Ding-Bot",
-  },
-  {
-    name: "FlightCal",
-    description:
-      "Utility that converts any flight itinerary into calendar events with a clean, minimal interface",
-    stack: ["TypeScript", "Vercel"],
-    github: "https://github.com/KenWuqianghao/FlightCal",
-    demo: "https://flight-cal.vercel.app",
+      "Financial analysis library for trend following and mean reversion strategies, built for Python developers and analysts",
+    stack: ["Python", "Fintech", "Open Source"],
+    github: "https://github.com/Laurier-Fintech/OpenFintech",
   },
 ];

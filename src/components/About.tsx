@@ -19,7 +19,7 @@ const facets = [
   {
     kanji: "将",
     label: "Chess",
-    text: "Plays badly. Builds chess bots to compensate.",
+    text: "Mediocre player. Builds chess bots on the side to compensate.",
   },
   {
     kanji: "哲",
