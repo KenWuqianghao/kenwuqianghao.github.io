@@ -144,6 +144,7 @@ export const projects: Project[] = [
       "Chess engine combining GATEAU-style Graph Attention Networks with contrastive latent-space search",
     stack: ["Python", "TypeScript", "Graph Neural Networks"],
     github: "https://github.com/KenWuqianghao/Ding-Bot",
+    demo: "https://ding-bot.vercel.app/",
   },
   {
     name: "PokerMon",
@@ -151,6 +152,7 @@ export const projects: Project[] = [
       "Deep Counterfactual Regret Minimization (Deep CFR) for 6-player No-Limit Texas Hold'em",
     stack: ["Python", "Deep CFR", "Game Theory"],
     github: "https://github.com/KenWuqianghao/PokerMon",
+    demo: "https://poker-mon.vercel.app/",
   },
   {
     name: "LeGM-Lab",
@@ -168,18 +170,18 @@ export const projects: Project[] = [
     github: "https://github.com/KenWuqianghao/LeLM",
   },
   {
-    name: "Algoherence",
+    name: "FlightCal",
     description:
-      "Stock trading chatbot democratizing financial literacy with RAG-powered advice and live Alpaca paper trading",
-    stack: ["Python", "LangChain", "Cohere", "Streamlit"],
-    github: "https://github.com/KenWuqianghao/Algoherence",
-    highlight: "18 stars",
+      "Fetches flight info and exports it directly to Google Calendar or as an .ics file for any calendar app",
+    stack: ["TypeScript", "Next.js", "Google Calendar API"],
+    github: "https://github.com/KenWuqianghao/FlightCal",
+    demo: "https://flight-cal.vercel.app",
   },
   {
-    name: "OpenFintech",
+    name: "claude-bell",
     description:
-      "Financial analysis library for trend following and mean reversion strategies, built for Python developers and analysts",
-    stack: ["Python", "Fintech", "Open Source"],
-    github: "https://github.com/Laurier-Fintech/OpenFintech",
+      "Interactive CLI to configure audio notifications for Claude Code — know when your agent is done without babysitting it",
+    stack: ["JavaScript", "Node.js", "Claude Code"],
+    github: "https://github.com/KenWuqianghao/claude-bell",
   },
 ];
