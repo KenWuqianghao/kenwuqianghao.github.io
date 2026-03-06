@@ -176,6 +176,7 @@ export const projects: Project[] = [
       "Fine-tuned LLM for NBA hot takes, built on Qwen3-8B with LoRA and trained on Reddit r/nba posts",
     stack: ["Python", "Unsloth", "LoRA", "Hugging Face"],
     github: "https://github.com/KenWuqianghao/LeLM",
+    demo: "https://lelm.vercel.app/",
   },
   {
     name: "FlightCal",
