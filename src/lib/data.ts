@@ -70,7 +70,7 @@ export const experience: ExperienceEntry[] = [
     type: "LLM Agent",
     dates: "Sept 2024 \u2014 Dec 2024",
     location: "New York, United States",
-    website: "https://augusthq.com",
+    website: "https://www.august.law/",
     stack: ["Python", "LangGraph", "FastAPI", "AWS"],
     bullets: [
       "Handled 2,000+ requests/min by deploying 10+ API endpoints using FastAPI, AWS, and Supabase",
