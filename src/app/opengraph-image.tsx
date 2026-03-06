@@ -1,4 +1,5 @@
 import { ImageResponse } from "next/og";
+import { projects, experience } from "@/lib/data";
 
 export const dynamic = "force-static";
 export const alt = "Ken Wu — Software Engineer & ML Researcher";
@@ -6,6 +7,9 @@ export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
 export default function OGImage() {
+  const projectCount = projects.length;
+  const experienceCount = experience.length;
+
   return new ImageResponse(
     (
       <div
@@ -81,8 +85,8 @@ export default function OGImage() {
             bottom: 60,
             left: 100,
             display: "flex",
-            gap: 40,
-            fontSize: 14,
+            gap: 32,
+            fontSize: 13,
             color: "#a1a1aa",
             textTransform: "uppercase" as const,
             letterSpacing: "0.15em",
@@ -92,7 +96,9 @@ export default function OGImage() {
           <span style={{ color: "#dc2626" }}>·</span>
           <span>ML Researcher</span>
           <span style={{ color: "#dc2626" }}>·</span>
-          <span>Waterloo CS 26</span>
+          <span>{experienceCount} Internships</span>
+          <span style={{ color: "#dc2626" }}>·</span>
+          <span>{projectCount} Projects</span>
         </div>
       </div>
     ),

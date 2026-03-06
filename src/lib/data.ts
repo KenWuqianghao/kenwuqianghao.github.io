@@ -19,6 +19,7 @@ export interface ExperienceEntry {
   stack: string[];
   bullets: string[];
   meta?: string;
+  website?: string;
 }
 
 export const experience: ExperienceEntry[] = [
@@ -28,6 +29,7 @@ export const experience: ExperienceEntry[] = [
     type: "5G Network Agent",
     dates: "Jul 2025 \u2014 Dec 2025",
     location: "Ottawa, Canada",
+    website: "https://www.nokia.com",
     stack: ["Python", "PyTorch", "Unsloth", "Transformer"],
     bullets: [
       "Built LoRA fine-tuning pipeline for Qwen generating Camunda BPMN XML with GGUF quantization",
@@ -41,6 +43,7 @@ export const experience: ExperienceEntry[] = [
     type: "Insurance Analysis",
     dates: "Jun 2025 \u2014 Aug 2025",
     location: "Toronto, Canada",
+    website: "https://www.td.com",
     stack: ["Python", "SQL", "PySpark", "Pandas", "Databricks"],
     bullets: [
       "Replatformed pipelines for 1.5M+ rows of data and reproduced a 154,340 row deliverable with 100% parity",
@@ -54,6 +57,7 @@ export const experience: ExperienceEntry[] = [
     type: "Teaching",
     dates: "Apr 2025 \u2014 Jun 2025",
     location: "Stanford, United States",
+    website: "https://codeinplace.stanford.edu",
     stack: ["Python", "Karel", "Tkinter"],
     bullets: [
       "Taught Stanford\u2019s Code in Place CS106A course to students globally, taken by 40,000+ students",
@@ -66,6 +70,7 @@ export const experience: ExperienceEntry[] = [
     type: "LLM Agent",
     dates: "Sept 2024 \u2014 Dec 2024",
     location: "New York, United States",
+    website: "https://augusthq.com",
     stack: ["Python", "LangGraph", "FastAPI", "AWS"],
     bullets: [
       "Handled 2,000+ requests/min by deploying 10+ API endpoints using FastAPI, AWS, and Supabase",
@@ -79,6 +84,7 @@ export const experience: ExperienceEntry[] = [
     type: "Document QA",
     dates: "Apr 2024 \u2014 Aug 2024",
     location: "Ottawa, Canada",
+    website: "https://www.canada.ca/en/health-canada.html",
     stack: ["Python", "Azure", "LangChain", "Streamlit"],
     bullets: [
       "Built a document QA system using Llama3 7B and ChromaDB for OECD report search and summarization",
@@ -91,6 +97,7 @@ export const experience: ExperienceEntry[] = [
     type: "Resume Parsing",
     dates: "Mar 2023 \u2014 Jun 2023",
     location: "New York, United States",
+    website: "https://keywordsai.co",
     stack: ["Python", "spaCy", "SQLite"],
     meta: "Y Combinator W24",
     bullets: [
@@ -104,6 +111,7 @@ export const experience: ExperienceEntry[] = [
     type: "Entity Recognition",
     dates: "Jul 2022 \u2014 Sept 2022",
     location: "Berlin, Germany",
+    website: "https://www.intapp.com",
     stack: ["Python", "spaCy", "W&B", "BS4"],
     meta: "Formerly delphai",
     bullets: [

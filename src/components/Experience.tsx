@@ -4,6 +4,7 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { experience, type ExperienceEntry } from "@/lib/data";
 import { ScrollReveal } from "./ScrollReveal";
+import { ArrowUpRight } from "@phosphor-icons/react";
 
 const JP_NUMBERS = ["一", "二", "三", "四", "五", "六", "七", "八", "九", "十"];
 
@@ -66,14 +67,28 @@ function ExperienceCard({
 
       <div className="relative pl-4 md:pl-0">
         {/* Company name — MASSIVE */}
-        <motion.h3
-          className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-display font-light tracking-tighter text-zinc-900 leading-[0.9] mb-3 head-tilt"
+        <motion.div
+          className="flex items-start gap-4 mb-3"
           initial={{ opacity: 0, x: -20 }}
           animate={isInView ? { opacity: 1, x: 0, rotate: index % 2 === 0 ? -1.5 : 1 } : {}}
           transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
         >
-          {entry.company}
-        </motion.h3>
+          <h3 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-display font-light tracking-tighter text-zinc-900 leading-[0.9] head-tilt">
+            {entry.company}
+          </h3>
+          {entry.website && (
+            <a
+              href={entry.website}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-2 md:mt-4 shrink-0 text-zinc-400 hover:text-red-600 transition-colors duration-300"
+              aria-label={`${entry.company} website`}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <ArrowUpRight size={20} weight="bold" />
+            </a>
+          )}
+        </motion.div>
 
         {/* Meta badge */}
         {entry.meta && (

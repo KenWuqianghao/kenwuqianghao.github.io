@@ -15,6 +15,7 @@ import { ScrollParallax } from "@/components/ScrollParallax";
 import { FilmGrain } from "@/components/FilmGrain";
 import { KonamiEgg } from "@/components/KonamiEgg";
 import { About } from "@/components/About";
+import { ProfileCard } from "@/components/ProfileCard";
 
 export default function Home() {
   return (
@@ -26,6 +27,7 @@ export default function Home() {
       <CursorTrail />
       <RedThread />
       <KonamiEgg />
+      <ProfileCard />
       <Navigation />
       <main className="relative z-10">
         <Hero />
