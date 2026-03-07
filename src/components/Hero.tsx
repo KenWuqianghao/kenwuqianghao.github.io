@@ -6,7 +6,7 @@ import { personalInfo } from "@/lib/data";
 
 export function Hero() {
   return (
-    <section className="min-h-[100dvh] relative flex items-end pb-16 md:pb-24">
+    <section className="min-h-[100dvh] relative flex items-end pb-16 md:pb-24 overflow-hidden">
       {/* Name kanji watermark — 皓 (luminous) */}
       <div className="absolute bottom-0 right-0 font-display text-[20rem] md:text-[32rem] text-zinc-900/[0.03] leading-none select-none pointer-events-none gate-weave">
         皓

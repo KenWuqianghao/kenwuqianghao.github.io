@@ -67,28 +67,14 @@ function ExperienceCard({
 
       <div className="relative pl-4 md:pl-0">
         {/* Company name — MASSIVE */}
-        <motion.div
-          className="flex items-start gap-4 mb-3"
+        <motion.h3
+          className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-display font-light tracking-tighter text-zinc-900 leading-[0.9] mb-3 head-tilt"
           initial={{ opacity: 0, x: -20 }}
           animate={isInView ? { opacity: 1, x: 0, rotate: index % 2 === 0 ? -1.5 : 1 } : {}}
           transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
         >
-          <h3 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-display font-light tracking-tighter text-zinc-900 leading-[0.9] head-tilt">
-            {entry.company}
-          </h3>
-          {entry.website && (
-            <a
-              href={entry.website}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-2 md:mt-4 shrink-0 text-zinc-400 hover:text-red-600 transition-colors duration-300"
-              aria-label={`${entry.company} website`}
-              onClick={(e) => e.stopPropagation()}
-            >
-              <ArrowUpRight size={20} weight="bold" />
-            </a>
-          )}
-        </motion.div>
+          {entry.company}
+        </motion.h3>
 
         {/* Meta badge */}
         {entry.meta && (
@@ -142,6 +128,21 @@ function ExperienceCard({
               </span>
             ))}
           </div>
+
+          {/* Website link */}
+          {entry.website && (
+            <div className="mt-5">
+              <a
+                href={entry.website}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 font-mono text-xs text-zinc-400 hover:text-red-600 transition-colors duration-300 underline underline-offset-4 decoration-zinc-300 hover:decoration-red-600"
+              >
+                Visit
+                <ArrowUpRight size={12} weight="bold" />
+              </a>
+            </div>
+          )}
         </motion.div>
       </div>
     </motion.article>

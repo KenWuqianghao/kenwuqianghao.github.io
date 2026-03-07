@@ -84,7 +84,7 @@ export function Contact() {
           <p className="font-mono text-[10px] text-zinc-400 uppercase tracking-widest">
             Ken Wu
           </p>
-          <p className="font-mono text-[10px] text-zinc-400">
+          <p className="font-mono text-[10px] text-zinc-400" suppressHydrationWarning>
             {new Date().getFullYear()}
           </p>
         </div>
