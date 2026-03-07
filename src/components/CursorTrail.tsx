@@ -34,6 +34,7 @@ export function CursorTrail() {
       dot.style.transform = `translate(${positions[i].x}px, ${positions[i].y}px)`;
     }
 
+    // eslint-disable-next-line react-hooks/immutability
     rafRef.current = requestAnimationFrame(animate);
   }, []);
 

@@ -21,18 +21,16 @@ const ATTRIBUTES = [
 function AttributeBar({
   label,
   value,
-  display,
   color,
   delay,
 }: {
   label: string;
   value: number | null;
-  display?: string;
   color: string;
   delay: number;
 }) {
   const pct = value !== null ? (value / 99) * 100 : 0;
-  const shown = display ?? (value !== null ? String(value) : "??");
+  const shown = value !== null ? String(value) : "??";;
 
   return (
     <motion.div
@@ -288,7 +286,6 @@ export function ProfileCard() {
                     key={attr.label}
                     label={attr.label}
                     value={attr.value}
-                    display={attr.display}
                     color={attr.color}
                     delay={0.7 + i * 0.07}
                   />

@@ -21,6 +21,7 @@ import { OraOra } from "@/components/OraOra";
 import { Menacing } from "@/components/Menacing";
 import { ItemObtained } from "@/components/ItemObtained";
 import { HadesDialogue } from "@/components/HadesDialogue";
+import { LostGrace } from "@/components/LostGrace";
 
 export default function Home() {
   return (
@@ -38,6 +39,7 @@ export default function Home() {
       <Menacing />
       <ItemObtained />
       <HadesDialogue />
+      <LostGrace />
       <Navigation />
       <main className="relative z-10">
         <Hero />

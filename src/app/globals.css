@@ -129,19 +129,19 @@ section:first-of-type {
   75%      { transform: translate(0.8px, 0.3px) rotate(0.08deg); }
 }
 
-/* CRT text weight flicker — plays once on load */
+/* CRT text weight flicker — brief burst every ~5s */
 .weight-flicker {
-  animation: weight-flicker 0.3s steps(1) 0.6s 1 both;
+  animation: weight-flicker 5s steps(1) infinite;
 }
 
 @keyframes weight-flicker {
-  0%   { font-weight: 300; }
-  16%  { font-weight: 700; }
-  33%  { font-weight: 300; }
-  50%  { font-weight: 600; }
-  66%  { font-weight: 300; }
-  83%  { font-weight: 700; }
-  100% { font-weight: 300; }
+  0%, 92%, 100% { font-weight: 300; }
+  93%  { font-weight: 700; }
+  94%  { font-weight: 300; }
+  95%  { font-weight: 600; }
+  96%  { font-weight: 300; }
+  97%  { font-weight: 700; }
+  98%  { font-weight: 300; }
 }
 
 /* Section cut — hard white flash */
@@ -155,11 +155,38 @@ section:first-of-type {
   100% { opacity: 0; transform: scaleX(1); }
 }
 
+/* Periodic grace glitch — appears every ~7s */
+@keyframes grace-twitch {
+  0%, 87%, 100% { transform: translate(0); filter: none; }
+  88%  { transform: translate(-2px, 0); filter: brightness(1.5); }
+  89%  { transform: translate(2px, 0.5px); }
+  90%  { transform: translate(-1.5px, -0.5px); filter: brightness(0.7) hue-rotate(10deg); }
+  91%  { transform: translate(1px, 0); }
+  92%  { transform: translate(0); filter: none; }
+}
+
+.grace-twitch {
+  animation: grace-twitch 7s linear infinite;
+}
+
+/* Grace golden glow — unlocked state */
+@keyframes grace-pulse {
+  0%, 100% { text-shadow: 0 0 6px rgba(212,168,58,0.45), 0 0 14px rgba(212,168,58,0.2); }
+  50%       { text-shadow: 0 0 10px rgba(212,168,58,0.7), 0 0 26px rgba(212,168,58,0.4); }
+}
+
+.grace-gold {
+  color: #d4a83a;
+  animation: grace-pulse 3s ease-in-out infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .film-jitter,
   .gate-weave,
   .weight-flicker,
-  .section-cut {
+  .section-cut,
+  .grace-twitch,
+  .grace-gold {
     animation: none !important;
   }
 }
@@ -194,6 +221,7 @@ section:first-of-type {
   pointer-events: none;
 }
 
+/* JS controls visibility — no opacity or animation needed */
 .entrance-card {
   position: absolute;
   inset: 0;
@@ -203,13 +231,6 @@ section:first-of-type {
   font-family: "Shippori Mincho", "游明朝", "YuMincho", var(--font-display), Georgia, serif;
   font-size: clamp(6rem, 20vw, 16rem);
   font-weight: 400;
-  opacity: 0;
-  animation: entrance-flash 150ms steps(1) forwards;
-}
-
-@keyframes entrance-flash {
-  0% { opacity: 1; }
-  100% { opacity: 0; }
 }
 
 .entrance-fade {

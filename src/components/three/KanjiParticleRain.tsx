@@ -9,16 +9,17 @@ const vertexShader = `
   attribute float aOpacity;
   attribute float aFlash;
   attribute vec2 aUvOffset;
-  attribute float aCharIndex;
 
   varying float vOpacity;
   varying float vFlash;
   varying vec2 vUvOffset;
+  varying vec2 vUv;
 
   void main() {
     vOpacity = aOpacity;
     vFlash = aFlash;
     vUvOffset = aUvOffset;
+    vUv = uv;
 
     vec4 mvPosition = modelViewMatrix * instanceMatrix * vec4(position, 1.0);
     gl_Position = projectionMatrix * mvPosition;
@@ -33,10 +34,11 @@ const fragmentShader = `
   varying float vOpacity;
   varying float vFlash;
   varying vec2 vUvOffset;
+  varying vec2 vUv;
 
   void main() {
     float cell = 1.0 / uGridSize;
-    vec2 uv = gl_PointCoord * cell + vUvOffset;
+    vec2 uv = vUv * cell + vUvOffset;
     vec4 tex = texture2D(uAtlas, uv);
 
     vec3 color = mix(vec3(0.63, 0.63, 0.67), uRedColor, vFlash);
@@ -106,14 +108,18 @@ export function KanjiParticleRain({ count, mouse }: KanjiParticleRainProps) {
     const uvOffsets = new Float32Array(count * 2);
 
     for (let i = 0; i < count; i++) {
+      // eslint-disable-next-line react-hooks/purity
       const speed = PARTICLE_CONFIG.fallSpeedMin +
+        // eslint-disable-next-line react-hooks/purity
         Math.random() * (PARTICLE_CONFIG.fallSpeedMax - PARTICLE_CONFIG.fallSpeedMin);
+      // eslint-disable-next-line react-hooks/purity
       const baseOpacity = 0.08 + Math.random() * 0.25;
 
       data.push({ speed, baseOpacity, flashTimer: 0 });
       opacities[i] = baseOpacity;
       flashes[i] = 0;
 
+      // eslint-disable-next-line react-hooks/purity
       const charIdx = Math.floor(Math.random() * gridSize * gridSize);
       const col = charIdx % gridSize;
       const row = Math.floor(charIdx / gridSize);
@@ -189,15 +195,23 @@ export function KanjiParticleRain({ count, mouse }: KanjiParticleRainProps) {
         pos.x = (Math.random() - 0.5) * viewport.width * 1.2;
       }
 
-      // Random flash
+      // Random flash — intentional per-frame mutation of animation state
+      // eslint-disable-next-line react-hooks/immutability
       if (particleData[i].flashTimer > 0) {
+        // eslint-disable-next-line react-hooks/immutability
         particleData[i].flashTimer -= delta;
+        // eslint-disable-next-line react-hooks/immutability
         flashArray[i] = 1;
+        // eslint-disable-next-line react-hooks/immutability
         opacityArray[i] = 0.6;
       } else {
+        // eslint-disable-next-line react-hooks/immutability
         flashArray[i] = 0;
+        // eslint-disable-next-line react-hooks/immutability
         opacityArray[i] = particleData[i].baseOpacity;
+        // eslint-disable-next-line react-hooks/immutability
         if (Math.random() < PARTICLE_CONFIG.flashProbability * delta) {
+          // eslint-disable-next-line react-hooks/immutability
           particleData[i].flashTimer = 0.15 + Math.random() * 0.2;
         }
       }

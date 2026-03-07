@@ -42,6 +42,7 @@ export function AmbientKanji() {
         scale: 0.8 + Math.random() * 0.6,
       }));
 
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setStamps(createStamps());
 
     const interval = setInterval(() => {

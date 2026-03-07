@@ -1,14 +1,22 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import { TextReveal } from "./TextReveal";
 import { personalInfo } from "@/lib/data";
 
 export function Hero() {
+  const [graceFound, setGraceFound] = useState(false);
+
   const dispatchNameClick = useCallback(() => {
     window.dispatchEvent(new Event("hero-name-click"));
   }, []);
+
+  const handleGraceClick = useCallback(() => {
+    if (graceFound) return;
+    setGraceFound(true);
+    window.dispatchEvent(new Event("grace-discovered"));
+  }, [graceFound]);
 
   return (
     <section className="min-h-[100dvh] relative flex items-end pb-16 md:pb-24 overflow-hidden">
@@ -20,7 +28,12 @@ export function Hero() {
         <div className="grid grid-cols-1 lg:grid-cols-[1.4fr_1fr] gap-12 lg:gap-4 items-end">
           <div>
             <motion.p
-              className="font-mono text-xs text-zinc-400 uppercase tracking-[0.2em] mb-8 film-jitter"
+              className={`font-mono text-xs uppercase tracking-[0.2em] mb-8 select-none ${
+                graceFound
+                  ? "grace-gold cursor-default"
+                  : "grace-twitch text-zinc-400 cursor-pointer"
+              }`}
+              onClick={handleGraceClick}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.8, duration: 0.6 }}

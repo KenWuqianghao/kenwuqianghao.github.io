@@ -16,66 +16,70 @@ const CARDS = [
 ];
 
 const CARD_DURATION = 150; // ms per card
-const TOTAL_CARDS_TIME = CARDS.length * CARD_DURATION; // 1500ms
-const FADE_DURATION = 400;
-const TOTAL_DURATION = TOTAL_CARDS_TIME + FADE_DURATION; // ~1900ms
 
 export function EntranceSequence() {
-  const [show, setShow] = useState(false);
+  const [cardIdx, setCardIdx] = useState(-1); // -1 = no card showing
+  const [fadeOut, setFadeOut] = useState(false);
   const [done, setDone] = useState(false);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
 
-    // Only play once per session
     if (sessionStorage.getItem("entrance-played")) {
       setDone(true);
       return;
     }
 
-    // Check prefers-reduced-motion
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       sessionStorage.setItem("entrance-played", "1");
       setDone(true);
       return;
     }
 
-    setShow(true);
     document.body.style.overflow = "hidden";
+    const timers: ReturnType<typeof setTimeout>[] = [];
 
-    const timer = setTimeout(() => {
+    // Show each card in sequence — one at a time via React state
+    for (let i = 0; i < CARDS.length; i++) {
+      timers.push(setTimeout(() => setCardIdx(i), i * CARD_DURATION));
+    }
+
+    // Hide last card + begin white fade simultaneously
+    const endTime = CARDS.length * CARD_DURATION;
+    timers.push(setTimeout(() => {
+      setCardIdx(-1);
+      setFadeOut(true);
+    }, endTime));
+
+    // Unmount everything
+    timers.push(setTimeout(() => {
       document.body.style.overflow = "";
       sessionStorage.setItem("entrance-played", "1");
       setDone(true);
-    }, TOTAL_DURATION);
+    }, endTime + 450));
 
     return () => {
-      clearTimeout(timer);
+      timers.forEach(clearTimeout);
       document.body.style.overflow = "";
     };
   }, []);
 
-  if (done || !show) return null;
+  if (done) return null;
+
+  const card = cardIdx >= 0 ? CARDS[cardIdx] : null;
 
   return (
     <div className="entrance-overlay" aria-hidden="true">
-      {CARDS.map((card, i) => (
+      {card && (
         <div
-          key={i}
+          key={cardIdx}
           className="entrance-card"
-          style={{
-            backgroundColor: card.bg,
-            color: card.color,
-            animationDelay: `${i * CARD_DURATION}ms`,
-          }}
+          style={{ backgroundColor: card.bg, color: card.color }}
         >
           {card.kanji}
         </div>
-      ))}
-      <div
-        className="entrance-fade"
-        style={{ animationDelay: `${TOTAL_CARDS_TIME}ms` }}
-      />
+      )}
+      {fadeOut && <div className="entrance-fade" />}
     </div>
   );
 }
