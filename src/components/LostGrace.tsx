@@ -7,7 +7,7 @@ const GOLD = "#c8a96e";
 const GOLD_BRIGHT = "#e8d07a";
 const GOLD_DIM = "#8a6a3a";
 
-// Synthesized Elden Ring grace ambient — warm drone + ethereal shimmer
+// Elden Ring grace ambient — warm drone + ethereal bell layers
 function playGraceSound() {
   try {
     const ctx = new AudioContext();
@@ -27,7 +27,7 @@ function playGraceSound() {
     drone.start(now);
     drone.stop(now + 5.1);
 
-    // Warm mid tone — E4
+    // Warm mid — E4
     const mid = ctx.createOscillator();
     const midGain = ctx.createGain();
     mid.connect(midGain);
@@ -40,7 +40,7 @@ function playGraceSound() {
     mid.start(now + 0.3);
     mid.stop(now + 4.6);
 
-    // High shimmer bell — B5 (first chime)
+    // Bell — B5
     const bell1 = ctx.createOscillator();
     const bell1Gain = ctx.createGain();
     bell1.connect(bell1Gain);
@@ -85,66 +85,7 @@ function playGraceSound() {
   }
 }
 
-// Elden Ring grace symbol — radial rays + rings, matching game's starburst icon
-function GraceSymbol() {
-  const LONG_RAYS = 8;
-  const SHORT_RAYS = 8;
-  return (
-    <svg
-      width="100"
-      height="100"
-      viewBox="-50 -50 100 100"
-      style={{ overflow: "visible" }}
-    >
-      {/* Long cardinal/diagonal rays */}
-      {Array.from({ length: LONG_RAYS }, (_, i) => {
-        const angle = (i * 360) / LONG_RAYS;
-        const rad = (angle * Math.PI) / 180;
-        const x1 = Math.cos(rad) * 14;
-        const y1 = Math.sin(rad) * 14;
-        const x2 = Math.cos(rad) * 44;
-        const y2 = Math.sin(rad) * 44;
-        return (
-          <line
-            key={i}
-            x1={x1} y1={y1} x2={x2} y2={y2}
-            stroke={GOLD}
-            strokeWidth={1.4}
-            strokeLinecap="round"
-          />
-        );
-      })}
-      {/* Short interstitial rays */}
-      {Array.from({ length: SHORT_RAYS }, (_, i) => {
-        const angle = (i * 360) / SHORT_RAYS + 22.5;
-        const rad = (angle * Math.PI) / 180;
-        const x1 = Math.cos(rad) * 14;
-        const y1 = Math.sin(rad) * 14;
-        const x2 = Math.cos(rad) * 28;
-        const y2 = Math.sin(rad) * 28;
-        return (
-          <line
-            key={`s${i}`}
-            x1={x1} y1={y1} x2={x2} y2={y2}
-            stroke={GOLD}
-            strokeWidth={0.7}
-            strokeLinecap="round"
-            opacity={0.55}
-          />
-        );
-      })}
-      {/* Outer ring */}
-      <circle cx="0" cy="0" r="44" fill="none" stroke={GOLD} strokeWidth="0.5" opacity="0.35" />
-      {/* Inner ring */}
-      <circle cx="0" cy="0" r="14" fill="none" stroke={GOLD} strokeWidth="0.9" opacity="0.75" />
-      {/* Core */}
-      <circle cx="0" cy="0" r="5" fill={GOLD_BRIGHT} />
-      <circle cx="0" cy="0" r="2" fill="white" opacity="0.9" />
-    </svg>
-  );
-}
-
-// Rising motes — particles that float upward
+// Rising motes
 const MOTES = [
   { id: 0,  x: 42, size: 1.5, delay: 0.25, dur: 3.1 },
   { id: 1,  x: 46, size: 2,   delay: 0.55, dur: 2.8 },
@@ -163,6 +104,43 @@ const MOTES = [
   { id: 14, x: 55, size: 2,   delay: 0.95, dur: 2.6 },
   { id: 15, x: 47, size: 1.5, delay: 1.15, dur: 2.9 },
 ];
+
+// Thin Elden Ring divider — lines converging on a central ◈
+function Divider({ delay }: { delay: number }) {
+  return (
+    <motion.div
+      className="flex items-center"
+      style={{ width: "min(340px, 82vw)", gap: "10px" }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ delay, duration: 0.5 }}
+    >
+      <motion.div
+        style={{
+          flex: 1,
+          height: "1px",
+          background: `linear-gradient(to right, transparent, ${GOLD}99)`,
+          transformOrigin: "right",
+        }}
+        initial={{ scaleX: 0 }}
+        animate={{ scaleX: 1 }}
+        transition={{ delay: delay + 0.1, duration: 0.5 }}
+      />
+      <span style={{ color: GOLD, fontSize: "9px", lineHeight: 1, flexShrink: 0 }}>◈</span>
+      <motion.div
+        style={{
+          flex: 1,
+          height: "1px",
+          background: `linear-gradient(to left, transparent, ${GOLD}99)`,
+          transformOrigin: "left",
+        }}
+        initial={{ scaleX: 0 }}
+        animate={{ scaleX: 1 }}
+        transition={{ delay: delay + 0.1, duration: 0.5 }}
+      />
+    </motion.div>
+  );
+}
 
 function AutoDismiss({ onDismiss }: { onDismiss: () => void }) {
   useEffect(() => {
@@ -198,23 +176,18 @@ export function LostGrace() {
         >
           <AutoDismiss onDismiss={dismiss} />
 
-          {/* Dark warm overlay — Elden Ring's dark amber ambience */}
-          <div
-            className="absolute inset-0"
-            style={{
-              background: "rgba(6, 4, 1, 0.90)",
-            }}
-          />
+          {/* Dark warm overlay */}
+          <div className="absolute inset-0" style={{ background: "rgba(4, 2, 0, 0.88)" }} />
 
-          {/* Warm amber radial glow from center */}
+          {/* Warm amber radial glow */}
           <motion.div
             className="absolute inset-0 pointer-events-none"
             style={{
-              background: `radial-gradient(ellipse 55% 45% at 50% 55%, rgba(200,158,80,0.14) 0%, rgba(180,130,50,0.06) 50%, transparent 80%)`,
+              background: `radial-gradient(ellipse 40% 35% at 50% 50%, rgba(200,158,80,0.12) 0%, transparent 70%)`,
             }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.4, duration: 1.5 }}
+            transition={{ delay: 0.3, duration: 1.5 }}
           />
 
           {/* Narrow golden beam from top */}
@@ -222,7 +195,7 @@ export function LostGrace() {
             className="absolute top-0 left-1/2 -translate-x-1/2 pointer-events-none"
             style={{
               width: "1px",
-              height: "52vh",
+              height: "48vh",
               background: `linear-gradient(to bottom, ${GOLD_BRIGHT} 0%, ${GOLD}bb 30%, ${GOLD}55 65%, transparent 100%)`,
               boxShadow: `0 0 6px ${GOLD}99, 0 0 18px ${GOLD}44`,
               transformOrigin: "top center",
@@ -231,13 +204,12 @@ export function LostGrace() {
             animate={{ scaleY: 1, opacity: 1 }}
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           />
-          {/* Wider soft column glow */}
           <motion.div
             className="absolute top-0 left-1/2 -translate-x-1/2 pointer-events-none"
             style={{
-              width: "180px",
-              height: "55vh",
-              background: `linear-gradient(to bottom, ${GOLD}22 0%, ${GOLD}0a 50%, transparent 100%)`,
+              width: "160px",
+              height: "50vh",
+              background: `linear-gradient(to bottom, ${GOLD}18 0%, transparent 100%)`,
               transformOrigin: "top center",
             }}
             initial={{ scaleY: 0, opacity: 0 }}
@@ -245,7 +217,7 @@ export function LostGrace() {
             transition={{ delay: 0.1, duration: 0.9 }}
           />
 
-          {/* Rising golden motes from lower center */}
+          {/* Rising golden motes */}
           {MOTES.map((m) => (
             <motion.div
               key={m.id}
@@ -260,140 +232,49 @@ export function LostGrace() {
                 boxShadow: `0 0 ${m.size * 3}px ${GOLD}cc`,
               }}
               initial={{ y: 0, opacity: 0, scale: 0 }}
-              animate={{
-                y: -280,
-                opacity: [0, 0.9, 0.6, 0],
-                scale: [0, 1, 0.8, 0],
-              }}
-              transition={{
-                delay: m.delay,
-                duration: m.dur,
-                ease: "easeOut",
-              }}
+              animate={{ y: -280, opacity: [0, 0.9, 0.6, 0], scale: [0, 1, 0.8, 0] }}
+              transition={{ delay: m.delay, duration: m.dur, ease: "easeOut" }}
             />
           ))}
 
-          {/* Central UI — grace icon + Elden Ring-style notification */}
-          <div className="relative flex flex-col items-center gap-0">
+          {/* Central text — pure Elden Ring typography, no panel/box */}
+          <div className="relative flex flex-col items-center gap-5 px-8 text-center">
+            <Divider delay={0.35} />
 
-            {/* Grace symbol with slow rotation */}
             <motion.div
-              style={{
-                filter: `drop-shadow(0 0 16px ${GOLD}cc) drop-shadow(0 0 40px ${GOLD}55)`,
-                marginBottom: "1.2rem",
-              }}
-              initial={{ opacity: 0, scale: 0.5, rotate: -15 }}
-              animate={{ opacity: 1, scale: 1, rotate: 0 }}
-              transition={{ delay: 0.3, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
             >
-              <GraceSymbol />
-            </motion.div>
-
-            {/* Elden Ring style notification box */}
-            <motion.div
-              style={{
-                position: "relative",
-                width: "min(360px, 86vw)",
-                padding: "1rem 1.6rem 1.1rem",
-                background: "rgba(8, 5, 2, 0.82)",
-                borderTop: `1px solid ${GOLD}88`,
-                borderBottom: `1px solid ${GOLD}88`,
-              }}
-              initial={{ opacity: 0, scaleX: 0.85 }}
-              animate={{ opacity: 1, scaleX: 1 }}
-              transition={{ delay: 0.5, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            >
-              {/* Corner accents */}
-              <span
+              {/* "LOST GRACE DISCOVERED" — Elden Ring's exact phrasing */}
+              <p
+                className="font-mono uppercase"
                 style={{
-                  position: "absolute",
-                  top: -1,
-                  left: 0,
-                  width: "18px",
-                  height: "1px",
-                  background: GOLD_BRIGHT,
+                  fontSize: "9px",
+                  color: `${GOLD_DIM}cc`,
+                  letterSpacing: "0.5em",
+                  marginBottom: "0.65rem",
                 }}
-              />
-              <span
-                style={{
-                  position: "absolute",
-                  top: -1,
-                  right: 0,
-                  width: "18px",
-                  height: "1px",
-                  background: GOLD_BRIGHT,
-                }}
-              />
-              <span
-                style={{
-                  position: "absolute",
-                  bottom: -1,
-                  left: 0,
-                  width: "18px",
-                  height: "1px",
-                  background: GOLD_BRIGHT,
-                }}
-              />
-              <span
-                style={{
-                  position: "absolute",
-                  bottom: -1,
-                  right: 0,
-                  width: "18px",
-                  height: "1px",
-                  background: GOLD_BRIGHT,
-                }}
-              />
-
-              {/* "SITE OF GRACE" label */}
-              <motion.p
-                style={{
-                  fontFamily: "var(--font-mono), ui-monospace, monospace",
-                  fontSize: "8px",
-                  color: `${GOLD_DIM}dd`,
-                  letterSpacing: "0.45em",
-                  textTransform: "uppercase",
-                  textAlign: "center",
-                  marginBottom: "0.55rem",
-                }}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.7, duration: 0.5 }}
               >
-                Site of Grace
-              </motion.p>
+                Lost Grace Discovered
+              </p>
 
-              {/* Thin divider */}
-              <motion.div
+              {/* Grace name — main text, elegant serif */}
+              <p
+                className="font-display font-light"
                 style={{
-                  height: "1px",
-                  background: `linear-gradient(90deg, transparent, ${GOLD}55, transparent)`,
-                  marginBottom: "0.6rem",
-                }}
-                initial={{ scaleX: 0 }}
-                animate={{ scaleX: 1 }}
-                transition={{ delay: 0.8, duration: 0.5 }}
-              />
-
-              {/* Grace name */}
-              <motion.p
-                style={{
-                  fontFamily: "var(--font-display), Georgia, serif",
-                  fontSize: "clamp(1rem, 2.8vw, 1.35rem)",
-                  fontWeight: 300,
+                  fontSize: "clamp(1.2rem, 3.5vw, 1.75rem)",
                   color: GOLD_BRIGHT,
-                  textAlign: "center",
-                  letterSpacing: "0.08em",
+                  letterSpacing: "0.12em",
                   lineHeight: 1.2,
-                  textShadow: `0 0 12px ${GOLD}88, 0 0 28px ${GOLD}44`,
+                  textShadow: `0 0 20px ${GOLD}99, 0 0 50px ${GOLD}33`,
                 }}
-                initial={{ opacity: 0, y: 6 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.9, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
               >
                 Software Engineer & ML Researcher
-              </motion.p>
+              </p>
             </motion.div>
+
+            <Divider delay={0.55} />
           </div>
         </motion.div>
       )}
