@@ -81,11 +81,13 @@ function ProjectPanel({
 
         {/* Project name — dramatic scale */}
         <motion.h3
-          className={`text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-display font-light tracking-tighter text-zinc-900 leading-[0.95] mb-2 head-tilt ${
+          className={`text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-display font-light tracking-tighter text-zinc-900 leading-[0.95] mb-2 head-tilt glitch-hover transition-colors duration-300 cursor-default ${
             isEven ? "" : "md:text-right"
           }`}
+          data-text={project.name}
           initial={{ opacity: 0, x: isEven ? -20 : 20 }}
           animate={isInView ? { opacity: 1, x: 0, rotate: index % 2 === 0 ? -1.5 : 1 } : {}}
+          whileHover={{ color: "#dc2626" }}
           transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
         >
           {project.name}

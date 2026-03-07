@@ -127,13 +127,13 @@ function SkillPanel({
                   opacity: 0,
                   x: k % 2 === 0 ? -900 : 900,
                   y: (k % 3 - 1) * 18,
-                  rotate: k % 2 === 0 ? -14 : 14,
+                  rotate: k % 2 === 0 ? -720 : 720,
                 }}
                 animate={isInView ? { opacity: 1, x: 0, y: 0, rotate: 0 } : {}}
                 transition={{
                   type: "spring",
-                  stiffness: 200,
-                  damping: 26,
+                  stiffness: 120,
+                  damping: 18,
                   delay: 0.04 + k * 0.05,
                 }}
               >

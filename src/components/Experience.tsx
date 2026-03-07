@@ -68,9 +68,11 @@ function ExperienceCard({
       <div className="relative pl-4 md:pl-0">
         {/* Company name — MASSIVE */}
         <motion.h3
-          className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-display font-light tracking-tighter text-zinc-900 leading-[0.9] mb-3 head-tilt"
+          className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-display font-light tracking-tighter text-zinc-900 leading-[0.9] mb-3 head-tilt glitch-hover transition-colors duration-300 cursor-default"
+          data-text={entry.company}
           initial={{ opacity: 0, x: -20 }}
           animate={isInView ? { opacity: 1, x: 0, rotate: index % 2 === 0 ? -1.5 : 1 } : {}}
+          whileHover={{ color: "#dc2626" }}
           transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
         >
           {entry.company}

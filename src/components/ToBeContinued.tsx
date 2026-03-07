@@ -69,7 +69,7 @@ export function ToBeContinued() {
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="https://www.vhv.rs/dpng/d/151-1519975_transparent-to-be-continued-transparent-jojo-to-be.png"
+              src="https://toppng.com/uploads/preview/jojo-jojobizarreadventure-tobecontinued-continued-arrow-jojos-bizarre-adventure-to-be-continued-11562855040gsk2yfvsx2.png"
               alt="To Be Continued →"
               style={{
                 width: "clamp(220px, 35vw, 480px)",
