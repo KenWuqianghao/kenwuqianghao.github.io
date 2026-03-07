@@ -10,12 +10,12 @@ const GOLD = "#FFC72C";
 const BLUE = "#1D428A";
 
 const ATTRIBUTES = [
-  { label: "MID",  value: 69, display: "69",   color: GOLD },       // nice
-  { label: "3PT",  value: 35, display: "KD35", color: GOLD },       // his number
-  { label: "PHY",  value: 7,  display: "KD7",  color: "#4a8fe8" },  // other number
-  { label: "IQ",   value: 99, display: "∞",    color: GOLD },       // infinite
-  { label: "HND",  value: 42, display: "42",   color: "#4a8fe8" },  // the answer
-  { label: "ALGN", value: null, display: "??", color: "#3a3a4a" },  // unknown
+  { label: "MID",  value: 99,   color: GOLD },
+  { label: "3PT",  value: 95,   color: GOLD },
+  { label: "PHY",  value: 88,   color: "#4a8fe8" },
+  { label: "IQ",   value: 96,   color: GOLD },
+  { label: "HND",  value: 87,   color: "#4a8fe8" },
+  { label: "ALGN", value: null, color: "#3a3a4a" },
 ];
 
 function AttributeBar({
@@ -185,12 +185,12 @@ export function ProfileCard() {
                     className="font-display font-light"
                     style={{
                       fontSize: "clamp(3.5rem, 15vw, 5rem)",
-                      color: `${GOLD}88`,
+                      color: GOLD,
                       letterSpacing: "-0.04em",
                       lineHeight: 0.88,
                     }}
                   >
-                    ??
+                    99
                   </span>
                   <span
                     className="font-mono text-[7px] uppercase tracking-[0.3em] mt-1"
