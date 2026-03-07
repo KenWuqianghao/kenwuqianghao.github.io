@@ -28,13 +28,13 @@ export const COLORS = {
 } as const;
 
 export const PARTICLE_CONFIG = {
-  desktop: 300,
-  mobile: 80,
+  desktop: 160,
+  mobile: 50,
   charSize: 32,
   atlasGridSize: 8,
-  fallSpeedMin: 0.3,
-  fallSpeedMax: 1.2,
-  flashProbability: 0.05,
+  fallSpeedMin: 0.010,
+  fallSpeedMax: 0.038,
+  flashProbability: 0.03,
   mouseRepelRadius: 1.5,
   mouseRepelStrength: 0.08,
 } as const;
