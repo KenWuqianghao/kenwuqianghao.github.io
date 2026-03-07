@@ -12,7 +12,7 @@ export function Experience() {
   return (
     <section id="experience" className="py-32 md:py-48 relative overflow-hidden">
       {/* Section kanji watermark */}
-      <div className="absolute -top-10 -right-12 font-display text-[18rem] md:text-[28rem] text-zinc-900/[0.02] leading-none select-none pointer-events-none gate-weave parallax-watermark">
+      <div className="absolute -top-10 -right-12 font-kanji text-[18rem] md:text-[28rem] text-zinc-900/[0.02] leading-none select-none pointer-events-none gate-weave parallax-watermark">
         経験
       </div>
 
@@ -58,7 +58,7 @@ function ExperienceCard({
       transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
     >
       {/* Large Japanese numeral as watermark */}
-      <div className="absolute top-8 right-4 md:right-0 font-display text-[8rem] md:text-[14rem] text-zinc-900/[0.03] leading-none select-none pointer-events-none gate-weave parallax-watermark">
+      <div className="absolute top-8 right-4 md:right-0 font-kanji text-[8rem] md:text-[14rem] text-zinc-900/[0.03] leading-none select-none pointer-events-none gate-weave parallax-watermark">
         {JP_NUMBERS[index]}
       </div>
 

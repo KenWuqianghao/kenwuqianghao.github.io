@@ -17,7 +17,7 @@ export function Skills() {
   return (
     <section id="skills" className="py-32 md:py-48 relative overflow-hidden">
       {/* Section kanji watermark */}
-      <div className="absolute top-0 right-0 font-display text-[18rem] md:text-[28rem] text-zinc-900/[0.02] leading-none select-none pointer-events-none gate-weave parallax-watermark">
+      <div className="absolute top-0 right-0 font-kanji text-[18rem] md:text-[28rem] text-zinc-900/[0.02] leading-none select-none pointer-events-none gate-weave parallax-watermark">
         技術
       </div>
 
@@ -95,7 +95,7 @@ function SkillPanel({
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, delay: 0.1 }}
         >
-          <span className="font-display text-3xl md:text-4xl text-zinc-300 mr-3 tracking-tight">
+          <span className="font-kanji text-3xl md:text-4xl text-zinc-300 mr-3 tracking-tight">
             {kanji}
           </span>
           <span className="font-mono text-xs text-zinc-400 uppercase tracking-[0.2em]">
@@ -123,12 +123,18 @@ function SkillPanel({
                 style={{
                   fontSize: `clamp(1rem, ${1.1 + (items.length - k) * 0.08}rem, 2.2rem)`,
                 }}
-                initial={{ opacity: 0, y: 8 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                initial={{
+                  opacity: 0,
+                  y: -18,
+                  x: k % 2 === 0 ? -10 : 10,
+                  rotate: k % 2 === 0 ? -2.5 : 2,
+                }}
+                animate={isInView ? { opacity: 1, y: 0, x: 0, rotate: 0 } : {}}
                 transition={{
-                  duration: 0.4,
-                  delay: 0.15 + k * 0.04,
-                  ease: [0.16, 1, 0.3, 1],
+                  type: "spring",
+                  stiffness: 280,
+                  damping: 22,
+                  delay: 0.08 + k * 0.045,
                 }}
               >
                 {item}

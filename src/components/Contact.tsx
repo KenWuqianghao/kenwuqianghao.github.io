@@ -8,7 +8,7 @@ export function Contact() {
   return (
     <section id="contact" className="py-32 md:py-48 border-t border-zinc-200/60 relative overflow-hidden">
       {/* Section kanji watermark */}
-      <div className="absolute bottom-0 -left-8 font-display text-[18rem] md:text-[28rem] text-zinc-900/[0.02] leading-none select-none pointer-events-none gate-weave parallax-watermark">
+      <div className="absolute bottom-0 -left-8 font-kanji text-[18rem] md:text-[28rem] text-zinc-900/[0.02] leading-none select-none pointer-events-none gate-weave parallax-watermark">
         繋
       </div>
 

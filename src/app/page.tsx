@@ -16,6 +16,10 @@ import { FilmGrain } from "@/components/FilmGrain";
 import { KonamiEgg } from "@/components/KonamiEgg";
 import { About } from "@/components/About";
 import { ProfileCard } from "@/components/ProfileCard";
+import { ToBeContinued } from "@/components/ToBeContinued";
+import { OraOra } from "@/components/OraOra";
+import { Menacing } from "@/components/Menacing";
+import { ItemObtained } from "@/components/ItemObtained";
 
 export default function Home() {
   return (
@@ -28,6 +32,10 @@ export default function Home() {
       <RedThread />
       <KonamiEgg />
       <ProfileCard />
+      <ToBeContinued />
+      <OraOra />
+      <Menacing />
+      <ItemObtained />
       <Navigation />
       <main className="relative z-10">
         <Hero />

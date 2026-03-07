@@ -12,7 +12,7 @@ export function Projects() {
   return (
     <section id="projects" className="py-32 md:py-48 relative overflow-hidden">
       {/* Section kanji watermark */}
-      <div className="absolute -top-10 -left-8 font-display text-[18rem] md:text-[28rem] text-zinc-900/[0.02] leading-none select-none pointer-events-none gate-weave parallax-watermark">
+      <div className="absolute -top-10 -left-8 font-kanji text-[18rem] md:text-[28rem] text-zinc-900/[0.02] leading-none select-none pointer-events-none gate-weave parallax-watermark">
         作品
       </div>
 
@@ -60,7 +60,7 @@ function ProjectPanel({
     >
       {/* Japanese numeral watermark — alternates sides */}
       <div
-        className={`absolute top-6 font-display text-[8rem] md:text-[12rem] text-zinc-900/[0.03] leading-none select-none pointer-events-none gate-weave parallax-watermark ${
+        className={`absolute top-6 font-kanji text-[8rem] md:text-[12rem] text-zinc-900/[0.03] leading-none select-none pointer-events-none gate-weave parallax-watermark ${
           isEven ? "right-4 md:right-0" : "left-4 md:left-0"
         }`}
       >

@@ -1,14 +1,19 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useCallback } from "react";
 import { TextReveal } from "./TextReveal";
 import { personalInfo } from "@/lib/data";
 
 export function Hero() {
+  const dispatchNameClick = useCallback(() => {
+    window.dispatchEvent(new Event("hero-name-click"));
+  }, []);
+
   return (
     <section className="min-h-[100dvh] relative flex items-end pb-16 md:pb-24 overflow-hidden">
       {/* Name kanji watermark — 皓 (luminous) */}
-      <div className="absolute bottom-0 right-0 font-display text-[20rem] md:text-[32rem] text-zinc-900/[0.03] leading-none select-none pointer-events-none gate-weave">
+      <div className="absolute bottom-0 right-0 font-kanji text-[20rem] md:text-[32rem] text-zinc-900/[0.03] leading-none select-none pointer-events-none gate-weave">
         皓
       </div>
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 w-full">
@@ -27,27 +32,29 @@ export function Hero() {
               <h1 className="text-[clamp(4.5rem,14vw,11rem)] font-display tracking-tighter leading-[0.85] font-light weight-flicker">
                 <TextReveal delay={0.1}>
                   <motion.span
-                    className="text-zinc-900 glitch-hover inline-block"
+                    className="text-zinc-900 glitch-hover inline-block cursor-pointer"
                     data-text="Ken"
                     animate={{ rotate: -2 }}
                     transition={{ duration: 0.8, delay: 0.7, ease: [0.16, 1, 0.3, 1] }}
+                    onClick={dispatchNameClick}
                   >
                     Ken
                   </motion.span>
                 </TextReveal>
                 <TextReveal delay={0.25}>
                   <motion.span
-                    className="text-zinc-900 glitch-hover inline-block"
+                    className="text-zinc-900 glitch-hover inline-block cursor-pointer"
                     data-text="Wu."
                     animate={{ rotate: 1 }}
                     transition={{ duration: 0.8, delay: 0.85, ease: [0.16, 1, 0.3, 1] }}
+                    onClick={dispatchNameClick}
                   >
                     Wu<span className="text-red-600">.</span>
                   </motion.span>
                 </TextReveal>
               </h1>
               <motion.span
-                className="block font-display text-xl md:text-2xl text-zinc-300 tracking-[0.3em] mt-2 ml-1"
+                className="block font-kanji text-xl md:text-2xl text-zinc-300 tracking-[0.3em] mt-2 ml-1"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 1.1, duration: 0.6 }}

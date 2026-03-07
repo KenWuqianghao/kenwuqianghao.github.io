@@ -37,16 +37,26 @@ export function About() {
   return (
     <section className="py-32 md:py-48 relative overflow-hidden">
       {/* Section kanji watermark */}
-      <div className="absolute top-0 -right-8 font-display text-[18rem] md:text-[28rem] text-zinc-900/[0.02] leading-none select-none pointer-events-none gate-weave parallax-watermark">
+      <div className="absolute top-0 -right-8 font-kanji text-[18rem] md:text-[28rem] text-zinc-900/[0.02] leading-none select-none pointer-events-none gate-weave parallax-watermark">
         人
       </div>
 
       <div className="max-w-[1400px] mx-auto px-6 md:px-12">
         <ScrollReveal tilt={-1}>
           <div className="mb-20 md:mb-28">
-            <span className="font-mono text-[10px] text-red-600 uppercase tracking-[0.3em] block mb-4">
-              素顔 — Beyond Code
-            </span>
+            <div className="flex items-center gap-3 mb-4">
+              <span className="font-mono text-[10px] text-red-600 uppercase tracking-[0.3em]">
+                素顔 — Beyond Code
+              </span>
+              <button
+                className="font-mono text-[11px] text-zinc-300/25 hover:text-red-600/50 transition-colors duration-500 cursor-pointer select-none leading-none"
+                onClick={() => window.dispatchEvent(new Event("item-obtained"))}
+                aria-hidden="true"
+                tabIndex={-1}
+              >
+                ♦
+              </button>
+            </div>
             <h2
               className="text-6xl md:text-8xl lg:text-9xl font-display font-light tracking-tighter text-zinc-900 glitch-hover"
               data-text="Beyond Code"
@@ -84,7 +94,7 @@ export function About() {
                 <div className="absolute -left-4 top-0 w-[3px] h-6 bg-red-600" />
 
                 <div className="flex items-baseline gap-3 mb-3">
-                  <span className="font-display text-3xl md:text-4xl text-zinc-200 group-hover:text-red-600 transition-colors duration-300">
+                  <span className="font-kanji text-3xl md:text-4xl text-zinc-200 group-hover:text-red-600 transition-colors duration-300">
                     {facet.kanji}
                   </span>
                   <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-zinc-400">
