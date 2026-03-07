@@ -103,45 +103,93 @@ function SkillPanel({
           </span>
         </motion.div>
 
-        {/* Skills as a flowing typographic field */}
+        {/* Skills as dealt playing cards */}
         <div
           className={`${
             isEven
               ? "md:pl-[15%] lg:pl-[25%]"
-              : "md:pr-[15%] lg:pr-[25%] md:text-right"
+              : "md:pr-[15%] lg:pr-[25%]"
           }`}
         >
           <div
-            className={`flex flex-wrap gap-x-1 gap-y-2 ${
+            className={`flex flex-wrap gap-3 ${
               isEven ? "" : "md:justify-end"
             }`}
           >
             {items.map((item, k) => (
-              <motion.span
-                key={item}
-                className="inline-block text-zinc-600 font-light tracking-tight mr-1 cursor-default transition-colors duration-300 hover:text-red-600"
-                style={{
-                  fontSize: `clamp(1rem, ${1.1 + (items.length - k) * 0.08}rem, 2.2rem)`,
-                }}
-                initial={{
-                  opacity: 0,
-                  x: k % 2 === 0 ? -900 : 900,
-                  y: (k % 3 - 1) * 18,
-                  rotate: k % 2 === 0 ? -720 : 720,
-                }}
-                animate={isInView ? { opacity: 1, x: 0, y: 0, rotate: 0 } : {}}
-                transition={{
-                  type: "spring",
-                  stiffness: 120,
-                  damping: 18,
-                  delay: 0.04 + k * 0.05,
-                }}
-              >
-                {item}
-                {k < items.length - 1 && (
-                  <span className="text-red-600/25 ml-1 font-mono text-xs align-middle">/</span>
-                )}
-              </motion.span>
+              <div key={item} style={{ perspective: "700px" }}>
+                <motion.div
+                  className="relative cursor-default select-none"
+                  style={{
+                    background: "#fafaf9",
+                    border: "1px solid #e4e4e7",
+                    borderRadius: "3px",
+                    padding: "0.5rem 1rem 0.55rem",
+                    boxShadow: "0 2px 6px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.04)",
+                    minWidth: "64px",
+                  }}
+                  initial={{ rotateY: 180, opacity: 0 }}
+                  animate={isInView ? { rotateY: 0, opacity: 1 } : {}}
+                  whileHover={{
+                    y: -10,
+                    boxShadow: "0 16px 32px rgba(0,0,0,0.12), 0 6px 12px rgba(0,0,0,0.08)",
+                    borderColor: "#dc2626",
+                    transition: { type: "spring", stiffness: 320, damping: 28 },
+                  }}
+                  transition={{
+                    rotateY: {
+                      type: "spring",
+                      stiffness: 200,
+                      damping: 24,
+                      delay: 0.06 + k * 0.08,
+                    },
+                    opacity: { duration: 0.15, delay: 0.06 + k * 0.08 },
+                  }}
+                >
+                  {/* Top-left suit mark */}
+                  <span
+                    style={{
+                      position: "absolute",
+                      top: "3px",
+                      left: "5px",
+                      fontSize: "7px",
+                      lineHeight: 1,
+                      color: "rgba(220,38,38,0.32)",
+                      fontFamily: "monospace",
+                    }}
+                  >
+                    ♦
+                  </span>
+                  {/* Skill name */}
+                  <span
+                    style={{
+                      display: "block",
+                      textAlign: "center",
+                      fontSize: `clamp(0.78rem, ${0.8 + (items.length - k) * 0.022}rem, 1.05rem)`,
+                      color: "#3f3f46",
+                      fontWeight: 300,
+                      letterSpacing: "0.01em",
+                    }}
+                  >
+                    {item}
+                  </span>
+                  {/* Bottom-right suit mark (inverted) */}
+                  <span
+                    style={{
+                      position: "absolute",
+                      bottom: "3px",
+                      right: "5px",
+                      fontSize: "7px",
+                      lineHeight: 1,
+                      color: "rgba(220,38,38,0.32)",
+                      fontFamily: "monospace",
+                      transform: "rotate(180deg)",
+                    }}
+                  >
+                    ♦
+                  </span>
+                </motion.div>
+              </div>
             ))}
           </div>
         </div>
