@@ -32,6 +32,18 @@ The site translates Shinbo's cinematic vocabulary into web interactions:
 
 **Konami Code Easter Egg** — `↑↑↓↓←→←→BA` triggers a rapid-fire highlight reel of achievements displayed as Monogatari-style title cards.
 
+**ORA ORA ORA** — Click the hero name (Ken / Wu) 7 times within 2 seconds. Rapid-fire flash cards erupt in JoJo gold/black/red palette. Ends with やれやれだぜ.
+
+**Menacing ゴゴゴゴ** — While the hero section is in view, ゴ characters continuously float upward and fade in the classic JoJo menacing style.
+
+**To Be Continued →** — Scroll all the way to the bottom and pause. After 0.6 seconds a sepia wash falls over the screen and the iconic amber arrow + italic text fades in at the lower left.
+
+**Item Obtained ♦** — Find the nearly-invisible ♦ symbol next to "素顔 — Beyond Code" in the About section and click it. A Zelda-authentic item get screen appears: nested gold border, 3D spinning diamond, synthesized G4–C5–E5–G5 arpeggio jingle via Web Audio API, and a blinking ▼ prompt. Press any key to dismiss.
+
+**NBA Player Card** — Leave the site idle for 45 seconds. A Warriors-era KD 2K card appears: OVR ??, MID 69 (nice), 3PT KD35, PHY KD7, IQ ∞, HND 42, ALGN ??, with THE SLIM REAPER badge and #35 watermark.
+
+**Hades Dialogue** — After 13–23 seconds of inactivity, Zagreus speaks from the bottom-left in a blood-red bordered card. Quotes like *"The work never ends."*, *"Blood price paid."*, *"Back again."*
+
 **Post-Processing Stack** — Three.js EffectComposer applies chromatic aberration, additive noise, bloom (threshold 0.9), and custom scanlines over the entire canvas layer. Every pixel goes through the SHAFT filter.
 
 ## Color Palette
@@ -48,7 +60,8 @@ Zinc grays (`#e4e4e7`, `#a1a1aa`) appear only in secondary text. The red `::sele
 
 ## Typography
 
-- **Cormorant Garamond** (display) — Elegant serif for the hero name and kanji-adjacent typography. Light weight (300) gives it the delicate quality of Japanese typesetting.
+- **Cormorant Garamond** (display) — Elegant serif for the hero name and Latin display typography. Light weight (300).
+- **Shippori Mincho** (kanji) — Traditional Japanese Mincho typeface for all kanji watermarks and the Chinese name 吴锵皓. Thin strokes and classical serifs match the SHAFT aesthetic.
 - **Outfit** (body) — Clean geometric sans-serif for readability in content sections.
 - **JetBrains Mono** (mono) — Monospace for labels, tags, and technical metadata.
 

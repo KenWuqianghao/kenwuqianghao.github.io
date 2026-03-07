@@ -60,35 +60,24 @@ export function ToBeContinued() {
             style={{ background: "rgba(180,140,70,0.15)" }}
           />
 
-          {/* Arrow + text — bottom left, JoJo iconic layout */}
+          {/* Actual JoJo "To Be Continued →" PNG — bottom left */}
           <motion.div
-            className="absolute bottom-14 left-10 md:left-16 flex flex-col gap-2"
+            className="absolute bottom-10 left-8 md:left-12"
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.35, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           >
-            <span
-              className="font-display italic leading-none"
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="https://www.vhv.rs/dpng/d/151-1519975_transparent-to-be-continued-transparent-jojo-to-be.png"
+              alt="To Be Continued →"
               style={{
-                fontSize: "clamp(1.6rem, 4vw, 3rem)",
-                color: "#c8900a",
-                letterSpacing: "0.01em",
-                textShadow: "1px 1px 0 #1a1a1a, -1px -1px 0 #1a1a1a",
+                width: "clamp(220px, 35vw, 480px)",
+                filter: "drop-shadow(0 2px 4px rgba(0,0,0,0.6))",
+                userSelect: "none",
               }}
-            >
-              To Be Continued
-            </span>
-            <span
-              className="font-mono"
-              style={{
-                fontSize: "clamp(1.4rem, 3.5vw, 2.6rem)",
-                color: "#c8900a",
-                letterSpacing: "-0.02em",
-                textShadow: "1px 1px 0 #1a1a1a, -1px -1px 0 #1a1a1a",
-              }}
-            >
-              ⟶
-            </span>
+              draggable={false}
+            />
           </motion.div>
         </motion.div>
       )}

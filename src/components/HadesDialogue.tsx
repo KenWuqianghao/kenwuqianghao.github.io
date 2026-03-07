@@ -22,7 +22,13 @@ const QUOTES = [
 
 const MIN_IDLE_MS = 13_000;
 const RAND_EXTRA_MS = 10_000;
-const SHOW_MS = 4_000;
+const SHOW_MS = 5_000;
+
+// Hades game palette
+const BORDER_GOLD = "#b8922a";
+const INNER_GOLD = "#d4a83a";
+const BG_DARK = "#0e0812";
+const BG_PANEL = "#1a0d24";
 
 export function HadesDialogue() {
   const [quote, setQuote] = useState<string | null>(null);
@@ -77,40 +83,149 @@ export function HadesDialogue() {
     <AnimatePresence>
       {quote && (
         <motion.div
-          className="fixed bottom-8 left-8 z-[9993] pointer-events-none"
-          initial={{ opacity: 0, x: -14, y: 6 }}
-          animate={{ opacity: 1, x: 0, y: 0 }}
-          exit={{ opacity: 0, x: -10, y: 4 }}
-          transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+          className="fixed bottom-6 left-4 md:left-8 z-[9993] pointer-events-none"
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 8 }}
+          transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
           aria-hidden="true"
+          style={{ maxWidth: "min(400px, 90vw)" }}
         >
+          {/* Outer gold frame */}
           <div
-            className="flex items-start gap-2.5 px-4 py-3"
             style={{
-              background: "rgba(7,3,13,0.94)",
-              border: "1px solid rgba(140,16,16,0.35)",
-              borderLeft: "2px solid #961414",
-              boxShadow:
-                "0 4px 28px rgba(0,0,0,0.65), 0 0 20px rgba(120,8,8,0.08)",
-              maxWidth: "215px",
+              background: BG_DARK,
+              border: `2px solid ${BORDER_GOLD}`,
+              boxShadow: `0 0 0 1px #3a2010, 0 0 0 3px ${BORDER_GOLD}33, 0 12px 48px rgba(0,0,0,0.85), 0 0 32px rgba(184,146,42,0.12)`,
+              padding: "2px",
             }}
           >
-            <span className="shrink-0 mt-0.5 text-[8px]" style={{ color: "#961414" }}>
-              ◆
-            </span>
-            <div className="flex flex-col gap-0.5">
-              <span
-                className="font-mono text-[7px] uppercase tracking-[0.3em]"
-                style={{ color: "#4d1010" }}
-              >
-                Zagreus
-              </span>
-              <span
-                className="font-display italic text-sm leading-snug"
-                style={{ color: "#dfc9a0" }}
-              >
-                &ldquo;{quote}&rdquo;
-              </span>
+            {/* Inner panel */}
+            <div
+              style={{
+                background: `linear-gradient(160deg, ${BG_PANEL} 0%, #120a1c 100%)`,
+                border: `1px solid ${INNER_GOLD}44`,
+              }}
+            >
+              {/* Portrait + dialogue row */}
+              <div className="flex items-stretch">
+                {/* Portrait frame */}
+                <div
+                  className="relative shrink-0 overflow-hidden"
+                  style={{
+                    width: "72px",
+                    borderRight: `1px solid ${BORDER_GOLD}55`,
+                    background: "linear-gradient(180deg, #1e0d2e 0%, #0c0618 100%)",
+                  }}
+                >
+                  {/* Corner ornaments */}
+                  <div
+                    className="absolute top-0 left-0 w-3 h-3"
+                    style={{
+                      borderTop: `1px solid ${INNER_GOLD}`,
+                      borderLeft: `1px solid ${INNER_GOLD}`,
+                    }}
+                  />
+                  <div
+                    className="absolute top-0 right-0 w-3 h-3"
+                    style={{
+                      borderTop: `1px solid ${INNER_GOLD}`,
+                      borderRight: `1px solid ${INNER_GOLD}`,
+                    }}
+                  />
+                  <div
+                    className="absolute bottom-0 left-0 w-3 h-3"
+                    style={{
+                      borderBottom: `1px solid ${INNER_GOLD}`,
+                      borderLeft: `1px solid ${INNER_GOLD}`,
+                    }}
+                  />
+                  <div
+                    className="absolute bottom-0 right-0 w-3 h-3"
+                    style={{
+                      borderBottom: `1px solid ${INNER_GOLD}`,
+                      borderRight: `1px solid ${INNER_GOLD}`,
+                    }}
+                  />
+                  {/* Zagreus portrait — cropped to face */}
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src="https://static.wikia.nocookie.net/hades_gamepedia_en/images/2/29/Zagreus.png/revision/latest?cb=20181210044005"
+                    alt="Zagreus"
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                      objectPosition: "center top",
+                      opacity: 0.92,
+                      filter: "saturate(1.1) contrast(1.05)",
+                      display: "block",
+                    }}
+                  />
+                  {/* Red eye glow overlay */}
+                  <div
+                    className="absolute inset-0 pointer-events-none"
+                    style={{
+                      background:
+                        "radial-gradient(ellipse at 50% 38%, rgba(180,20,20,0.12) 0%, transparent 65%)",
+                    }}
+                  />
+                </div>
+
+                {/* Dialogue content */}
+                <div className="flex flex-col flex-1 min-w-0">
+                  {/* Name bar */}
+                  <div
+                    className="px-3 py-1.5 flex items-center gap-2"
+                    style={{
+                      background: `linear-gradient(90deg, ${BORDER_GOLD}28 0%, transparent 100%)`,
+                      borderBottom: `1px solid ${BORDER_GOLD}44`,
+                    }}
+                  >
+                    {/* Blood-red diamond */}
+                    <span style={{ color: "#c0282e", fontSize: "7px", lineHeight: 1 }}>◆</span>
+                    <span
+                      className="font-mono uppercase tracking-[0.22em]"
+                      style={{ fontSize: "9px", color: INNER_GOLD, letterSpacing: "0.22em" }}
+                    >
+                      Zagreus
+                    </span>
+                  </div>
+
+                  {/* Quote text */}
+                  <div className="px-3 py-2.5 flex-1">
+                    <motion.p
+                      key={quote}
+                      className="font-display italic leading-snug"
+                      style={{
+                        fontSize: "clamp(0.75rem, 1.8vw, 0.85rem)",
+                        color: "#e8d8b8",
+                        lineHeight: 1.45,
+                      }}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ delay: 0.15, duration: 0.4 }}
+                    >
+                      &ldquo;{quote}&rdquo;
+                    </motion.p>
+                  </div>
+
+                  {/* Blinking continue indicator */}
+                  <div
+                    className="px-3 pb-1.5 flex justify-end"
+                    style={{ borderTop: `1px solid ${BORDER_GOLD}22` }}
+                  >
+                    <motion.span
+                      className="font-mono"
+                      style={{ fontSize: "8px", color: `${INNER_GOLD}88` }}
+                      animate={{ opacity: [1, 0.2, 1] }}
+                      transition={{ duration: 0.9, repeat: Infinity, ease: "easeInOut" }}
+                    >
+                      ▼
+                    </motion.span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </motion.div>

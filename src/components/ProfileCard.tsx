@@ -10,26 +10,29 @@ const GOLD = "#FFC72C";
 const BLUE = "#1D428A";
 
 const ATTRIBUTES = [
-  { label: "MID", value: 99, color: GOLD },
-  { label: "3PT", value: 95, color: GOLD },
-  { label: "PHY", value: 88, color: "#4a8fe8" },
-  { label: "IQ", value: 96, color: GOLD },
-  { label: "HND", value: 87, color: "#4a8fe8" },
-  { label: "ALGN", value: null, color: "#3a3a4a" },
+  { label: "MID",  value: 69, display: "69",   color: GOLD },       // nice
+  { label: "3PT",  value: 35, display: "KD35", color: GOLD },       // his number
+  { label: "PHY",  value: 7,  display: "KD7",  color: "#4a8fe8" },  // other number
+  { label: "IQ",   value: 99, display: "∞",    color: GOLD },       // infinite
+  { label: "HND",  value: 42, display: "42",   color: "#4a8fe8" },  // the answer
+  { label: "ALGN", value: null, display: "??", color: "#3a3a4a" },  // unknown
 ];
 
 function AttributeBar({
   label,
   value,
+  display,
   color,
   delay,
 }: {
   label: string;
   value: number | null;
+  display?: string;
   color: string;
   delay: number;
 }) {
   const pct = value !== null ? (value / 99) * 100 : 0;
+  const shown = display ?? (value !== null ? String(value) : "??");
 
   return (
     <motion.div
@@ -48,7 +51,7 @@ function AttributeBar({
         className="font-mono text-[11px] font-bold shrink-0 w-6 text-right"
         style={{ color: value !== null ? color : "#2a2a3a" }}
       >
-        {value !== null ? value : "??"}
+        {shown}
       </span>
       <div
         className="flex-1 h-[3px] rounded-full overflow-hidden"
@@ -107,7 +110,7 @@ export function ProfileCard() {
       clearTimeout(timer);
       events.forEach((e) => window.removeEventListener(e, schedule));
     };
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, []);
 
   const dismiss = () => setVisible(false);
 
@@ -182,12 +185,12 @@ export function ProfileCard() {
                     className="font-display font-light"
                     style={{
                       fontSize: "clamp(3.5rem, 15vw, 5rem)",
-                      color: GOLD,
+                      color: `${GOLD}88`,
                       letterSpacing: "-0.04em",
                       lineHeight: 0.88,
                     }}
                   >
-                    99
+                    ??
                   </span>
                   <span
                     className="font-mono text-[7px] uppercase tracking-[0.3em] mt-1"
@@ -285,6 +288,7 @@ export function ProfileCard() {
                     key={attr.label}
                     label={attr.label}
                     value={attr.value}
+                    display={attr.display}
                     color={attr.color}
                     delay={0.7 + i * 0.07}
                   />

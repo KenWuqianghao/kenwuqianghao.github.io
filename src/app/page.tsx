@@ -20,7 +20,6 @@ import { ToBeContinued } from "@/components/ToBeContinued";
 import { OraOra } from "@/components/OraOra";
 import { Menacing } from "@/components/Menacing";
 import { ItemObtained } from "@/components/ItemObtained";
-import { SiteOfGrace } from "@/components/SiteOfGrace";
 import { HadesDialogue } from "@/components/HadesDialogue";
 
 export default function Home() {
@@ -38,7 +37,6 @@ export default function Home() {
       <OraOra />
       <Menacing />
       <ItemObtained />
-      <SiteOfGrace />
       <HadesDialogue />
       <Navigation />
       <main className="relative z-10">
