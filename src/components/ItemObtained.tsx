@@ -3,67 +3,10 @@
 import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-// BotW/TotK harp-style G major arpeggio — triangle wave, warm and magical
 function playZeldaJingle() {
-  try {
-    const ctx = new AudioContext();
-    const now = ctx.currentTime;
-
-    const notes = [
-      { freq: 392.0,  start: 0.00, dur: 0.12 }, // G4
-      { freq: 493.88, start: 0.09, dur: 0.12 }, // B4
-      { freq: 587.33, start: 0.17, dur: 0.12 }, // D5
-      { freq: 783.99, start: 0.25, dur: 1.10 }, // G5 (held)
-    ];
-
-    notes.forEach(({ freq, start, dur }) => {
-      const osc = ctx.createOscillator();
-      const gain = ctx.createGain();
-      osc.connect(gain);
-      gain.connect(ctx.destination);
-
-      osc.type = "triangle"; // warmer, more harp-like than square
-      osc.frequency.setValueAtTime(freq, now + start);
-
-      gain.gain.setValueAtTime(0, now + start);
-      gain.gain.linearRampToValueAtTime(0.14, now + start + 0.012);
-      gain.gain.setValueAtTime(0.14, now + start + dur * 0.55);
-      gain.gain.exponentialRampToValueAtTime(0.001, now + start + dur);
-
-      osc.start(now + start);
-      osc.stop(now + start + dur + 0.05);
-    });
-
-    // Soft shimmer — G6 (2 octaves up, very airy)
-    const shimmer = ctx.createOscillator();
-    const shimmerGain = ctx.createGain();
-    shimmer.connect(shimmerGain);
-    shimmerGain.connect(ctx.destination);
-    shimmer.type = "sine";
-    shimmer.frequency.setValueAtTime(1567.98, now + 0.25);
-    shimmerGain.gain.setValueAtTime(0, now + 0.25);
-    shimmerGain.gain.linearRampToValueAtTime(0.022, now + 0.27);
-    shimmerGain.gain.exponentialRampToValueAtTime(0.001, now + 1.6);
-    shimmer.start(now + 0.25);
-    shimmer.stop(now + 1.65);
-
-    // Warm bass root — G2
-    const bass = ctx.createOscillator();
-    const bassGain = ctx.createGain();
-    bass.connect(bassGain);
-    bassGain.connect(ctx.destination);
-    bass.type = "sine";
-    bass.frequency.setValueAtTime(98, now + 0.25);
-    bassGain.gain.setValueAtTime(0, now + 0.25);
-    bassGain.gain.linearRampToValueAtTime(0.055, now + 0.35);
-    bassGain.gain.exponentialRampToValueAtTime(0.001, now + 1.5);
-    bass.start(now + 0.25);
-    bass.stop(now + 1.55);
-
-    setTimeout(() => ctx.close().catch(() => {}), 2500);
-  } catch {
-    // audio unavailable
-  }
+  const audio = new Audio("/item_botw.mp3");
+  audio.volume = 0.7;
+  audio.play().catch(() => {});
 }
 
 // Sheikah-style sparkles — cyan instead of gold
@@ -220,53 +163,28 @@ export function ItemObtained() {
               );
             })}
 
-            {/* Triforce — gold with Sheikah cyan aura */}
+            {/* Triforce — gold SVG with Sheikah cyan aura */}
             <motion.div
               className="relative select-none"
               initial={{ opacity: 0, scale: 0.3, y: 30 }}
               animate={{ opacity: 1, scale: 1, y: [30, -6, 0] }}
               transition={{ delay: 0.25, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
             >
-              <div className="flex flex-col items-center" style={{ lineHeight: 0.78 }}>
-                <span
-                  style={{
-                    fontSize: "3.5rem",
-                    color: "#f5c842",
-                    display: "block",
-                    filter:
-                      "drop-shadow(0 0 14px rgba(245,200,66,0.95)) drop-shadow(0 0 32px rgba(56,189,248,0.55))",
-                    lineHeight: 0.85,
-                  }}
-                >
-                  ▲
-                </span>
-                <div style={{ display: "flex", gap: "0.12rem", marginTop: "-0.3rem" }}>
-                  <span
-                    style={{
-                      fontSize: "3.5rem",
-                      color: "#f5c842",
-                      display: "block",
-                      filter:
-                        "drop-shadow(0 0 14px rgba(245,200,66,0.95)) drop-shadow(0 0 32px rgba(56,189,248,0.55))",
-                      lineHeight: 0.85,
-                    }}
-                  >
-                    ▲
-                  </span>
-                  <span
-                    style={{
-                      fontSize: "3.5rem",
-                      color: "#f5c842",
-                      display: "block",
-                      filter:
-                        "drop-shadow(0 0 14px rgba(245,200,66,0.95)) drop-shadow(0 0 32px rgba(56,189,248,0.55))",
-                      lineHeight: 0.85,
-                    }}
-                  >
-                    ▲
-                  </span>
-                </div>
-              </div>
+              <svg
+                viewBox="0 0 120 104"
+                width="120"
+                height="104"
+                style={{ filter: "drop-shadow(0 0 14px rgba(245,200,66,0.95)) drop-shadow(0 0 32px rgba(56,189,248,0.55))" }}
+              >
+                <defs>
+                  <filter id="tfshadow" x="-20%" y="-20%" width="140%" height="140%">
+                    <feDropShadow dx="0" dy="0" stdDeviation="3" floodColor="#f5c842" floodOpacity="0.8" />
+                  </filter>
+                </defs>
+                <polygon points="60,0 22,68 98,68"   fill="#f5c842" />
+                <polygon points="22,68 0,104 44,104" fill="#f5c842" />
+                <polygon points="98,68 76,104 120,104" fill="#f5c842" />
+              </svg>
             </motion.div>
           </div>
 
@@ -334,7 +252,7 @@ export function ItemObtained() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.7, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
             >
-              Software Engineer<span style={{ color: CYAN }}>!</span>
+              Ken&apos;s Zelda Easter Egg<span style={{ color: CYAN }}>!</span>
             </motion.h3>
 
             {/* Sheikah divider */}
@@ -357,8 +275,7 @@ export function ItemObtained() {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.9, duration: 0.5 }}
             >
-              A rare craftsman. Ships ML pipelines by day,
-              chess bots by night. Pairs well with TypeScript.
+              A hidden treasure of the Sheikah. Wandered into a portfolio site, discovered a Software Engineer lurking among the ancient code.
             </motion.p>
 
             {/* Blinking ▼ prompt */}

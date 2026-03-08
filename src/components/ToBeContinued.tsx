@@ -69,13 +69,12 @@ export function ToBeContinued() {
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="https://toppng.com/uploads/preview/jojo-jojobizarreadventure-tobecontinued-continued-arrow-jojos-bizarre-adventure-to-be-continued-11562855040gsk2yfvsx2.png"
+              src="/TBC.png"
               alt="To Be Continued →"
               style={{
                 width: "clamp(220px, 35vw, 480px)",
                 filter: "drop-shadow(0 2px 4px rgba(0,0,0,0.6))",
                 userSelect: "none",
-                mixBlendMode: "multiply",
               }}
               draggable={false}
             />

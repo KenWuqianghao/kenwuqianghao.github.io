@@ -21,11 +21,13 @@ import { OraOra } from "@/components/OraOra";
 import { Menacing } from "@/components/Menacing";
 import { ItemObtained } from "@/components/ItemObtained";
 import { LostGrace } from "@/components/LostGrace";
+import { ParticleTextOverlay } from "@/components/ParticleTextOverlay";
 
 export default function Home() {
   return (
     <>
       <EntranceSequence />
+      <ParticleTextOverlay />
       <ShinboEffects />
       <ScrollParallax />
       <FilmGrain />

@@ -178,6 +178,17 @@ section:first-of-type {
 .grace-gold {
   color: #d4a83a;
   animation: grace-pulse 3s ease-in-out infinite;
+  transition: text-shadow 0.2s ease;
+}
+
+.grace-gold:hover {
+  animation: none;
+  text-shadow:
+    0 0 8px rgba(212,168,58,1),
+    0 0 20px rgba(212,168,58,0.9),
+    0 0 40px rgba(212,168,58,0.7),
+    0 0 70px rgba(212,168,58,0.5),
+    0 0 120px rgba(212,168,58,0.3);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -211,6 +222,12 @@ section:first-of-type {
 
 ::-webkit-scrollbar-thumb:hover {
   background: #a1a1aa;
+}
+
+/* Flash card — briefly show then hide (Konami / OraOra) */
+@keyframes entrance-flash {
+  from { opacity: 1; }
+  to   { opacity: 0; }
 }
 
 /* Entrance sequence — Bakemonogatari-style rapid kanji cards */

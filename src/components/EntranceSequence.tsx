@@ -56,6 +56,7 @@ export function EntranceSequence() {
       document.body.style.overflow = "";
       sessionStorage.setItem("entrance-played", "1");
       setDone(true);
+      window.dispatchEvent(new CustomEvent("entrance-complete"));
     }, endTime + 450));
 
     return () => {

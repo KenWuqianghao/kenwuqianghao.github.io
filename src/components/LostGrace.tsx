@@ -7,82 +7,10 @@ const GOLD = "#c8a96e";
 const GOLD_BRIGHT = "#e8d07a";
 const GOLD_DIM = "#8a6a3a";
 
-// Elden Ring grace ambient — warm drone + ethereal bell layers
 function playGraceSound() {
-  try {
-    const ctx = new AudioContext();
-    const now = ctx.currentTime;
-
-    // Low foundational drone — A2
-    const drone = ctx.createOscillator();
-    const droneGain = ctx.createGain();
-    drone.connect(droneGain);
-    droneGain.connect(ctx.destination);
-    drone.type = "sine";
-    drone.frequency.setValueAtTime(110, now);
-    droneGain.gain.setValueAtTime(0, now);
-    droneGain.gain.linearRampToValueAtTime(0.07, now + 1.0);
-    droneGain.gain.setValueAtTime(0.07, now + 3.0);
-    droneGain.gain.exponentialRampToValueAtTime(0.001, now + 5.0);
-    drone.start(now);
-    drone.stop(now + 5.1);
-
-    // Warm mid — E4
-    const mid = ctx.createOscillator();
-    const midGain = ctx.createGain();
-    mid.connect(midGain);
-    midGain.connect(ctx.destination);
-    mid.type = "sine";
-    mid.frequency.setValueAtTime(329.63, now + 0.3);
-    midGain.gain.setValueAtTime(0, now + 0.3);
-    midGain.gain.linearRampToValueAtTime(0.05, now + 1.1);
-    midGain.gain.exponentialRampToValueAtTime(0.001, now + 4.5);
-    mid.start(now + 0.3);
-    mid.stop(now + 4.6);
-
-    // Bell — B5
-    const bell1 = ctx.createOscillator();
-    const bell1Gain = ctx.createGain();
-    bell1.connect(bell1Gain);
-    bell1Gain.connect(ctx.destination);
-    bell1.type = "sine";
-    bell1.frequency.setValueAtTime(987.77, now + 0.6);
-    bell1Gain.gain.setValueAtTime(0, now + 0.6);
-    bell1Gain.gain.linearRampToValueAtTime(0.06, now + 0.65);
-    bell1Gain.gain.exponentialRampToValueAtTime(0.001, now + 3.2);
-    bell1.start(now + 0.6);
-    bell1.stop(now + 3.3);
-
-    // Second bell — G#5
-    const bell2 = ctx.createOscillator();
-    const bell2Gain = ctx.createGain();
-    bell2.connect(bell2Gain);
-    bell2Gain.connect(ctx.destination);
-    bell2.type = "sine";
-    bell2.frequency.setValueAtTime(830.61, now + 1.1);
-    bell2Gain.gain.setValueAtTime(0, now + 1.1);
-    bell2Gain.gain.linearRampToValueAtTime(0.04, now + 1.15);
-    bell2Gain.gain.exponentialRampToValueAtTime(0.001, now + 3.8);
-    bell2.start(now + 1.1);
-    bell2.stop(now + 3.9);
-
-    // Airy overtone — E6
-    const air = ctx.createOscillator();
-    const airGain = ctx.createGain();
-    air.connect(airGain);
-    airGain.connect(ctx.destination);
-    air.type = "sine";
-    air.frequency.setValueAtTime(1318.51, now + 0.8);
-    airGain.gain.setValueAtTime(0, now + 0.8);
-    airGain.gain.linearRampToValueAtTime(0.025, now + 1.2);
-    airGain.gain.exponentialRampToValueAtTime(0.001, now + 4.0);
-    air.start(now + 0.8);
-    air.stop(now + 4.1);
-
-    setTimeout(() => ctx.close().catch(() => {}), 6000);
-  } catch {
-    // audio unavailable
-  }
+  const audio = new Audio("/lost_grace_discovered.mp3");
+  audio.volume = 0.8;
+  audio.play().catch(() => {});
 }
 
 // Rising motes
@@ -177,17 +105,28 @@ export function LostGrace() {
           <AutoDismiss onDismiss={dismiss} />
 
           {/* Dark warm overlay */}
-          <div className="absolute inset-0" style={{ background: "rgba(4, 2, 0, 0.88)" }} />
+          <div className="absolute inset-0" style={{ background: "rgba(2, 1, 0, 0.93)" }} />
 
           {/* Warm amber radial glow */}
           <motion.div
             className="absolute inset-0 pointer-events-none"
             style={{
-              background: `radial-gradient(ellipse 40% 35% at 50% 50%, rgba(200,158,80,0.12) 0%, transparent 70%)`,
+              background: `radial-gradient(ellipse 40% 35% at 50% 50%, rgba(200,158,80,0.22) 0%, transparent 70%)`,
             }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3, duration: 1.5 }}
+          />
+
+          {/* Second pulsing glow layer */}
+          <motion.div
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              background: `radial-gradient(ellipse 30% 25% at 50% 50%, rgba(200,158,80,0.15) 0%, transparent 60%)`,
+            }}
+            initial={{ opacity: 0.5 }}
+            animate={{ opacity: [0.5, 1, 0.5] }}
+            transition={{ delay: 0.5, duration: 4, repeat: Infinity, ease: "easeInOut" }}
           />
 
           {/* Narrow golden beam from top */}
@@ -267,10 +206,10 @@ export function LostGrace() {
                   color: GOLD_BRIGHT,
                   letterSpacing: "0.12em",
                   lineHeight: 1.2,
-                  textShadow: `0 0 20px ${GOLD}99, 0 0 50px ${GOLD}33`,
+                  textShadow: `0 0 30px ${GOLD}cc, 0 0 70px ${GOLD}55, 0 0 100px ${GOLD}22`,
                 }}
               >
-                Software Engineer & ML Researcher
+                Ken&apos;s Elden Ring Easter Egg
               </p>
             </motion.div>
 

@@ -1,9 +1,18 @@
 "use client";
 
 import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useState } from "react";
+import dynamic from "next/dynamic";
 import { skills } from "@/lib/data";
 import { ScrollReveal } from "./ScrollReveal";
+
+const SkillConstellation = dynamic(
+  () =>
+    import("./three/SkillConstellation").then((m) => ({
+      default: m.SkillConstellation,
+    })),
+  { ssr: false, loading: () => <div style={{ height: 520 }} /> }
+);
 
 const CATEGORY_KANJI: Record<string, string> = {
   Languages: "言語",
@@ -13,6 +22,10 @@ const CATEGORY_KANJI: Record<string, string> = {
 
 export function Skills() {
   const categories = Object.entries(skills);
+  const [reducedMotion] = useState(() => {
+    if (typeof window === "undefined") return false;
+    return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  });
 
   return (
     <section id="skills" className="py-32 md:py-48 relative overflow-hidden">
@@ -21,9 +34,9 @@ export function Skills() {
         技術
       </div>
 
-      <div className="max-w-[1400px] mx-auto px-6 md:px-12">
+      <div className="max-w-[1400px] mx-auto px-6 md:px-12" suppressHydrationWarning>
         <ScrollReveal tilt={-1}>
-          <div className="mb-24 md:mb-36">
+          <div className="mb-16 md:mb-24">
             <span className="font-mono text-[10px] text-red-600 uppercase tracking-[0.3em] block mb-4">
               技術 — Skills
             </span>
@@ -36,14 +49,18 @@ export function Skills() {
           </div>
         </ScrollReveal>
 
-        {categories.map(([category, items], i) => (
-          <SkillPanel
-            key={category}
-            category={category}
-            items={items}
-            index={i}
-          />
-        ))}
+        {reducedMotion ? (
+          categories.map(([category, items], i) => (
+            <SkillPanel
+              key={category}
+              category={category}
+              items={items}
+              index={i}
+            />
+          ))
+        ) : (
+          <SkillConstellation />
+        )}
       </div>
     </section>
   );
