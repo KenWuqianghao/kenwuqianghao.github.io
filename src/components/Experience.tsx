@@ -119,15 +119,78 @@ function ExperienceCard({
             ))}
           </ul>
 
-          {/* Stack */}
-          <div className="mt-8 flex flex-wrap gap-x-2 gap-y-1">
+          {/* Stack — poker flip cards */}
+          <div className="mt-8 flex flex-wrap gap-3">
             {entry.stack.map((tech, k) => (
-              <span key={tech} className="font-mono text-[11px] text-zinc-400 cursor-default transition-colors duration-300 hover:text-red-600">
-                {tech}
-                {k < entry.stack.length - 1 && (
-                  <span className="text-red-600/30 ml-2">·</span>
-                )}
-              </span>
+              <div key={tech} style={{ perspective: "700px" }}>
+                <motion.div
+                  className="relative cursor-default select-none"
+                  style={{
+                    background: "#fafaf9",
+                    border: "1px solid #e4e4e7",
+                    borderRadius: "3px",
+                    padding: "0.35rem 0.75rem 0.4rem",
+                    boxShadow: "0 2px 6px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.04)",
+                  }}
+                  initial={{ rotateY: 180, opacity: 0 }}
+                  animate={isInView ? { rotateY: 0, opacity: 1 } : {}}
+                  whileHover={{
+                    y: -8,
+                    boxShadow: "0 12px 24px rgba(0,0,0,0.12), 0 4px 8px rgba(0,0,0,0.08)",
+                    borderColor: "#dc2626",
+                    transition: { type: "spring", stiffness: 320, damping: 28 },
+                  }}
+                  transition={{
+                    rotateY: {
+                      type: "spring",
+                      stiffness: 200,
+                      damping: 24,
+                      delay: 0.35 + k * 0.06,
+                    },
+                    opacity: { duration: 0.15, delay: 0.35 + k * 0.06 },
+                  }}
+                >
+                  <span
+                    style={{
+                      position: "absolute",
+                      top: "2px",
+                      left: "4px",
+                      fontSize: "6px",
+                      lineHeight: 1,
+                      color: "rgba(220,38,38,0.32)",
+                      fontFamily: "monospace",
+                    }}
+                  >
+                    ♠
+                  </span>
+                  <span
+                    style={{
+                      display: "block",
+                      fontSize: "11px",
+                      color: "#3f3f46",
+                      fontWeight: 300,
+                      letterSpacing: "0.01em",
+                      fontFamily: "monospace",
+                    }}
+                  >
+                    {tech}
+                  </span>
+                  <span
+                    style={{
+                      position: "absolute",
+                      bottom: "2px",
+                      right: "4px",
+                      fontSize: "6px",
+                      lineHeight: 1,
+                      color: "rgba(220,38,38,0.32)",
+                      fontFamily: "monospace",
+                      transform: "rotate(180deg)",
+                    }}
+                  >
+                    ♠
+                  </span>
+                </motion.div>
+              </div>
             ))}
           </div>
 

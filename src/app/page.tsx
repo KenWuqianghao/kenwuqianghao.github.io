@@ -8,7 +8,6 @@ import { Skills } from "@/components/Skills";
 import { Contact } from "@/components/Contact";
 import { ShinboEffects } from "@/components/ShinboEffects";
 import { RedThread } from "@/components/RedThread";
-import { EntranceSequence } from "@/components/EntranceSequence";
 import { SectionCut } from "@/components/SectionCut";
 import { CursorTrail } from "@/components/CursorTrail";
 import { ScrollParallax } from "@/components/ScrollParallax";
@@ -26,7 +25,6 @@ import { ParticleTextOverlay } from "@/components/ParticleTextOverlay";
 export default function Home() {
   return (
     <>
-      <EntranceSequence />
       <ParticleTextOverlay />
       <ShinboEffects />
       <ScrollParallax />

@@ -6,7 +6,6 @@ import * as THREE from "three";
 import { useRef, useState, useMemo, useEffect } from "react";
 import { skills } from "@/lib/data";
 
-// Tighter layout — all clusters fit within ~±2.5 units so nothing clips
 const CAT = [
   {
     key: "Languages",
@@ -30,6 +29,7 @@ const CAT = [
 
 type NodeData = {
   skill: string;
+  catKey: string;
   pos: [number, number, number];
   center: [number, number, number];
   color: string;
@@ -45,6 +45,7 @@ function buildNodes(): NodeData[] {
       const h = ((i % 5) - 2) * 0.22;
       out.push({
         skill,
+        catKey: key,
         color,
         center,
         pos: [
@@ -59,19 +60,37 @@ function buildNodes(): NodeData[] {
 }
 
 function Edges({ nodes }: { nodes: NodeData[] }) {
-  const verts = useMemo(() => {
+  const skillVerts = useMemo(() => {
     const arr: number[] = [];
     for (const n of nodes) arr.push(...n.pos, ...n.center);
     return new Float32Array(arr);
   }, [nodes]);
 
+  const hubVerts = useMemo(() => {
+    const arr: number[] = [];
+    for (let i = 0; i < CAT.length; i++) {
+      for (let j = i + 1; j < CAT.length; j++) {
+        arr.push(...CAT[i].center, ...CAT[j].center);
+      }
+    }
+    return new Float32Array(arr);
+  }, []);
+
   return (
-    <lineSegments>
-      <bufferGeometry>
-        <bufferAttribute attach="attributes-position" args={[verts, 3]} />
-      </bufferGeometry>
-      <lineBasicMaterial color="#71717a" transparent opacity={0.14} />
-    </lineSegments>
+    <>
+      <lineSegments>
+        <bufferGeometry>
+          <bufferAttribute attach="attributes-position" args={[skillVerts, 3]} />
+        </bufferGeometry>
+        <lineBasicMaterial color="#71717a" transparent opacity={0.12} />
+      </lineSegments>
+      <lineSegments>
+        <bufferGeometry>
+          <bufferAttribute attach="attributes-position" args={[hubVerts, 3]} />
+        </bufferGeometry>
+        <lineBasicMaterial color="#a1a1aa" transparent opacity={0.35} />
+      </lineSegments>
+    </>
   );
 }
 
@@ -118,15 +137,22 @@ function CatHub({ cat }: { cat: (typeof CAT)[number] }) {
   );
 }
 
-function SkillNode({ node }: { node: NodeData }) {
+function SkillNode({
+  node,
+  highlighted,
+}: {
+  node: NodeData;
+  highlighted: boolean;
+}) {
   const ref = useRef<THREE.Mesh>(null!);
   const [hov, setHov] = useState(false);
+  const active = hov || highlighted;
 
   useEffect(() => () => { document.body.style.cursor = ""; }, []);
 
   useFrame(({ clock }) => {
     ref.current.scale.setScalar(
-      hov ? 2.0 : 1 + 0.06 * Math.sin(clock.elapsedTime * 1.8 + node.pos[0])
+      active ? 2.2 : 1 + 0.06 * Math.sin(clock.elapsedTime * 1.8 + node.pos[0])
     );
   });
 
@@ -146,31 +172,27 @@ function SkillNode({ node }: { node: NodeData }) {
       >
         <sphereGeometry args={[0.08, 8, 8]} />
         <meshStandardMaterial
-          color={hov ? "#ffffff" : node.color}
+          color={active ? "#ffffff" : node.color}
           emissive={node.color}
-          emissiveIntensity={hov ? 1.5 : 0.5}
+          emissiveIntensity={active ? 2.0 : 0.5}
           roughness={0.3}
           metalness={0.3}
         />
       </mesh>
 
-      {/* Always-visible skill label — scales with camera distance */}
-      <Html
-        center
-        distanceFactor={6}
-        position={[0, 0.18, 0]}
-      >
+      <Html center distanceFactor={6} position={[0, 0.18, 0]}>
         <span
           style={{
             fontFamily: "monospace",
             fontSize: "9px",
             letterSpacing: "0.04em",
-            color: hov ? "#171717" : node.color,
-            opacity: hov ? 1 : 0.72,
+            color: active ? "#171717" : node.color,
+            opacity: active ? 1 : 0.72,
             whiteSpace: "nowrap",
             pointerEvents: "none",
             userSelect: "none",
-            transition: "opacity 0.15s, color 0.15s",
+            fontWeight: active ? 600 : 400,
+            transition: "opacity 0.15s, color 0.15s, font-weight 0.15s",
           }}
         >
           {node.skill}
@@ -180,9 +202,13 @@ function SkillNode({ node }: { node: NodeData }) {
   );
 }
 
-function Scene() {
-  const nodes = useMemo(() => buildNodes(), []);
-
+function Scene({
+  nodes,
+  highlighted,
+}: {
+  nodes: NodeData[];
+  highlighted: string | null;
+}) {
   return (
     <>
       <ambientLight intensity={0.5} />
@@ -192,30 +218,103 @@ function Scene() {
       {CAT.map((c) => (
         <CatHub key={c.key} cat={c} />
       ))}
-      {nodes.map((n, i) => (
-        <SkillNode key={i} node={n} />
+      {nodes.map((n) => (
+        <SkillNode key={`${n.catKey}:${n.skill}`} node={n} highlighted={highlighted === `${n.catKey}:${n.skill}`} />
       ))}
     </>
   );
 }
 
 export function SkillConstellation() {
+  const [highlighted, setHighlighted] = useState<string | null>(null);
+  const nodes = useMemo(() => buildNodes(), []);
+
   return (
-    <Canvas
-      style={{ height: 600 }}
-      camera={{ position: [0, 2.2, 7.5], fov: 56 }}
-      gl={{ antialias: true, alpha: true }}
-    >
-      <Scene />
-      <OrbitControls
-        enablePan={false}
-        enableZoom={false}
-        autoRotate
-        autoRotateSpeed={0.5}
-        minPolarAngle={Math.PI / 7}
-        maxPolarAngle={(Math.PI * 5) / 8}
-        target={[0, 0, -0.5]}
-      />
-    </Canvas>
+    <div style={{ display: "flex", gap: "1.5rem", alignItems: "flex-start" }}>
+      {/* 3D canvas */}
+      <div style={{ flex: 1 }}>
+        <Canvas
+          style={{ height: 560 }}
+          camera={{ position: [0, 2.2, 7.5], fov: 56 }}
+          gl={{ antialias: true, alpha: true }}
+        >
+          <Scene nodes={nodes} highlighted={highlighted} />
+          <OrbitControls
+            enablePan={false}
+            enableZoom={false}
+            autoRotate
+            autoRotateSpeed={0.5}
+            minPolarAngle={Math.PI / 7}
+            maxPolarAngle={(Math.PI * 5) / 8}
+            target={[0, 0, -0.5]}
+          />
+        </Canvas>
+      </div>
+
+      {/* Skill index sidebar */}
+      <div
+        className="hidden md:block shrink-0"
+        style={{
+          width: "176px",
+          maxHeight: "560px",
+          overflowY: "auto",
+          paddingTop: "1rem",
+        }}
+      >
+        {CAT.map((cat) => {
+          const catNodes = nodes.filter((n) => n.catKey === cat.key);
+          return (
+            <div key={cat.key} style={{ marginBottom: "1.25rem" }}>
+              <span
+                style={{
+                  display: "block",
+                  fontFamily: "monospace",
+                  fontSize: "8px",
+                  letterSpacing: "0.22em",
+                  textTransform: "uppercase",
+                  color: cat.color,
+                  marginBottom: "0.4rem",
+                  paddingLeft: "0.5rem",
+                }}
+              >
+                {cat.label}
+              </span>
+              {catNodes.map((n) => (
+                <button
+                  key={n.skill}
+                  onClick={() => {
+                    const id = `${n.catKey}:${n.skill}`;
+                    setHighlighted((h) => (h === id ? null : id));
+                  }}
+                  style={{
+                    display: "block",
+                    width: "100%",
+                    textAlign: "left",
+                    fontFamily: "monospace",
+                    fontSize: "10px",
+                    padding: "0.2rem 0.5rem",
+                    borderRadius: "2px",
+                    border: "none",
+                    background:
+                      highlighted === `${n.catKey}:${n.skill}`
+                        ? `${cat.color}1a`
+                        : "transparent",
+                    borderLeft:
+                      highlighted === `${n.catKey}:${n.skill}`
+                        ? `2px solid ${cat.color}`
+                        : "2px solid transparent",
+                    color: highlighted === `${n.catKey}:${n.skill}` ? "#171717" : "#a1a1aa",
+                    cursor: "pointer",
+                    transition: "all 0.12s",
+                  }}
+                >
+                  {n.skill}
+                </button>
+              ))}
+            </div>
+          );
+        })}
+      </div>
+    </div>
   );
 }

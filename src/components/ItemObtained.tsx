@@ -181,9 +181,9 @@ export function ItemObtained() {
                     <feDropShadow dx="0" dy="0" stdDeviation="3" floodColor="#f5c842" floodOpacity="0.8" />
                   </filter>
                 </defs>
-                <polygon points="60,0 22,68 98,68"   fill="#f5c842" />
-                <polygon points="22,68 0,104 44,104" fill="#f5c842" />
-                <polygon points="98,68 76,104 120,104" fill="#f5c842" />
+                <polygon points="60,0 30,52 90,52"   fill="#f5c842" />
+                <polygon points="30,52 0,104 60,104" fill="#f5c842" />
+                <polygon points="90,52 60,104 120,104" fill="#f5c842" />
               </svg>
             </motion.div>
           </div>

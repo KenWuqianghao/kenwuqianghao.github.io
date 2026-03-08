@@ -26,12 +26,12 @@ export function ParticleTextOverlay() {
   const [active, setActive] = useState(false);
 
   useEffect(() => {
-    if (sessionStorage.getItem("particle-played")) return;
+    if (sessionStorage.getItem("entrance-played")) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-    const handle = () => setActive(true);
-    window.addEventListener("entrance-complete", handle);
-    return () => window.removeEventListener("entrance-complete", handle);
+    document.body.style.overflow = "hidden";
+    setActive(true);
+    return () => { document.body.style.overflow = ""; };
   }, []);
 
   if (!active) return null;
@@ -39,7 +39,8 @@ export function ParticleTextOverlay() {
   return (
     <ParticleText
       onComplete={() => {
-        sessionStorage.setItem("particle-played", "1");
+        document.body.style.overflow = "";
+        sessionStorage.setItem("entrance-played", "1");
         setActive(false);
       }}
     />
