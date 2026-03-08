@@ -3,10 +3,23 @@
 import { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 
+// Immediate white cover while JS module loads — prevents page flash-through
+const COVER = (
+  <div
+    style={{
+      position: "fixed",
+      inset: 0,
+      zIndex: 9993,
+      background: "#fafaf9",
+      pointerEvents: "none",
+    }}
+  />
+);
+
 const ParticleText = dynamic(
   () =>
     import("./three/ParticleText").then((m) => ({ default: m.ParticleText })),
-  { ssr: false }
+  { ssr: false, loading: () => COVER }
 );
 
 export function ParticleTextOverlay() {

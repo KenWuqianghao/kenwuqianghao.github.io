@@ -6,23 +6,24 @@ import * as THREE from "three";
 import { useRef, useState, useMemo, useEffect } from "react";
 import { skills } from "@/lib/data";
 
+// Tighter layout — all clusters fit within ~±2.5 units so nothing clips
 const CAT = [
   {
     key: "Languages",
     label: "Languages",
-    center: [-3.5, 0, 0.5] as [number, number, number],
+    center: [-2.4, 0.4, 0.3] as [number, number, number],
     color: "#dc2626",
   },
   {
     key: "Technologies & Cloud",
     label: "Tech & Cloud",
-    center: [3.5, 0, 0.5] as [number, number, number],
+    center: [2.4, 0.4, 0.3] as [number, number, number],
     color: "#71717a",
   },
   {
     key: "Libraries & Frameworks",
     label: "Libraries",
-    center: [0, 0, -3.5] as [number, number, number],
+    center: [0, -0.6, -2.4] as [number, number, number],
     color: "#a1a1aa",
   },
 ] as const;
@@ -39,9 +40,9 @@ function buildNodes(): NodeData[] {
   for (const { key, center, color } of CAT) {
     const items = (skills as Record<string, string[]>)[key] ?? [];
     items.forEach((skill, i) => {
-      const a = (i / items.length) * Math.PI * 2 + Math.PI / 5;
-      const r = 1.3 + (i % 3) * 0.22;
-      const h = ((i % 5) - 2) * 0.28;
+      const a = (i / items.length) * Math.PI * 2 + Math.PI / 6;
+      const r = 1.0 + (i % 3) * 0.18;
+      const h = ((i % 5) - 2) * 0.22;
       out.push({
         skill,
         color,
@@ -60,21 +61,16 @@ function buildNodes(): NodeData[] {
 function Edges({ nodes }: { nodes: NodeData[] }) {
   const verts = useMemo(() => {
     const arr: number[] = [];
-    for (const n of nodes) {
-      arr.push(...n.pos, ...n.center);
-    }
+    for (const n of nodes) arr.push(...n.pos, ...n.center);
     return new Float32Array(arr);
   }, [nodes]);
 
   return (
     <lineSegments>
       <bufferGeometry>
-        <bufferAttribute
-          attach="attributes-position"
-          args={[verts, 3]}
-        />
+        <bufferAttribute attach="attributes-position" args={[verts, 3]} />
       </bufferGeometry>
-      <lineBasicMaterial color="#71717a" transparent opacity={0.13} />
+      <lineBasicMaterial color="#71717a" transparent opacity={0.14} />
     </lineSegments>
   );
 }
@@ -90,28 +86,29 @@ function CatHub({ cat }: { cat: (typeof CAT)[number] }) {
   return (
     <group position={cat.center}>
       <mesh ref={ref}>
-        <sphereGeometry args={[0.24, 14, 14]} />
+        <sphereGeometry args={[0.22, 14, 14]} />
         <meshStandardMaterial
           color={cat.color}
           emissive={cat.color}
-          emissiveIntensity={0.65}
+          emissiveIntensity={0.7}
           roughness={0.3}
           metalness={0.2}
         />
       </mesh>
-      <Html center distanceFactor={12}>
+      <Html center distanceFactor={10}>
         <span
           style={{
             fontFamily: "monospace",
-            fontSize: "9px",
-            letterSpacing: "0.2em",
+            fontSize: "10px",
+            letterSpacing: "0.22em",
             textTransform: "uppercase",
             color: cat.color,
             whiteSpace: "nowrap",
             display: "block",
-            transform: "translateY(28px)",
+            transform: "translateY(26px)",
             pointerEvents: "none",
             userSelect: "none",
+            fontWeight: 500,
           }}
         >
           {cat.label}
@@ -125,12 +122,11 @@ function SkillNode({ node }: { node: NodeData }) {
   const ref = useRef<THREE.Mesh>(null!);
   const [hov, setHov] = useState(false);
 
-  // Reset cursor if component unmounts while hovered
   useEffect(() => () => { document.body.style.cursor = ""; }, []);
 
   useFrame(({ clock }) => {
     ref.current.scale.setScalar(
-      hov ? 1.9 : 1 + 0.07 * Math.sin(clock.elapsedTime * 1.8 + node.pos[0])
+      hov ? 2.0 : 1 + 0.06 * Math.sin(clock.elapsedTime * 1.8 + node.pos[0])
     );
   });
 
@@ -148,34 +144,38 @@ function SkillNode({ node }: { node: NodeData }) {
           document.body.style.cursor = "";
         }}
       >
-        <sphereGeometry args={[0.09, 8, 8]} />
+        <sphereGeometry args={[0.08, 8, 8]} />
         <meshStandardMaterial
           color={hov ? "#ffffff" : node.color}
           emissive={node.color}
-          emissiveIntensity={hov ? 1.4 : 0.45}
+          emissiveIntensity={hov ? 1.5 : 0.5}
           roughness={0.3}
           metalness={0.3}
         />
       </mesh>
-      {hov && (
-        <Html center distanceFactor={10}>
-          <div
-            style={{
-              fontFamily: "monospace",
-              fontSize: "11px",
-              background: "rgba(23,23,23,0.92)",
-              color: "#fafaf9",
-              padding: "3px 8px",
-              borderRadius: "2px",
-              whiteSpace: "nowrap",
-              pointerEvents: "none",
-              userSelect: "none",
-            }}
-          >
-            {node.skill}
-          </div>
-        </Html>
-      )}
+
+      {/* Always-visible skill label — scales with camera distance */}
+      <Html
+        center
+        distanceFactor={6}
+        position={[0, 0.18, 0]}
+      >
+        <span
+          style={{
+            fontFamily: "monospace",
+            fontSize: "9px",
+            letterSpacing: "0.04em",
+            color: hov ? "#171717" : node.color,
+            opacity: hov ? 1 : 0.72,
+            whiteSpace: "nowrap",
+            pointerEvents: "none",
+            userSelect: "none",
+            transition: "opacity 0.15s, color 0.15s",
+          }}
+        >
+          {node.skill}
+        </span>
+      </Html>
     </group>
   );
 }
@@ -185,9 +185,9 @@ function Scene() {
 
   return (
     <>
-      <ambientLight intensity={0.45} />
-      <pointLight position={[6, 5, 6]} intensity={0.8} />
-      <pointLight position={[-5, -3, -4]} intensity={0.3} color="#c8a96e" />
+      <ambientLight intensity={0.5} />
+      <pointLight position={[5, 5, 5]} intensity={0.8} />
+      <pointLight position={[-4, -3, -3]} intensity={0.3} color="#c8a96e" />
       <Edges nodes={nodes} />
       {CAT.map((c) => (
         <CatHub key={c.key} cat={c} />
@@ -202,8 +202,8 @@ function Scene() {
 export function SkillConstellation() {
   return (
     <Canvas
-      style={{ height: 520 }}
-      camera={{ position: [0, 3.5, 9], fov: 52 }}
+      style={{ height: 600 }}
+      camera={{ position: [0, 2.2, 7.5], fov: 56 }}
       gl={{ antialias: true, alpha: true }}
     >
       <Scene />
@@ -211,9 +211,10 @@ export function SkillConstellation() {
         enablePan={false}
         enableZoom={false}
         autoRotate
-        autoRotateSpeed={0.6}
-        minPolarAngle={Math.PI / 6}
+        autoRotateSpeed={0.5}
+        minPolarAngle={Math.PI / 7}
         maxPolarAngle={(Math.PI * 5) / 8}
+        target={[0, 0, -0.5]}
       />
     </Canvas>
   );
