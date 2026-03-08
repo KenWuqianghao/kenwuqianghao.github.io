@@ -67,21 +67,18 @@ export function ToBeContinued() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.35, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           >
-            <div
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/TBC.png"
+              alt="To Be Continued →"
               style={{
-                fontFamily: "'Impact', 'Arial Black', 'Haettenschweiler', sans-serif",
-                fontWeight: 900,
-                fontSize: "clamp(26px, 4.5vw, 54px)",
-                color: "#111111",
-                letterSpacing: "0.02em",
-                lineHeight: 1,
+                width: "clamp(240px, 38vw, 500px)",
+                filter: "drop-shadow(0 2px 6px rgba(0,0,0,0.5))",
                 userSelect: "none",
-                whiteSpace: "nowrap",
-                textShadow: "2px 3px 6px rgba(0,0,0,0.35)",
+                mixBlendMode: "multiply",
               }}
-            >
-              To Be Continued →
-            </div>
+              draggable={false}
+            />
           </motion.div>
         </motion.div>
       )}

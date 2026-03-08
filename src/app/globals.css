@@ -172,23 +172,51 @@ section:first-of-type {
 /* Grace golden glow — unlocked state */
 @keyframes grace-pulse {
   0%, 100% { text-shadow: 0 0 6px rgba(212,168,58,0.45), 0 0 14px rgba(212,168,58,0.2); }
-  50%       { text-shadow: 0 0 10px rgba(212,168,58,0.7), 0 0 26px rgba(212,168,58,0.4); }
+  50%       { text-shadow: 0 0 10px rgba(212,168,58,0.7), 0 0 28px rgba(212,168,58,0.4), 0 0 50px rgba(212,168,58,0.15); }
+}
+
+/* Smooth ramp-in: animates from dim → full radiance over 0.65s */
+@keyframes grace-ramp {
+  from { text-shadow: 0 0 6px rgba(212,168,58,0.45), 0 0 14px rgba(212,168,58,0.2); }
+  to   {
+    text-shadow:
+      0 0 8px  rgba(212,168,58,0.95),
+      0 0 22px rgba(212,168,58,0.8),
+      0 0 46px rgba(212,168,58,0.6),
+      0 0 90px rgba(212,168,58,0.38),
+      0 0 160px rgba(212,168,58,0.18);
+  }
+}
+
+/* Slow radiant breath once at full brightness */
+@keyframes grace-radiate {
+  0%, 100% {
+    text-shadow:
+      0 0 8px  rgba(212,168,58,0.9),
+      0 0 22px rgba(212,168,58,0.75),
+      0 0 46px rgba(212,168,58,0.55),
+      0 0 90px rgba(212,168,58,0.32),
+      0 0 160px rgba(212,168,58,0.14);
+  }
+  50% {
+    text-shadow:
+      0 0 12px rgba(212,168,58,1),
+      0 0 30px rgba(212,168,58,0.92),
+      0 0 65px rgba(212,168,58,0.72),
+      0 0 120px rgba(212,168,58,0.46),
+      0 0 210px rgba(212,168,58,0.22);
+  }
 }
 
 .grace-gold {
   color: #d4a83a;
   animation: grace-pulse 3s ease-in-out infinite;
-  transition: text-shadow 0.2s ease;
 }
 
 .grace-gold:hover {
-  animation: none;
-  text-shadow:
-    0 0 8px rgba(212,168,58,1),
-    0 0 20px rgba(212,168,58,0.9),
-    0 0 40px rgba(212,168,58,0.7),
-    0 0 70px rgba(212,168,58,0.5),
-    0 0 120px rgba(212,168,58,0.3);
+  animation:
+    grace-ramp    0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards,
+    grace-radiate 3s ease-in-out 0.65s infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {
