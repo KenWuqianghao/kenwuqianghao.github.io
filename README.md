@@ -8,6 +8,8 @@ The site translates Shinbo's cinematic vocabulary into web interactions:
 
 **Entrance Sequence** — On first load, a Three.js particle animation plays: thousands of particles converge from a scattered cloud into glowing text, then dissolve. Plays once per session, gated by sessionStorage.
 
+**Kanji Name Stroke Animation** — The Chinese name 吴锵皓 beneath the hero title traces out stroke-by-stroke on load using `hanzi-writer`, pulling per-character SVG path data from the Make Me A Hanzi dataset. Each character animates sequentially in correct calligraphic stroke order against a faint ghost outline, then holds. Falls back to static text if the CDN request fails.
+
 **Kanji Column Rain** — Seven CSS-animated columns of falling kanji/katakana/hiragana characters are fixed at the viewport edges (left, center, right). Each column scrolls downward at a different speed (29–45 seconds per cycle) with staggered offsets for a seamless loop. Opacity 0.042–0.065 — barely visible, SHAFT watermark aesthetic. Pure CSS/DOM, no canvas.
 
 **Ambient Kanji Watermarks** — Large, nearly-invisible kanji (opacity 0.02–0.04) float at section edges and drift with a slow organic gate-weave animation, mimicking the incidental typography SHAFT places in negative space.
@@ -44,7 +46,9 @@ The site translates Shinbo's cinematic vocabulary into web interactions:
 
 **NBA Player Card** — Leave the site idle for 45 seconds. A Warriors-era KD 2K card appears: OVR ??, MID 69 (nice), 3PT KD35, PHY KD7, IQ ∞, HND 42, ALGN ??, with THE SLIM REAPER badge and #35 watermark.
 
-**Hades Dialogue** — After 13–23 seconds of inactivity, Zagreus speaks from the bottom-left in a blood-red bordered card. Quotes like *"The work never ends."*, *"Blood price paid."*, *"Back again."*
+**Easter Egg Counter** — A small HUD in the bottom-right corner tracks all 6 discoverable easter eggs as a row of squares (`secrets · □□□□□□ · 0/6`). Always visible at low opacity; pulses brighter when a new egg fills in. Persists across sessions via localStorage. When all 6 are collected, a rapid SHAFT-style flash sequence fires — `全` → `SECRETS` → `DISCOVERED` → `6/6` → `吴锵皓` — and the counter dots turn red permanently.
+
+**Secret Shrine** — Navigate to `/shrine` to find a hidden alternate version of the portfolio styled as a JoJo × Persona 5 fusion: near-black background with halftone dot texture and diagonal speed-line hatching, ゴゴゴゴ ambient text on both edges, and the full site content reimagined through a dark game-UI lens. The hero section presents a stand user card (Stand: DEEP PURPLE, Arcana: THE MAGICIAN) with JoJo-style stat bars. Experience becomes Battle History in chapter cards, projects become Operations, skills become Stand Abilities. A barely-visible `★` in the About section's Off-duty facet links here for those paying close attention.
 
 **Post-Processing Stack** — Three.js EffectComposer applies chromatic aberration, additive noise, bloom (threshold 0.9), and custom scanlines over the entire canvas layer. Every pixel goes through the SHAFT filter.
 
@@ -77,6 +81,7 @@ Zinc grays (`#e4e4e7`, `#a1a1aa`) appear only in secondary text. The red `::sele
 - **React 19** + **TypeScript**
 - **Tailwind CSS 4** — Utility-first styling with `@theme` token system
 - **Three.js** via **React Three Fiber** + **Drei** — Particle text entrance, skill constellation, wireframe grid
+- **hanzi-writer** — SVG stroke-order animation for Chinese characters
 - **React Three Postprocessing** — Chromatic aberration, bloom, noise, custom scanline shader
 - **Framer Motion** — Scroll-triggered reveals, spring animations, viewport-aware transitions
 - **Phosphor Icons** — Icon system
