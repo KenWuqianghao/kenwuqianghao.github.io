@@ -53,14 +53,11 @@ export function EasterEggCounter() {
     };
   }, [discover]);
 
-  // Hidden until first egg found
-  if (found.size === 0) return null;
-
   return (
     <div
       className="fixed bottom-4 right-4 z-[9990] pointer-events-none select-none flex flex-col items-end gap-[3px]"
       style={{
-        opacity: pulse ? 0.72 : 0.16,
+        opacity: pulse ? 0.85 : 0.35,
         transition: "opacity 0.6s ease",
       }}
       aria-hidden="true"
