@@ -25,9 +25,15 @@ export function OraOra() {
   const clickTimesRef = useRef<number[]>([]);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
+  const dispatched = useRef(false);
+
   const trigger = useCallback(() => {
     if (active) return;
     setActive(true);
+    if (!dispatched.current) {
+      dispatched.current = true;
+      window.dispatchEvent(new CustomEvent("egg-found", { detail: { id: "ora" } }));
+    }
     document.body.style.overflow = "hidden";
     timerRef.current = setTimeout(() => {
       document.body.style.overflow = "";

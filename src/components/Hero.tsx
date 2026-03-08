@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { useCallback, useState } from "react";
 import { TextReveal } from "./TextReveal";
+import { KanjiStrokeReveal } from "./KanjiStrokeReveal";
 import { personalInfo } from "@/lib/data";
 
 export function Hero() {
@@ -65,14 +66,7 @@ export function Hero() {
                   </motion.span>
                 </TextReveal>
               </h1>
-              <motion.span
-                className="block font-kanji text-xl md:text-2xl text-zinc-300 tracking-[0.3em] mt-2 ml-1"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 1.1, duration: 0.6 }}
-              >
-                吴锵皓
-              </motion.span>
+              <KanjiStrokeReveal />
             </div>
           </div>
 

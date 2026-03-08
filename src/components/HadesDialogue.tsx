@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const QUOTES = [
@@ -32,6 +32,7 @@ const BG_PANEL = "#1a0d24";
 
 export function HadesDialogue() {
   const [quote, setQuote] = useState<string | null>(null);
+  const dispatched = useRef(false);
 
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
@@ -47,6 +48,10 @@ export function HadesDialogue() {
       } while (idx === lastIdx && QUOTES.length > 1);
       lastIdx = idx;
       setQuote(QUOTES[idx]);
+      if (!dispatched.current) {
+        dispatched.current = true;
+        window.dispatchEvent(new CustomEvent("egg-found", { detail: { id: "hades" } }));
+      }
 
       if (dismissTimer) clearTimeout(dismissTimer);
       dismissTimer = setTimeout(() => {

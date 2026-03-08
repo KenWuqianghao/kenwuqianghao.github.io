@@ -72,8 +72,12 @@ function Divider({ delay }: { delay: number }) {
 
 function AutoDismiss({ onDismiss }: { onDismiss: () => void }) {
   useEffect(() => {
+    document.documentElement.style.overflow = "hidden";
     const t = setTimeout(onDismiss, 6000);
-    return () => clearTimeout(t);
+    return () => {
+      clearTimeout(t);
+      document.documentElement.style.overflow = "";
+    };
   }, [onDismiss]);
   return null;
 }

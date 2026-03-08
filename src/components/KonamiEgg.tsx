@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
 
 const KONAMI = [
   "ArrowUp", "ArrowUp", "ArrowDown", "ArrowDown",
@@ -28,10 +28,15 @@ const TOTAL_MS = FLASH_CARDS.length * CARD_MS + 500;
 export function KonamiEgg() {
   const [active, setActive] = useState(false);
   const [done, setDone] = useState(false);
+  const dispatched = useRef(false);
 
   const trigger = useCallback(() => {
     if (active) return;
     setActive(true);
+    if (!dispatched.current) {
+      dispatched.current = true;
+      window.dispatchEvent(new CustomEvent("egg-found", { detail: { id: "konami" } }));
+    }
     document.body.style.overflow = "hidden";
 
     setTimeout(() => {

@@ -6,11 +6,11 @@ Personal portfolio built as a love letter to SHAFT and Akiyuki Shinbo's visual d
 
 The site translates Shinbo's cinematic vocabulary into web interactions:
 
-**Entrance Sequence** — On first load, rapid-fire kanji title cards (始, 創, 無, 夢, 命, 魂, 幻, 紅, 刻, 光) flash in alternating red/black/white frames at 150ms intervals. Directly inspired by the eyecatch cards in *Monogatari* series. Plays once per session.
+**Entrance Sequence** — On first load, a Three.js particle animation plays: thousands of particles converge from a scattered cloud into glowing text, then dissolve. Plays once per session, gated by sessionStorage.
 
-**Kanji Particle Rain** — A full-viewport Three.js layer renders 300 falling katakana/hiragana/kanji characters as instanced quads from a texture atlas. Characters drift, flash red probabilistically, and repel from the cursor. Think the background text in any SHAFT dialogue scene.
+**Kanji Column Rain** — Seven CSS-animated columns of falling kanji/katakana/hiragana characters are fixed at the viewport edges (left, center, right). Each column scrolls downward at a different speed (29–45 seconds per cycle) with staggered offsets for a seamless loop. Opacity 0.042–0.065 — barely visible, SHAFT watermark aesthetic. Pure CSS/DOM, no canvas.
 
-**Ambient Kanji Watermarks** — Large, nearly-invisible kanji (opacity 0.04–0.09) float at viewport edges and cycle every 6 seconds, mimicking the incidental typography SHAFT places in negative space.
+**Ambient Kanji Watermarks** — Large, nearly-invisible kanji (opacity 0.02–0.04) float at section edges and drift with a slow organic gate-weave animation, mimicking the incidental typography SHAFT places in negative space.
 
 **Film Grain & Scanlines** — SVG fractal noise overlay at 3.5% opacity plus CRT scanlines via a custom post-processing shader. Gives the clean digital layout a tactile, cel-animation quality.
 
@@ -36,15 +36,21 @@ The site translates Shinbo's cinematic vocabulary into web interactions:
 
 **Menacing ゴゴゴゴ** — While the hero section is in view, ゴ characters continuously float upward and fade in the classic JoJo menacing style.
 
-**To Be Continued →** — Scroll all the way to the bottom and pause. After 0.6 seconds a sepia wash falls over the screen and the iconic amber arrow + italic text fades in at the lower left.
+**To Be Continued →** — Scroll all the way to the bottom and pause. After 0.6 seconds a sepia wash falls over the screen and the iconic JoJo arrow PNG fades in at the lower left, rendered with `mix-blend-mode: multiply` over the warm overlay.
 
-**Item Obtained ♦** — Find the nearly-invisible ♦ symbol next to "素顔 — Beyond Code" in the About section and click it. A Zelda-authentic item get screen appears: nested gold border, 3D spinning diamond, synthesized G4–C5–E5–G5 arpeggio jingle via Web Audio API, and a blinking ▼ prompt. Press any key to dismiss.
+**Item Obtained** — Find the nearly-invisible ♦ symbol next to "素顔 — Beyond Code" in the About section and click it. A Zelda BotW/TotK–style Sheikah item screen appears: dark slate background with a subtle cyan grid, SVG Triforce in gold with a spinning Sheikah runic ring and cyan sparkles, Sheikah corner-bracket panel, and the actual BotW item jingle from `/item_botw.mp3`. Press any key or click to dismiss.
+
+**Lost Grace Discovered** — Click the "Software Engineer & ML Researcher" subtitle in the hero. A full-screen Elden Ring overlay fades in: near-black warm atmosphere, a narrow golden beam descending from the top, rising golden motes, and the grace name rendered in Elden Ring typography with a deep gold glow. Plays the actual Lost Grace discovered sound from `/lost_grace_discovered.mp3`. The text turns gold permanently after the first click and re-triggers the overlay on every subsequent click.
 
 **NBA Player Card** — Leave the site idle for 45 seconds. A Warriors-era KD 2K card appears: OVR ??, MID 69 (nice), 3PT KD35, PHY KD7, IQ ∞, HND 42, ALGN ??, with THE SLIM REAPER badge and #35 watermark.
 
 **Hades Dialogue** — After 13–23 seconds of inactivity, Zagreus speaks from the bottom-left in a blood-red bordered card. Quotes like *"The work never ends."*, *"Blood price paid."*, *"Back again."*
 
 **Post-Processing Stack** — Three.js EffectComposer applies chromatic aberration, additive noise, bloom (threshold 0.9), and custom scanlines over the entire canvas layer. Every pixel goes through the SHAFT filter.
+
+## Skills Constellation
+
+The Skills section renders a live 3D graph using React Three Fiber. Three category hub nodes — Languages (red), Tech & Cloud (charcoal), Libraries & Frameworks (zinc) — each pulse with a spinning torus ring and a colored point light. Skill nodes orbit each hub and connect to it via translucent edge lines; the three hubs are connected to each other with slightly more visible hub–hub edges. A sidebar lists all skills by category; clicking any skill smoothly pans the camera (via OrbitControls target lerp) to focus on that node in the constellation. Auto-rotation pauses while a node is selected.
 
 ## Color Palette
 
@@ -70,7 +76,7 @@ Zinc grays (`#e4e4e7`, `#a1a1aa`) appear only in secondary text. The red `::sele
 - **Next.js 16** — App Router, server components, `next/font` optimization
 - **React 19** + **TypeScript**
 - **Tailwind CSS 4** — Utility-first styling with `@theme` token system
-- **Three.js** via **React Three Fiber** + **Drei** — Instanced particle system, wireframe grid, orthographic canvas
+- **Three.js** via **React Three Fiber** + **Drei** — Particle text entrance, skill constellation, wireframe grid
 - **React Three Postprocessing** — Chromatic aberration, bloom, noise, custom scanline shader
 - **Framer Motion** — Scroll-triggered reveals, spring animations, viewport-aware transitions
 - **Phosphor Icons** — Icon system

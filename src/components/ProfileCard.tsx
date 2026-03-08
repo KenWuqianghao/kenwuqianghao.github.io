@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const IDLE_MS = 45_000;
@@ -83,6 +83,7 @@ function AutoDismiss({ onDismiss }: { onDismiss: () => void }) {
 
 export function ProfileCard() {
   const [visible, setVisible] = useState(false);
+  const dispatched = useRef(false);
 
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
@@ -91,7 +92,13 @@ export function ProfileCard() {
 
     const schedule = () => {
       clearTimeout(timer);
-      timer = setTimeout(() => setVisible(true), IDLE_MS);
+      timer = setTimeout(() => {
+        setVisible(true);
+        if (!dispatched.current) {
+          dispatched.current = true;
+          window.dispatchEvent(new CustomEvent("egg-found", { detail: { id: "nba" } }));
+        }
+      }, IDLE_MS);
     };
 
     const events = [

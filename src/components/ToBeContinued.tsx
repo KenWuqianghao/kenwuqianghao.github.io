@@ -1,10 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export function ToBeContinued() {
   const [visible, setVisible] = useState(false);
+  const dispatched = useRef(false);
 
   useEffect(() => {
     let showTimer: ReturnType<typeof setTimeout>;
@@ -19,6 +20,10 @@ export function ToBeContinued() {
         atBottom = true;
         showTimer = setTimeout(() => {
           setVisible(true);
+          if (!dispatched.current) {
+            dispatched.current = true;
+            window.dispatchEvent(new CustomEvent("egg-found", { detail: { id: "tbc" } }));
+          }
           hideTimer = setTimeout(() => setVisible(false), 4000);
         }, 600);
       } else if (!near) {

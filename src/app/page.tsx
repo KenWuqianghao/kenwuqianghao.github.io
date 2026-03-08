@@ -20,6 +20,7 @@ import { OraOra } from "@/components/OraOra";
 import { Menacing } from "@/components/Menacing";
 import { ItemObtained } from "@/components/ItemObtained";
 import { LostGrace } from "@/components/LostGrace";
+import { EasterEggCounter } from "@/components/EasterEggCounter";
 import { ParticleTextOverlay } from "@/components/ParticleTextOverlay";
 
 export default function Home() {
@@ -38,6 +39,7 @@ export default function Home() {
       <Menacing />
       <ItemObtained />
       <LostGrace />
+      <EasterEggCounter />
       <Navigation />
       <main className="relative z-10">
         <Hero />

@@ -10,7 +10,7 @@ const route = [
   { flag: "🇬🇧", label: "Exchanged" },
 ];
 
-const facets = [
+const facets: { kanji: string; label: string; text: string; hint?: boolean }[] = [
   {
     kanji: "球",
     label: "NBA",
@@ -30,6 +30,7 @@ const facets = [
     kanji: "余",
     label: "Off-duty",
     text: "Basketball, poker, anime, and the occasional Leetcode grind.",
+    hint: true,
   },
 ];
 
@@ -103,6 +104,16 @@ export function About() {
                 </div>
                 <p className="text-sm text-zinc-500 leading-relaxed max-w-[38ch] cursor-default transition-colors duration-300 group-hover:text-zinc-700">
                   {facet.text}
+                  {facet.hint && (
+                    <a
+                      href="/shrine"
+                      aria-hidden="true"
+                      tabIndex={-1}
+                      style={{ opacity: 0.04, marginLeft: "0.3em", textDecoration: "none", color: "inherit" }}
+                    >
+                      ★
+                    </a>
+                  )}
                 </p>
               </div>
             </ScrollReveal>
