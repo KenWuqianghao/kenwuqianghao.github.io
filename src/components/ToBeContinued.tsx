@@ -19,12 +19,16 @@ export function ToBeContinued() {
       if (near && !atBottom) {
         atBottom = true;
         showTimer = setTimeout(() => {
+          document.documentElement.style.overflow = "hidden";
           setVisible(true);
           if (!dispatched.current) {
             dispatched.current = true;
             window.dispatchEvent(new CustomEvent("egg-found", { detail: { id: "tbc" } }));
           }
-          hideTimer = setTimeout(() => setVisible(false), 4000);
+          hideTimer = setTimeout(() => {
+            document.documentElement.style.overflow = "";
+            setVisible(false);
+          }, 4000);
         }, 600);
       } else if (!near) {
         atBottom = false;
@@ -37,6 +41,7 @@ export function ToBeContinued() {
       window.removeEventListener("scroll", onScroll);
       clearTimeout(showTimer);
       clearTimeout(hideTimer);
+      document.documentElement.style.overflow = "";
     };
   }, []);
 
