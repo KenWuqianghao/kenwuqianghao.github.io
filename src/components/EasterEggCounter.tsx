@@ -64,21 +64,21 @@ export function EasterEggCounter() {
     >
       <span
         className="font-mono uppercase"
-        style={{ fontSize: "7px", letterSpacing: "0.35em", color: "#a1a1aa" }}
+        style={{ fontSize: "10px", letterSpacing: "0.3em", color: "#a1a1aa" }}
       >
         secrets
       </span>
-      <div className="flex gap-[3px]">
+      <div className="flex gap-1.5">
         {ALL_EGGS.map((id) => (
           <span
             key={id}
             style={{
               display: "block",
-              width: 5,
-              height: 5,
-              borderRadius: 1,
+              width: 10,
+              height: 10,
+              borderRadius: 2,
               background: found.has(id) ? "#d4d4d8" : "transparent",
-              border: "1px solid rgba(212,212,216,0.32)",
+              border: "1px solid rgba(212,212,216,0.45)",
               transition: "background 0.3s ease",
             }}
           />
@@ -86,7 +86,7 @@ export function EasterEggCounter() {
       </div>
       <span
         className="font-mono tabular-nums"
-        style={{ fontSize: "7px", color: "#a1a1aa" }}
+        style={{ fontSize: "10px", color: "#a1a1aa" }}
       >
         {found.size} / {ALL_EGGS.length}
       </span>
