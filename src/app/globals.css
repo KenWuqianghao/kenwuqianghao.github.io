@@ -214,9 +214,7 @@ section:first-of-type {
 }
 
 .grace-gold:hover {
-  animation:
-    grace-ramp    0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards,
-    grace-radiate 3s ease-in-out 0.65s infinite;
+  animation: grace-ramp 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 @media (prefers-reduced-motion: reduce) {

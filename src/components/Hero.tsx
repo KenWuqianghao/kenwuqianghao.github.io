@@ -13,8 +13,7 @@ export function Hero() {
   }, []);
 
   const handleGraceClick = useCallback(() => {
-    if (graceFound) return;
-    setGraceFound(true);
+    if (!graceFound) setGraceFound(true);
     window.dispatchEvent(new Event("grace-discovered"));
   }, [graceFound]);
 
@@ -30,7 +29,7 @@ export function Hero() {
             <motion.p
               className={`font-mono text-xs uppercase tracking-[0.2em] mb-8 select-none ${
                 graceFound
-                  ? "grace-gold cursor-default"
+                  ? "grace-gold cursor-pointer"
                   : "grace-twitch text-zinc-400 cursor-pointer"
               }`}
               onClick={handleGraceClick}
