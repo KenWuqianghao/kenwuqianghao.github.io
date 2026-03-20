@@ -4,12 +4,13 @@ import {
   JetBrains_Mono,
   Cormorant_Garamond,
   Shippori_Mincho,
+  Instrument_Serif,
 } from "next/font/google";
 import "./globals.css";
 
 const outfit = Outfit({
   variable: "--font-outfit",
-  subsets: ["latin"],
+  subsets: ["latin", "latin-ext"],
 });
 
 const jetbrainsMono = JetBrains_Mono({
@@ -30,6 +31,13 @@ const shipporiMincho = Shippori_Mincho({
   weight: ["400"],
 });
 
+const instrumentSerif = Instrument_Serif({
+  variable: "--font-instrument",
+  subsets: ["latin", "latin-ext"],
+  weight: ["400"],
+  style: ["normal", "italic"],
+});
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://kenwu.is-a.dev"),
   title: "Ken Wu — Software Engineer & ML Researcher",
@@ -48,7 +56,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${outfit.variable} ${jetbrainsMono.variable} ${cormorant.variable} ${shipporiMincho.variable} font-sans antialiased`}
+        className={`${outfit.variable} ${jetbrainsMono.variable} ${cormorant.variable} ${shipporiMincho.variable} ${instrumentSerif.variable} font-sans antialiased`}
       >
         {children}
       </body>

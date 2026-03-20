@@ -1,4 +1,5 @@
 import { blogPosts } from "./blog";
+import { BLOG_INDEX_PATH } from "./i18n";
 
 const SITE = "https://kenwu.is-a.dev";
 
@@ -17,7 +18,8 @@ function rfc822(isoDate: string): string {
 
 /** Plain text for description — no HTML in RSS excerpt/description. */
 function itemDescription(post: (typeof blogPosts)[number]): string {
-  return [post.excerpt, ...post.content].join("\n\n");
+  const en = post.locales.en;
+  return [en.excerpt, ...en.content].join("\n\n");
 }
 
 export function buildBlogRss(): string {
@@ -29,10 +31,11 @@ export function buildBlogRss(): string {
 
   const items = sorted
     .map((post) => {
-      const url = `${SITE}/blog/${post.slug}`;
+      const url = `${SITE}/en/blog/${post.slug}`;
       const desc = escapeXml(itemDescription(post));
+      const title = escapeXml(post.locales.en.title);
       return `    <item>
-      <title>${escapeXml(post.title)}</title>
+      <title>${title}</title>
       <link>${escapeXml(url)}</link>
       <guid isPermaLink="true">${escapeXml(url)}</guid>
       <pubDate>${rfc822(post.date)}</pubDate>
@@ -45,7 +48,7 @@ export function buildBlogRss(): string {
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>${escapeXml("Ken Wu — Writing")}</title>
-    <link>${escapeXml(`${SITE}/blog`)}</link>
+    <link>${escapeXml(`${SITE}${BLOG_INDEX_PATH}`)}</link>
     <description>${escapeXml(
       "Essays and marginalia — ML, systems, and craft.",
     )}</description>

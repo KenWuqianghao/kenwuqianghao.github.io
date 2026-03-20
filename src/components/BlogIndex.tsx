@@ -5,9 +5,16 @@ import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { BlogCutLink } from "@/components/BlogCutTransition";
 import type { BlogPostPreview } from "@/lib/blog";
+import type { Locale } from "@/lib/i18n";
+import {
+  getBlogIndexMessages,
+  dateLocaleForUi,
+  formatBlogIndexCount,
+  formatReadAria,
+} from "@/lib/i18n";
 
-function formatDate(iso: string) {
-  return new Date(iso + "T12:00:00").toLocaleDateString("en-CA", {
+function formatDate(iso: string, locale: Locale) {
+  return new Date(iso + "T12:00:00").toLocaleDateString(dateLocaleForUi(locale), {
     year: "numeric",
     month: "short",
     day: "numeric",
@@ -15,13 +22,17 @@ function formatDate(iso: string) {
 }
 
 export function BlogIndex({
+  locale,
   posts,
   allTags,
 }: {
+  locale: Locale;
   posts: BlogPostPreview[];
   allTags: string[];
 }) {
   const router = useRouter();
+  const messages = getBlogIndexMessages(locale);
+  const blogBase = `/${locale}/blog`;
   const [urlReady, setUrlReady] = useState(false);
   const [query, setQuery] = useState("");
   const [activeTag, setActiveTag] = useState("");
@@ -49,13 +60,13 @@ export function BlogIndex({
       const p = new URLSearchParams();
       if (query.trim()) p.set("q", query.trim());
       if (activeTag) p.set("tag", activeTag);
-      const nextPath = p.toString() ? `/blog?${p.toString()}` : "/blog";
+      const nextPath = p.toString() ? `${blogBase}?${p.toString()}` : blogBase;
       const cur = `${window.location.pathname}${window.location.search}`;
       if (cur === nextPath) return;
       router.replace(nextPath, { scroll: false });
     }, 280);
     return () => window.clearTimeout(id);
-  }, [query, activeTag, router, urlReady]);
+  }, [query, activeTag, router, urlReady, blogBase]);
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -77,7 +88,7 @@ export function BlogIndex({
         className="absolute top-[12%] -right-[8%] md:right-[4%] font-kanji text-[clamp(14rem,40vw,28rem)] text-zinc-900/[0.035] leading-none select-none pointer-events-none parallax-watermark gate-weave"
         aria-hidden
       >
-        篇
+        {messages.watermark}
       </div>
 
       <section className="min-h-dvh pt-28 md:pt-36 pb-24 px-6 md:px-12 max-w-[1400px] mx-auto">
@@ -87,20 +98,19 @@ export function BlogIndex({
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           className="mb-12 md:mb-16 max-w-3xl"
         >
-          <p className="font-mono text-xs uppercase tracking-[0.2em] text-zinc-400 mb-6">
-            Writing / 随筆
+          <p className="font-mono text-xs uppercase tracking-[0.14em] md:tracking-[0.2em] text-zinc-400 mb-6">
+            {messages.kicker}
           </p>
           <h1 className="font-display text-[clamp(3rem,10vw,6.5rem)] font-light tracking-tight leading-[0.92] text-zinc-900">
-            <span className="weight-flicker">Fragments</span>
+            <span className="weight-flicker">{messages.titleWord}</span>
             <span className="text-red-600">.</span>
             <br />
             <span className="text-zinc-400 text-[0.42em] md:text-[0.38em] tracking-tight font-normal italic">
-              marginalia in the SHAFT register
+              {messages.titleSuffixNote}
             </span>
           </h1>
           <p className="mt-8 font-mono text-[11px] md:text-xs text-zinc-500 leading-relaxed max-w-xl border-l-2 border-red-600/70 pl-4">
-            Short essays on ML practice, search, and craft — laid out like title pans:
-            bold type, quiet grids, and the occasional bilingual stutter.
+            {messages.deck}
           </p>
         </motion.div>
 
@@ -111,14 +121,14 @@ export function BlogIndex({
                 htmlFor="blog-search"
                 className="font-mono text-[10px] uppercase tracking-[0.14em] text-zinc-400 block mb-2"
               >
-                Search
+                {messages.searchLabel}
               </label>
               <input
                 id="blog-search"
                 type="search"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                placeholder="Title, excerpt, tags…"
+                placeholder={messages.searchPlaceholder}
                 autoComplete="off"
                 className="w-full font-mono text-sm text-zinc-900 bg-[rgba(250,249,248,0.95)] border border-zinc-200 rounded-sm px-3 py-2.5 placeholder:text-zinc-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-600/40 focus-visible:border-red-600/50"
               />
@@ -126,7 +136,7 @@ export function BlogIndex({
 
             <div>
               <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-zinc-400 mb-2">
-                Tags
+                {messages.tagsLabel}
               </p>
               <div className="flex flex-wrap gap-2">
                 <button
@@ -138,7 +148,7 @@ export function BlogIndex({
                       : "border-zinc-200 text-zinc-500 hover:border-zinc-300"
                   }`}
                 >
-                  All
+                  {messages.tagAll}
                 </button>
                 {allTags.map((t) => (
                   <button
@@ -169,7 +179,7 @@ export function BlogIndex({
                   }}
                   className="font-mono text-[10px] uppercase tracking-[0.12em] text-zinc-400 hover:text-red-600 transition-colors underline underline-offset-4 decoration-zinc-300 text-left"
                 >
-                  Clear filters
+                  {messages.clearFilters}
                 </button>
               ) : null}
               <a
@@ -177,7 +187,7 @@ export function BlogIndex({
                 className="font-mono text-[10px] uppercase tracking-[0.14em] text-zinc-400 hover:text-red-600 transition-colors inline-flex items-center gap-2 w-fit"
               >
                 <span className="w-6 h-px bg-current shrink-0" />
-                RSS feed
+                {messages.rss}
               </a>
             </div>
           </div>
@@ -186,9 +196,7 @@ export function BlogIndex({
             className="lg:ml-auto lg:text-right font-mono text-[10px] uppercase tracking-[0.14em] text-zinc-400 tabular-nums self-end"
             aria-live="polite"
           >
-            {filtered.length === posts.length
-              ? `${posts.length} ${posts.length === 1 ? "piece" : "pieces"}`
-              : `${filtered.length} of ${posts.length} shown`}
+            {formatBlogIndexCount(locale, filtered.length, posts.length, messages)}
           </p>
         </div>
 
@@ -201,7 +209,7 @@ export function BlogIndex({
               exit={{ opacity: 0, y: -8 }}
               className="font-mono text-sm text-zinc-500 border-l-2 border-red-600/40 pl-4 max-w-md"
             >
-              No posts match this cut — try loosening search or another tag.
+              {messages.emptyState}
             </motion.p>
           ) : (
             <motion.ul
@@ -241,7 +249,7 @@ export function BlogIndex({
                         dateTime={post.date}
                         className="font-mono text-[10px] uppercase tracking-[0.14em] text-zinc-400 shrink-0 tabular-nums"
                       >
-                        {formatDate(post.date)}
+                        {formatDate(post.date, locale)}
                       </time>
                       <div className="flex flex-wrap gap-2 md:justify-end">
                         {post.tags.map((t) => (
@@ -263,7 +271,7 @@ export function BlogIndex({
 
                     <h2 className="mt-5 font-display text-2xl md:text-3xl font-medium text-zinc-900 leading-snug">
                       <BlogCutLink
-                        href={`/blog/${post.slug}`}
+                        href={`${blogBase}/${post.slug}`}
                         className="glitch-hover inline-block text-inherit no-underline"
                         data-text={post.title}
                       >
@@ -283,12 +291,12 @@ export function BlogIndex({
                     </p>
 
                     <BlogCutLink
-                      href={`/blog/${post.slug}`}
+                      href={`${blogBase}/${post.slug}`}
                       className="inline-flex items-center gap-2 mt-6 font-mono text-[10px] uppercase tracking-[0.18em] text-zinc-400 hover:text-red-600 transition-colors duration-300"
-                      aria-label={`Read: ${post.title}`}
+                      aria-label={formatReadAria(locale, post.title)}
                     >
                       <span className="w-8 h-px bg-current" />
-                      Read
+                      {messages.read}
                     </BlogCutLink>
                   </article>
                 </motion.li>

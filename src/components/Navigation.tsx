@@ -10,7 +10,7 @@ const navLinks = [
   { kanji: "経験", label: "Experience", href: "#experience", id: "experience" },
   { kanji: "作品", label: "Projects", href: "#projects", id: "projects" },
   { kanji: "技術", label: "Skills", href: "#skills", id: "skills" },
-  { kanji: "随筆", label: "Writing", href: "/blog", id: "blog" },
+  { kanji: "随筆", label: "Writing", href: "/en/blog", id: "blog" },
   { kanji: "連絡", label: "Contact", href: "#contact", id: "contact" },
 ];
 
@@ -20,7 +20,12 @@ export function Navigation() {
   const sectionActive = useActiveSection();
 
   const isLinkActive = (id: string) => {
-    if (id === "blog") return pathname === "/blog" || pathname.startsWith("/blog/");
+    if (id === "blog")
+      return (
+        /^\/(en|zh|it)\/blog(\/|$)/.test(pathname) ||
+        pathname === "/blog" ||
+        pathname.startsWith("/blog/")
+      );
     return sectionActive === id;
   };
 

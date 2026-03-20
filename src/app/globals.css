@@ -1,10 +1,29 @@
 @import "tailwindcss";
 
+/* Full CJK coverage for zh blog locale — not available via next/font subsets for Noto Serif SC */
+@import url("https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&display=swap");
+
 @theme inline {
   --font-sans: var(--font-outfit), system-ui, sans-serif;
   --font-mono: var(--font-jetbrains), ui-monospace, monospace;
   --font-display: var(--font-cormorant), Georgia, serif;
   --font-kanji: var(--font-shippori), "游明朝", "YuMincho", "Hiragino Mincho ProN", serif;
+}
+
+/*
+ * Blog locale stacks — Shinto paper / SHAFT title-card discipline.
+ * zh: Noto Serif SC (torii-ink continuity for Han characters)
+ * it: Instrument Serif display + existing Latin body
+ */
+[data-blog-locale="zh"] {
+  --font-sans: "Noto Serif SC", "Source Han Serif SC", "PingFang SC", serif;
+  --font-display: "Noto Serif SC", "Source Han Serif SC", serif;
+  --font-kanji: var(--font-shippori), "Noto Serif SC", serif;
+}
+
+[data-blog-locale="it"] {
+  --font-display: var(--font-instrument), var(--font-cormorant), Georgia, serif;
+  --font-kanji: var(--font-shippori), var(--font-instrument), serif;
 }
 
 html {

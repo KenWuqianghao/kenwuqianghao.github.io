@@ -2,17 +2,31 @@
 
 import { motion } from "framer-motion";
 import { BlogCutLink } from "@/components/BlogCutTransition";
-import type { BlogPost } from "@/lib/blog";
+import type { BlogPostResolved } from "@/lib/blog";
+import type { Locale } from "@/lib/i18n";
+import { getBlogArticleMessages, dateLocaleForUi } from "@/lib/i18n";
 
-function formatDate(iso: string) {
-  return new Date(iso + "T12:00:00").toLocaleDateString("en-CA", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
+function formatDate(iso: string, locale: Locale) {
+  return new Date(iso + "T12:00:00").toLocaleDateString(
+    dateLocaleForUi(locale),
+    {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    },
+  );
 }
 
-export function BlogArticle({ post }: { post: BlogPost }) {
+export function BlogArticle({
+  post,
+  locale,
+}: {
+  post: BlogPostResolved;
+  locale: Locale;
+}) {
+  const messages = getBlogArticleMessages(locale);
+  const blogBase = `/${locale}/blog`;
+
   return (
     <article className="relative overflow-hidden min-h-dvh bg-[rgba(250,249,248,0.92)]">
       <div
@@ -30,10 +44,10 @@ export function BlogArticle({ post }: { post: BlogPost }) {
         >
           <p className="font-mono text-xs uppercase tracking-[0.2em] text-zinc-400 mb-6">
             <BlogCutLink
-              href="/blog"
+              href={blogBase}
               className="hover:text-red-600 transition-colors duration-300"
             >
-              ← 随筆 index
+              {messages.backToIndex}
             </BlogCutLink>
           </p>
 
@@ -41,7 +55,7 @@ export function BlogArticle({ post }: { post: BlogPost }) {
             dateTime={post.date}
             className="font-mono text-[10px] uppercase tracking-[0.14em] text-zinc-400 tabular-nums"
           >
-            {formatDate(post.date)}
+            {formatDate(post.date, locale)}
           </time>
 
           <h1 className="mt-4 font-display text-[clamp(2.25rem,7vw,3.75rem)] font-light tracking-tight leading-[1.05] text-zinc-900">
@@ -83,7 +97,11 @@ export function BlogArticle({ post }: { post: BlogPost }) {
                 delay: 0.15 + idx * 0.06,
                 ease: [0.16, 1, 0.3, 1],
               }}
-              className={idx === 0 ? "first-letter:font-display first-letter:text-[2.85rem] first-letter:leading-[0.85] first-letter:mr-1 first-letter:float-left first-letter:text-zinc-900" : undefined}
+              className={
+                idx === 0
+                  ? "first-letter:font-display first-letter:text-[2.85rem] first-letter:leading-[0.85] first-letter:mr-1 first-letter:float-left first-letter:text-zinc-900"
+                  : undefined
+              }
             >
               {para}
             </motion.p>
@@ -97,14 +115,14 @@ export function BlogArticle({ post }: { post: BlogPost }) {
           transition={{ delay: 0.5, duration: 0.5 }}
         >
           <BlogCutLink
-            href="/blog"
+            href={blogBase}
             className="group inline-flex flex-col gap-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-red-600 rounded-sm"
           >
             <span className="font-display text-lg text-zinc-900 group-hover:text-red-600 transition-colors">
-              目次へ
+              {messages.footerBackKanji}
             </span>
             <span className="font-mono text-[8px] uppercase tracking-[0.15em] text-zinc-400 group-hover:text-red-600 transition-colors">
-              Back to index
+              {messages.footerBackSub}
             </span>
           </BlogCutLink>
         </motion.footer>

@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import { BlogShell } from "@/components/BlogShell";
 
 const SITE = "https://kenwu.is-a.dev";
 
+/** Legacy /blog routes: RSS discovery only (pages redirect to /en/blog). */
 export const metadata: Metadata = {
   alternates: {
     types: {
@@ -11,10 +11,10 @@ export const metadata: Metadata = {
   },
 };
 
-export default function BlogLayout({
+export default function LegacyBlogLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  return <BlogShell>{children}</BlogShell>;
+  return children;
 }
