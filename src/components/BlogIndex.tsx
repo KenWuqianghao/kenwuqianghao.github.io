@@ -110,7 +110,11 @@ export function BlogIndex({
             </span>
           </h1>
           <p className="mt-8 font-mono text-[11px] md:text-xs text-zinc-500 leading-relaxed max-w-xl border-l-2 border-red-600/70 pl-4">
-            {messages.deck}
+            {messages.deckBefore}
+            {messages.deckEmphasis ? (
+              <em className="italic text-zinc-600">{messages.deckEmphasis}</em>
+            ) : null}
+            {messages.deckAfter}
           </p>
         </motion.div>
 

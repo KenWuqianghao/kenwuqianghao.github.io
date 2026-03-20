@@ -15,7 +15,11 @@ export type BlogIndexMessages = {
   kicker: string;
   titleWord: string;
   titleSuffixNote: string;
-  deck: string;
+  /** Text before the emphasized word (e.g. philosophy term) */
+  deckBefore: string;
+  /** Emphasized segment — rendered italic on the blog index */
+  deckEmphasis: string;
+  deckAfter: string;
   searchLabel: string;
   searchPlaceholder: string;
   tagsLabel: string;
@@ -47,8 +51,10 @@ const blogIndex: Record<Locale, BlogIndexMessages> = {
     kicker: "Writing / 随筆",
     titleWord: "Fragments",
     titleSuffixNote: "marginalia in the SHAFT register",
-    deck:
-      "Short essays on ML practice, search, and craft — laid out like title pans: bold type, quiet grids, and the occasional bilingual stutter.",
+    deckBefore:
+      "Essays on software engineering, life, philosophy, health and how to survive and find ",
+    deckEmphasis: "ataraxia",
+    deckAfter: ".",
     searchLabel: "Search",
     searchPlaceholder: "Title, excerpt, tags…",
     tagsLabel: "Tags",
@@ -66,8 +72,9 @@ const blogIndex: Record<Locale, BlogIndexMessages> = {
     kicker: "随笔 / Writing",
     titleWord: "断章",
     titleSuffixNote: "映在底片上的旁注",
-    deck:
-      "关于机器学习实践、检索与手艺的短章——排成标题卡的样子：利落字形、克制栅格，与偶尔的双语错拍。",
+    deckBefore: "关于软件工程、生活、哲学、健康，以及如何自处并寻得 ",
+    deckEmphasis: "ataraxia",
+    deckAfter: "。",
     searchLabel: "检索",
     searchPlaceholder: "标题、摘要、标签…",
     tagsLabel: "标签",
@@ -84,8 +91,10 @@ const blogIndex: Record<Locale, BlogIndexMessages> = {
     kicker: "Scritti / 随筆",
     titleWord: "Frammenti",
     titleSuffixNote: "marginalia nello stile SHAFT",
-    deck:
-      "Brevi saggi su ML, ricerca e mestiere — impaginati come cartelli di titolo: tipi netti, griglie silenziose, e qualche inciampo bilingue.",
+    deckBefore:
+      "Saggi su ingegneria del software, vita, filosofia, salute e su come sopravvivere e trovare ",
+    deckEmphasis: "ataraxia",
+    deckAfter: ".",
     searchLabel: "Cerca",
     searchPlaceholder: "Titolo, estratto, tag…",
     tagsLabel: "Tag",
@@ -142,6 +151,12 @@ const blogShell: Record<Locale, BlogShellMessages> = {
 
 export function getBlogIndexMessages(locale: Locale): BlogIndexMessages {
   return blogIndex[locale];
+}
+
+/** Plain blog tagline for meta / RSS (no italic markup). */
+export function getBlogIndexPlainDeck(locale: Locale): string {
+  const m = blogIndex[locale];
+  return `${m.deckBefore}${m.deckEmphasis}${m.deckAfter}`;
 }
 
 export function getBlogArticleMessages(locale: Locale): BlogArticleMessages {

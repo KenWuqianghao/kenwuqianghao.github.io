@@ -1,5 +1,5 @@
 import { blogPosts } from "./blog";
-import { BLOG_INDEX_PATH } from "./i18n";
+import { BLOG_INDEX_PATH, DEFAULT_LOCALE, getBlogIndexPlainDeck } from "./i18n";
 
 const SITE = "https://kenwu.is-a.dev";
 
@@ -50,7 +50,7 @@ export function buildBlogRss(): string {
     <title>${escapeXml("Ken Wu — Writing")}</title>
     <link>${escapeXml(`${SITE}${BLOG_INDEX_PATH}`)}</link>
     <description>${escapeXml(
-      "Essays and marginalia — ML, systems, and craft.",
+      getBlogIndexPlainDeck(DEFAULT_LOCALE),
     )}</description>
     <language>en</language>
     <lastBuildDate>${lastBuild}</lastBuildDate>

@@ -3,7 +3,7 @@
   <channel>
     <title>Ken Wu — Writing</title>
     <link>https://kenwu.is-a.dev/en/blog</link>
-    <description>Essays and marginalia — ML, systems, and craft.</description>
+    <description>Essays on software engineering, life, philosophy, health and how to survive and find ataraxia.</description>
     <language>en</language>
     <lastBuildDate>Fri, 20 Mar 2026 12:00:00 GMT</lastBuildDate>
     <atom:link href="https://kenwu.is-a.dev/blog/rss.xml" rel="self" type="application/rss+xml"/>
