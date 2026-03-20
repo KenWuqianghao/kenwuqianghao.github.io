@@ -1,5 +1,5 @@
 import { ImageResponse } from "next/og";
-import { projects, experience } from "@/lib/data";
+import { projects, experienceTimeline } from "@/lib/data";
 
 export const dynamic = "force-static";
 export const alt = "Ken Wu — Software Engineer & ML Researcher";
@@ -8,7 +8,7 @@ export const contentType = "image/png";
 
 export default function OGImage() {
   const projectCount = projects.length;
-  const experienceCount = experience.length;
+  const experienceCount = experienceTimeline.length;
 
   return new ImageResponse(
     (
@@ -96,7 +96,7 @@ export default function OGImage() {
           <span style={{ color: "#dc2626" }}>·</span>
           <span>ML Researcher</span>
           <span style={{ color: "#dc2626" }}>·</span>
-          <span>{experienceCount} Internships</span>
+          <span>{experienceCount} Roles</span>
           <span style={{ color: "#dc2626" }}>·</span>
           <span>{projectCount} Projects</span>
         </div>

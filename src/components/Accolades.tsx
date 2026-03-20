@@ -6,8 +6,8 @@ const accolades = [
   "Neo Scholar Finalist",
   "5x Hackathon Winner",
   "Stanford Code in Place Instructor",
-  "Undergraduate Research Assistant",
-  "Research Exchange — Lancaster University",
+  "URA · University of Waterloo",
+  "Undergraduate Researcher · Lancaster University",
 ];
 
 export function Accolades() {

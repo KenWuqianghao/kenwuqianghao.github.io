@@ -1,5 +1,10 @@
 import type { Metadata } from "next";
-import { Outfit, JetBrains_Mono, Cormorant_Garamond } from "next/font/google";
+import {
+  Outfit,
+  JetBrains_Mono,
+  Cormorant_Garamond,
+  Shippori_Mincho,
+} from "next/font/google";
 import "./globals.css";
 
 const outfit = Outfit({
@@ -17,6 +22,12 @@ const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
   style: ["normal", "italic"],
+});
+
+const shipporiMincho = Shippori_Mincho({
+  variable: "--font-shippori",
+  subsets: ["latin"],
+  weight: ["400"],
 });
 
 export const metadata: Metadata = {
@@ -37,7 +48,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${outfit.variable} ${jetbrainsMono.variable} ${cormorant.variable} font-sans antialiased`}
+        className={`${outfit.variable} ${jetbrainsMono.variable} ${cormorant.variable} ${shipporiMincho.variable} font-sans antialiased`}
       >
         {children}
       </body>

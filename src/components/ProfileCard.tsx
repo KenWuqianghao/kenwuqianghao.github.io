@@ -318,7 +318,24 @@ export function ProfileCard() {
                   className="font-mono text-[8px] uppercase tracking-[0.2em]"
                   style={{ color: "#2a2a3a" }}
                 >
-                  UW · Waterloo, ON
+                  <a
+                    href="https://uwaterloo.ca/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-[#0d0d1a] underline underline-offset-2"
+                  >
+                    UW
+                  </a>{" "}
+                  ·{" "}
+                  <a
+                    href="https://en.wikipedia.org/wiki/Waterloo,_Ontario?useskin=vector"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-[#0d0d1a] underline underline-offset-2"
+                  >
+                    Waterloo
+                  </a>
+                  , ON
                 </span>
                 <span
                   className="font-mono text-[8px] uppercase tracking-[0.2em]"

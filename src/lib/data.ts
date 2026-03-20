@@ -20,8 +20,51 @@ export interface ExperienceEntry {
   bullets: string[];
   meta?: string;
   website?: string;
+  advisorUrl?: string;
+  advisorLabel?: string;
 }
 
+/** Ongoing academic research; rendered in a compact cluster on the main Experience section */
+export const researchExperience: ExperienceEntry[] = [
+  {
+    company: "University of Waterloo",
+    role: "Undergraduate Research Assistant",
+    type: "ML \u00b7 Attention & symbolic regression",
+    dates: "Sep 2024 \u2014 Present",
+    location: "Waterloo, Canada \u00b7 Remote",
+    website: "https://uwaterloo.ca/",
+    advisorUrl: "https://uwaterloo.ca/statistics-and-actuarial-science/profiles/ali-ghodsi",
+    advisorLabel: "Advisor",
+    stack: ["Python", "PyTorch", "Transformers"],
+    meta: "With Prof. Ali Ghodsi & Amin Ravanbakhsh",
+    bullets: [
+      "Benchmarked symbolic regression at dataset scale, holding R² ≥ 0.99 whenever fits stayed numerically stable.",
+      "Fine-tuned Symbolic GPT variants for roughly 19 percentage points higher in-domain accuracy.",
+      "Ablated tokenizer and Point-Net configurations to balance R² against overall model complexity.",
+      "Refined inference loops to reduce MSE and MRE consistently across standard benchmark suites.",
+    ],
+  },
+  {
+    company: "Lancaster University",
+    role: "Undergraduate Researcher",
+    type: "Unsupervised learning",
+    dates: "Jan 2025 \u2014 Present",
+    location: "Lancaster, UK \u00b7 On-site",
+    website: "https://www.lancaster.ac.uk/",
+    advisorUrl: "https://www.lancaster.ac.uk/lira/people/plamen-angelov",
+    advisorLabel: "Advisor",
+    stack: ["Python", "NumPy", "scikit-learn"],
+    meta: "With Prof. Plamen Angelov",
+    bullets: [
+      "Recursive ReSil / ReSilC in Python: O(1) key updates and PAMSil up to 85.6% faster on CIFAR-100 at equal quality.",
+      "Optimized R-Means centroid updates for 17\u201324% faster runs than K-Means on CIFAR-10/100, MNIST, and Fashion-MNIST.",
+      "Built a NumPy / scikit-learn pipeline benchmarking recursive versus flat clustering across 8+ datasets with 10-run averages.",
+      "Tracked silhouette, inertia, and wall-clock time each run so speed-quality comparisons stayed fair.",
+    ],
+  },
+];
+
+/** Industry, teaching, and internships (full-width cards) */
 export const experience: ExperienceEntry[] = [
   {
     company: "Nokia",
@@ -79,6 +122,22 @@ export const experience: ExperienceEntry[] = [
     ],
   },
   {
+    company: "hum.ai",
+    role: "Machine Learning Engineer Intern",
+    type: "Super Resolution",
+    dates: "Jul 2024 \u2014 Sep 2024",
+    location: "Kitchener, Canada",
+    website: "https://hum.ai",
+    stack: ["Python", "PyTorch", "AWS", "SageMaker", "Jupyter"],
+    meta: "Formerly Coastal Carbon",
+    bullets: [
+      "Benchmarked SOTA super-resolution models (e.g. ESRGAN, StableSR) through PyTorch pipelines",
+      "Built automated benchmarking pipelines in Python to evaluate multiple models efficiently",
+      "Visualized model performance with Matplotlib and Seaborn in Jupyter on SageMaker for analysis",
+      "Managed experiment infrastructure on AWS S3 and EC2 for scalable fine-tuning and evaluation",
+    ],
+  },
+  {
     company: "Health Canada",
     role: "Machine Learning Engineer Intern",
     type: "Document QA",
@@ -92,14 +151,29 @@ export const experience: ExperienceEntry[] = [
     ],
   },
   {
-    company: "Keywords AI",
+    company: "Saputo",
+    role: "Data Analyst Intern",
+    type: "Operations & Automation",
+    dates: "Jan 2024 \u2014 Apr 2024",
+    location: "Georgetown, Canada",
+    website: "https://www.saputo.com",
+    stack: ["TypeScript", "Excel", "VBA", "Gemini API"],
+    bullets: [
+      "Developed TypeScript Office Scripts in Excel that eliminated ~8 hours/week of manual open-order updates",
+      "Automated weekly workflows for 1000+ Nestl\u00e9 products, avoiding 20,000+ manual data entries",
+      "Used the Gemini API to automate competitor research across 200+ brands",
+      "Ran weekly statistical analysis and EDA in VBA across 2000+ major products and 200+ miscellaneous SKUs",
+    ],
+  },
+  {
+    company: "Respan",
     role: "Software Engineer Intern",
     type: "Resume Parsing",
     dates: "Mar 2023 \u2014 Jun 2023",
     location: "New York, United States",
-    website: "https://keywordsai.co",
+    website: "https://respan.ai",
     stack: ["Python", "spaCy", "SQLite"],
-    meta: "Y Combinator W24",
+    meta: "Y Combinator W24 \u00b7 Formerly Keywords AI",
     bullets: [
       "Parsed 1,000+ resumes with a spaCy-based NER pipeline to extract structured recruiter data",
       "Reduced response delay by 98% through integration of SQLite-based result caching into the parsing engine",
@@ -119,6 +193,12 @@ export const experience: ExperienceEntry[] = [
       "Achieved 70% recall by fine-tuning spaCy models and optimizing hyperparameters via WanDB on Azure",
     ],
   },
+];
+
+/** Shrine / combined counts: research first, then industry timeline */
+export const experienceTimeline: ExperienceEntry[] = [
+  ...researchExperience,
+  ...experience,
 ];
 
 export const skills: Record<string, string[]> = {
@@ -153,6 +233,7 @@ export const projects: Project[] = [
     stack: ["Python", "TypeScript", "Graph Neural Networks"],
     github: "https://github.com/KenWuqianghao/Ding-Bot",
     demo: "https://ding-bot.vercel.app/",
+    highlight: "Under Construction",
   },
   {
     name: "PokerMon",
@@ -161,6 +242,31 @@ export const projects: Project[] = [
     stack: ["Python", "Deep CFR", "Game Theory"],
     github: "https://github.com/KenWuqianghao/PokerMon",
     demo: "https://poker-mon.vercel.app/",
+    highlight: "Under Construction",
+  },
+  {
+    name: "LeaseEase",
+    description:
+      "Streamlit app demystifying Canada\u2019s Residential Tenancy Act with LLM + RAG, plain-language guidance, and auto-generated forms (T1, N7) for tenants navigating the housing crisis.",
+    stack: ["Python", "Streamlit", "OpenAI", "Cohere", "ChromaDB"],
+    demo: "https://devpost.com/software/leaseease",
+    highlight: "McHack \u201924 \u00b7 Telus Environment & Social Sustainable Future Prize",
+  },
+  {
+    name: "MedChat",
+    description:
+      "Assistant for clinical Q&A: Cohere Classify routes intent to a brain-tumor CNN or RAG over 1000+ WebMD pages with streamed answers in Streamlit.",
+    stack: ["Python", "Cohere", "TensorFlow", "Streamlit"],
+    github: "https://github.com/KenWuqianghao/MedChat",
+    highlight: "Cohere RAG Challenge \u201923 \u00b7 Winner",
+  },
+  {
+    name: "DirectU",
+    description:
+      "Full-stack planner matching career goals and free-text course preferences to UWFlow reviews via Cohere, assembling a personalized four-year roadmap (React, Flask, MongoDB).",
+    stack: ["React", "Flask", "MongoDB", "Cohere"],
+    demo: "https://directu.onrender.com/",
+    highlight: "Hack the North \u201923 \u00b7 Best Use of Cohere",
   },
   {
     name: "LeGM-Lab",
@@ -171,26 +277,11 @@ export const projects: Project[] = [
     demo: "https://legm-lab.vercel.app",
   },
   {
-    name: "LeLM",
-    description:
-      "Fine-tuned LLM for NBA hot takes, built on Qwen3-8B with LoRA and trained on Reddit r/nba posts",
-    stack: ["Python", "Unsloth", "LoRA", "Hugging Face"],
-    github: "https://github.com/KenWuqianghao/LeLM",
-    demo: "https://lelm.vercel.app/",
-  },
-  {
     name: "FlightCal",
     description:
       "Fetches flight info and exports it directly to Google Calendar or as an .ics file for any calendar app",
     stack: ["TypeScript", "Next.js", "Google Calendar API"],
     github: "https://github.com/KenWuqianghao/FlightCal",
     demo: "https://flight-cal.vercel.app",
-  },
-  {
-    name: "claude-bell",
-    description:
-      "Interactive CLI to configure audio notifications for Claude Code — know when your agent is done without babysitting it",
-    stack: ["JavaScript", "Node.js", "Claude Code"],
-    github: "https://github.com/KenWuqianghao/claude-bell",
   },
 ];

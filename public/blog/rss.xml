@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ken Wu — Writing</title>
+    <link>https://kenwu.is-a.dev/blog</link>
+    <description>Essays and marginalia — ML, systems, and craft.</description>
+    <language>en</language>
+    <lastBuildDate>Fri, 20 Mar 2026 12:00:00 GMT</lastBuildDate>
+    <atom:link href="https://kenwu.is-a.dev/blog/rss.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>Coming Soon...</title>
+      <link>https://kenwu.is-a.dev/blog/coming-soon</link>
+      <guid isPermaLink="true">https://kenwu.is-a.dev/blog/coming-soon</guid>
+      <pubDate>Fri, 20 Mar 2026 12:00:00 GMT</pubDate>
+      <description>The feed is live — longer essays and notes will land here when they are ready.
+
+Coming soon...
+
+This space will hold writing on machine learning, systems, and whatever else earns a longer arc than a thread. For now, you can still subscribe via RSS so new posts show up without checking back.</description>
+    </item>
+  </channel>
+</rss>

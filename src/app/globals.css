@@ -1,11 +1,10 @@
 @import "tailwindcss";
-@import url("https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400&display=optional");
 
 @theme inline {
   --font-sans: var(--font-outfit), system-ui, sans-serif;
   --font-mono: var(--font-jetbrains), ui-monospace, monospace;
   --font-display: var(--font-cormorant), Georgia, serif;
-  --font-kanji: "Shippori Mincho", "游明朝", "YuMincho", "Hiragino Mincho ProN", serif;
+  --font-kanji: var(--font-shippori), "游明朝", "YuMincho", "Hiragino Mincho ProN", serif;
 }
 
 html {
@@ -271,7 +270,7 @@ section:first-of-type {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: "Shippori Mincho", "游明朝", "YuMincho", var(--font-display), Georgia, serif;
+  font-family: var(--font-kanji), var(--font-display), Georgia, serif;
   font-size: clamp(6rem, 20vw, 16rem);
   font-weight: 400;
 }

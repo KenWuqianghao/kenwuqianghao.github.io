@@ -81,7 +81,14 @@ export function Hero() {
                 Based in
               </span>
               <span className="text-zinc-700 text-sm">
-                {personalInfo.location}
+                <a
+                  href="https://en.wikipedia.org/wiki/Waterloo,_Ontario?useskin=vector"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline underline-offset-4 decoration-zinc-300 hover:decoration-red-600 hover:text-red-600 transition-colors duration-300"
+                >
+                  {personalInfo.location}
+                </a>
               </span>
             </div>
 
@@ -90,7 +97,15 @@ export function Hero() {
                 Education
               </span>
               <span className="text-zinc-700 text-sm">
-                University of Waterloo, CS &apos;26
+                <a
+                  href="https://uwaterloo.ca/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline underline-offset-4 decoration-zinc-300 hover:decoration-red-600 hover:text-red-600 transition-colors duration-300"
+                >
+                  University of Waterloo
+                </a>
+                , CS &apos;26
               </span>
             </div>
 

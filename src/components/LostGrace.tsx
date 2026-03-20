@@ -199,7 +199,7 @@ export function LostGrace() {
                   marginBottom: "0.65rem",
                 }}
               >
-                Lost Grace Discovered
+                LOST GRACE DISCOVERED
               </p>
 
               {/* Grace name — main text, elegant serif */}
@@ -213,7 +213,7 @@ export function LostGrace() {
                   textShadow: `0 0 30px ${GOLD}cc, 0 0 70px ${GOLD}55, 0 0 100px ${GOLD}22`,
                 }}
               >
-                Ken&apos;s Elden Ring Easter Egg
+                Elden Ring Easter Egg
               </p>
             </motion.div>
 

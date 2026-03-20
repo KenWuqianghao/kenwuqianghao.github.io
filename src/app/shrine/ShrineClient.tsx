@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { personalInfo, experience, projects, skills } from "@/lib/data";
+import { personalInfo, experienceTimeline, projects, skills } from "@/lib/data";
 
 // ─── palette ──────────────────────────────────────────────────────────────────
 const R  = "#dc2626";
@@ -264,7 +264,7 @@ export function ShrineClient() {
           <Slash />
 
           <div className="flex flex-col gap-3">
-            {experience.map((exp, i) => (
+            {experienceTimeline.map((exp, i) => (
               <motion.div
                 key={exp.company}
                 initial={{ opacity: 0, x: i % 2 === 0 ? -24 : 24 }}

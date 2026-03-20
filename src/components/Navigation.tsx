@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { useActiveSection } from "@/hooks/useActiveSection";
 
@@ -8,12 +10,19 @@ const navLinks = [
   { kanji: "経験", label: "Experience", href: "#experience", id: "experience" },
   { kanji: "作品", label: "Projects", href: "#projects", id: "projects" },
   { kanji: "技術", label: "Skills", href: "#skills", id: "skills" },
+  { kanji: "随筆", label: "Writing", href: "/blog", id: "blog" },
   { kanji: "連絡", label: "Contact", href: "#contact", id: "contact" },
 ];
 
 export function Navigation() {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const active = useActiveSection();
+  const pathname = usePathname();
+  const sectionActive = useActiveSection();
+
+  const isLinkActive = (id: string) => {
+    if (id === "blog") return pathname === "/blog" || pathname.startsWith("/blog/");
+    return sectionActive === id;
+  };
 
   return (
     <nav aria-label="Main navigation">
@@ -24,28 +33,45 @@ export function Navigation() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.3, ease: [0.25, 1, 0.5, 1] }}
       >
-        {navLinks.map((link) => (
-          <a
-            key={link.id}
-            href={link.href}
-            aria-label={link.label}
-            className="group flex flex-col items-end"
-          >
-            <span
-              className={`font-display text-lg transition-colors duration-300 group-hover:text-red-600 relative ${
-                active === link.id ? "text-zinc-900" : "text-zinc-400"
-              }`}
+        {navLinks.map((link) => {
+          const active = isLinkActive(link.id);
+          const body = (
+            <>
+              <span
+                className={`font-display text-lg transition-colors duration-300 group-hover:text-red-600 relative ${
+                  active ? "text-zinc-900" : "text-zinc-400"
+                }`}
+              >
+                {link.kanji}
+                {active && (
+                  <span className="absolute -left-3 top-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full bg-red-600" />
+                )}
+              </span>
+              <span className="font-mono text-[8px] uppercase tracking-[0.15em] text-zinc-400 group-hover:text-red-600 transition-colors duration-300">
+                {link.label}
+              </span>
+            </>
+          );
+          return link.href.startsWith("/") ? (
+            <Link
+              key={link.id}
+              href={link.href}
+              aria-label={link.label}
+              className="group flex flex-col items-end"
             >
-              {link.kanji}
-              {active === link.id && (
-                <span className="absolute -left-3 top-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full bg-red-600" />
-              )}
-            </span>
-            <span className="font-mono text-[8px] uppercase tracking-[0.15em] text-zinc-400 group-hover:text-red-600 transition-colors duration-300">
-              {link.label}
-            </span>
-          </a>
-        ))}
+              {body}
+            </Link>
+          ) : (
+            <a
+              key={link.id}
+              href={link.href}
+              aria-label={link.label}
+              className="group flex flex-col items-end"
+            >
+              {body}
+            </a>
+          );
+        })}
       </motion.div>
 
       {/* Mobile — toggle button */}
@@ -72,30 +98,55 @@ export function Navigation() {
             transition={{ duration: 0.3, ease: [0.25, 1, 0.5, 1] }}
           >
             <div className="flex flex-col items-center gap-10">
-              {navLinks.map((link, i) => (
-                <motion.a
-                  key={link.id}
-                  href={link.href}
-                  aria-label={link.label}
-                  className="flex flex-col items-center group"
-                  onClick={() => setMobileOpen(false)}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.4, delay: i * 0.05, ease: [0.25, 1, 0.5, 1] }}
-                >
-                  <span
-                    className={`font-display text-3xl transition-colors duration-300 group-hover:text-red-600 ${
-                      active === link.id ? "text-zinc-900" : "text-zinc-400"
-                    }`}
+              {navLinks.map((link, i) => {
+                const active = isLinkActive(link.id);
+                const mobileBody = (
+                  <>
+                    <span
+                      className={`font-display text-3xl transition-colors duration-300 group-hover:text-red-600 ${
+                        active ? "text-zinc-900" : "text-zinc-400"
+                      }`}
+                    >
+                      {link.kanji}
+                    </span>
+                    <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-zinc-400 group-hover:text-red-600 transition-colors duration-300 mt-1">
+                      {link.label}
+                    </span>
+                  </>
+                );
+                return link.href.startsWith("/") ? (
+                  <motion.div
+                    key={link.id}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.4, delay: i * 0.05, ease: [0.25, 1, 0.5, 1] }}
                   >
-                    {link.kanji}
-                  </span>
-                  <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-zinc-400 group-hover:text-red-600 transition-colors duration-300 mt-1">
-                    {link.label}
-                  </span>
-                </motion.a>
-              ))}
+                    <Link
+                      href={link.href}
+                      aria-label={link.label}
+                      className="flex flex-col items-center group"
+                      onClick={() => setMobileOpen(false)}
+                    >
+                      {mobileBody}
+                    </Link>
+                  </motion.div>
+                ) : (
+                  <motion.a
+                    key={link.id}
+                    href={link.href}
+                    aria-label={link.label}
+                    className="flex flex-col items-center group"
+                    onClick={() => setMobileOpen(false)}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.4, delay: i * 0.05, ease: [0.25, 1, 0.5, 1] }}
+                  >
+                    {mobileBody}
+                  </motion.a>
+                );
+              })}
             </div>
           </motion.div>
         )}

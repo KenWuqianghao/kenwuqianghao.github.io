@@ -46,9 +46,11 @@ The site translates Shinbo's cinematic vocabulary into web interactions:
 
 **NBA Player Card** — Leave the site idle for 45 seconds. A Warriors-era KD 2K card appears: OVR ??, MID 69 (nice), 3PT KD35, PHY KD7, IQ ∞, HND 42, ALGN ??, with THE SLIM REAPER badge and #35 watermark.
 
-**Easter Egg Counter** — A small HUD in the bottom-right corner tracks all 6 discoverable easter eggs as a row of squares (`secrets · □□□□□□ · 0/6`). Always visible at low opacity; pulses brighter when a new egg fills in. Persists across sessions via localStorage. When all 6 are collected, a rapid SHAFT-style flash sequence fires — `全` → `SECRETS` → `DISCOVERED` → `6/6` → `吴锵皓` — and the counter dots turn red permanently.
+**Easter Egg Counter** — A small HUD in the bottom-right corner tracks all 6 discoverable easter eggs as a row of squares (`secrets · □□□□□□ · 0/6`). Always visible at low opacity; pulses brighter when a new egg fills in. Persists egg progress in **localStorage** under `eggs-found` (JSON array of egg ids). When all 6 are collected the first time, a rapid SHAFT-style flash sequence fires — `全` → `SECRETS` → `DISCOVERED` → `6/6` → `吴锵皓` — the HUD label switches to **complete**, dots turn red, and **`eggs-complete-seen`** is set so the full sequence only runs once. **Hierophant Green** — Immediately after that flash, a **completion reward** dialog opens ([`EasterEggCounter.tsx`](src/components/EasterEggCounter.tsx)): Framer Motion **AnimatePresence** + title-card layout (black/white/red, letterbox bars, slight Dutch tilt, diagonal red band, faint scanlines, vertical caption rail, oversized watermark 秘). Copy invites email to **wooqianghao@gmail.com** with subject **Hierophant Green**; primary action is a **mailto** with that subject prefilled. **Return visits** with all eggs already saved do not auto-open the dialog; users can reopen it by **clicking the complete HUD**. Dismiss is **Cut** (film cue) with an accessible “close” label; **Escape** and backdrop click also close.
 
 **Secret Shrine** — Navigate to `/shrine` to find a hidden alternate version of the portfolio styled as a JoJo × Persona 5 fusion: near-black background with halftone dot texture and diagonal speed-line hatching, ゴゴゴゴ ambient text on both edges, and the full site content reimagined through a dark game-UI lens. The hero section presents a stand user card (Stand: DEEP PURPLE, Arcana: THE MAGICIAN) with JoJo-style stat bars. Experience becomes Battle History in chapter cards, projects become Operations, skills become Stand Abilities. A barely-visible `★` in the About section's Off-duty facet links here for those paying close attention.
+
+**Writing (`/blog`)** — A dedicated essays index under [`src/app/blog/`](src/app/blog/) with the same atmospheric shell as the rest of the site: falling kanji columns, film grain, scroll-linked red thread, and watermark typography. Navigation includes **随筆 / Writing**. The index supports **search** (title, excerpt, subtitle, tags), **single-tag filtering** with URL sync (`?q=` and `?tag=`), and a visible **RSS** link. **Card-cut transitions** (full-viewport wipe with a red leading edge) run when moving between the index and a post via in-blog links; reduced motion falls back to normal navigation. Post data and helpers live in [`src/lib/blog.ts`](src/lib/blog.ts). Layout wraps all blog routes in [`BlogShell`](src/components/BlogShell.tsx) so transitions and effects persist across client-side route changes.
 
 **Post-Processing Stack** — Three.js EffectComposer applies chromatic aberration, additive noise, bloom (threshold 0.9), and custom scanlines over the entire canvas layer. Every pixel goes through the SHAFT filter.
 
@@ -71,24 +73,43 @@ Zinc grays (`#e4e4e7`, `#a1a1aa`) appear only in secondary text. The red `::sele
 ## Typography
 
 - **Cormorant Garamond** (display) — Elegant serif for the hero name and Latin display typography. Light weight (300).
-- **Shippori Mincho** (kanji) — Traditional Japanese Mincho typeface for all kanji watermarks and the Chinese name 吴锵皓. Thin strokes and classical serifs match the SHAFT aesthetic.
+- **Shippori Mincho** (kanji) — Loaded via `next/font/google` as `--font-shippori`; referenced in CSS as `--font-kanji` with CJK fallbacks. Used for kanji watermarks, column rain, and the Chinese name 吴锵皓.
 - **Outfit** (body) — Clean geometric sans-serif for readability in content sections.
 - **JetBrains Mono** (mono) — Monospace for labels, tags, and technical metadata.
 
 ## Tech Stack
 
-- **Next.js 16** — App Router, server components, `next/font` optimization
+- **Next.js 16** — App Router, server components, **`output: "export"`** for static hosting (e.g. GitHub Pages), `next/font` optimization
 - **React 19** + **TypeScript**
 - **Tailwind CSS 4** — Utility-first styling with `@theme` token system
 - **Three.js** via **React Three Fiber** + **Drei** — Particle text entrance, skill constellation, wireframe grid
 - **hanzi-writer** — SVG stroke-order animation for Chinese characters
 - **React Three Postprocessing** — Chromatic aberration, bloom, noise, custom scanline shader
-- **Framer Motion** — Scroll-triggered reveals, spring animations, viewport-aware transitions
+- **Framer Motion** — Scroll-triggered reveals, spring animations, viewport-aware transitions, blog card-cut and list animations
 - **Phosphor Icons** — Icon system
+
+## Blog RSS feed
+
+The site is a **static export**, so RSS cannot be served by a dynamic API route. Instead, the feed is **generated whenever Next loads [`next.config.ts`](next.config.ts)**:
+
+1. [`buildBlogRss()`](src/lib/blogRss.ts) reads [`blogPosts`](src/lib/blog.ts) and emits valid RSS 2.0 XML with an Atom self-link.
+2. The file is written to **`public/blog/rss.xml`**, which is copied into **`out/blog/rss.xml`** on `next build`.
+
+**Subscriber-facing URL:** `https://kenwu.is-a.dev/blog/rss.xml`.
+
+Whenever the production domain changes, keep these in sync: **`SITE`** in [`src/lib/blogRss.ts`](src/lib/blogRss.ts) (feed links and Atom `self` URL), **`metadataBase`** in [`src/app/layout.tsx`](src/app/layout.tsx), and **`SITE`** in [`src/app/blog/layout.tsx`](src/app/blog/layout.tsx) (RSS `alternates` discovery URL).
+
+[`src/app/blog/layout.tsx`](src/app/blog/layout.tsx) exposes the feed via `metadata.alternates.types` so clients can auto-discover it. After editing posts, run **`npm run dev`** or **`npm run build`** once so `public/blog/rss.xml` stays in sync; commit that file if your deploy pipeline does not run a full Next build.
+
+## Editing blog posts
+
+- Add or change entries in the **`blogPosts`** array in [`src/lib/blog.ts`](src/lib/blog.ts). Each post needs: `slug`, `title`, optional `titleRuby`, ISO `date` (`YYYY-MM-DD`), `excerpt`, `tags`, `watermarkKanji`, and `content` (string paragraphs).
+- **`generateStaticParams`** in `src/app/blog/[slug]/page.tsx` derives slugs from that array—no manual route list.
+- Empty **`tags`** is allowed; the index still shows the **All** filter and search.
 
 ## Accessibility
 
-All visual effects respect `prefers-reduced-motion`. Entrance sequence, film jitter, gate weave, cursor trail, and flash frames are suppressed entirely when the user's OS requests reduced motion. Decorative elements are marked `aria-hidden="true"`.
+All visual effects respect `prefers-reduced-motion`. Entrance sequence, film jitter, gate weave, cursor trail, flash frames, and the **blog card-cut transition** are suppressed or reduced when the user's OS requests reduced motion. Decorative elements are marked `aria-hidden="true"`.
 
 ## Running Locally
 
@@ -97,4 +118,6 @@ npm install
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000).
+Open [http://localhost:3000](http://localhost:3000). Loading the dev server evaluates `next.config.ts` and regenerates `public/blog/rss.xml` to match the current `blogPosts` data.
+
+**Production build:** `npm run build` writes static HTML to `out/`. RSS ends up at `out/blog/rss.xml` alongside the rest of the exported site.

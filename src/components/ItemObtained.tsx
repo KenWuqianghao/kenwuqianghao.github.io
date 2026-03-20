@@ -252,7 +252,7 @@ export function ItemObtained() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.7, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
             >
-              Ken&apos;s Zelda Easter Egg<span style={{ color: CYAN }}>!</span>
+              Zelda Easter Egg<span style={{ color: CYAN }}>!</span>
             </motion.h3>
 
             {/* Sheikah divider */}
