@@ -6,13 +6,29 @@ import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { useActiveSection } from "@/hooks/useActiveSection";
 
-const navLinks = [
-  { kanji: "経験", label: "Experience", href: "#experience", id: "experience" },
-  { kanji: "作品", label: "Projects", href: "#projects", id: "projects" },
-  { kanji: "技術", label: "Skills", href: "#skills", id: "skills" },
-  { kanji: "随筆", label: "Writing", href: "/en/blog", id: "blog" },
-  { kanji: "連絡", label: "Contact", href: "#contact", id: "contact" },
+const navLinks: Array<{
+  kanji: string;
+  label: string;
+  id: string;
+  section?: string;
+  href?: string;
+}> = [
+  { kanji: "経験", label: "Experience", id: "experience", section: "experience" },
+  { kanji: "作品", label: "Projects", id: "projects", section: "projects" },
+  { kanji: "技術", label: "Skills", id: "skills", section: "skills" },
+  { kanji: "随筆", label: "Writing", id: "blog", href: "/en/blog" },
+  { kanji: "他作", label: "More work", id: "more-projects", href: "/projects" },
+  { kanji: "連絡", label: "Contact", id: "contact", section: "contact" },
 ];
+
+function resolvedHref(
+  pathname: string,
+  link: (typeof navLinks)[number]
+): string {
+  if (link.href) return link.href;
+  if (link.section) return pathname === "/" ? `#${link.section}` : `/#${link.section}`;
+  return "/";
+}
 
 export function Navigation() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -20,12 +36,8 @@ export function Navigation() {
   const sectionActive = useActiveSection();
 
   const isLinkActive = (id: string) => {
-    if (id === "blog")
-      return (
-        /^\/(en|zh|it)\/blog(\/|$)/.test(pathname) ||
-        pathname === "/blog" ||
-        pathname.startsWith("/blog/")
-      );
+    if (id === "blog") return /^\/(en|zh|it)\/blog(\/|$)/.test(pathname);
+    if (id === "more-projects") return pathname === "/projects";
     return sectionActive === id;
   };
 
@@ -40,6 +52,7 @@ export function Navigation() {
       >
         {navLinks.map((link) => {
           const active = isLinkActive(link.id);
+          const href = resolvedHref(pathname, link);
           const body = (
             <>
               <span
@@ -57,24 +70,15 @@ export function Navigation() {
               </span>
             </>
           );
-          return link.href.startsWith("/") ? (
+          return (
             <Link
               key={link.id}
-              href={link.href}
+              href={href}
               aria-label={link.label}
               className="group flex flex-col items-end"
             >
               {body}
             </Link>
-          ) : (
-            <a
-              key={link.id}
-              href={link.href}
-              aria-label={link.label}
-              className="group flex flex-col items-end"
-            >
-              {body}
-            </a>
           );
         })}
       </motion.div>
@@ -105,6 +109,7 @@ export function Navigation() {
             <div className="flex flex-col items-center gap-10">
               {navLinks.map((link, i) => {
                 const active = isLinkActive(link.id);
+                const href = resolvedHref(pathname, link);
                 const mobileBody = (
                   <>
                     <span
@@ -119,7 +124,7 @@ export function Navigation() {
                     </span>
                   </>
                 );
-                return link.href.startsWith("/") ? (
+                return (
                   <motion.div
                     key={link.id}
                     initial={{ opacity: 0, y: 20 }}
@@ -128,7 +133,7 @@ export function Navigation() {
                     transition={{ duration: 0.4, delay: i * 0.05, ease: [0.25, 1, 0.5, 1] }}
                   >
                     <Link
-                      href={link.href}
+                      href={href}
                       aria-label={link.label}
                       className="flex flex-col items-center group"
                       onClick={() => setMobileOpen(false)}
@@ -136,20 +141,6 @@ export function Navigation() {
                       {mobileBody}
                     </Link>
                   </motion.div>
-                ) : (
-                  <motion.a
-                    key={link.id}
-                    href={link.href}
-                    aria-label={link.label}
-                    className="flex flex-col items-center group"
-                    onClick={() => setMobileOpen(false)}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    transition={{ duration: 0.4, delay: i * 0.05, ease: [0.25, 1, 0.5, 1] }}
-                  >
-                    {mobileBody}
-                  </motion.a>
                 );
               })}
             </div>

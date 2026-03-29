@@ -1,8 +1,8 @@
+/* Must precede @import "tailwindcss": after Tailwind expands, mid-file @import is invalid CSS. */
+@import url("https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&display=swap");
 @import "tailwindcss";
 
-/* Full CJK coverage for zh blog locale — not available via next/font subsets for Noto Serif SC */
-@import url("https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&display=swap");
-
+/* zh blog: Noto Serif SC (full CJK via Google Fonts URL above; not bundled via next/font subsets). */
 @theme inline {
   --font-sans: var(--font-outfit), system-ui, sans-serif;
   --font-mono: var(--font-jetbrains), ui-monospace, monospace;

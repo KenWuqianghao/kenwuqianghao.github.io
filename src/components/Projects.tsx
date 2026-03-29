@@ -2,6 +2,7 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
+import Link from "next/link";
 import { projects, type Project } from "@/lib/data";
 import { ScrollReveal } from "./ScrollReveal";
 import { ArrowUpRight } from "@phosphor-icons/react";
@@ -34,6 +35,21 @@ export function Projects() {
         {projects.map((project, i) => (
           <ProjectPanel key={project.name} project={project} index={i} />
         ))}
+
+        <ScrollReveal tilt={1}>
+          <div className="pt-20 md:pt-28 border-t border-zinc-200/60 flex flex-col md:flex-row md:items-end md:justify-between gap-8">
+            <p className="font-mono text-[10px] text-zinc-400 uppercase tracking-[0.25em] max-w-[40ch]">
+              他作 — Coursework, tools, and other public repos live on a separate shelf.
+            </p>
+            <Link
+              href="/projects"
+              className="inline-flex items-center gap-2 font-mono text-xs text-zinc-500 hover:text-red-600 transition-colors duration-300 underline underline-offset-4 decoration-zinc-300 hover:decoration-red-600 w-fit"
+            >
+              All repositories
+              <ArrowUpRight size={14} weight="bold" aria-hidden />
+            </Link>
+          </div>
+        </ScrollReveal>
       </div>
     </section>
   );

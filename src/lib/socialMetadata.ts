@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
 
-/** Matches `app/opengraph-image.tsx` (1200×630). Path is valid for static export. */
+/** Same origin as `metadataBase` in root layout. Crawlers need absolute image URLs. */
+const SITE_ORIGIN = "https://kenwu.is-a.dev";
+
+/** Matches `app/opengraph-image.tsx` (1200×630). */
 const OG_IMAGE = {
-  url: "/opengraph-image",
+  url: `${SITE_ORIGIN}/opengraph-image`,
   width: 1200,
   height: 630,
 } as const;

@@ -50,7 +50,7 @@ The site translates Shinbo's cinematic vocabulary into web interactions:
 
 **Secret Shrine** — Navigate to `/shrine` to find a hidden alternate version of the portfolio styled as a JoJo × Persona 5 fusion: near-black background with halftone dot texture and diagonal speed-line hatching, ゴゴゴゴ ambient text on both edges, and the full site content reimagined through a dark game-UI lens. The hero section presents a stand user card (Stand: DEEP PURPLE, Arcana: THE MAGICIAN) with JoJo-style stat bars. Experience becomes Battle History in chapter cards, projects become Operations, skills become Stand Abilities. A barely-visible `★` in the About section's Off-duty facet links here for those paying close attention.
 
-**Writing (`/blog`)** — A dedicated essays index under [`src/app/blog/`](src/app/blog/) with the same atmospheric shell as the rest of the site: falling kanji columns, film grain, scroll-linked red thread, and watermark typography. Navigation includes **随筆 / Writing**. The index supports **search** (title, excerpt, subtitle, tags), **single-tag filtering** with URL sync (`?q=` and `?tag=`), and a visible **RSS** link. **Card-cut transitions** (full-viewport wipe with a red leading edge) run when moving between the index and a post via in-blog links; reduced motion falls back to normal navigation. Post data and helpers live in [`src/lib/blog.ts`](src/lib/blog.ts). Layout wraps all blog routes in [`BlogShell`](src/components/BlogShell.tsx) so transitions and effects persist across client-side route changes.
+**Writing (`/{locale}/blog`)** — Localized essay indexes under [`src/app/[locale]/blog/`](src/app/[locale]/blog/) share the same atmospheric shell as the rest of the site: falling kanji columns, film grain, scroll-linked red thread, and watermark typography. Navigation includes **随筆 / Writing**. The index supports **search** (title, excerpt, subtitle, tags), **single-tag filtering** with URL sync (`?q=` and `?tag=`), and a visible **RSS** link. **Card-cut transitions** (full-viewport wipe with a red leading edge) run when moving between the index and a post via in-blog links; reduced motion falls back to normal navigation. Post data and helpers live in [`src/lib/blog.ts`](src/lib/blog.ts). Layout wraps all blog routes in [`BlogShell`](src/components/BlogShell.tsx) so transitions and effects persist across client-side route changes.
 
 **Post-Processing Stack** — Three.js EffectComposer applies chromatic aberration, additive noise, bloom (threshold 0.9), and custom scanlines over the entire canvas layer. Every pixel goes through the SHAFT filter.
 
@@ -97,14 +97,14 @@ The site is a **static export**, so RSS cannot be served by a dynamic API route.
 
 **Subscriber-facing URL:** `https://kenwu.is-a.dev/blog/rss.xml`.
 
-Whenever the production domain changes, keep these in sync: **`SITE`** in [`src/lib/blogRss.ts`](src/lib/blogRss.ts) (feed links and Atom `self` URL), **`metadataBase`** in [`src/app/layout.tsx`](src/app/layout.tsx), and **`SITE`** in [`src/app/blog/layout.tsx`](src/app/blog/layout.tsx) (RSS `alternates` discovery URL).
+Whenever the production domain changes, keep these in sync: **`SITE`** in [`src/lib/blogRss.ts`](src/lib/blogRss.ts) (feed links and Atom `self` URL), **`metadataBase`** in [`src/app/layout.tsx`](src/app/layout.tsx), **`SITE`** in [`src/app/[locale]/blog/layout.tsx`](src/app/[locale]/blog/layout.tsx) (canonicals and RSS `alternates`), and absolute **`SITE_ORIGIN`** in [`src/lib/socialMetadata.ts`](src/lib/socialMetadata.ts) (Open Graph / Twitter images).
 
-[`src/app/blog/layout.tsx`](src/app/blog/layout.tsx) exposes the feed via `metadata.alternates.types` so clients can auto-discover it. After editing posts, run **`npm run dev`** or **`npm run build`** once so `public/blog/rss.xml` stays in sync; commit that file if your deploy pipeline does not run a full Next build.
+[`src/app/[locale]/blog/layout.tsx`](src/app/[locale]/blog/layout.tsx) exposes the feed via `metadata.alternates.types` so clients can auto-discover it. After editing posts, run **`npm run dev`** or **`npm run build`** once so `public/blog/rss.xml` stays in sync; commit that file if your deploy pipeline does not run a full Next build.
 
 ## Editing blog posts
 
 - Add or change entries in the **`blogPosts`** array in [`src/lib/blog.ts`](src/lib/blog.ts). Each post needs: `slug`, `title`, optional `titleRuby`, ISO `date` (`YYYY-MM-DD`), `excerpt`, `tags`, `watermarkKanji`, and `content` (string paragraphs).
-- **`generateStaticParams`** in `src/app/blog/[slug]/page.tsx` derives slugs from that array—no manual route list.
+- **`generateStaticParams`** in [`src/app/[locale]/blog/[slug]/page.tsx`](src/app/[locale]/blog/[slug]/page.tsx) derives slugs from that array—no manual route list.
 - Empty **`tags`** is allowed; the index still shows the **All** filter and search.
 
 ## Accessibility
