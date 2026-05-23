@@ -113,8 +113,9 @@ export function Hero() {
               <span className="font-mono text-xs text-zinc-400 uppercase tracking-widest">
                 Status
               </span>
-              <span className="text-zinc-700 text-sm">
-                Seeking Fall 2026 / New Grad — ML, Systems, SWE
+              <span className="text-zinc-700 text-sm leading-relaxed">
+                ML SWE Intern @ Lyft · ML Platform · Toronto (May 2026\u2014Present). Also exploring
+                Fall 2026 full-time — ML, systems, SWE.
               </span>
             </div>
 

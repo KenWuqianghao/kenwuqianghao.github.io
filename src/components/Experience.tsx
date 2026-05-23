@@ -249,24 +249,26 @@ function ResearchCluster({ entries }: { entries: ExperienceEntry[] }) {
                 </span>
               </motion.div>
 
-              <motion.ul
-                className="space-y-3 mb-2"
-                initial={{ opacity: 0, y: 12 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.65, delay: 0.18 + idx * 0.08, ease: [0.16, 1, 0.3, 1] }}
-              >
-                {entry.bullets.map((bullet, j) => (
-                  <li
-                    key={j}
-                    className="group/bullet text-zinc-500 text-[13px] md:text-sm leading-relaxed flex gap-3 cursor-default transition-all duration-300 hover:translate-x-1 hover:text-zinc-700"
-                  >
-                    <span className="text-red-600/40 mt-0.5 shrink-0 select-none transition-colors duration-300 group-hover/bullet:text-red-600">
-                      &#8212;
-                    </span>
-                    <span>{bullet}</span>
-                  </li>
-                ))}
-              </motion.ul>
+              {entry.bullets.length > 0 && (
+                <motion.ul
+                  className="space-y-3 mb-2"
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.65, delay: 0.18 + idx * 0.08, ease: [0.16, 1, 0.3, 1] }}
+                >
+                  {entry.bullets.map((bullet, j) => (
+                    <li
+                      key={j}
+                      className="group/bullet text-zinc-500 text-[13px] md:text-sm leading-relaxed flex gap-3 cursor-default transition-all duration-300 hover:translate-x-1 hover:text-zinc-700"
+                    >
+                      <span className="text-red-600/40 mt-0.5 shrink-0 select-none transition-colors duration-300 group-hover/bullet:text-red-600">
+                        &#8212;
+                      </span>
+                      <span>{bullet}</span>
+                    </li>
+                  ))}
+                </motion.ul>
+              )}
 
               <motion.div
                 initial={{ opacity: 0, y: 12 }}
@@ -356,19 +358,21 @@ function ExperienceCard({
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
         >
-          <ul className="space-y-3">
-            {entry.bullets.map((bullet, j) => (
-              <li
-                key={j}
-                className="group/bullet text-zinc-500 text-sm leading-relaxed flex gap-3 cursor-default transition-all duration-300 hover:translate-x-1 hover:text-zinc-700"
-              >
-                <span className="text-red-600/40 mt-0.5 shrink-0 select-none transition-colors duration-300 group-hover/bullet:text-red-600">
-                  &#8212;
-                </span>
-                <span>{bullet}</span>
-              </li>
-            ))}
-          </ul>
+          {entry.bullets.length > 0 && (
+            <ul className="space-y-3 mb-10 md:mb-14">
+              {entry.bullets.map((bullet, j) => (
+                <li
+                  key={j}
+                  className="group/bullet text-zinc-500 text-sm leading-relaxed flex gap-3 cursor-default transition-all duration-300 hover:translate-x-1 hover:text-zinc-700"
+                >
+                  <span className="text-red-600/40 mt-0.5 shrink-0 select-none transition-colors duration-300 group-hover/bullet:text-red-600">
+                    &#8212;
+                  </span>
+                  <span>{bullet}</span>
+                </li>
+              ))}
+            </ul>
+          )}
 
           <StackPokerCards stack={entry.stack} isInView={isInView} />
 

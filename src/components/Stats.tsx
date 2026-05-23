@@ -3,7 +3,7 @@
 import { ScrollReveal } from "./ScrollReveal";
 
 const stats = [
-  { value: "7", kanji: "七", label: "Internships" },
+  { value: "9", kanji: "九", label: "Internships" },
   { value: "5", kanji: "五", label: "Hackathon Wins" },
   { value: "4", kanji: "四", label: "Countries" },
 ];

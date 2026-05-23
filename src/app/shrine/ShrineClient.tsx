@@ -299,14 +299,16 @@ export function ShrineClient() {
                     </div>
                   </div>
 
-                  <div className="mb-4 flex flex-col gap-1.5">
-                    {exp.bullets.map((b, j) => (
-                      <div key={j} className="flex items-start gap-2">
-                        <span style={{ color: R, fontSize: "9px", marginTop: 3, flexShrink: 0 }}>▶</span>
-                        <span className="font-mono" style={{ fontSize: "11px", color: `${W}55`, lineHeight: 1.55 }}>{b}</span>
-                      </div>
-                    ))}
-                  </div>
+                  {exp.bullets.length > 0 && (
+                    <div className="mb-4 flex flex-col gap-1.5">
+                      {exp.bullets.map((b, j) => (
+                        <div key={j} className="flex items-start gap-2">
+                          <span style={{ color: R, fontSize: "9px", marginTop: 3, flexShrink: 0 }}>▶</span>
+                          <span className="font-mono" style={{ fontSize: "11px", color: `${W}55`, lineHeight: 1.55 }}>{b}</span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
 
                   <div className="flex flex-wrap gap-1.5">
                     {exp.stack.map((t) => <Tag key={t}>{t}</Tag>)}

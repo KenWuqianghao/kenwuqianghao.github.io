@@ -67,6 +67,32 @@ export const researchExperience: ExperienceEntry[] = [
 /** Industry, teaching, and internships (full-width cards) */
 export const experience: ExperienceEntry[] = [
   {
+    company: "Lyft",
+    role: "Machine Learning Software Engineer Intern",
+    type: "ML Platform",
+    dates: "May 2026 \u2014 Present",
+    location: "Toronto, Canada",
+    website: "https://www.lyft.com/",
+    stack: [],
+    bullets: [
+      "Working on rider experience related ML model training, evaluation and observability development.",
+    ],
+  },
+  {
+    company: "Fermilab",
+    role: "Open Source Developer",
+    type: "Agentic Lagrangian Extraction",
+    dates: "May 2026 \u2014 Aug 2026",
+    location: "Remote \u00b7 United States",
+    website: "https://summerofcode.withgoogle.com/programs/2026/projects/k28fWeH1",
+    meta: "Google Summer of Code \u00b7 ML4SCI · University of Alabama",
+    stack: ["Python"],
+    bullets: [
+      "Open-source contributor via Google Summer of Code 2026 with ML4SCI at Fermilab, collaborating with mentors at the University of Alabama.",
+      "Project focus: Agentic Lagrangian Extraction \u2014 details on the GSoC project page.",
+    ],
+  },
+  {
     company: "Nokia",
     role: "Software Engineer Intern",
     type: "5G Network Agent",
