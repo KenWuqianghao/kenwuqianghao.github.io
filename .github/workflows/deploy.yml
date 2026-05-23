@@ -5,17 +5,21 @@ on:
     branches: [ main ]
   workflow_dispatch:
 
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
 jobs:
   build:
     runs-on: ubuntu-latest
+    # Explicit job permissions + token on checkout avoids "could not read Username"
+    # when Git did not attach GITHUB_TOKEN to the HTTPS fetch (actions/checkout FAQs).
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          token: ${{ github.token }}
+          persist-credentials: true
       
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -37,6 +41,9 @@ jobs:
           path: ./out
 
   deploy:
+    permissions:
+      pages: write
+      id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
