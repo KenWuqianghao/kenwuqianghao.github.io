@@ -3,8 +3,9 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import {
+  activeResearch,
   experience,
-  researchExperience,
+  pastResearch,
   type ExperienceEntry,
 } from "@/lib/data";
 import { ScrollReveal } from "./ScrollReveal";
@@ -157,7 +158,7 @@ export function Experience() {
           </div>
         </ScrollReveal>
 
-        <ResearchCluster entries={researchExperience} />
+        <ResearchSection active={activeResearch} past={pastResearch} />
 
         {experience.map((exp, i) => (
           <ExperienceCard key={exp.company} entry={exp} index={i} />
@@ -167,7 +168,13 @@ export function Experience() {
   );
 }
 
-function ResearchCluster({ entries }: { entries: ExperienceEntry[] }) {
+function ResearchSection({
+  active,
+  past,
+}: {
+  active: ExperienceEntry[];
+  past: ExperienceEntry[];
+}) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
 
@@ -183,7 +190,7 @@ function ResearchCluster({ entries }: { entries: ExperienceEntry[] }) {
         研
       </div>
 
-      <div className="relative mb-8 md:mb-10 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+      <div className="relative mb-10 md:mb-12 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
         <span
           className="font-mono text-[10px] text-red-600 uppercase tracking-[0.35em] glitch-hover cursor-default inline-block"
           data-text="研究 — Research"
@@ -198,97 +205,186 @@ function ResearchCluster({ entries }: { entries: ExperienceEntry[] }) {
         />
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-0 md:rounded-sm md:border md:border-zinc-200/80 md:bg-zinc-50/40 md:overflow-hidden">
-        {entries.map((entry, idx) => (
-          <motion.article
-            key={entry.company}
-            className={`relative pl-4 md:pl-0 ${
-              idx === 1 ? "md:border-l md:border-zinc-200/80" : ""
-            }`}
-            initial={{ opacity: 0, y: 16 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{
-              duration: 0.65,
-              delay: 0.08 + idx * 0.1,
-              ease: [0.16, 1, 0.3, 1],
-            }}
-          >
-            <div className="absolute left-0 top-1 md:top-2 w-[3px] h-8 bg-red-600/85" />
+      {active.map((entry, idx) => (
+        <ActiveResearchCard key={entry.company} entry={entry} index={idx} isInView={isInView} />
+      ))}
 
-            <div className="md:p-8 md:pt-9">
-              <motion.h3
-                className="text-2xl sm:text-3xl md:text-[1.65rem] lg:text-4xl font-display font-light tracking-tighter text-zinc-900 leading-[1.05] mb-2 head-tilt glitch-hover transition-colors duration-300 cursor-default"
-                data-text={entry.company}
-                initial={{ opacity: 0, x: -12 }}
-                animate={isInView ? { opacity: 1, x: 0, rotate: idx % 2 === 0 ? -0.8 : 0.8 } : {}}
-                whileHover={{ color: "#dc2626" }}
-                transition={{ duration: 0.65, delay: 0.05 + idx * 0.08, ease: [0.16, 1, 0.3, 1] }}
-              >
-                {entry.company}
-              </motion.h3>
-
-              {entry.meta && (
-                <span className="inline-block font-mono text-[10px] text-red-600 border border-red-600/30 px-2 py-0.5 uppercase tracking-widest mb-3">
-                  {entry.meta}
-                </span>
-              )}
-
-              <motion.div
-                className="flex flex-wrap items-baseline gap-x-3 gap-y-1 mb-6 text-[13px] md:text-sm"
-                initial={{ opacity: 0 }}
-                animate={isInView ? { opacity: 1 } : {}}
-                transition={{ duration: 0.55, delay: 0.12 + idx * 0.08 }}
-              >
-                <span className="text-zinc-600">{entry.role}</span>
-                <span className="font-mono text-[9px] text-zinc-400 uppercase tracking-wider">
-                  {entry.type}
-                </span>
-                <span className="font-mono text-[9px] text-zinc-400">{entry.dates}</span>
-                <span className="font-mono text-[9px] text-zinc-400 w-full md:w-auto">
-                  {entry.location}
-                </span>
-              </motion.div>
-
-              {entry.bullets.length > 0 && (
-                <motion.ul
-                  className="space-y-3 mb-2"
-                  initial={{ opacity: 0, y: 12 }}
-                  animate={isInView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.65, delay: 0.18 + idx * 0.08, ease: [0.16, 1, 0.3, 1] }}
-                >
-                  {entry.bullets.map((bullet, j) => (
-                    <li
-                      key={j}
-                      className="group/bullet text-zinc-500 text-[13px] md:text-sm leading-relaxed flex gap-3 cursor-default transition-all duration-300 hover:translate-x-1 hover:text-zinc-700"
-                    >
-                      <span className="text-red-600/40 mt-0.5 shrink-0 select-none transition-colors duration-300 group-hover/bullet:text-red-600">
-                        &#8212;
-                      </span>
-                      <span>{bullet}</span>
-                    </li>
-                  ))}
-                </motion.ul>
-              )}
-
-              <motion.div
-                initial={{ opacity: 0, y: 12 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.65, delay: 0.22 + idx * 0.08 }}
-              >
-                <StackPokerCards stack={entry.stack} isInView={isInView} delayBase={0.28 + idx * 0.06} />
-              </motion.div>
-
-              <EntryLinks
-                website={entry.website}
-                advisorUrl={entry.advisorUrl}
-                advisorLabel={entry.advisorLabel}
-                compact
+      {past.length > 0 && (
+        <div className="mt-10 md:mt-14 pt-8 md:pt-10 border-t border-zinc-200/50">
+          <span className="font-mono text-[9px] text-zinc-400 uppercase tracking-[0.3em] block mb-5 md:mb-6">
+            Past Research
+          </span>
+          <div className="space-y-5 md:space-y-6">
+            {past.map((entry, idx) => (
+              <PastResearchRow
+                key={entry.company}
+                entry={entry}
+                index={idx}
+                isInView={isInView}
               />
-            </div>
-          </motion.article>
-        ))}
-      </div>
+            ))}
+          </div>
+        </div>
+      )}
     </motion.div>
+  );
+}
+
+function ActiveResearchCard({
+  entry,
+  index,
+  isInView,
+}: {
+  entry: ExperienceEntry;
+  index: number;
+  isInView: boolean;
+}) {
+  return (
+    <motion.article
+      className="relative pl-4 md:pl-0 md:rounded-sm md:border md:border-zinc-200/80 md:bg-zinc-50/40 md:overflow-hidden"
+      initial={{ opacity: 0, y: 16 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      transition={{
+        duration: 0.65,
+        delay: 0.08 + index * 0.1,
+        ease: [0.16, 1, 0.3, 1],
+      }}
+    >
+      <div className="absolute left-0 top-1 md:top-8 w-[3px] h-10 bg-red-600/85" />
+
+      <div className="md:p-10 md:pt-11">
+        <motion.h3
+          className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-light tracking-tighter text-zinc-900 leading-[0.95] mb-3 head-tilt glitch-hover transition-colors duration-300 cursor-default"
+          data-text={entry.company}
+          initial={{ opacity: 0, x: -12 }}
+          animate={isInView ? { opacity: 1, x: 0, rotate: -0.8 } : {}}
+          whileHover={{ color: "#dc2626" }}
+          transition={{ duration: 0.65, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
+        >
+          {entry.company}
+        </motion.h3>
+
+        {entry.meta && (
+          <span className="inline-block font-mono text-[10px] text-red-600 border border-red-600/30 px-2 py-0.5 uppercase tracking-widest mb-4">
+            {entry.meta}
+          </span>
+        )}
+
+        <motion.div
+          className="flex flex-wrap items-baseline gap-x-4 gap-y-1 mb-8 md:mb-10 text-sm md:text-base"
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : {}}
+          transition={{ duration: 0.55, delay: 0.12 }}
+        >
+          <span className="text-zinc-600">{entry.role}</span>
+          <span className="font-mono text-[10px] text-zinc-400 uppercase tracking-wider">
+            {entry.type}
+          </span>
+          <span className="font-mono text-[10px] text-zinc-400">{entry.dates}</span>
+          <span className="font-mono text-[10px] text-zinc-400">{entry.location}</span>
+        </motion.div>
+
+        <motion.div
+          className="md:ml-[18%] lg:ml-[28%] max-w-[52ch]"
+          initial={{ opacity: 0, y: 12 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.65, delay: 0.18, ease: [0.16, 1, 0.3, 1] }}
+        >
+          {entry.bullets.length > 0 && (
+            <ul className="space-y-3 mb-8">
+              {entry.bullets.map((bullet, j) => (
+                <li
+                  key={j}
+                  className="group/bullet text-zinc-500 text-sm leading-relaxed flex gap-3 cursor-default transition-all duration-300 hover:translate-x-1 hover:text-zinc-700"
+                >
+                  <span className="text-red-600/40 mt-0.5 shrink-0 select-none transition-colors duration-300 group-hover/bullet:text-red-600">
+                    &#8212;
+                  </span>
+                  <span>{bullet}</span>
+                </li>
+              ))}
+            </ul>
+          )}
+
+          <StackPokerCards stack={entry.stack} isInView={isInView} delayBase={0.28} />
+
+          <EntryLinks
+            website={entry.website}
+            advisorUrl={entry.advisorUrl}
+            advisorLabel={entry.advisorLabel}
+            compact
+          />
+        </motion.div>
+      </div>
+    </motion.article>
+  );
+}
+
+function PastResearchRow({
+  entry,
+  index,
+  isInView,
+}: {
+  entry: ExperienceEntry;
+  index: number;
+  isInView: boolean;
+}) {
+  return (
+    <motion.article
+      className="relative pl-4 md:pl-6 border-l border-zinc-200/80"
+      initial={{ opacity: 0, y: 10 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      transition={{
+        duration: 0.55,
+        delay: 0.24 + index * 0.08,
+        ease: [0.16, 1, 0.3, 1],
+      }}
+    >
+      <div className="flex flex-col gap-2 md:flex-row md:items-baseline md:justify-between md:gap-6 mb-3">
+        <h4 className="text-lg md:text-xl font-display font-light tracking-tight text-zinc-700">
+          {entry.company}
+        </h4>
+        <span className="font-mono text-[10px] text-zinc-400 shrink-0">{entry.dates}</span>
+      </div>
+
+      <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1 mb-4 text-[13px]">
+        <span className="text-zinc-500">{entry.role}</span>
+        <span className="font-mono text-[9px] text-zinc-400 uppercase tracking-wider">
+          {entry.type}
+        </span>
+        <span className="font-mono text-[9px] text-zinc-400">{entry.location}</span>
+      </div>
+
+      {entry.meta && (
+        <span className="inline-block font-mono text-[9px] text-zinc-400 border border-zinc-200 px-2 py-0.5 uppercase tracking-widest mb-4">
+          {entry.meta}
+        </span>
+      )}
+
+      {entry.bullets.length > 0 && (
+        <ul className="space-y-2 mb-4 max-w-[62ch]">
+          {entry.bullets.map((bullet, j) => (
+            <li
+              key={j}
+              className="text-zinc-400 text-[13px] leading-relaxed flex gap-2.5"
+            >
+              <span className="text-zinc-300 mt-0.5 shrink-0 select-none">&#8212;</span>
+              <span>{bullet}</span>
+            </li>
+          ))}
+        </ul>
+      )}
+
+      <div className="flex flex-wrap items-center gap-4">
+        <StackPokerCards stack={entry.stack} isInView={isInView} delayBase={0.32 + index * 0.04} />
+        <EntryLinks
+          website={entry.website}
+          advisorUrl={entry.advisorUrl}
+          advisorLabel={entry.advisorLabel}
+          compact
+        />
+      </div>
+    </motion.article>
   );
 }
 

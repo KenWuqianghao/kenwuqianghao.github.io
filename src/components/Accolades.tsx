@@ -7,7 +7,7 @@ const accolades = [
   "5x Hackathon Winner",
   "Stanford Code in Place Instructor",
   "URA · University of Waterloo",
-  "Undergraduate Researcher · Lancaster University",
+  "Former URA · Lancaster University",
 ];
 
 export function Accolades() {

@@ -2,7 +2,7 @@ export const personalInfo = {
   name: "Ken Wu",
   title: "Software Engineer & ML Researcher",
   email: "ken.wu@uwaterloo.ca",
-  location: "Waterloo, ON",
+  location: "Toronto, ON",
   github: "KenWuqianghao",
   linkedin: "kenwuu",
   website: "kenwu.is-a.dev",
@@ -24,8 +24,8 @@ export interface ExperienceEntry {
   advisorLabel?: string;
 }
 
-/** Ongoing academic research; rendered in a compact cluster on the main Experience section */
-export const researchExperience: ExperienceEntry[] = [
+/** Current academic research; featured in the Experience section */
+export const activeResearch: ExperienceEntry[] = [
   {
     company: "University of Waterloo",
     role: "Undergraduate Research Assistant",
@@ -44,11 +44,15 @@ export const researchExperience: ExperienceEntry[] = [
       "Refined inference loops to reduce MSE and MRE consistently across standard benchmark suites.",
     ],
   },
+];
+
+/** Completed research roles; shown in a compact past-research block */
+export const pastResearch: ExperienceEntry[] = [
   {
     company: "Lancaster University",
     role: "Undergraduate Researcher",
     type: "Unsupervised learning",
-    dates: "Jan 2025 \u2014 Present",
+    dates: "Jan 2025 \u2014 May 2026",
     location: "Lancaster, UK \u00b7 On-site",
     website: "https://www.lancaster.ac.uk/",
     advisorUrl: "https://www.lancaster.ac.uk/lira/people/plamen-angelov",
@@ -62,6 +66,11 @@ export const researchExperience: ExperienceEntry[] = [
       "Tracked silhouette, inertia, and wall-clock time each run so speed-quality comparisons stayed fair.",
     ],
   },
+];
+
+export const researchExperience: ExperienceEntry[] = [
+  ...activeResearch,
+  ...pastResearch,
 ];
 
 /** Industry, teaching, and internships (full-width cards) */
@@ -252,6 +261,22 @@ export interface Project {
 }
 
 export const projects: Project[] = [
+  {
+    name: "OpenComposer",
+    description:
+      "Mini-scale end-to-end reproduction of the Composer 2 training pipeline on a single NVIDIA GH200: MoE CPT, MTP self-distillation, Dr. GRPO + k1 KL, and behavioral auxiliary rewards.",
+    stack: ["Python", "PyTorch", "MoE", "OpenRLHF"],
+    github: "https://github.com/KenWuqianghao/OpenComposer",
+    highlight: "Composer 2 pipeline · single GH200",
+  },
+  {
+    name: "AppGammon",
+    description:
+      "Online backgammon with a React Native/Expo client, Hono backend, and shared gameplay rules in a TypeScript monorepo.",
+    stack: ["TypeScript", "React Native", "Expo", "Hono"],
+    github: "https://github.com/KenWuqianghao/AppGammon",
+    highlight: "CS 446 / ECE 452",
+  },
   {
     name: "Ding-Bot",
     description:

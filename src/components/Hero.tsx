@@ -82,7 +82,7 @@ export function Hero() {
               </span>
               <span className="text-zinc-700 text-sm">
                 <a
-                  href="https://en.wikipedia.org/wiki/Waterloo,_Ontario?useskin=vector"
+                  href="https://en.wikipedia.org/wiki/Toronto?useskin=vector"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="underline underline-offset-4 decoration-zinc-300 hover:decoration-red-600 hover:text-red-600 transition-colors duration-300"
@@ -114,7 +114,7 @@ export function Hero() {
                 Status
               </span>
               <span className="text-zinc-700 text-sm leading-relaxed">
-                ML SWE Intern @ Lyft, exploring Fall 2026 full-time \u2014 ML, systems, SWE.
+                ML SWE Intern @ Lyft, exploring Fall 2026 full-time — ML, systems, SWE.
               </span>
             </div>
 
