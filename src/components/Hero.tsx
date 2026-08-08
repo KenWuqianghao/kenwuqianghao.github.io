@@ -114,7 +114,7 @@ export function Hero() {
                 Status
               </span>
               <span className="text-zinc-700 text-sm leading-relaxed">
-                ML SWE Intern @ Lyft, exploring Fall 2026 full-time — ML, systems, SWE.
+                Incoming MTS, Enterprise AI @ Mercor · wrapping ML SWE @ Lyft.
               </span>
             </div>
 

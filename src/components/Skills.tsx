@@ -16,8 +16,9 @@ const SkillConstellation = dynamic(
 
 const CATEGORY_KANJI: Record<string, string> = {
   Languages: "言語",
-  "Technologies & Cloud": "技術",
-  "Libraries & Frameworks": "枠組",
+  "ML & Data": "学習",
+  Frameworks: "枠組",
+  "Cloud & Databases": "雲",
 };
 
 export function Skills() {

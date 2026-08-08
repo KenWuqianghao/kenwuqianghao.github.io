@@ -7,7 +7,7 @@ export const personalInfo = {
   linkedin: "kenwuu",
   website: "kenwu.is-a.dev",
   twitter: "kenwuuuu",
-  resume: "https://drive.google.com/file/d/11TiGQ-JxqmLQ-TJ24Jui8V9kXsI6QZld/view",
+  resume: "/Ken_Wu_Resume.pdf",
 };
 
 export interface ExperienceEntry {
@@ -76,15 +76,30 @@ export const researchExperience: ExperienceEntry[] = [
 /** Industry, teaching, and internships (full-width cards) */
 export const experience: ExperienceEntry[] = [
   {
-    company: "Lyft",
-    role: "Machine Learning Software Engineer Intern",
-    type: "ML Platform",
-    dates: "May 2026 \u2014 Present",
-    location: "Toronto, Canada",
-    website: "https://www.lyft.com/",
+    company: "Mercor",
+    role: "Member of Technical Staff",
+    type: "Enterprise AI",
+    dates: "Incoming",
+    location: "San Francisco, United States",
+    website: "https://mercor.com",
     stack: [],
     bullets: [
-      "Working on rider experience related ML model training, evaluation and observability development.",
+      "Incoming Member of Technical Staff, Enterprise AI.",
+    ],
+  },
+  {
+    company: "Lyft",
+    role: "Machine Learning Software Engineer Intern",
+    type: "Bailout Model",
+    dates: "May 2026 \u2014 Aug 2026",
+    location: "Toronto, Canada",
+    website: "https://www.lyft.com/",
+    stack: ["Python", "CatBoost", "SQL", "GeoPandas"],
+    bullets: [
+      "Doubled the bailout model\u2019s cancel-detection recall (+34.2pp at 2.5% FPR) via 17 new route/GPS features",
+      "Grew Canada bailout coverage from 1.4% to 100% of rides via census backfill for 2,964 geohashes",
+      "Root-caused a defect in Lyft\u2019s bailout model flagging 76.6% of rides; shipped automated per-cluster thresholds",
+      "Shipped shadow inference and holdout capture into the bailout service with zero live decision impact",
     ],
   },
   {
@@ -110,9 +125,9 @@ export const experience: ExperienceEntry[] = [
     website: "https://www.nokia.com",
     stack: ["Python", "PyTorch", "Unsloth", "Transformer"],
     bullets: [
-      "Built LoRA fine-tuning pipeline for Qwen generating Camunda BPMN XML with GGUF quantization",
-      "Designed evaluation framework revealing overfitting from NCSC-only data vs. base models",
-      "Resolved GPU memory and Triton issues and shipped reusable training tooling for future experiments",
+      "Built a LoRA fine-tuning pipeline turning Qwen into a Camunda BPMN XML generator, with GGUF quantization",
+      "Exposed overfitting in NCSC-only training data with an evaluation framework benchmarking vs. base models",
+      "Unblocked training runs by resolving GPU memory and Triton kernel failures; shipped reusable training tooling",
     ],
   },
   {
@@ -125,8 +140,8 @@ export const experience: ExperienceEntry[] = [
     stack: ["Python", "SQL", "PySpark", "Pandas", "Databricks"],
     bullets: [
       "Replatformed pipelines for 1.5M+ rows of data and reproduced a 154,340 row deliverable with 100% parity",
-      "Automated 30+ minutes of manual ingestion per cycle, cutting QA time by 80% via a parity harness",
-      "Migrated on-prem pipeline to Azure fully automating runs and saving 2\u20134 hours/week of manual execution",
+      "Automated 30+ minutes of manual ingestion per cycle, cutting QA time by 80% via a row-level parity harness",
+      "Saved 2\u20134 hours/week of manual execution by migrating the on-prem pipeline to Azure with automated runs",
     ],
   },
   {
@@ -146,14 +161,14 @@ export const experience: ExperienceEntry[] = [
     company: "August",
     role: "Software Engineer Intern",
     type: "LLM Agent",
-    dates: "Sept 2024 \u2014 Dec 2024",
+    dates: "Sep 2024 \u2014 Dec 2024",
     location: "New York, United States",
     website: "https://www.august.law/",
     stack: ["Python", "LangGraph", "FastAPI", "AWS"],
     bullets: [
-      "Handled 2,000+ requests/min by deploying 10+ API endpoints using FastAPI, AWS, and Supabase",
-      "Optimized evaluation cycles for 15+ LLM Agents with a round-robin multi-agent and scoring framework",
-      "Led the end-to-end development of a multi-agent RAG pipeline powered by LLM-as-Judge strategies",
+      "Handled 2000+ requests/min by deploying 10+ live API endpoints using FastAPI, AWS, and Supabase",
+      "Streamlined evaluation cycles for 15+ LLM Agents via a round-robin multi-agent and ELO scoring framework",
+      "Architected a multi-agent RAG pipeline end-to-end, powered by LLM-as-Judge evaluation strategies",
     ],
   },
   {
@@ -182,7 +197,7 @@ export const experience: ExperienceEntry[] = [
     stack: ["Python", "Azure", "LangChain", "Streamlit"],
     bullets: [
       "Built a document QA system using Llama3 7B and ChromaDB for OECD report search and summarization",
-      "Increased response and semantic accuracy by ~20% using query transformation and contextual memory",
+      "Increased response and semantic accuracy by \u223c20% using query transformation and contextual memory",
     ],
   },
   {
@@ -201,7 +216,7 @@ export const experience: ExperienceEntry[] = [
     ],
   },
   {
-    company: "Respan",
+    company: "Respan AI",
     role: "Software Engineer Intern",
     type: "Resume Parsing",
     dates: "Mar 2023 \u2014 Jun 2023",
@@ -210,7 +225,7 @@ export const experience: ExperienceEntry[] = [
     stack: ["Python", "spaCy", "SQLite"],
     meta: "Y Combinator W24 \u00b7 Formerly Keywords AI",
     bullets: [
-      "Parsed 1,000+ resumes with a spaCy-based NER pipeline to extract structured recruiter data",
+      "Parsed 1000+ resumes with a spaCy-based NER pipeline to extract structured and relevant recruiter data",
       "Reduced response delay by 98% through integration of SQLite-based result caching into the parsing engine",
     ],
   },
@@ -218,14 +233,14 @@ export const experience: ExperienceEntry[] = [
     company: "Intapp",
     role: "Machine Learning Engineer Intern",
     type: "Entity Recognition",
-    dates: "Jul 2022 \u2014 Sept 2022",
+    dates: "Jul 2022 \u2014 Sep 2022",
     location: "Berlin, Germany",
     website: "https://www.intapp.com",
     stack: ["Python", "spaCy", "W&B", "BS4"],
     meta: "Formerly delphai",
     bullets: [
-      "Boosted recall by 20% through improved entity labeling workflows and language-specific training sets",
-      "Achieved 70% recall by fine-tuning spaCy models and optimizing hyperparameters via WanDB on Azure",
+      "Boosted recall by 20% through improved entity labeling workflows and language-specific model training sets",
+      "Achieved 70% recall by fine-tuning spaCy models and optimizing hyperparameters via W&B on Azure",
     ],
   },
 ];
@@ -238,16 +253,20 @@ export const experienceTimeline: ExperienceEntry[] = [
 
 export const skills: Record<string, string[]> = {
   Languages: [
-    "Python", "SQL", "C", "C++", "TypeScript", "JavaScript",
-    "HTML", "CSS", "R", "Racket", "Bash",
+    "Python", "SQL", "C++", "C", "TypeScript", "JavaScript",
+    "R", "Racket", "Bash",
   ],
-  "Technologies & Cloud": [
-    "PySpark", "NumPy", "Pandas", "spaCy", "MongoDB",
-    "Supabase", "PostgreSQL", "AWS", "Docker", "Git",
+  "ML & Data": [
+    "PyTorch", "CatBoost", "TensorFlow", "PySpark", "Pandas",
+    "NumPy", "GeoPandas", "spaCy", "MLflow", "Hive", "CUDA",
   ],
-  "Libraries & Frameworks": [
-    "PyTorch", "LangChain", "Flask", "FastAPI", "TensorFlow",
-    "Keras", "CUDA", "React", "Next.js", "Tailwind",
+  Frameworks: [
+    "FastAPI", "Flask", "LangChain", "LangGraph", "React",
+    "Next.js", "Tailwind",
+  ],
+  "Cloud & Databases": [
+    "AWS", "Azure", "Docker", "Git", "PostgreSQL",
+    "MongoDB", "Supabase", "ChromaDB",
   ],
 };
 

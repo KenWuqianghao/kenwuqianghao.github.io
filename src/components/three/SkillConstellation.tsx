@@ -7,25 +7,31 @@ import * as THREE from "three";
 import { useRef, useState, useMemo, useEffect } from "react";
 import { skills } from "@/lib/data";
 
-// Clusters spread wide so all three appear at roughly equal screen weight
+// Clusters spread so all four categories share the view
 const CAT = [
   {
     key: "Languages",
     label: "Languages",
-    center: [-3.2, 0.9, 0.5] as [number, number, number],
+    center: [-3.4, 1.4, 0.4] as [number, number, number],
     color: "#dc2626",
   },
   {
-    key: "Technologies & Cloud",
-    label: "Tech & Cloud",
-    center: [3.2, 0.9, 0.5] as [number, number, number],
+    key: "ML & Data",
+    label: "ML & Data",
+    center: [3.4, 1.4, 0.4] as [number, number, number],
     color: "#3f3f46",
   },
   {
-    key: "Libraries & Frameworks",
-    label: "Libraries",
-    center: [0, -2.2, 0] as [number, number, number],
+    key: "Frameworks",
+    label: "Frameworks",
+    center: [-2.2, -2.0, 0] as [number, number, number],
     color: "#71717a",
+  },
+  {
+    key: "Cloud & Databases",
+    label: "Cloud & DB",
+    center: [2.2, -2.0, 0] as [number, number, number],
+    color: "#a1a1aa",
   },
 ] as const;
 

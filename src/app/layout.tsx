@@ -42,7 +42,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://kenwu.is-a.dev"),
   title: "Ken Wu — Software Engineer & ML Researcher",
   description:
-    "Portfolio of Ken Wu (吴锵皓). Software Engineer and ML Researcher at the University of Waterloo.",
+    "Portfolio of Ken Wu (吴锵皓). Incoming MTS, Enterprise AI at Mercor. CS at the University of Waterloo.",
   icons: {
     icon: "/icon.svg",
   },

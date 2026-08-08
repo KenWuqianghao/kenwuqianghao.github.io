@@ -9,13 +9,13 @@ const KONAMI = [
 ];
 
 const FLASH_CARDS = [
-  { text: "7 INTERNSHIPS", bg: "#171717", color: "#fafaf9" },
+  { text: "9 INTERNSHIPS", bg: "#171717", color: "#fafaf9" },
   { text: "NEO SCHOLAR", bg: "#dc2626", color: "#fafaf9" },
   { text: "5X HACKATHON WINNER", bg: "#fafaf9", color: "#171717" },
-  { text: "STANFORD INSTRUCTOR", bg: "#171717", color: "#dc2626" },
+  { text: "INCOMING · MERCOR", bg: "#171717", color: "#dc2626" },
   { text: "WATERLOO CS '26", bg: "#dc2626", color: "#171717" },
-  { text: "NOKIA · TD · AUGUST", bg: "#fafaf9", color: "#dc2626" },
-  { text: "HEALTH CANADA · INTAPP", bg: "#171717", color: "#fafaf9" },
+  { text: "LYFT · NOKIA · TD", bg: "#fafaf9", color: "#dc2626" },
+  { text: "AUGUST · HEALTH CANADA", bg: "#171717", color: "#fafaf9" },
   { text: "ML · SYSTEMS · SWE", bg: "#dc2626", color: "#fafaf9" },
   { text: "4 COUNTRIES", bg: "#fafaf9", color: "#171717" },
   { text: "吴锵皓", bg: "#171717", color: "#dc2626" },
