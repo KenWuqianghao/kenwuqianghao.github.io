@@ -5,7 +5,7 @@ import { ScrollReveal } from "./ScrollReveal";
 const route = [
   { flag: "🇮🇹", label: "Born" },
   { flag: "🇨🇳", label: "Raised" },
-  { flag: "🇨🇦", label: "Studying" },
+  { flag: "🇨🇦", label: "Studied" },
   { flag: "🇬🇧", label: "Exchanged" },
   { flag: "🇺🇸", label: "Incoming" },
 ];
