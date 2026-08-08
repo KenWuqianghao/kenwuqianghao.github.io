@@ -6,8 +6,8 @@ const route = [
   { flag: "🇮🇹", label: "Born" },
   { flag: "🇨🇳", label: "Raised" },
   { flag: "🇨🇦", label: "Studying" },
-  { flag: "🇺🇸", label: "Interned" },
   { flag: "🇬🇧", label: "Exchanged" },
+  { flag: "🇺🇸", label: "Incoming" },
 ];
 
 const facets: { kanji: string; label: string; text: string; hint?: boolean }[] = [

@@ -114,7 +114,7 @@ export function Hero() {
                 Status
               </span>
               <span className="text-zinc-700 text-sm leading-relaxed">
-                Incoming MTS, Enterprise AI @ Mercor · previously ML SWE @ Lyft.
+                Incoming MTS, Enterprise AI @ Mercor.
               </span>
             </div>
 

@@ -25,15 +25,12 @@ export interface ExperienceEntry {
 }
 
 /** Current academic research; featured in the Experience section */
-export const activeResearch: ExperienceEntry[] = [];
-
-/** Completed research roles; shown in a compact past-research block */
-export const pastResearch: ExperienceEntry[] = [
+export const activeResearch: ExperienceEntry[] = [
   {
     company: "Fermilab",
     role: "Open Source Developer",
     type: "Agentic Lagrangian Extraction",
-    dates: "May 2026 \u2014 Aug 2026",
+    dates: "May 2026 \u2014 Present",
     location: "Remote \u00b7 United States",
     website: "https://summerofcode.withgoogle.com/programs/2026/projects/k28fWeH1",
     meta: "Google Summer of Code \u00b7 ML4SCI · University of Alabama",
@@ -43,6 +40,10 @@ export const pastResearch: ExperienceEntry[] = [
       "Open-sourced the pipeline for physics-informed symbolic extraction; project details on the GSoC 2026 page",
     ],
   },
+];
+
+/** Completed research roles; shown in a compact past-research block */
+export const pastResearch: ExperienceEntry[] = [
   {
     company: "University of Waterloo",
     role: "Undergraduate Research Assistant",

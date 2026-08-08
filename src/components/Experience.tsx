@@ -285,7 +285,7 @@ function ActiveResearchCard({
         </motion.div>
 
         <motion.div
-          className="md:ml-[18%] lg:ml-[28%] max-w-[52ch]"
+          className="md:ml-[10%] lg:ml-[14%] max-w-[82ch]"
           initial={{ opacity: 0, y: 12 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.65, delay: 0.18, ease: [0.16, 1, 0.3, 1] }}
@@ -300,7 +300,7 @@ function ActiveResearchCard({
                   <span className="text-red-600/40 mt-0.5 shrink-0 select-none transition-colors duration-300 group-hover/bullet:text-red-600">
                     &#8212;
                   </span>
-                  <span>{bullet}</span>
+                  <span className="text-pretty">{bullet}</span>
                 </li>
               ))}
             </ul>
@@ -362,14 +362,14 @@ function PastResearchRow({
       )}
 
       {entry.bullets.length > 0 && (
-        <ul className="space-y-2 mb-4 max-w-[62ch]">
+        <ul className="space-y-2 mb-4 max-w-[82ch]">
           {entry.bullets.map((bullet, j) => (
             <li
               key={j}
               className="text-zinc-400 text-[13px] leading-relaxed flex gap-2.5"
             >
               <span className="text-zinc-300 mt-0.5 shrink-0 select-none">&#8212;</span>
-              <span>{bullet}</span>
+              <span className="text-pretty">{bullet}</span>
             </li>
           ))}
         </ul>
@@ -447,9 +447,9 @@ function ExperienceCard({
           <span className="font-mono text-[10px] text-zinc-400">{entry.location}</span>
         </motion.div>
 
-        {/* Bullets — narrow column, dramatically offset to the right */}
+        {/* Bullets — wide column so most lines stay on one row */}
         <motion.div
-          className="md:ml-[30%] lg:ml-[40%] max-w-[52ch]"
+          className="md:ml-[12%] lg:ml-[16%] max-w-[82ch]"
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
@@ -464,7 +464,7 @@ function ExperienceCard({
                   <span className="text-red-600/40 mt-0.5 shrink-0 select-none transition-colors duration-300 group-hover/bullet:text-red-600">
                     &#8212;
                   </span>
-                  <span>{bullet}</span>
+                  <span className="text-pretty">{bullet}</span>
                 </li>
               ))}
             </ul>
