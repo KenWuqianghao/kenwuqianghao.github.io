@@ -25,12 +25,29 @@ export interface ExperienceEntry {
 }
 
 /** Current academic research; featured in the Experience section */
-export const activeResearch: ExperienceEntry[] = [
+export const activeResearch: ExperienceEntry[] = [];
+
+/** Completed research roles; shown in a compact past-research block */
+export const pastResearch: ExperienceEntry[] = [
+  {
+    company: "Fermilab",
+    role: "Open Source Developer",
+    type: "Agentic Lagrangian Extraction",
+    dates: "May 2026 \u2014 Aug 2026",
+    location: "Remote \u00b7 United States",
+    website: "https://summerofcode.withgoogle.com/programs/2026/projects/k28fWeH1",
+    meta: "Google Summer of Code \u00b7 ML4SCI · University of Alabama",
+    stack: ["Python"],
+    bullets: [
+      "Built agentic Lagrangian extraction tooling for ML4SCI at Fermilab under Google Summer of Code 2026 with University of Alabama mentors",
+      "Open-sourced the pipeline for physics-informed symbolic extraction; project details on the GSoC 2026 page",
+    ],
+  },
   {
     company: "University of Waterloo",
     role: "Undergraduate Research Assistant",
     type: "ML \u00b7 Attention & symbolic regression",
-    dates: "Sep 2024 \u2014 Present",
+    dates: "Sep 2024 \u2014 Apr 2026",
     location: "Waterloo, Canada \u00b7 Remote",
     website: "https://uwaterloo.ca/",
     advisorUrl: "https://uwaterloo.ca/statistics-and-actuarial-science/profiles/ali-ghodsi",
@@ -38,16 +55,12 @@ export const activeResearch: ExperienceEntry[] = [
     stack: ["Python", "PyTorch", "Transformers"],
     meta: "With Prof. Ali Ghodsi & Amin Ravanbakhsh",
     bullets: [
-      "Benchmarked symbolic regression at dataset scale, holding R² ≥ 0.99 whenever fits stayed numerically stable.",
-      "Fine-tuned Symbolic GPT variants for roughly 19 percentage points higher in-domain accuracy.",
-      "Ablated tokenizer and Point-Net configurations to balance R² against overall model complexity.",
-      "Refined inference loops to reduce MSE and MRE consistently across standard benchmark suites.",
+      "Held R² ≥ 0.99 on numerically stable symbolic-regression fits by benchmarking models at dataset scale",
+      "Raised in-domain accuracy ~19pp by fine-tuning Symbolic GPT variants under Prof. Ali Ghodsi",
+      "Balanced R² vs. model complexity via tokenizer and Point-Net ablations across benchmark suites",
+      "Cut MSE and MRE on standard benchmarks by refining inference loops for Symbolic GPT",
     ],
   },
-];
-
-/** Completed research roles; shown in a compact past-research block */
-export const pastResearch: ExperienceEntry[] = [
   {
     company: "Lancaster University",
     role: "Undergraduate Researcher",
@@ -60,10 +73,10 @@ export const pastResearch: ExperienceEntry[] = [
     stack: ["Python", "NumPy", "scikit-learn"],
     meta: "With Prof. Plamen Angelov",
     bullets: [
-      "Recursive ReSil / ReSilC in Python: O(1) key updates and PAMSil up to 85.6% faster on CIFAR-100 at equal quality.",
-      "Optimized R-Means centroid updates for 17\u201324% faster runs than K-Means on CIFAR-10/100, MNIST, and Fashion-MNIST.",
-      "Built a NumPy / scikit-learn pipeline benchmarking recursive versus flat clustering across 8+ datasets with 10-run averages.",
-      "Tracked silhouette, inertia, and wall-clock time each run so speed-quality comparisons stayed fair.",
+      "Sped up PAMSil up to 85.6% on CIFAR-100 at equal quality with recursive ReSil / ReSilC (O(1) key updates)",
+      "Beat K-Means wall-clock by 17\u201324% on CIFAR-10/100, MNIST, and Fashion-MNIST via optimized R-Means centroids",
+      "Benchmarked recursive vs. flat clustering across 8+ datasets with 10-run averages in NumPy / scikit-learn",
+      "Kept speed-quality comparisons fair by tracking silhouette, inertia, and wall-clock on every run",
     ],
   },
 ];
@@ -103,20 +116,6 @@ export const experience: ExperienceEntry[] = [
     ],
   },
   {
-    company: "Fermilab",
-    role: "Open Source Developer",
-    type: "Agentic Lagrangian Extraction",
-    dates: "May 2026 \u2014 Aug 2026",
-    location: "Remote \u00b7 United States",
-    website: "https://summerofcode.withgoogle.com/programs/2026/projects/k28fWeH1",
-    meta: "Google Summer of Code \u00b7 ML4SCI · University of Alabama",
-    stack: ["Python"],
-    bullets: [
-      "Open-source contributor via Google Summer of Code 2026 with ML4SCI at Fermilab, collaborating with mentors at the University of Alabama.",
-      "Project focus: Agentic Lagrangian Extraction \u2014 details on the GSoC project page.",
-    ],
-  },
-  {
     company: "Nokia",
     role: "Software Engineer Intern",
     type: "5G Network Agent",
@@ -125,9 +124,9 @@ export const experience: ExperienceEntry[] = [
     website: "https://www.nokia.com",
     stack: ["Python", "PyTorch", "Unsloth", "Transformer"],
     bullets: [
-      "Built a LoRA fine-tuning pipeline turning Qwen into a Camunda BPMN XML generator, with GGUF quantization",
-      "Exposed overfitting in NCSC-only training data with an evaluation framework benchmarking vs. base models",
-      "Unblocked training runs by resolving GPU memory and Triton kernel failures; shipped reusable training tooling",
+      "Shipped a LoRA fine-tuning pipeline that turns Qwen into a Camunda BPMN XML generator with GGUF quantization",
+      "Caught NCSC-only training overfitting with an eval harness that benchmarks fine-tuned vs. base models",
+      "Unblocked GPU training by fixing OOM and Triton kernel failures; shipped reusable training tooling",
     ],
   },
   {
@@ -139,9 +138,9 @@ export const experience: ExperienceEntry[] = [
     website: "https://www.td.com",
     stack: ["Python", "SQL", "PySpark", "Pandas", "Databricks"],
     bullets: [
-      "Replatformed pipelines for 1.5M+ rows of data and reproduced a 154,340 row deliverable with 100% parity",
-      "Automated 30+ minutes of manual ingestion per cycle, cutting QA time by 80% via a row-level parity harness",
-      "Saved 2\u20134 hours/week of manual execution by migrating the on-prem pipeline to Azure with automated runs",
+      "Replatformed 1.5M+ row pipelines and reproduced a 154,340-row deliverable at 100% parity",
+      "Cut QA time 80% by automating 30+ min/cycle ingestion with a row-level parity harness",
+      "Saved 2\u20134 hrs/week by migrating the on-prem pipeline to Azure with automated runs",
     ],
   },
   {
@@ -153,8 +152,8 @@ export const experience: ExperienceEntry[] = [
     website: "https://codeinplace.stanford.edu",
     stack: ["Python", "Karel", "Tkinter"],
     bullets: [
-      "Taught Stanford\u2019s Code in Place CS106A course to students globally, taken by 40,000+ students",
-      "Educated students in Python leveraging beginner friendly libraries including Stanford\u2019s Karel and Tkinter",
+      "Instructed Stanford Code in Place CS106A for a global cohort of 40,000+ students",
+      "Taught intro Python with Karel and Tkinter through live sections and project feedback",
     ],
   },
   {
@@ -166,9 +165,9 @@ export const experience: ExperienceEntry[] = [
     website: "https://www.august.law/",
     stack: ["Python", "LangGraph", "FastAPI", "AWS"],
     bullets: [
-      "Handled 2000+ requests/min by deploying 10+ live API endpoints using FastAPI, AWS, and Supabase",
-      "Streamlined evaluation cycles for 15+ LLM Agents via a round-robin multi-agent and ELO scoring framework",
-      "Architected a multi-agent RAG pipeline end-to-end, powered by LLM-as-Judge evaluation strategies",
+      "Scaled 10+ FastAPI / AWS / Supabase endpoints to 2,000+ requests/min in production",
+      "Cut eval cycles across 15+ LLM agents with round-robin multi-agent routing and ELO scoring",
+      "Architected end-to-end multi-agent RAG with LLM-as-Judge evaluation",
     ],
   },
   {
@@ -181,10 +180,9 @@ export const experience: ExperienceEntry[] = [
     stack: ["Python", "PyTorch", "AWS", "SageMaker", "Jupyter"],
     meta: "Formerly Coastal Carbon",
     bullets: [
-      "Benchmarked SOTA super-resolution models (e.g. ESRGAN, StableSR) through PyTorch pipelines",
-      "Built automated benchmarking pipelines in Python to evaluate multiple models efficiently",
-      "Visualized model performance with Matplotlib and Seaborn in Jupyter on SageMaker for analysis",
-      "Managed experiment infrastructure on AWS S3 and EC2 for scalable fine-tuning and evaluation",
+      "Benchmarked SOTA super-resolution models (ESRGAN, StableSR) in PyTorch for coastal imagery",
+      "Automated multi-model SR eval pipelines on SageMaker with Matplotlib / Seaborn analysis notebooks",
+      "Stood up AWS S3 / EC2 experiment infra for scalable fine-tuning and evaluation",
     ],
   },
   {
@@ -196,8 +194,8 @@ export const experience: ExperienceEntry[] = [
     website: "https://www.canada.ca/en/health-canada.html",
     stack: ["Python", "Azure", "LangChain", "Streamlit"],
     bullets: [
-      "Built a document QA system using Llama3 7B and ChromaDB for OECD report search and summarization",
-      "Increased response and semantic accuracy by \u223c20% using query transformation and contextual memory",
+      "Built Llama3 7B + ChromaDB document QA for OECD report search and summarization",
+      "Lifted response and semantic accuracy ~20% via query transformation and contextual memory",
     ],
   },
   {
@@ -209,10 +207,10 @@ export const experience: ExperienceEntry[] = [
     website: "https://www.saputo.com",
     stack: ["TypeScript", "Excel", "VBA", "Gemini API"],
     bullets: [
-      "Developed TypeScript Office Scripts in Excel that eliminated ~8 hours/week of manual open-order updates",
-      "Automated weekly workflows for 1000+ Nestl\u00e9 products, avoiding 20,000+ manual data entries",
-      "Used the Gemini API to automate competitor research across 200+ brands",
-      "Ran weekly statistical analysis and EDA in VBA across 2000+ major products and 200+ miscellaneous SKUs",
+      "Cut ~8 hrs/week of open-order updates with TypeScript Excel Office Scripts",
+      "Automated weekly workflows for 1,000+ Nestl\u00e9 products, avoiding 20,000+ manual entries",
+      "Automated competitor research across 200+ brands with the Gemini API",
+      "Ran weekly EDA in VBA across 2,000+ products and 200+ miscellaneous SKUs",
     ],
   },
   {
@@ -225,8 +223,8 @@ export const experience: ExperienceEntry[] = [
     stack: ["Python", "spaCy", "SQLite"],
     meta: "Y Combinator W24 \u00b7 Formerly Keywords AI",
     bullets: [
-      "Parsed 1000+ resumes with a spaCy-based NER pipeline to extract structured and relevant recruiter data",
-      "Reduced response delay by 98% through integration of SQLite-based result caching into the parsing engine",
+      "Parsed 1,000+ resumes with a spaCy NER pipeline to extract structured recruiter data",
+      "Cut parsing response delay 98% by adding SQLite result caching to the engine",
     ],
   },
   {
@@ -239,8 +237,8 @@ export const experience: ExperienceEntry[] = [
     stack: ["Python", "spaCy", "W&B", "BS4"],
     meta: "Formerly delphai",
     bullets: [
-      "Boosted recall by 20% through improved entity labeling workflows and language-specific model training sets",
-      "Achieved 70% recall by fine-tuning spaCy models and optimizing hyperparameters via W&B on Azure",
+      "Raised entity recall 20% via improved labeling workflows and language-specific training sets",
+      "Hit 70% recall by fine-tuning spaCy NER and tuning hyperparameters with W&B on Azure",
     ],
   },
 ];
