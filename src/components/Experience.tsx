@@ -160,11 +160,47 @@ export function Experience() {
 
         <ResearchSection active={activeResearch} past={pastResearch} />
 
-        {experience.map((exp, i) => (
-          <ExperienceCard key={exp.company} entry={exp} index={i} />
-        ))}
+        <IndustrySection entries={experience} />
       </div>
     </section>
+  );
+}
+
+function IndustrySection({ entries }: { entries: ExperienceEntry[] }) {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-80px" });
+
+  return (
+    <motion.div
+      ref={ref}
+      className="relative"
+      initial={{ opacity: 0 }}
+      animate={isInView ? { opacity: 1 } : {}}
+      transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
+    >
+      <div className="absolute top-10 right-0 font-kanji text-[6rem] md:text-[9rem] text-zinc-900/[0.025] leading-none select-none pointer-events-none gate-weave">
+        職
+      </div>
+
+      <div className="relative mb-4 md:mb-6 pt-6 md:pt-8 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+        <span
+          className="font-mono text-[10px] text-red-600 uppercase tracking-[0.35em] glitch-hover cursor-default inline-block"
+          data-text="職歴 — Work"
+        >
+          職歴 — Work
+        </span>
+        <div
+          className="hidden md:block h-px flex-1 max-w-[min(320px,28vw)] mb-1 ml-8 origin-left"
+          style={{
+            background: "linear-gradient(90deg, rgba(220,38,38,0.35), transparent)",
+          }}
+        />
+      </div>
+
+      {entries.map((exp, i) => (
+        <ExperienceCard key={exp.company} entry={exp} index={i} />
+      ))}
+    </motion.div>
   );
 }
 
