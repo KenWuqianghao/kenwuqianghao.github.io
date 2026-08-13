@@ -1,7 +1,7 @@
 export const personalInfo = {
   name: "Ken Wu",
   title: "Software Engineer & ML Researcher",
-  email: "ken.wu@uwaterloo.ca",
+  email: "wooqianghao@gmail.com",
   location: "Toronto, ON",
   github: "KenWuqianghao",
   linkedin: "kenwuu",
