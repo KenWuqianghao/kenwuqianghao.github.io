@@ -158,9 +158,9 @@ export function Experience() {
           </div>
         </ScrollReveal>
 
-        <ResearchSection active={activeResearch} past={pastResearch} />
-
         <IndustrySection entries={experience} />
+
+        <ResearchSection active={activeResearch} past={pastResearch} />
       </div>
     </section>
   );
@@ -173,7 +173,7 @@ function IndustrySection({ entries }: { entries: ExperienceEntry[] }) {
   return (
     <motion.div
       ref={ref}
-      className="relative"
+      className="relative mb-20 md:mb-28"
       initial={{ opacity: 0 }}
       animate={isInView ? { opacity: 1 } : {}}
       transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
@@ -217,7 +217,7 @@ function ResearchSection({
   return (
     <motion.div
       ref={ref}
-      className="relative mb-20 md:mb-28 border-t border-zinc-200/60 pt-14 md:pt-20"
+      className="relative border-t border-zinc-200/60 pt-14 md:pt-20"
       initial={{ opacity: 0 }}
       animate={isInView ? { opacity: 1 } : {}}
       transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
