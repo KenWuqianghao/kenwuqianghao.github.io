@@ -5,9 +5,6 @@ import { ScrollReveal } from "./ScrollReveal";
 const accolades = [
   "Neo Scholar Finalist",
   "5x Hackathon Winner",
-  "Former URA · University of Waterloo",
-  "Former Researcher · Lancaster University",
-  "Open Source Dev · Fermilab",
 ];
 
 export function Accolades() {
