@@ -77,6 +77,14 @@ export function Contact() {
             >
               X
             </a>
+            <a
+              href={`https://www.instagram.com/${personalInfo.instagram}/`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-mono text-xs text-zinc-400 hover:text-red-600 transition-colors duration-300 underline underline-offset-4 decoration-zinc-300 hover:decoration-red-600"
+            >
+              Instagram
+            </a>
           </div>
         </ScrollReveal>
 

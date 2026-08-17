@@ -455,6 +455,7 @@ export function ShrineClient() {
                 { label: "Email",     href: `mailto:${personalInfo.email}` },
                 { label: "Resume",    href: personalInfo.resume },
                 { label: "X",         href: `https://x.com/${personalInfo.twitter}` },
+                { label: "Instagram", href: `https://www.instagram.com/${personalInfo.instagram}/` },
               ].map(({ label, href }) => (
                 <a
                   key={label}

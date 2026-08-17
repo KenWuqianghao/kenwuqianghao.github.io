@@ -7,6 +7,7 @@ export const personalInfo = {
   linkedin: "kenwuu",
   website: "kenwu.is-a.dev",
   twitter: "kenwuuuu",
+  instagram: "ken_wuuuuuu",
   resume: "/Ken_Wu_Resume.pdf",
 };
 

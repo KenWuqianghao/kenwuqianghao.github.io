@@ -1,5 +1,7 @@
 "use client";
 
+import type { ReactNode } from "react";
+import { personalInfo } from "@/lib/data";
 import { ScrollReveal } from "./ScrollReveal";
 
 const route = [
@@ -10,26 +12,72 @@ const route = [
   { flag: "🇺🇸", label: "Incoming" },
 ];
 
-const facets: { kanji: string; label: string; text: string; hint?: boolean }[] = [
+const linkClass =
+  "underline underline-offset-4 decoration-zinc-300 hover:decoration-red-600 hover:text-red-600 transition-colors duration-300";
+
+const facets: { kanji: string; label: string; text: ReactNode; hint?: boolean }[] = [
   {
     kanji: "球",
     label: "NBA",
-    text: "Fine-tuned an LLM on r/nba posts. Built an AI that roasts bad basketball takes on X.",
+    text: "Mavs fan. Favorite player is Kevin Durant.",
   },
   {
     kanji: "将",
     label: "Chess",
-    text: "Mediocre player. Builds chess bots on the side to compensate.",
+    text: (
+      <>
+        Beaten titled players. Waterloo Chess Club and Lancaster Chess Society.{" "}
+        <a
+          href="https://lichess.org/@/KenWuu"
+          target="_blank"
+          rel="noopener noreferrer"
+          className={linkClass}
+        >
+          Lichess
+        </a>
+        {" · "}
+        <a
+          href="https://www.chess.com/member/kenwuu"
+          target="_blank"
+          rel="noopener noreferrer"
+          className={linkClass}
+        >
+          Chess.com
+        </a>
+      </>
+    ),
   },
   {
     kanji: "哲",
     label: "Philosophy",
-    text: "Minor who thinks about AI alignment when not shipping ML pipelines.",
+    text: "Studied philosophy at Waterloo. Ancient Greek science and thought stuck. Next: Hegel, Spinoza, and Berkeley.",
   },
   {
     kanji: "余",
     label: "Off-duty",
-    text: "Basketball, poker, anime, and the occasional Leetcode grind.",
+    text: (
+      <>
+        Travel, new food, galleries, and museums — photos on{" "}
+        <a
+          href={`https://www.instagram.com/${personalInfo.instagram}/`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={linkClass}
+        >
+          Instagram
+        </a>
+        {" and "}
+        <a
+          href={`https://x.com/${personalInfo.twitter}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={linkClass}
+        >
+          X
+        </a>
+        . Chess, poker, basketball, anime, and manga. JoJo Part 7 is the favorite.
+      </>
+    ),
     hint: true,
   },
 ];
@@ -102,7 +150,7 @@ export function About() {
                     {facet.label}
                   </span>
                 </div>
-                <p className="text-sm text-zinc-500 leading-relaxed max-w-[38ch] cursor-default transition-colors duration-300 group-hover:text-zinc-700">
+                <p className="text-sm text-zinc-500 leading-relaxed max-w-[46ch] cursor-default transition-colors duration-300 group-hover:text-zinc-700">
                   {facet.text}
                   {facet.hint && (
                     <a
