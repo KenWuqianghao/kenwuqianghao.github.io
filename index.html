@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Ken Wu — Software Engineer &amp; ML Researcher</title>
-<meta name="description" content="Ken Wu, software engineer and ML researcher in Toronto. Waterloo CS ’26. Incoming Member of Technical Staff, Enterprise AI at Mercor.">
+<meta name="description" content="Ken Wu, software engineer and ML researcher in San Francisco. Waterloo CS ’26. Member of Technical Staff, Enterprise AI at Mercor.">
 <link rel="icon" href="/icon.svg" type="image/svg+xml">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Ken Wu">
 <meta property="og:title" content="Ken Wu — Software Engineer &amp; ML Researcher">
-<meta property="og:description" content="Ken Wu, software engineer and ML researcher in Toronto. Waterloo CS ’26. Incoming Member of Technical Staff, Enterprise AI at Mercor.">
+<meta property="og:description" content="Ken Wu, software engineer and ML researcher in San Francisco. Waterloo CS ’26. Member of Technical Staff, Enterprise AI at Mercor.">
 <meta property="og:url" content="https://kenwu.is-a.dev/">
 <meta property="og:image" content="https://kenwu.is-a.dev/og.png">
 <meta property="og:image:width" content="1200">
@@ -284,7 +284,7 @@
     <div id="c1">
       <h1 class="name" aria-label="Ken Wu"><span class="ln" style="--d:250ms" aria-hidden="true"><span class="L">K</span><span class="L">e</span><span class="L">n</span></span><span class="ln" style="--d:380ms" aria-hidden="true"><span class="L">W</span><span class="L">u</span><i>.</i></span></h1>
       <div class="kn" style="--d:600ms">吴锵皓</div>
-      <div class="meta" style="--d:700ms"><b>Software engineer &amp; ML researcher</b> · Toronto<br>Waterloo CS ’26 · Business specialization · Philosophy minor<br>Incoming MTS, Enterprise AI @ <b>Mercor</b></div>
+      <div class="meta" style="--d:700ms"><b>Software engineer &amp; ML researcher</b> · San Francisco<br>Waterloo CS ’26 · Business specialization · Philosophy minor<br>MTS, Enterprise AI @ <b>Mercor</b></div>
       <div class="stats" style="--d:800ms">
         <div><b aria-hidden="true">九</b><span>9 INTERNSHIPS</span></div>
         <div><b aria-hidden="true">五</b><span>5 HACKATHON WINS</span></div>
@@ -324,9 +324,9 @@
 <script>
 const KN=['一','二','三','四','五','六','七','八','九','十','十一','十二'];
 const NO=i=>String(i+1).padStart(2,'0');
-const PLACES=[['伊','Italy','BORN'],['中','China','RAISED'],['加','Canada','STUDIED'],['英','UK','EXCHANGED'],['米','US','INCOMING']].map(([k,c,w])=>`<div><b aria-hidden="true">${k}</b><em>${c}</em><span>${w}</span></div>`).join('');
+const PLACES=[['伊','Italy','BORN'],['中','China','RAISED'],['加','Canada','STUDIED'],['英','UK','EXCHANGED'],['米','US','WORKING']].map(([k,c,w])=>`<div><b aria-hidden="true">${k}</b><em>${c}</em><span>${w}</span></div>`).join('');
 const EXP=[
- {n:'Mercor',role:'Member of Technical Staff',tag:'ENTERPRISE AI',d:'Incoming',y:'next',p:'San Francisco, United States',b:['Build an evaluation platform and domain-specific benchmarks for enterprise AI agents','Construct training environments, tasks and reward signals to post-train private models','Run systematic experiments to hill-climb agent performance on real enterprise workflows','Deploy evaluation and post-training systems with enterprise partners as a forward-deployed engineer'],t:[],l:[['Visit','https://mercor.com/']]},
+ {n:'Mercor',role:'Member of Technical Staff',tag:'ENTERPRISE AI',d:'Nov 2026 — Present',y:'2026',p:'San Francisco, United States',b:['Build an evaluation platform and domain-specific benchmarks for enterprise AI agents','Construct training environments, tasks and reward signals to post-train private models','Run systematic experiments to hill-climb agent performance on real enterprise workflows','Deploy evaluation and post-training systems with enterprise partners as a forward-deployed engineer'],t:[],l:[['Visit','https://mercor.com/']]},
  {n:'Lyft',role:'Machine Learning Software Engineer Intern',tag:'BAILOUT MODEL',d:'May 2026 — Aug 2026',y:'2026',p:'Toronto, Canada',b:['Doubled the bailout model’s cancel-detection recall (+34.2pp at 2.5% FPR) via 17 new route/GPS features','Grew Canada bailout coverage from 1.4% to 100% of rides via census backfill for 2,964 geohashes','Root-caused a defect in Lyft’s bailout model flagging 76.6% of rides; shipped automated per-cluster thresholds','Shipped shadow inference and holdout capture into the bailout service with zero live decision impact'],t:['Python','CatBoost','SQL','GeoPandas'],l:[['Visit','https://www.lyft.com/']]},
  {n:'Nokia',role:'Software Engineer Intern',tag:'5G NETWORK AGENT',d:'Jul 2025 — Dec 2025',y:'2025',p:'Ottawa, Canada',b:['Shipped a LoRA fine-tuning pipeline that turns Qwen into a Camunda BPMN XML generator with GGUF quantization','Caught NCSC-only training overfitting with an eval harness that benchmarks fine-tuned vs. base models','Unblocked GPU training by fixing OOM and Triton kernel failures; shipped reusable training tooling'],t:['Python','PyTorch','Unsloth','Transformer'],l:[['Visit','https://www.nokia.com/']]},
  {n:'TD Bank',role:'Data Scientist Intern',tag:'INSURANCE ANALYSIS',d:'Jun 2025 — Aug 2025',y:'2025',p:'Toronto, Canada',b:['Replatformed 1.5M+ row pipelines and reproduced a 154,340-row deliverable at 100% parity','Cut QA time 80% by automating 30+ min/cycle ingestion with a row-level parity harness','Saved 2–4 hrs/week by migrating the on-prem pipeline to Azure with automated runs'],t:['Python','SQL','PySpark','Pandas','Databricks'],l:[['Visit','https://www.td.com/']]},
@@ -447,7 +447,7 @@ addEventListener('resize',fit);phone.addEventListener('change',fit);fit();
 
 /* ---------- rows ---------- */
 const btn=(kind,i,x,d,inner)=>`<button class="row${kind==='res'?' sm':''}" data-kind="${kind}" data-i="${i}"${d==null?'':` style="--d:${d}ms"`}>${inner}</button>`;
-function expRows(){const g=[];EXP.forEach((x,i)=>{const y=x.y==='next'?'NEXT':x.y;let G=g.find(q=>q.y===y);if(!G)g.push(G={y,ix:[]});G.ix.push(i)});
+function expRows(){const g=[];EXP.forEach((x,i)=>{const y=x.y;let G=g.find(q=>q.y===y);if(!G)g.push(G={y,ix:[]});G.ix.push(i)});
   $('expRows').innerHTML=g.map((G,j)=>`<div class="yg" style="--d:${380+j*70}ms"><span class="yy">${G.y}</span><div class="yn">${G.ix.map(i=>btn('exp',i,EXP[i],null,`<span class="nm">${EXP[i].n}</span>`)).join('')}</div></div>`).join('')}
 function resRows(){$('resRows').innerHTML=RES.map((x,i)=>btn('res',i,x,780+i*45,`<span class="nm">${x.n}</span><span class="yr">${x.y}</span><span class="s">${x.s}</span>`)).join('')}
 function projRows(){$('projRows').innerHTML=PROJ.map((x,i)=>{const f=(x.aw?`<span class="flag">◆ ${x.aw}</span>`:'')+(x.st?`<span class="star" title="GitHub stars"><i aria-hidden="true">★</i> ${x.st}</span>`:'');
