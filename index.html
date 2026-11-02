@@ -31,8 +31,7 @@
   button{all:unset;cursor:pointer}
   a{color:inherit}
   #gl{position:absolute;left:0;top:0;width:1440px;height:900px;pointer-events:none;z-index:0}
-  .bigk{position:absolute;right:-60px;bottom:-150px;font:400 760px/1 var(--kanji);opacity:.035;pointer-events:none;display:none}
-  .nogl .bigk{display:block}
+  .bigk{position:absolute;inset:0;display:grid;place-items:center;font:800 340px/1 var(--kanji);color:#fff;pointer-events:none}
   .vline{position:absolute;top:56px;bottom:56px;width:1px;background:var(--line);transform-origin:top}
   #main{position:absolute;inset:0;z-index:1;transition:opacity .25s}
   #main.dim{opacity:.26}
@@ -108,9 +107,10 @@
   #blk{position:absolute;left:1010px;top:392px;right:0;bottom:0;background:var(--red);z-index:0;transform-origin:bottom;transition:opacity .25s}
   #blk .tt{position:absolute;left:20px;top:24px;writing-mode:vertical-rl;font:600 15px var(--kanji);letter-spacing:.6em;color:#0a0a0b}
   #cv:has(#main.dim) #blk{opacity:.26}
+  #cv:has(#main.dim) #ctl{visibility:hidden}
   .pre #blk{opacity:0}
   .enter #blk{animation:grow .7s var(--ease) both;animation-delay:450ms}
-  .vline[style*="1010"]{bottom:532px}
+  #v2{bottom:532px}
   .more{position:absolute;left:1046px;bottom:52px;display:flex;gap:22px;font-size:13px}
   .more a{text-decoration:none;color:#fff}
   .more a:hover{text-decoration:underline}
@@ -233,11 +233,12 @@
   :root[data-theme=dark] #card .ep{text-shadow:2px 2px 0 #0a0a0b}
   :root[data-theme=dark] #card.white .ep{text-shadow:none}
   :root[data-theme=dark] #card .bar{background:#f4f4f5}
-  @media (max-width:900px){
+  @media (max-width:900px),(max-height:500px){
     #wrap{border-radius:0}
     #cv{position:relative;width:auto;height:auto;display:flex;flex-direction:column}
     #main{position:static;padding:40px 22px 36px}
-    .vline,.bigk{display:none}
+    .vline{display:none}
+    .bigk{font-size:50vw}
     #c1,#c2,#c3,.links{position:static;width:auto}
     #c2,#c3{margin-top:48px}
     .name{font-size:112px}
@@ -248,7 +249,7 @@
     .stats span{white-space:normal;line-height:1.4}
     #hon{grid-template-columns:1fr 1fr;margin-right:0}
     #blk{position:relative;left:0;top:0;height:84vw;flex:none;order:1}
-    #gl{top:auto;bottom:21.5vw;width:100%;height:62.5vw;z-index:1}
+    #gl{top:auto;bottom:21.5vw;width:100%;height:auto;aspect-ratio:1.6;z-index:1}
     .more{left:22px;bottom:58px;z-index:2}
     #ctl{right:22px;flex-wrap:wrap;justify-content:flex-end}
     #op,#card,#scrim,#wipe{position:fixed}
@@ -257,7 +258,7 @@
     #op .t{font-size:18px;letter-spacing:.22em;white-space:normal;max-width:88vw;line-height:1.5}
     #op .t.s{font-size:34px;line-height:1.15}
     #op .t.big{font-size:24px}
-    #card .kj{font-size:92px}
+    #card .kj{font-size:min(92px,21vw)}
     #card .ep{font-size:18px}
     #card .tt{font-size:28px}
     #pane{position:fixed;inset:0;width:auto;max-height:none;border-width:4px 0 0;transform:translateX(105%);padding:22px 20px 32px}
@@ -278,7 +279,7 @@
   <canvas id="gl"></canvas>
   <div id="main">
     <div class="vline" style="left:520px"></div>
-    <div class="vline" style="left:1010px"></div>
+    <div class="vline" id="v2" style="left:1010px"></div>
     <div id="c1">
       <h1 class="name" aria-label="Ken Wu"><span class="ln" style="--d:250ms" aria-hidden="true"><span class="L">K</span><span class="L">e</span><span class="L">n</span></span><span class="ln" style="--d:380ms" aria-hidden="true"><span class="L">W</span><span class="L">u</span><i>.</i></span></h1>
       <div class="kn" style="--d:600ms">吴锵皓</div>
@@ -376,7 +377,7 @@ paintSnd();
 /* ---------- WebGL particle kanji ---------- */
 const P3=(()=>{
   const cvs=$('gl'),gl=cvs.getContext('webgl',{alpha:true,premultipliedAlpha:false,antialias:false});
-  if(!gl){cv.classList.add('nogl');const k=document.createElement('div');k.className='bigk';k.setAttribute('aria-hidden','true');k.textContent='皓';cv.prepend(k);return {morph(){},burst(){},resize(){}}}
+  if(!gl){$('blk').insertAdjacentHTML('beforeend','<div class="bigk" aria-hidden="true">皓</div>');return {morph(){},burst(){},resize(){}}}
   const N=6500;let CX=1222,CY=625,SC=205;
   const vs=`attribute vec4 a;uniform float u;varying float c;varying float d;void main(){gl_Position=vec4(a.xy,0.,1.);gl_PointSize=a.z*u;c=a.w;d=a.z;}`;
   const fs=`precision mediump float;uniform vec3 ki;uniform vec3 kr;uniform float ka;varying float c;varying float d;void main(){float r=length(gl_PointCoord-.5);if(r>.5)discard;float s=smoothstep(.5,.15,r);
@@ -397,7 +398,7 @@ const P3=(()=>{
       res[i*3]=(pts[j]+Math.random()-.5-S/2)/(S/2);res[i*3+1]=(pts[j+1]+Math.random()-.5-S/2)/(S/2);res[i*3+2]=(Math.random()-.5)*.3}
     return cache[ch]=res}
   let cur='皓',mx=-1e4,my=-1e4,nx=0,ny=0,yaw=0,pitch=0,t0=performance.now(),scale=1;
-  cv.addEventListener('pointermove',e=>{const r=cvs.getBoundingClientRect(),s=r.width/1440;mx=(e.clientX-r.left)/s;my=(e.clientY-r.top)/s;nx=mx/720-1;ny=my/450-1});
+  cv.addEventListener('pointermove',e=>{const r=cvs.getBoundingClientRect(),s=r.width/1440;mx=(e.clientX-r.left)/s;my=(e.clientY-r.top)/s;nx=Math.max(-1,Math.min(1,mx/720-1));ny=Math.max(-1,Math.min(1,my/450-1))});
   cv.addEventListener('pointerleave',()=>{mx=my=-1e4;nx=ny=0});
   function morph(ch){cur=ch;T.set(sample(ch));if(reduce)P.set(T)}
   function burst(){for(let i=0;i<N;i++){const k=i*3,x=P[k],y=P[k+1],z=P[k+2],l=Math.hypot(x,y,z)||1,f=1.8+Math.random()*2.6;
@@ -437,7 +438,7 @@ function wipe(mid){const w=$('wipe'),[r,k,l]=w.children,sk=' skewX(-22deg)',x=v=
     l.animate([x('-400%'),x('4200%')],{duration:560,delay:90,easing:'cubic-bezier(.3,.6,.4,1)',fill:'forwards'}).finished.then(()=>{w.classList.remove('go');[r,k,l].forEach(e=>e.getAnimations().forEach(a=>a.cancel()))})})}
 
 /* ---------- fit 1440×900 canvas ---------- */
-const phone=matchMedia('(max-width:900px)');
+const phone=matchMedia('(max-width:900px),(max-height:500px)');
 function fit(){const dpr=Math.min(devicePixelRatio||1,2),cw=document.documentElement.clientWidth;
   if(phone.matches){wrap.style.width=wrap.style.height=cv.style.transform='';return P3.resize(cw,dpr,true)}
   const w=Math.min(cw,Math.round(innerHeight*1.6));wrap.style.width=w+'px';wrap.style.height=Math.round(w/1.6)+'px';cv.style.transform=`scale(${w/1440})`;P3.resize(w,dpr,false)}
