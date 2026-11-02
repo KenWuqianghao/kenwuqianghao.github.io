@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Writing — Ken Wu</title>
+<meta name="description" content="Essays on software engineering, life, philosophy, health, and how to find ataraxia.">
+<link rel="icon" href="/icon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Ken Wu">
+<meta property="og:title" content="Writing — Ken Wu">
+<meta property="og:description" content="Essays on software engineering, life, philosophy, health, and how to find ataraxia.">
+<meta property="og:url" content="https://kenwu.is-a.dev/blog.html">
+<meta property="og:image" content="https://kenwu.is-a.dev/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="description" content="Essays on software engineering, life, philosophy, health, and how to find ataraxia.">
+<link rel="alternate" type="application/rss+xml" title="Ken Wu — Writing" href="https://kenwu.is-a.dev/blog/rss.xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400&family=Outfit:wght@300;400;500&family=JetBrains+Mono:wght@400;500&family=Shippori+Mincho:wght@400;600;800&display=swap" rel="stylesheet">
+<script>try{document.documentElement.dataset.theme=localStorage.getItem('kw-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){document.documentElement.dataset.theme='light'}</script>
+<style>
+  :root{--ink:#18181b;--mute:#71717a;--faint:#a1a1aa;--line:#e4e4e7;--paper:#fafaf9;--red:#dc2626;--chip:#0a0a0a;--chipfg:#fff;
+        --disp:"Cormorant Garamond",Georgia,serif;--sans:"Outfit",system-ui,sans-serif;--mono:"JetBrains Mono",ui-monospace,monospace;--kanji:"Shippori Mincho","Hiragino Mincho ProN",serif;
+        --ease:cubic-bezier(.2,.7,.1,1);--pad:clamp(20px,4.5vw,64px)}
+  *{box-sizing:border-box}
+  html{background:var(--paper)}
+  body{margin:0;color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased}
+  button{all:unset;cursor:pointer}
+  a{color:inherit}
+  .num{font-family:var(--sans);font-weight:300;letter-spacing:0}
+  /* bar */
+  .bar{display:flex;align-items:center;gap:22px;padding:22px var(--pad);font:400 12px var(--mono);letter-spacing:.08em;color:var(--mute)}
+  .bar a{text-decoration:none}
+  .bar a:hover,.bar button:hover{color:var(--red)}
+  .bar .home{color:var(--ink);margin-right:auto}
+  .bar b{font:600 13px var(--kanji);margin-right:6px}
+  /* label chip, same as the poster */
+  .ch{display:flex;align-items:center;gap:12px}
+  .ch b{display:flex;align-items:center;gap:12px;background:var(--chip);color:var(--chipfg);font:700 14px/1 var(--disp);letter-spacing:.2em;text-transform:uppercase;padding:6px 10px 6px 12px}
+  .ch b i{font:600 18px/1 var(--kanji);font-style:normal;letter-spacing:.22em}
+  .ch.r b{background:var(--red)}
+  .ch span{font:400 12px var(--mono);letter-spacing:.2em;color:var(--mute)}
+  /* index */
+  main{padding:0 var(--pad) 96px;max-width:1440px;margin:0 auto;min-height:calc(100vh - 70px)}
+  .hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,420px);gap:40px;align-items:end;padding:clamp(28px,6vw,72px) 0 clamp(36px,5vw,56px);border-bottom:1px solid var(--ink)}
+  .hero h1{font:300 clamp(84px,13vw,188px)/.84 var(--disp);letter-spacing:-.04em;margin:18px 0 0 -.04em}
+  .hero h1 i{font-style:normal;color:var(--red)}
+  .hero p{font-size:17px;line-height:1.6;font-weight:300;margin:0 0 10px;max-width:420px}
+  .hero .rss{display:inline-block;margin-top:14px;font:400 12px var(--mono);letter-spacing:.08em;text-decoration:none;border-bottom:1px solid var(--faint)}
+  .hero .rss:hover{color:var(--red);border-color:var(--red)}
+  .list{margin-top:8px}
+  .post{display:grid;grid-template-columns:64px minmax(0,1fr) auto;column-gap:20px;align-items:baseline;width:100%;padding:26px 0 28px;border-bottom:1px solid var(--line);position:relative}
+  .post:before{content:"";position:absolute;left:-16px;top:30%;bottom:30%;width:2px;background:var(--red);transform:scaleY(0);transition:transform .15s}
+  .post:hover:before,.post:focus-visible:before{transform:scaleY(1)}
+  .post .k{font:400 12px var(--mono);color:var(--red)}
+  .post .t{font:400 clamp(34px,4.4vw,56px)/1.02 var(--disp);letter-spacing:-.015em;transition:transform .18s var(--ease),color .15s;transform-origin:left bottom}
+  .post:hover .t,.post:focus-visible .t{transform:translateX(6px) rotate(-1deg);color:var(--red)}
+  .post .d{font:400 12px var(--mono);color:var(--mute);white-space:nowrap}
+  .post .x{grid-column:2;font-size:16px;line-height:1.55;font-weight:300;color:var(--mute);margin-top:10px;max-width:640px}
+  .post .tg{grid-column:2;display:flex;gap:8px;margin-top:12px}
+  .post .tg span{font:400 11px var(--mono);padding:2px 8px;border:1px solid var(--line);color:var(--ink)}
+  /* article */
+  #article{display:none}
+  body.read #index{display:none}
+  body.read #article{display:block}
+  .a-top{display:flex;align-items:center;gap:16px;padding-top:clamp(20px,4vw,44px)}
+  .a-ep{display:inline-flex;align-items:center;gap:12px;background:var(--chip);color:var(--chipfg);font:700 15px/1 var(--disp);letter-spacing:.2em;text-transform:uppercase;padding:7px 12px 7px 14px}
+  .a-ep i{font:600 18px/1 var(--kanji);font-style:normal;letter-spacing:.2em}
+  .a-cat{font:400 12px var(--mono);letter-spacing:.2em;color:var(--mute)}
+  .a-title{font:300 clamp(56px,9vw,128px)/.92 var(--disp);letter-spacing:-.03em;margin:clamp(28px,5vw,48px) 0 18px;max-width:14ch}
+  .a-meta{font:400 12px var(--mono);color:var(--mute);letter-spacing:.06em;padding-bottom:28px;border-bottom:1px solid var(--ink);max-width:680px}
+  .a-body{max-width:680px;font-size:18px;line-height:1.75;font-weight:300}
+  .a-body p{margin:1.3em 0}
+  .a-body p:first-child:first-letter{font:400 4.1em/.8 var(--disp);float:left;margin:.08em .1em 0 0;color:var(--red)}
+  .a-nav{display:flex;justify-content:space-between;max-width:680px;margin-top:56px;padding-top:18px;border-top:1px solid var(--line);font:400 12px var(--mono);letter-spacing:.08em;color:var(--mute)}
+  .a-nav a{text-decoration:none}
+  .a-nav a:hover{color:var(--red)}
+  /* episode card, same as the poster */
+  #card{position:fixed;inset:0;display:none;place-items:center;z-index:30;background:#0a0a0a;color:#fff;text-align:center;padding:24px}
+  #card.show{display:grid;animation:cardIn .46s steps(1,end) forwards}
+  #card .kj{font:800 clamp(84px,10.5vw,150px)/1 var(--kanji);letter-spacing:.06em}
+  #card .ep{font:700 clamp(18px,2.1vw,30px)/1 var(--disp);letter-spacing:.34em;text-transform:uppercase;margin:28px 0 0 .34em}
+  #card .tt{font:300 italic clamp(28px,3.1vw,44px) var(--disp);margin-top:12px}
+  #card .rule{width:160px;height:4px;background:var(--red);margin:22px auto 0}
+  @keyframes cardIn{0%{transform:rotate(-3deg) scale(1.06)}30%{transform:rotate(1deg) scale(1.01)}60%{transform:none}}
+  /* entrance */
+  .in{animation:rise .7s var(--ease) both;animation-delay:var(--d,0ms)}
+  @keyframes rise{from{opacity:0;transform:translateY(16px)}}
+  /* theme wipe */
+  #wipe{position:fixed;inset:0;z-index:70;pointer-events:none;overflow:hidden;display:none}
+  #wipe.go{display:block}
+  #wipe i{position:absolute;top:-20%;height:140%;transform:translateX(-200%) skewX(-22deg)}
+  #wipe i:nth-child(1){left:-20%;width:140%;background:#ff1f3d}
+  #wipe i:nth-child(2){left:-20%;width:16%;background:#0a0a0b}
+  #wipe i:nth-child(3){left:-20%;width:5%;background:#f4f4f5}
+  /* dark: Persona */
+  :root[data-theme=dark]{--ink:#f4f4f5;--mute:#a1a1aa;--faint:#52525b;--line:#2c2c30;--paper:#0a0a0b;--red:#ff1f3d;--chip:#f4f4f5;--chipfg:#0a0a0b}
+  :root[data-theme=dark]{background-image:radial-gradient(circle,rgba(255,31,61,.45) 1.1px,transparent 1.7px);background-size:10px 10px;background-attachment:fixed}
+  :root[data-theme=dark] main{background:linear-gradient(90deg,transparent,var(--paper) 9%,var(--paper) 91%,transparent)}
+  :root[data-theme=dark] .ch b,:root[data-theme=dark] .a-ep{transform:skewX(-14deg);box-shadow:5px 5px 0 var(--red)}
+  :root[data-theme=dark] .hero h1{font-weight:400}
+  :root[data-theme=dark] .hero{border-bottom:3px solid var(--red)}
+  :root[data-theme=dark] .post:before{display:none}
+  :root[data-theme=dark] .post .t{background:linear-gradient(var(--red),var(--red)) no-repeat 0 0/0% 100%;padding:0 .12em;margin:0 -.12em;justify-self:start;transition:background-size .18s var(--ease),color .15s,transform .18s var(--ease)}
+  :root[data-theme=dark] .post:hover .t,:root[data-theme=dark] .post:focus-visible .t{background-size:100% 100%;color:#0a0a0b;transform:skewX(-10deg) rotate(-1deg)}
+  :root[data-theme=dark] .a-meta{border-bottom:3px solid var(--red)}
+  :root[data-theme=dark] #card{background:var(--red);color:#fff}
+  :root[data-theme=dark] #card:before{content:"";position:absolute;inset:0;background:#0a0a0b;clip-path:polygon(0 60%,100% 30%,100% 47%,0 77%)}
+  :root[data-theme=dark] #card > div{position:relative}
+  :root[data-theme=dark] #card .kj{text-shadow:7px 7px 0 #0a0a0b}
+  :root[data-theme=dark] #card .ep{text-shadow:2px 2px 0 #0a0a0b}
+  :root[data-theme=dark] #card .rule{background:#f4f4f5}
+  @media (max-width:760px){
+    .hero{grid-template-columns:1fr;gap:20px}
+    .post{grid-template-columns:40px minmax(0,1fr)}
+    .post .d{grid-column:2;grid-row:2;margin-top:8px}
+    .post .x,.post .tg{grid-column:2}}
+  @media (prefers-reduced-motion:reduce){.in,#card.show{animation:none}.post .t{transition:none}}
+</style>
+</head>
+<body>
+<nav class="bar">
+  <a class="home" href="./">← KEN WU</a>
+  <button id="snd"><b aria-hidden="true">音</b>SOUND <span>ON</span></button>
+  <button id="theme"></button>
+</nav>
+
+<main id="index">
+  <header class="hero">
+    <div>
+      <div class="ch in" style="--d:80ms"><b><i aria-hidden="true">随筆</i>Writing</b><span id="count"></span></div>
+      <h1 class="in" style="--d:160ms">Fragments<i>.</i></h1>
+    </div>
+    <div class="in" style="--d:300ms">
+      <p>Essays on software engineering, life, philosophy, health, and how to find <em>ataraxia</em>.</p>
+      <a class="rss" href="https://kenwu.is-a.dev/blog/rss.xml">Subscribe with RSS</a>
+    </div>
+  </header>
+  <div class="list" id="list"></div>
+</main>
+
+<main id="article"></main>
+
+<div id="wipe" aria-hidden="true"><i></i><i></i><i></i></div>
+<div id="card"><div><div class="kj" id="cardKj" aria-hidden="true"></div><div class="ep" id="cardEp"></div><div class="tt" id="cardTt"></div><div class="rule"></div></div></div>
+
+<script>
+/* Posts, newest first. In production these come from the site's MDX files. */
+const POSTS=[
+ {slug:'coming-soon',title:'Coming soon…',date:'2026-03-20',tags:[],
+  desc:'The feed is live. Longer essays and notes will land here when they are ready.',
+  body:['This space will hold writing on machine learning, systems, and whatever else earns a longer arc than a thread.','For now, you can still subscribe with RSS, so new posts show up without checking back.']},
+];
+const KN=['一','二','三','四','五','六','七','八','九','十','十一','十二','十三','十四','十五','十六','十七','十八','十九','二十'];
+const NO=i=>String(i+1).padStart(2,'0');
+const fmt=d=>new Date(d+'T12:00:00').toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const $=id=>document.getElementById(id);
+const store=(k,v)=>{try{if(v===undefined)return localStorage.getItem(k);if(v===null)localStorage.removeItem(k);else localStorage.setItem(k,v)}catch(e){return null}};
+
+/* sound: same files and same setting as the poster */
+const SND={on:store('kw-snd')!=='off',bank:{}};
+['hyoshigi','hyoshigi-echo','kaka'].forEach(n=>{const a=new Audio(`sfx/${n}.mp3`);a.preload='auto';SND.bank[n]=a});
+function play(n,vol,rate=1){if(!SND.on)return;const a=SND.bank[n].cloneNode();a.volume=vol;a.preservesPitch=false;a.playbackRate=rate;a.play().catch(()=>{})}
+function paintSnd(){$('snd').querySelector('span').textContent=SND.on?'ON':'OFF'}
+$('snd').onclick=()=>{SND.on=!SND.on;store('kw-snd',SND.on?'on':'off');paintSnd();play('hyoshigi',.9)};
+paintSnd();
+
+/* theme: same setting and same wipe as the poster */
+const mq=matchMedia('(prefers-color-scheme: dark)'),sysTheme=()=>mq.matches?'dark':'light';
+function setTheme(t){const d=t==='dark';document.documentElement.dataset.theme=t;
+  $('theme').innerHTML=d?'<b aria-hidden="true">陽</b>LIGHT':'<b aria-hidden="true">陰</b>DARK';$('theme').title=d?'Switch to light mode':'Switch to dark mode'}
+setTheme(document.documentElement.dataset.theme);
+mq.addEventListener('change',()=>{if(!store('kw-theme'))setTheme(sysTheme())});
+$('theme').onclick=()=>{const next=document.documentElement.dataset.theme==='dark'?'light':'dark';store('kw-theme',next===sysTheme()?null:next);play('hyoshigi-echo',.8,1.12);
+  if(reduce)return setTheme(next);wipe(()=>setTheme(next))};
+function wipe(mid){const w=$('wipe'),[r,k,l]=w.children,sk=' skewX(-22deg)',x=v=>({transform:`translateX(${v})`+sk});
+  w.classList.add('go');
+  r.animate([x('-110%'),x('0')],{duration:280,easing:'cubic-bezier(.6,0,.9,.5)',fill:'forwards'}).finished.then(()=>{mid();
+    r.animate([x('0'),x('115%')],{duration:420,easing:'cubic-bezier(.15,.7,.3,1)',fill:'forwards'});
+    k.animate([x('-150%'),x('1300%')],{duration:520,delay:40,easing:'cubic-bezier(.3,.6,.4,1)',fill:'forwards'});
+    l.animate([x('-400%'),x('4200%')],{duration:560,delay:90,easing:'cubic-bezier(.3,.6,.4,1)',fill:'forwards'}).finished.then(()=>{w.classList.remove('go');[r,k,l].forEach(e=>e.getAnimations().forEach(a=>a.cancel()))})})}
+
+/* index */
+$('count').textContent=POSTS.length;
+$('list').innerHTML=POSTS.map((p,i)=>`<a class="post in" href="#${p.slug}" style="--d:${380+i*60}ms;text-decoration:none">
+  <span class="k">${NO(POSTS.length-1-i)}</span><span class="t">${p.title}</span><span class="d">${fmt(p.date)}</span>
+  <span class="x">${p.desc}</span>${p.tags.length?`<span class="tg">${p.tags.map(t=>`<span>${t}</span>`).join('')}</span>`:''}</a>`).join('');
+
+/* article: the URL hash is the post slug, so links and the back button work */
+function article(p){const n=POSTS.length-1-POSTS.indexOf(p),older=POSTS[POSTS.indexOf(p)+1],newer=POSTS[POSTS.indexOf(p)-1];
+  return `<div class="a-top in"><span class="a-ep"><i aria-hidden="true">第${KN[n]}話</i>Ep. <span class="num">${NO(n)}</span></span><span class="a-cat">WRITING — ${NO(n)} / ${NO(POSTS.length-1)}</span></div>
+  <h1 class="a-title in" style="--d:60ms">${p.title}</h1>
+  <div class="a-meta in" style="--d:120ms">${fmt(p.date)}${p.tags.length?' · '+p.tags.join(' · '):''}</div>
+  <div class="a-body in" style="--d:180ms">${p.body.map(t=>`<p>${t}</p>`).join('')}</div>
+  <div class="a-nav"><a href="#">← All writing</a><span>${older?`<a href="#${older.slug}">${older.title} →</a>`:''}${newer?`<a href="#${newer.slug}">← ${newer.title}</a>`:''}</span></div>`}
+function route(withCard){const p=POSTS.find(x=>'#'+x.slug===location.hash);
+  const go=()=>{document.body.classList.toggle('read',!!p);if(p){$('article').innerHTML=article(p);document.title=p.title+' — Ken Wu'}else document.title='Writing — Ken Wu';scrollTo(0,0)};
+  if(!p){if(withCard)play('kaka',.3);return go()}
+  const n=POSTS.length-1-POSTS.indexOf(p);
+  if(!withCard||reduce)return go();
+  play('hyoshigi',.9);$('cardKj').textContent=`第${KN[n]}話`;$('cardEp').innerHTML=`Episode <span class="num">${NO(n)}</span>`;$('cardTt').textContent=p.title;
+  $('card').className='show';setTimeout(()=>{$('card').className='';go()},460)}
+addEventListener('hashchange',()=>route(true));
+addEventListener('keydown',e=>{if(e.key==='Escape'&&document.body.classList.contains('read'))location.hash=''});
+route(false);
+</script>
+</body>
+</html>
