@@ -29,6 +29,7 @@
   #cv *{box-sizing:border-box}
   .num{font-family:var(--sans);font-weight:300;letter-spacing:0}
   button{all:unset;cursor:pointer}
+  button:focus-visible{outline:2px solid var(--red);outline-offset:3px}
   a{color:inherit}
   #gl{position:absolute;left:0;top:0;width:1440px;height:900px;pointer-events:none;z-index:0}
   .bigk{position:absolute;inset:0;display:grid;place-items:center;font:800 340px/1 var(--kanji);color:#fff;pointer-events:none}
@@ -156,8 +157,8 @@
   /* detail */
   #scrim{position:absolute;inset:0;z-index:10;display:none}
   #scrim.on{display:block}
-  #pane{position:absolute;top:50%;right:56px;width:740px;max-height:820px;z-index:20;background:var(--paper);border:1px solid var(--ink);border-top:4px solid var(--red);transform:translate(calc(100% + 80px),-50%);transition:transform .32s var(--ease);padding:30px 40px 24px;overflow:auto}
-  #pane.on{transform:translate(0,-50%)}
+  #pane{position:absolute;top:50%;right:56px;width:740px;max-height:820px;z-index:20;background:var(--paper);border:1px solid var(--ink);border-top:4px solid var(--red);transform:translate(calc(100% + 80px),-50%);transition:transform .32s var(--ease),visibility 0s .32s;visibility:hidden;padding:30px 40px 24px;overflow:auto}
+  #pane.on{transform:translate(0,-50%);visibility:visible;transition:transform .32s var(--ease)}
   #pane > *{animation:rise .5s var(--ease) both;animation-delay:var(--d,0ms)}
   .p-top{display:flex;align-items:center;gap:16px}
   .p-ep{display:inline-flex;align-items:center;gap:12px;background:var(--chip);color:var(--chipfg);font:700 15px/1 var(--disp);letter-spacing:.2em;text-transform:uppercase;padding:7px 12px 7px 14px}
@@ -468,7 +469,7 @@ main.addEventListener('pointerover',e=>{const r=e.target.closest('.row,#beyond')
 main.addEventListener('pointerout',e=>{if(e.relatedTarget&&e.relatedTarget.closest&&e.relatedTarget.closest('.row,#beyond'))return;clearTimeout(idleT);idleT=setTimeout(()=>{if(!cur)P3.morph('皓')},700)});
 
 /* ---------- detail ---------- */
-let cur=null;
+let cur=null,opener=null;
 function flash(kj,ep,title,tone,then){if(reduce){then();return}
   $('cardKj').textContent=kj;$('cardEp').innerHTML=ep;$('cardTt').textContent=title;card.className='show '+tone;setTimeout(()=>{card.className='';then()},460)}
 function detailHTML(kind,i){
@@ -490,12 +491,12 @@ function detailHTML(kind,i){
   if(kind==='proj')return top+`<div class="p-tagl" style="--d:80ms">${x.tag}</div><p class="p-lead" style="--d:110ms">${x.lead}</p>${bul}${facts}${nav}`;
   return top+`${x.note?`<div class="p-note" style="--d:80ms">${x.note}</div>`:''}<div class="p-role" style="--d:100ms">${x.role}<span>${x.tag}</span></div><div class="p-meta" style="--d:130ms">${x.d} · ${x.p}</div>${bul}${facts}${nav}`}
 function show(kind,i){cur={kind,i};pane.innerHTML=detailHTML(kind,i);pane.scrollTop=0}
-function open(kind,i){const x=kind==='me'?{n:'Beyond Code'}:LISTS[kind].items[i];
+function open(kind,i,from){opener=from;const x=kind==='me'?{n:'Beyond Code'}:LISTS[kind].items[i];
   const kj=kind==='me'?'素顔':`第${KN[i]}話`,ep=kind==='me'?'About':`Episode <span class="num">${NO(i)}</span>`,tone=kind==='me'?'white':LISTS[kind].card;
   cur={kind,i};clearTimeout(idleT);sfx.cut();P3.burst();
   flash(kj,ep,x.full||x.n,tone,()=>{show(kind,i);pane.classList.add('on');scrim.classList.add('on');main.classList.add('dim');pane.querySelector('[data-close]').focus({preventScroll:true})})}
-function close(){if(!cur)return;pane.classList.remove('on');scrim.classList.remove('on');main.classList.remove('dim');cur=null;P3.morph('皓')}
-main.addEventListener('click',e=>{const r=e.target.closest('.row,#beyond');if(!r)return;if(r.id==='beyond')open('me',0);else open(r.dataset.kind,+r.dataset.i)});
+function close(){if(!cur)return;pane.classList.remove('on');scrim.classList.remove('on');main.classList.remove('dim');cur=null;P3.morph('皓');opener?.focus({preventScroll:true});opener=null}
+main.addEventListener('click',e=>{const r=e.target.closest('.row,#beyond');if(!r)return;if(r.id==='beyond')open('me',0,r);else open(r.dataset.kind,+r.dataset.i,r)});
 scrim.addEventListener('click',close);
 pane.addEventListener('click',e=>{if(e.target.closest('[data-close]'))return close();
   const g=e.target.closest('[data-go]');if(g){sfx.step();return show(cur.kind,+g.dataset.go)}});
@@ -515,7 +516,7 @@ function playOp(){if(reduce){enter();return}
 $('op').addEventListener('click',endOp);
 addEventListener('keydown',()=>{if($('op').classList.contains('on'))endOp()});
 $('replay').onclick=playOp;
-Promise.all([document.fonts.load('800 200px "Shippori Mincho"','皓経作研素'),document.fonts.load('700 150px "Cormorant Garamond"','EXPERIENCE'),document.fonts.load('600 24px "Noto Serif SC"','吴锵皓')]).catch(()=>{}).then(()=>{
+Promise.race([Promise.all([document.fonts.load('800 200px "Shippori Mincho"','皓経作研素'),document.fonts.load('700 150px "Cormorant Garamond"','EXPERIENCE'),document.fonts.load('600 24px "Noto Serif SC"','吴锵皓')]),new Promise(r=>setTimeout(r,2500))]).catch(()=>{}).then(()=>{
   if(sess('kw-op')){enter()}else{sess('kw-op','1');playOp()}});
 </script>
 </body>
