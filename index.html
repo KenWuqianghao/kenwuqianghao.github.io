@@ -84,7 +84,7 @@
   #expRows .yn{display:flex;flex-wrap:wrap;gap:0 20px}
   #expRows .row{display:inline-block;width:auto;padding:1px 0}
   #expRows .row:before{display:none}
-  #expRows .row .nm{font-size:30px}
+  #expRows .row .nm{display:inline-block;font-size:30px}
   .enter #expRows .yg{animation:wipe .6s var(--ease) both;animation-delay:var(--d,0ms)}
   .enter #expRows .row{animation:none}
   #projRows{border-top:1px solid var(--ink)}
@@ -117,6 +117,9 @@
   #ctl{position:absolute;right:26px;bottom:20px;z-index:25;display:flex;gap:14px;align-items:center;font:400 12px var(--mono);letter-spacing:.08em;color:#fff}
   #ctl button:hover,#ctl a:hover{color:#0a0a0b}
   #ctl b{font:600 13px var(--kanji);margin-right:6px}
+  .links a,.more a,#ctl button,.p-x,.p-facts a,.p-nav button{display:inline-block;transition:transform .18s var(--ease),color .15s,border-color .15s;transform-origin:left bottom}
+  .links a:hover,.links a:focus-visible,.more a:hover,.more a:focus-visible,#ctl button:hover,#ctl button:focus-visible,.p-x:hover,.p-x:focus-visible,.p-facts a:hover,.p-facts a:focus-visible,.p-nav button:hover,.p-nav button:focus-visible{transform:translateX(2px) rotate(-3deg)}
+  :root[data-theme=dark] .links a:hover,:root[data-theme=dark] .links a:focus-visible,:root[data-theme=dark] .more a:hover,:root[data-theme=dark] .more a:focus-visible,:root[data-theme=dark] #ctl button:hover,:root[data-theme=dark] #ctl button:focus-visible,:root[data-theme=dark] .p-x:hover,:root[data-theme=dark] .p-x:focus-visible,:root[data-theme=dark] .p-facts a:hover,:root[data-theme=dark] .p-facts a:focus-visible,:root[data-theme=dark] .p-nav button:hover,:root[data-theme=dark] .p-nav button:focus-visible{transform:skewX(-10deg) rotate(-3deg)}
   /* entrance */
   .enter .kn,.enter .meta,.enter .stats,.enter #beyond,.enter .links,.enter .more,.enter #hon,.enter .ch span{animation:rise .7s var(--ease) both;animation-delay:var(--d,0ms)}
   .enter .name .ln{animation:riseBlur .9s var(--ease) both;animation-delay:var(--d,0ms)}
@@ -269,7 +272,8 @@
   }
   @media (prefers-reduced-motion:reduce){
     .enter *,#pane > *,.p-b li{animation:none!important}
-    #card.show{animation:none}#pane{transition:none}}
+    #card.show{animation:none}#pane{transition:none}
+    .row .nm,#hon .nm,.links a,.more a,#ctl button,.p-x,.p-facts a,.p-nav button{transition:none!important}}
 </style>
 </head>
 <body>

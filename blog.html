@@ -76,6 +76,9 @@
   .a-nav{display:flex;justify-content:space-between;max-width:680px;margin-top:56px;padding-top:18px;border-top:1px solid var(--line);font:400 12px var(--mono);letter-spacing:.08em;color:var(--mute)}
   .a-nav a{text-decoration:none}
   .a-nav a:hover{color:var(--red)}
+  .bar a,.bar button,.hero .rss,.a-nav a{display:inline-block;transition:transform .18s var(--ease),color .15s,border-color .15s;transform-origin:left bottom}
+  .bar a:hover,.bar a:focus-visible,.bar button:hover,.bar button:focus-visible,.hero .rss:hover,.hero .rss:focus-visible,.a-nav a:hover,.a-nav a:focus-visible{transform:translateX(2px) rotate(-3deg)}
+  :root[data-theme=dark] .bar a:hover,:root[data-theme=dark] .bar a:focus-visible,:root[data-theme=dark] .bar button:hover,:root[data-theme=dark] .bar button:focus-visible,:root[data-theme=dark] .hero .rss:hover,:root[data-theme=dark] .hero .rss:focus-visible,:root[data-theme=dark] .a-nav a:hover,:root[data-theme=dark] .a-nav a:focus-visible{transform:skewX(-10deg) rotate(-3deg)}
   /* episode card, same as the poster */
   #card{position:fixed;inset:0;display:none;place-items:center;z-index:30;background:#0a0a0a;color:#fff;text-align:center;padding:24px}
   #card.show{display:grid;animation:cardIn .46s steps(1,end) forwards}
@@ -116,7 +119,7 @@
     .post{grid-template-columns:40px minmax(0,1fr)}
     .post .d{grid-column:2;grid-row:2;margin-top:8px}
     .post .x,.post .tg{grid-column:2}}
-  @media (prefers-reduced-motion:reduce){.in,#card.show{animation:none}.post .t{transition:none}}
+  @media (prefers-reduced-motion:reduce){.in,#card.show{animation:none}.post .t,.bar a,.bar button,.hero .rss,.a-nav a{transition:none!important}}
 </style>
 </head>
 <body>
