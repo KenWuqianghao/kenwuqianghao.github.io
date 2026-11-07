@@ -103,13 +103,13 @@
   #hon .nm{display:block;font:400 15.5px/1.1 var(--disp);white-space:nowrap;transition:transform .18s var(--ease),color .15s;transform-origin:left bottom}
   #hon .pz{display:block;font:400 9.5px var(--mono);letter-spacing:.08em;color:var(--red);margin-top:2px;white-space:nowrap}
   #hon a.hn:hover .nm,#hon a.hn:focus-visible .nm{color:var(--red);transform:translateX(4px) rotate(-1.4deg)}
-  #blk{position:absolute;left:1010px;top:392px;right:0;bottom:0;background:var(--red);z-index:0;transform-origin:bottom;transition:opacity .25s}
+  #blk{position:absolute;left:1010px;top:452px;right:0;bottom:0;background:var(--red);z-index:0;transform-origin:bottom;transition:opacity .25s}
   #blk .tt{position:absolute;left:20px;top:24px;writing-mode:vertical-rl;font:600 15px var(--kanji);letter-spacing:.6em;color:#0a0a0b}
   #cv:has(#main.dim) #blk{opacity:.26}
   #cv:has(#main.dim) #ctl{visibility:hidden}
   .pre #blk{opacity:0}
   .enter #blk{animation:grow .7s var(--ease) both;animation-delay:450ms}
-  #v2{bottom:532px}
+  #v2{bottom:472px}
   .more{position:absolute;left:1046px;bottom:52px;display:flex;gap:22px;font-size:13px}
   .more a{text-decoration:none;color:#fff}
   .more a:hover{text-decoration:underline}
@@ -346,6 +346,7 @@ const RES=[
  {n:'Lancaster',s:'Recursive clustering · Prof. Angelov',full:'Lancaster University',note:'WITH PROF. PLAMEN ANGELOV',role:'Undergraduate Researcher',tag:'UNSUPERVISED LEARNING',d:'Jan 2025 — May 2026',y:'2025–26',p:'Lancaster, UK · On-site',b:['Sped up PAMSil up to 85.6% on CIFAR-100 at equal quality with recursive ReSil / ReSilC (O(1) key updates)','Beat K-Means wall-clock by 17–24% on CIFAR-10/100, MNIST, and Fashion-MNIST via optimized R-Means centroids','Benchmarked recursive vs. flat clustering across 8+ datasets with 10-run averages in NumPy / scikit-learn','Kept speed-quality comparisons fair by tracking silhouette, inertia, and wall-clock on every run'],t:['Python','NumPy','scikit-learn'],l:[['Visit','https://www.lancaster.ac.uk/'],['Advisor','https://www.lancaster.ac.uk/lira/people/plamen-angelov']]},
 ];
 const PROJ=[
+ {n:'Insert',tag:'MACOS 14+ · OPEN SOURCE',s:'Clipboard tray for macOS',lead:'A native clipboard tray for macOS: press ⇧⌘V, select a clip, and Insert pastes it into the active app.',b:["Shows each clip as a card with the source app, type, time, and preview, and pastes the first nine with ⌘1–⌘9", "Stores text, links, files, images, PDFs, rich text, and colors on the Mac, with no account and no cloud sync", "Skips concealed and transient items such as passwords, and ships signed updates through Sparkle"],t:['Swift','SwiftUI','AppKit','Sparkle'],l:[['Live','https://insert-app.vercel.app/'],['Source','https://github.com/KenWuqianghao/Insert']]},
  {n:'OpenComposer',st:15,tag:'COMPOSER 2 PIPELINE · SINGLE GH200',s:'Composer 2 pipeline, one GH200',lead:'A mini-scale, end-to-end reproduction of the Composer 2 training pipeline on one NVIDIA GH200.',b:["Trains Qwen3-Coder-30B-A3B (30B MoE, ~3B active) through phased CPT (2k → 16k context), CPT-SFT, and tool-use SFT", "Runs Dr. GRPO + k1 KL in OpenRLHF with a nonlinear length penalty and behavioral auxiliary rewards", "Adds MTP self-distillation and MoE router replay through forward hooks; evaluates on HumanEval"],t:['Python','PyTorch','MoE','OpenRLHF'],l:[['Source','https://github.com/KenWuqianghao/OpenComposer']]},
  {n:'LeaseEase',aw:'McHacks ’24',tag:'MCHACKS 11 · TELUS SUSTAINABLE FUTURE PRIZE',s:'Tenancy law, LLM + RAG',lead:'Plain-language legal help for tenants under Canada’s Residential Tenancy Act.',b:["Answers tenant questions with an LLM + RAG agent over the Act and shows the cited sections", "Fills T1 and N7 tribunal forms from a chat with the tenant", "Connects LangChain function calling, ChromaDB vector search, and streamed answers in Streamlit"],t:['Python','Streamlit','OpenAI','Cohere','ChromaDB'],l:[['Live','https://devpost.com/software/leaseease']]},
  {n:'MedChat',aw:'Cohere ’23',tag:'COHERE RAG CHALLENGE ’23 · 1ST PLACE',s:'Clinical Q&A',lead:'One chat interface for clinicians: ask the medical literature, or run a diagnosis model.',b:["Routes each query with Cohere Classify: literature questions go to RAG, scans go to a brain-tumor CNN", "Answers from 1,000+ WebMD pages with Cohere Chat and Rerank, streamed in Streamlit", "Runs pre-trained TensorFlow models to give a second opinion on a diagnosis"],t:['Python','Cohere','TensorFlow','Streamlit'],l:[['Source','https://github.com/KenWuqianghao/MedChat']]},
@@ -381,7 +382,7 @@ paintSnd();
 const P3=(()=>{
   const cvs=$('gl'),gl=cvs.getContext('webgl',{alpha:true,premultipliedAlpha:false,antialias:false});
   if(!gl){$('blk').insertAdjacentHTML('beforeend','<div class="bigk" aria-hidden="true">皓</div>');return {morph(){},burst(){},resize(){}}}
-  const N=6500;let CX=1222,CY=625,SC=205;
+  const N=6500;let CX,CY,SC;
   const vs=`attribute vec4 a;uniform float u;varying float c;varying float d;void main(){gl_Position=vec4(a.xy,0.,1.);gl_PointSize=a.z*u;c=a.w;d=a.z;}`;
   const fs=`precision mediump float;uniform vec3 ki;uniform vec3 kr;uniform float ka;varying float c;varying float d;void main(){float r=length(gl_PointCoord-.5);if(r>.5)discard;float s=smoothstep(.5,.15,r);
     vec3 k=c>.5?kr:ki;gl_FragColor=vec4(k,s*(c>.5?.9:(.18+.22*(d-1.))*ka));}`;
@@ -406,7 +407,7 @@ const P3=(()=>{
   function morph(ch){cur=ch;T.set(sample(ch));if(reduce)P.set(T)}
   function burst(){for(let i=0;i<N;i++){const k=i*3,x=P[k],y=P[k+1],z=P[k+2],l=Math.hypot(x,y,z)||1,f=1.8+Math.random()*2.6;
     T[k]=x+x/l*f+(Math.random()-.5);T[k+1]=y+y/l*f+(Math.random()-.5);T[k+2]=z+z/l*f}}
-  function resize(w,dpr,mob){[CX,CY,SC]=mob?[720,450,360]:[1222,625,205];cvs.width=Math.round(w*dpr);cvs.height=Math.round(w/1.6*dpr);gl.viewport(0,0,cvs.width,cvs.height);scale=w/1440*dpr*SC/205;gl.uniform1f(uLoc,scale)}
+  function resize(w,dpr,mob){[CX,CY,SC]=mob?[720,450,360]:[1222,648,185];cvs.width=Math.round(w*dpr);cvs.height=Math.round(w/1.6*dpr);gl.viewport(0,0,cvs.width,cvs.height);scale=w/1440*dpr*SC/205;gl.uniform1f(uLoc,scale)}
   function frame(now){const t=(now-t0)/1000;
     const ty=reduce?.25:Math.sin(t*.32)*.38+nx*.55,tp=reduce?-.08:Math.cos(t*.23)*.12+ny*.28;yaw+=(ty-yaw)*.06;pitch+=(tp-pitch)*.06;
     const cy=Math.cos(yaw),sy=Math.sin(yaw),cx=Math.cos(pitch),sx=Math.sin(pitch);
