@@ -120,10 +120,38 @@
   .links a,.more a,#ctl button,.p-x,.p-facts a,.p-nav button{display:inline-block;transition:transform .18s var(--ease),color .15s,border-color .15s;transform-origin:left bottom}
   .links a:hover,.links a:focus-visible,.more a:hover,.more a:focus-visible,#ctl button:hover,#ctl button:focus-visible,.p-x:hover,.p-x:focus-visible,.p-facts a:hover,.p-facts a:focus-visible,.p-nav button:hover,.p-nav button:focus-visible{transform:translateX(2px) rotate(-3deg)}
   :root[data-theme=dark] .links a:hover,:root[data-theme=dark] .links a:focus-visible,:root[data-theme=dark] .more a:hover,:root[data-theme=dark] .more a:focus-visible,:root[data-theme=dark] #ctl button:hover,:root[data-theme=dark] #ctl button:focus-visible,:root[data-theme=dark] .p-x:hover,:root[data-theme=dark] .p-x:focus-visible,:root[data-theme=dark] .p-facts a:hover,:root[data-theme=dark] .p-facts a:focus-visible,:root[data-theme=dark] .p-nav button:hover,:root[data-theme=dark] .p-nav button:focus-visible{transform:skewX(-10deg) rotate(-3deg)}
+  .name,.kn{width:fit-content}
+  .name .L{margin-right:var(--kern,0)}
+  .name .L,.name i,.kn span,.stats b,.ch b i{display:inline-block;transition:transform .2s var(--ease),color .15s,background-color .15s}
+  .name:hover .L:nth-of-type(odd){transform:translateY(-4px) rotate(-3deg)}
+  .name:hover .L:nth-of-type(even){transform:translateY(-4px) rotate(3deg)}
+  .name .L:hover{color:var(--red)}
+  .name:hover i{transform:scale(1.35) rotate(-8deg)}
+  .kn:hover span{color:var(--red)}
+  .kn:hover span:nth-child(odd){transform:translateY(-3px) rotate(-6deg)}
+  .kn:hover span:nth-child(even){transform:translateY(-3px) rotate(6deg)}
+  .meta .ml{display:block;width:fit-content;max-width:100%;transition:transform .18s var(--ease);transform-origin:left bottom}
+  .meta b{transition:color .15s}
+  .meta .ml:hover{transform:translateX(6px) rotate(-1deg)}
+  .meta .ml:hover b{color:var(--red)}
+  .stats div{position:relative}
+  .stats div:before{content:"";position:absolute;left:0;right:0;top:-1px;height:2px;background:var(--red);transform:scaleX(0);transform-origin:left;transition:transform .2s var(--ease)}
+  .stats div:hover:before{transform:scaleX(1)}
+  .stats span{transition:color .15s}
+  .stats div:hover b{color:var(--red)}
+  .stats div:hover span{color:var(--ink)}
+  .stats div:nth-child(odd):hover b{transform:translateY(-3px) rotate(-4deg)}
+  .stats div:nth-child(even):hover b{transform:translateY(-3px) rotate(4deg)}
+  .ch b{transition:box-shadow .18s var(--ease)}
+  .ch b:hover{box-shadow:4px 4px 0 var(--red)}
+  .ch.r b:hover{box-shadow:4px 4px 0 var(--ink)}
+  .ch b:hover i{transform:rotate(-6deg)}
+  #expRows .yy{display:inline-block;transition:transform .18s var(--ease);transform-origin:left bottom}
+  #expRows .yy:hover{transform:translateX(2px) rotate(-3deg)}
   /* entrance */
   .enter .kn,.enter .meta,.enter .stats,.enter #beyond,.enter .links,.enter .more,.enter #hon,.enter .ch span{animation:rise .7s var(--ease) both;animation-delay:var(--d,0ms)}
   .enter .name .ln{animation:riseBlur .9s var(--ease) both;animation-delay:var(--d,0ms)}
-  .enter .name i{animation:pop .5s cubic-bezier(.3,1.8,.5,1) both;animation-delay:1150ms}
+  .enter .name i{animation:pop .5s cubic-bezier(.3,1.8,.5,1) backwards;animation-delay:1150ms}
   .enter .ch b{animation:barIn .45s var(--ease) both;animation-delay:var(--d,0ms)}
   .enter .row{animation:wipe .6s var(--ease) both;animation-delay:var(--d,0ms)}
   .enter .vline{animation:grow 1s var(--ease) both;animation-delay:200ms}
@@ -223,6 +251,19 @@
   :root[data-theme=dark] .row:before{display:none}
   :root[data-theme=dark] .row .nm{background:linear-gradient(var(--red),var(--red)) no-repeat 0 0/0% 100%;padding:0 .14em;margin:0 -.14em;transition:background-size .18s var(--ease),color .15s,transform .18s var(--ease)}
   :root[data-theme=dark] .row:hover .nm,:root[data-theme=dark] .row:focus-visible .nm{background-size:100% 100%;color:#0a0a0b;transform:skewX(-10deg) rotate(-1.5deg)}
+  :root[data-theme=dark] .name:hover .L:nth-of-type(3n+1){transform:rotate(-9deg) translateY(-.06em)}
+  :root[data-theme=dark] .name:hover .L:nth-of-type(3n+2){transform:rotate(8deg) translateY(-.02em)}
+  :root[data-theme=dark] .name:hover .L:nth-of-type(3n){transform:rotate(-6deg) translateY(-.1em)}
+  :root[data-theme=dark] .name .L:hover{background-color:var(--red);color:#0a0a0b}
+  :root[data-theme=dark] .name .L:nth-of-type(3n):hover{background-color:#f4f4f5}
+  :root[data-theme=dark] .kn:hover span:nth-child(odd){transform:skewX(-10deg) rotate(-5deg)}
+  :root[data-theme=dark] .kn:hover span:nth-child(even){transform:skewX(-10deg) rotate(5deg)}
+  :root[data-theme=dark] .meta .ml:hover{transform:translateX(6px) skewX(-10deg)}
+  :root[data-theme=dark] .stats div:nth-child(odd):hover b{transform:skewX(-10deg) rotate(-4deg)}
+  :root[data-theme=dark] .stats div:nth-child(even):hover b{transform:skewX(-10deg) rotate(4deg)}
+  :root[data-theme=dark] .ch b:hover{box-shadow:8px 8px 0 var(--red)}
+  :root[data-theme=dark] .ch.r b:hover{box-shadow:8px 8px 0 #f4f4f5}
+  :root[data-theme=dark] #expRows .yy:hover{transform:translateX(2px) skewX(-10deg)}
   :root[data-theme=dark] #pane{border:2px solid #f4f4f5;border-top:6px solid var(--red);box-shadow:12px 12px 0 var(--red)}
   :root[data-theme=dark] #card{background:var(--red);color:#fff}
   :root[data-theme=dark] #card.red{background:#0a0a0b}
@@ -273,7 +314,7 @@
   @media (prefers-reduced-motion:reduce){
     .enter *,#pane > *,.p-b li{animation:none!important}
     #card.show{animation:none}#pane{transition:none}
-    .row .nm,#hon .nm,.links a,.more a,#ctl button,.p-x,.p-facts a,.p-nav button{transition:none!important}}
+    .row .nm,#hon .nm,.links a,.more a,#ctl button,.p-x,.p-facts a,.p-nav button,.name .L,.name i,.kn span,.meta .ml,.meta b,.stats b,.stats span,.stats div:before,.ch b,.ch b i,#expRows .yy{transition:none!important}}
 </style>
 </head>
 <body>
@@ -284,15 +325,15 @@
     <div class="vline" style="left:520px"></div>
     <div class="vline" id="v2" style="left:1010px"></div>
     <div id="c1">
-      <h1 class="name" aria-label="Ken Wu"><span class="ln" style="--d:250ms" aria-hidden="true"><span class="L">K</span><span class="L">e</span><span class="L">n</span></span><span class="ln" style="--d:380ms" aria-hidden="true"><span class="L">W</span><span class="L">u</span><i>.</i></span></h1>
-      <div class="kn" style="--d:600ms">吴锵皓</div>
-      <div class="meta" style="--d:700ms"><b>Software engineer &amp; ML researcher</b> · Toronto<br>Waterloo CS ’26 · Business specialization · Philosophy minor<br>Incoming MTS, Enterprise AI @ <b>Mercor</b></div>
+      <h1 class="name" aria-label="Ken Wu" data-k="吴"><span class="ln" style="--d:250ms" aria-hidden="true"><span class="L" style="--kern:-.029em">K</span><span class="L">e</span><span class="L">n</span></span><span class="ln" style="--d:380ms" aria-hidden="true"><span class="L" style="--kern:-.058em">W</span><span class="L">u</span><i>.</i></span></h1>
+      <div class="kn" style="--d:600ms" data-k="吴"><span>吴</span><span>锵</span><span>皓</span></div>
+      <div class="meta" style="--d:700ms"><span class="ml"><b>Software engineer &amp; ML researcher</b> · Toronto</span><span class="ml">Waterloo CS ’26 · Business specialization · Philosophy minor</span><span class="ml">Incoming MTS, Enterprise AI @ <b>Mercor</b></span></div>
       <div class="stats" style="--d:800ms">
-        <div><b aria-hidden="true">九</b><span>9 INTERNSHIPS</span></div>
-        <div><b aria-hidden="true">五</b><span>5 HACKATHON WINS</span></div>
-        <div><b aria-hidden="true">四</b><span>4 COUNTRIES</span></div>
+        <div data-k="九"><b aria-hidden="true">九</b><span>9 INTERNSHIPS</span></div>
+        <div data-k="五"><b aria-hidden="true">五</b><span>5 HACKATHON WINS</span></div>
+        <div data-k="四"><b aria-hidden="true">四</b><span>4 COUNTRIES</span></div>
       </div>
-      <button id="beyond" style="--d:900ms" aria-label="Beyond code">
+      <button id="beyond" style="--d:900ms" aria-label="Beyond code" data-k="素">
         <div class="ch r" style="margin-bottom:12px"><b style="--d:900ms"><i aria-hidden="true">素顔</i>Beyond code</b></div>
         <div class="flags"></div>
       </button>
@@ -449,7 +490,7 @@ function fit(){const dpr=Math.min(devicePixelRatio||1,2),cw=document.documentEle
 addEventListener('resize',fit);phone.addEventListener('change',fit);fit();
 
 /* ---------- rows ---------- */
-const btn=(kind,i,x,d,inner)=>`<button class="row${kind==='res'?' sm':''}" data-kind="${kind}" data-i="${i}"${d==null?'':` style="--d:${d}ms"`}>${inner}</button>`;
+const btn=(kind,i,x,d,inner)=>`<button class="row${kind==='res'?' sm':''}" data-kind="${kind}" data-i="${i}" data-k="${LISTS[kind].kanji}"${d==null?'':` style="--d:${d}ms"`}>${inner}</button>`;
 function expRows(){const g=[];EXP.forEach((x,i)=>{const y=x.y==='next'?'NEXT':x.y;let G=g.find(q=>q.y===y);if(!G)g.push(G={y,ix:[]});G.ix.push(i)});
   $('expRows').innerHTML=g.map((G,j)=>`<div class="yg" style="--d:${380+j*70}ms"><span class="yy">${G.y}</span><div class="yn">${G.ix.map(i=>btn('exp',i,EXP[i],null,`<span class="nm">${EXP[i].n}</span>`)).join('')}</div></div>`).join('')}
 function resRows(){$('resRows').innerHTML=RES.map((x,i)=>btn('res',i,x,780+i*45,`<span class="nm">${x.n}</span><span class="yr">${x.y}</span><span class="s">${x.s}</span>`)).join('')}
@@ -462,14 +503,14 @@ document.querySelector('.flags').innerHTML=PLACES;
 /* ---------- honours ---------- */
 $('nHon').textContent=HON.length;
 $('hon').innerHTML=HON.map(([ev,pz,to])=>{const in_=`<span class="nm">${ev}</span><span class="pz">${pz}</span>`;
-  if(Array.isArray(to)){const i=LISTS[to[0]].items.findIndex(x=>x.n===to[1]);return `<button class="row hn" data-kind="${to[0]}" data-i="${i}">${in_}</button>`}
+  if(Array.isArray(to)){const i=LISTS[to[0]].items.findIndex(x=>x.n===to[1]);return `<button class="row hn" data-kind="${to[0]}" data-i="${i}" data-k="${LISTS[to[0]].kanji}">${in_}</button>`}
   return to?`<a class="hn" href="${to}" target="_blank" rel="noopener">${in_}</a>`:`<div class="hn">${in_}</div>`}).join('');
 
 /* ---------- hover: particles morph to the section kanji ---------- */
 let idleT=null;
-main.addEventListener('pointerover',e=>{const r=e.target.closest('.row,#beyond');if(!r||cur)return;clearTimeout(idleT);
-  const k=r.id==='beyond'?'素':LISTS[r.dataset.kind].kanji;if(P3.cur!==k)P3.morph(k)});
-main.addEventListener('pointerout',e=>{if(e.relatedTarget&&e.relatedTarget.closest&&e.relatedTarget.closest('.row,#beyond'))return;clearTimeout(idleT);idleT=setTimeout(()=>{if(!cur)P3.morph('皓')},700)});
+main.addEventListener('pointerover',e=>{const r=e.target.closest('[data-k]');if(!r||cur)return;clearTimeout(idleT);
+  const k=r.dataset.k;if(P3.cur!==k)P3.morph(k)});
+main.addEventListener('pointerout',e=>{if(e.relatedTarget&&e.relatedTarget.closest&&e.relatedTarget.closest('[data-k]'))return;clearTimeout(idleT);idleT=setTimeout(()=>{if(!cur)P3.morph('皓')},700)});
 
 /* ---------- detail ---------- */
 let cur=null,opener=null;
