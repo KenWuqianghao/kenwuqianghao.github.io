@@ -79,6 +79,15 @@
   .bar a,.bar button,.hero .rss,.a-nav a{display:inline-block;transition:transform .18s var(--ease),color .15s,border-color .15s;transform-origin:left bottom}
   .bar a:hover,.bar a:focus-visible,.bar button:hover,.bar button:focus-visible,.hero .rss:hover,.hero .rss:focus-visible,.a-nav a:hover,.a-nav a:focus-visible{transform:translateX(2px) rotate(-3deg)}
   :root[data-theme=dark] .bar a:hover,:root[data-theme=dark] .bar a:focus-visible,:root[data-theme=dark] .bar button:hover,:root[data-theme=dark] .bar button:focus-visible,:root[data-theme=dark] .hero .rss:hover,:root[data-theme=dark] .hero .rss:focus-visible,:root[data-theme=dark] .a-nav a:hover,:root[data-theme=dark] .a-nav a:focus-visible{transform:skewX(-10deg) rotate(-3deg)}
+  .hero h1{white-space:nowrap}
+  .hero h1 .L,.hero h1 i,.ch b i,.a-ep i{display:inline-block;transition:transform .2s var(--ease),color .15s,background-color .15s}
+  .hero h1:hover .L:nth-child(odd){transform:translateY(-4px) rotate(-3deg)}
+  .hero h1:hover .L:nth-child(even){transform:translateY(-4px) rotate(3deg)}
+  .hero h1 .L:hover{color:var(--red)}
+  .hero h1:hover i{transform:scale(1.35) rotate(-8deg)}
+  .ch b,.a-ep{transition:box-shadow .18s var(--ease)}
+  .ch b:hover,.a-ep:hover{box-shadow:4px 4px 0 var(--red)}
+  .ch b:hover i,.a-ep:hover i{transform:rotate(-6deg)}
   /* episode card, same as the poster */
   #card{position:fixed;inset:0;display:none;place-items:center;z-index:30;background:#0a0a0a;color:#fff;text-align:center;padding:24px}
   #card.show{display:grid;animation:cardIn .46s steps(1,end) forwards}
@@ -103,6 +112,11 @@
   :root[data-theme=dark] main{background:linear-gradient(90deg,transparent,var(--paper) 9%,var(--paper) 91%,transparent)}
   :root[data-theme=dark] .ch b,:root[data-theme=dark] .a-ep{transform:skewX(-14deg);box-shadow:5px 5px 0 var(--red)}
   :root[data-theme=dark] .hero h1{font-weight:400}
+  :root[data-theme=dark] .hero h1 .L{padding:0 .04em;margin:0 -.04em}
+  :root[data-theme=dark] .hero h1:hover .L:nth-child(odd){transform:skewX(-10deg) rotate(-3deg) translateY(-.04em)}
+  :root[data-theme=dark] .hero h1:hover .L:nth-child(even){transform:skewX(-10deg) rotate(3deg)}
+  :root[data-theme=dark] .hero h1 .L:hover{background-color:var(--red);color:#0a0a0b}
+  :root[data-theme=dark] .ch b:hover,:root[data-theme=dark] .a-ep:hover{box-shadow:8px 8px 0 var(--red)}
   :root[data-theme=dark] .hero{border-bottom:3px solid var(--red)}
   :root[data-theme=dark] .post:before{display:none}
   :root[data-theme=dark] .post .t{background:linear-gradient(var(--red),var(--red)) no-repeat 0 0/0% 100%;padding:0 .12em;margin:0 -.12em;justify-self:start;transition:background-size .18s var(--ease),color .15s,transform .18s var(--ease)}
@@ -119,7 +133,7 @@
     .post{grid-template-columns:40px minmax(0,1fr)}
     .post .d{grid-column:2;grid-row:2;margin-top:8px}
     .post .x,.post .tg{grid-column:2}}
-  @media (prefers-reduced-motion:reduce){.in,#card.show{animation:none}.post .t,.bar a,.bar button,.hero .rss,.a-nav a{transition:none!important}}
+  @media (prefers-reduced-motion:reduce){.in,#card.show{animation:none}.post .t,.bar a,.bar button,.hero .rss,.a-nav a,.hero h1 .L,.hero h1 i,.ch b,.ch b i,.a-ep,.a-ep i{transition:none!important}}
 </style>
 </head>
 <body>
@@ -133,7 +147,7 @@
   <header class="hero">
     <div>
       <div class="ch in" style="--d:80ms"><b><i aria-hidden="true">随筆</i>Writing</b><span id="count"></span></div>
-      <h1 class="in" style="--d:160ms">Fragments<i>.</i></h1>
+      <h1 class="in" style="--d:160ms" aria-label="Fragments"><span class="L" aria-hidden="true">F</span><span class="L" aria-hidden="true">r</span><span class="L" aria-hidden="true">a</span><span class="L" aria-hidden="true">g</span><span class="L" aria-hidden="true">m</span><span class="L" aria-hidden="true">e</span><span class="L" aria-hidden="true">n</span><span class="L" aria-hidden="true">t</span><span class="L" aria-hidden="true">s</span><i aria-hidden="true">.</i></h1>
     </div>
     <div class="in" style="--d:300ms">
       <p>Essays on software engineering, life, philosophy, health, and how to find <em>ataraxia</em>.</p>
